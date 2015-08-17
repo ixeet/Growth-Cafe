@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoreViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hbV-hu-1CP" userLabel="imgBackGround">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="hbV-hu-1CP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2WU-eD-Iat"/>
+                <constraint firstItem="hbV-hu-1CP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8lz-86-9Ga"/>
+                <constraint firstAttribute="trailing" secondItem="hbV-hu-1CP" secondAttribute="trailing" id="ih7-De-UUI"/>
+                <constraint firstAttribute="bottom" secondItem="hbV-hu-1CP" secondAttribute="bottom" id="tRy-gW-0Sx"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="hbV-hu-1CP"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="2WU-eD-Iat"/>
+                    <exclude reference="8lz-86-9Ga"/>
+                    <exclude reference="ih7-De-UUI"/>
+                    <exclude reference="tRy-gW-0Sx"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="hbV-hu-1CP"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="2WU-eD-Iat"/>
+                    <include reference="8lz-86-9Ga"/>
+                    <include reference="ih7-De-UUI"/>
+                    <include reference="tRy-gW-0Sx"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="34" y="1152"/>
+        </view>
+    </objects>
+</document>

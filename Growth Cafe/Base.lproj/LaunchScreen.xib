@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="mqO-fY-2Dy">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="mqO-fY-2Dy" secondAttribute="bottom" id="8qK-V4-XLf"/>
+                <constraint firstAttribute="trailing" secondItem="mqO-fY-2Dy" secondAttribute="trailing" id="R9L-gt-OfF"/>
+                <constraint firstItem="mqO-fY-2Dy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YZ4-W4-cdi"/>
+                <constraint firstItem="mqO-fY-2Dy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="a6n-Co-kc9"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="mqO-fY-2Dy"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="8qK-V4-XLf"/>
+                    <exclude reference="R9L-gt-OfF"/>
+                    <exclude reference="YZ4-W4-cdi"/>
+                    <exclude reference="a6n-Co-kc9"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="mqO-fY-2Dy"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="8qK-V4-XLf"/>
+                    <include reference="R9L-gt-OfF"/>
+                    <include reference="YZ4-W4-cdi"/>
+                    <include reference="a6n-Co-kc9"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="548" y="455"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="splash.png" width="320" height="568"/>
+    </resources>
+</document>
