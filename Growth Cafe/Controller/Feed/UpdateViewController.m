@@ -261,7 +261,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
     
     if(update.isExpend)
     {
-        rowCount=[update.comments count]+1;
+        rowCount=[update.comments count] +1;
     }else{
         if([update.comments count]<3)
         {
@@ -309,10 +309,10 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
             [lbltitle setFont:[UIFont fontWithName:@"Helvetica Neue" size:12.0]];
             CGSize textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
             
-            CGFloat strikeWidth = textSize.width;
-            lbltitle.frame=CGRectMake(x, y, strikeWidth, 30);
-            if (x>150&& y==0) {
-                y=y+25;
+            CGFloat strikeWidth = textSize.width+5;
+            lbltitle.frame=CGRectMake(x, y, strikeWidth, 21);
+            if (x>140&& y==0) {
+                y=y+21;
                 x=0;
             }
            
@@ -332,7 +332,9 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
 
                 [btnAction.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:13.0]];
                 textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
-                strikeWidth = textSize.width;
+                textSize=[AppGlobal getTheExpectedSizeOfLabel:strtrim];
+               
+                strikeWidth = textSize.width+2;
                 
                 if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
                 {
@@ -355,13 +357,14 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
                     [btnAction addTarget:self action:@selector(btnResourceDetailClick:) forControlEvents:UIControlEventTouchUpInside];
                 }
                 
-                btnAction.frame=CGRectMake(x, y, strikeWidth, 30);
+                btnAction.frame=CGRectMake(x, y, strikeWidth, 21);
                 textIndex=textIndex+1;
                 [cell.viewDetail addSubview:btnAction];
                  x=x+strikeWidth;
+                
             }
             if (x>150 && y==0) {
-                y=y+25;
+                y=y+21;
                 x=0;
             }
         }
@@ -403,11 +406,11 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
                 }
             }
         }
-       if(update.updateCreatedBy!=nil)
+       if(update.user !=nil)
        {
            [cell.btnUpdatedBy addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
            
-           cell.btnUpdatedBy.tag = [update.updateCreatedBy integerValue];
+           cell.btnUpdatedBy.tag = [update.user.userId  integerValue];
        }
        
         if(update.updateCreatedByImage!=nil){
@@ -433,18 +436,30 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
             }
         }
     
-        
+        if(update.likeCount  !=nil)
+        {
+         [cell.btnLike setTitle:update.likeCount forState:UIControlStateNormal];
+        }else{
+        [cell.btnLike setTitle:@"" forState:UIControlStateNormal];
+        }
+        if(update.commentCount  !=nil)
+        {
+            [cell.btnComment setTitle:update.commentCount forState:UIControlStateNormal];
+        }else{
+            [cell.btnComment setTitle:@"" forState:UIControlStateNormal];
+        }
+
         if([update.isLike  isEqualToString:@"1"])
         {
             cell.btnLike.selected=YES;
-            [cell.btnLike setTitle:update.likeCount forState:UIControlStateSelected];
+           
         }else
             
         {
             cell.btnLike.selected=NO;
-            [cell.btnLike setTitle:update.likeCount forState:UIControlStateNormal];
+           
         }
-        [cell.btnComment setTitle:update.commentCount forState:UIControlStateNormal];
+       
        
         cell.lblUpdateBy.text=update.updateCreatedBy;
         cell.btnComment.tag=indexPath.section  ;
@@ -522,19 +537,34 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
                 [cell.btnCommentedBy setImage:[UIImage imageWithData:comment.commentByImageData] forState:UIControlStateNormal];
             }
         }
+           if(comment.commentBy!=nil)
+           {
+               [cell.btnCommentedBy addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
+               
+               cell.btnCommentedBy.tag = [comment.commentById integerValue];
+           }
          if([comment.isLike  isEqualToString:@"1"])
         {
             cell.btnLike.selected=YES;
-            [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateSelected];
+           
         }else
             
         {
             cell.btnLike.selected=NO;
-            [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateNormal];
         }
         
-        [cell.btnCMT setTitle:comment.commentCounts forState:UIControlStateNormal];
-        
+           if(comment.likeCounts  !=nil)
+           {
+               [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateNormal];
+           }else{
+               [cell.btnLike setTitle:@"" forState:UIControlStateNormal];
+           }
+           if(comment.commentCounts  !=nil)
+           {
+               [cell.btnCMT setTitle:comment.commentCounts forState:UIControlStateNormal];
+           }else{
+               [cell.btnCMT setTitle:@"" forState:UIControlStateNormal];
+           }
         cell.btnCMT.tag=[comment.commentId integerValue];
         cell.btnLike.tag=[comment.commentId integerValue];
         cell.btnMore.tag=indexPath.section;
@@ -561,7 +591,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
                 cell.btnMore.hidden=YES;
                 cell.imgDevider.hidden=NO;
                
-            }else if(indexPath.row==3 && !update.isExpend){
+            }else if(indexPath.row==4 && !update.isExpend){
                 [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[update.comments count ]-3]  forState:UIControlStateNormal];
                 cell.btnMore.hidden=NO;
@@ -626,24 +656,34 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
                    [cell.btnCommentedBy setImage:[UIImage imageWithData:comment.commentByImageData] forState:UIControlStateNormal];
                }
            }
+           if(comment.commentBy!=nil)
+           {
+               [cell.btnCommentedBy addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
+               
+               cell.btnCommentedBy.tag = [comment.commentById integerValue];
+           }
            if([comment.isLike  isEqualToString:@"1"])
            {
                cell.btnLike.selected=YES;
-               [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateSelected];
+              
            }else
                
            {
                cell.btnLike.selected=NO;
-               [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateNormal];
            }
            
-//           [cell.btnCMT setTitle:comment.commentCounts forState:UIControlStateNormal];
            
           // cell.btnCMT.tag=[comment.commentId integerValue];
            cell.btnLike.tag=[comment.commentId integerValue];
-           
+           if(comment.likeCounts  !=nil)
+           {
+               [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateSelected];
+           }else{
+               [cell.btnLike setTitle:@"" forState:UIControlStateSelected];
+           }
+          
            //set action for reply and like on comment
-//           [cell.btnCMT addTarget:self action:@selector(btnReplyOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+
            [cell.btnLike addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
            
            cell.btnMore.hidden=YES;
@@ -665,7 +705,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
                    cell.btnMore.hidden=YES;
                    cell.imgDevider.hidden=NO;
                    
-               }else if(indexPath.row==3 && !update.isExpend){
+               }else if(indexPath.row==4 && !update.isExpend){
                    [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[update.comments count ]-3]  forState:UIControlStateNormal];
                    cell.btnMore.hidden=NO;
@@ -724,6 +764,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
     if([arrayUpdates count]==0)
     return 0;
     Update *update=arrayUpdates[indexPath.section];
+    
     if(indexPath.row==0)
     {
         float height=0.0f;
@@ -731,6 +772,80 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
         {
         
             height=163.0f;
+        }else{
+        
+            NSString *titleString =update.updateTitle;
+            NSArray *titleWords = [titleString componentsSeparatedByString:@"$"];
+            float x,y;
+            x=0.0f;
+            y=0.0f;
+            int textIndex=0;
+            for (NSString *strtemp in titleWords) {
+                UILabel *lbltitle=[[UILabel alloc]init];
+                [lbltitle setTextColor:[UIColor darkGrayColor]];
+                NSString *strtrim = [strtemp stringByTrimmingCharactersInSet:
+                                     [NSCharacterSet whitespaceCharacterSet]];
+                lbltitle.text=strtrim;
+                [lbltitle setFont:[UIFont fontWithName:@"Helvetica Neue" size:12.0]];
+                CGSize textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
+                
+                CGFloat strikeWidth = textSize.width+5;
+                lbltitle.frame=CGRectMake(x, y, strikeWidth, 21);
+                if (x>140 && y==0) {
+                    y=y+21;
+                    x=0;
+                }
+                
+                
+                if([titleWords count]-1!=textIndex)
+                {
+                    x=x+strikeWidth;
+                    UIButton *btnAction=[[UIButton alloc]init];
+                    
+                    NSDictionary *dictext= update.updateTitleArray[textIndex];
+                    btnAction.tag =(int) update.updateId;
+                    NSString *strtrim = [[dictext objectForKey:@"value"] stringByTrimmingCharactersInSet:
+                                         [NSCharacterSet whitespaceCharacterSet]];
+                    
+                    [btnAction setTitle:strtrim forState:UIControlStateNormal];
+                    [btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                    
+                    [btnAction.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:13.0]];
+                    textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
+                    textSize=[AppGlobal getTheExpectedSizeOfLabel:strtrim];
+                    
+                    strikeWidth = textSize.width;
+                    
+                    if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
+                    {
+                        btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
+                        [btnAction addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
+                        
+                    }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
+                    {
+                        btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
+                        [btnAction addTarget:self action:@selector(btnCourseDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+                        
+                    }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
+                    {
+                        btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
+                        [btnAction addTarget:self action:@selector(btnModuleDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+                    }
+                    else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
+                    {
+                        btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
+                        [btnAction addTarget:self action:@selector(btnResourceDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+                    }
+                    
+                    btnAction.frame=CGRectMake(x, y, strikeWidth, 21);
+                    textIndex=textIndex+1;
+                                       x=x+strikeWidth;
+                    
+                }
+                if (y>50) {
+                    height=height+y-50;
+                }
+            }
         }
         return height=height+140;
     }
@@ -742,15 +857,15 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
         NSLog(@"%ld",(long)indexPath.row);
         if(([update.comments count]<3) && (indexPath.row==[update.comments count]))
         {
-            height=40.0f;
+            height=50.0f;
         }
         else if([update.comments count]>=3)
         {
             if(update.isExpend && (indexPath.row==[update.comments count]))
             {
-                height=40.0f;
+                height=50.0f;
             }else if(indexPath.row==3 && !update.isExpend){
-                height=40.0f;
+                height=50.0f;
             }
             
         }
@@ -960,6 +1075,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
         
         //Hide Indicator
         [appDelegate hideSpinner];
+        [tblViewContent reloadData];
         //[self getUpdate:searchText];
     }
                                      failure:^(NSError *error) {

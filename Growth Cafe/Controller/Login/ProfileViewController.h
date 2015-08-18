@@ -16,7 +16,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblSchoolAdminEmail;
 @property (strong, nonatomic) IBOutlet UILabel *lblClass;
 @property (strong, nonatomic) IBOutlet UILabel *lblHomeRoom;
-@property (strong, nonatomic) IBOutlet UIButton *btnLogout;
+@property (strong, nonatomic) IBOutlet UIButton *btnBack;
+- (IBAction)btnBackClick:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UserDetails *user;
 @end

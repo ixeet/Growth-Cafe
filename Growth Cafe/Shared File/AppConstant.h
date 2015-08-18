@@ -115,6 +115,7 @@
 #define MISSING_ADMIN_VLID_EMAIL @" School email seems to be incorrect, Enter a valid email id  including '@' and '.' "
 
 
+#define MISSING_SUBMIT_FUNC @"Not implemented."
 // Success Message Alert Title
 
 #define SUCCESS_MESSAGE_ALERT_TITLE @"Info"

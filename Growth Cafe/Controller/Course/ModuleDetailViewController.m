@@ -858,7 +858,7 @@
                     [self.pageViews addObject:[NSNull null]];
                 }
                 CGSize pagesScrollViewSize = self.scrollView.frame.size;
-                self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * [contentList count], pagesScrollViewSize.height);
+                self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * [contentList count], pagesScrollViewSize.height+5);
                 [self loadVisiblePages];
                 //button.layer.shouldRasterize = YES;
             }else {
@@ -1107,7 +1107,7 @@
         {
             [cell.btnCommentedBy addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
             
-            cell.btnCommentedBy.tag = [comment.commentBy integerValue];
+            cell.btnCommentedBy.tag = [comment.commentById integerValue];
         }
 
         
@@ -1217,7 +1217,7 @@
             {
                 [cell.btnCommentedBy addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
                 
-                cell.btnCommentedBy.tag = [comment.commentBy integerValue];
+                cell.btnCommentedBy.tag = [comment.commentById integerValue];
             }
             
             

@@ -121,8 +121,7 @@
 //    manager.requestSerializer = [AFJSONRequestSerializer serializer];
 //    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     // The `POST` method both creates and issues the request
-
-    [manager POST:POST_ASSIGNMENT_URL parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+[manager POST:POST_ASSIGNMENT_URL parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
          NSError *error;
    // [formData  appendPartWithFileURL:videoURL1 name:@"asset.mov" error: &error];
     [formData appendPartWithFileData:data name:@"fileName"

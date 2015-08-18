@@ -176,7 +176,7 @@
                 comment.shareCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"shareCounts"]];
                 comment.commentCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"commentCounts"]];
                 comment.commentId=[dicComment objectForKey:@"commentId"];
-                
+                comment.commentById=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"commentById"]];
                 comment.parentCommentId=[dicComment objectForKey:@"parentCommentId"];
                 comment.commentBy=[dicComment objectForKey:@"commentBy"];
                 //comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
@@ -192,7 +192,7 @@
                     comment.shareCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"shareCounts"]];
                     comment.commentCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"commentCounts"]];
                     comment.commentId=[dicSubComment objectForKey:@"commentId"];
-                    
+                     comment.commentById=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"commentById"]];
                     comment.parentCommentId=[dicSubComment objectForKey:@"parentCommentId"];
                     comment.commentBy=[dicSubComment objectForKey:@"commentBy"];
                     //comment.commentByImage=[dicComment objectForKey:@"commentByImage"];

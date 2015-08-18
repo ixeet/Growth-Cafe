@@ -49,7 +49,7 @@
                             <constraint firstAttribute="height" constant="22" id="feW-4f-0qa"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="9"/>
-                        <state key="normal" title="123" image="icn_like.png">
+                        <state key="normal" image="icn_like.png">
                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </state>
@@ -71,7 +71,7 @@
                             <constraint firstAttribute="height" constant="22" id="8yA-PM-iml"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="9"/>
-                        <state key="normal" title="123" image="icn_comment.png">
+                        <state key="normal" image="icn_comment.png">
                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </state>
@@ -88,7 +88,7 @@
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qOV-88-Rkq" userLabel="imgHalfDevider">
                         <rect key="frame" x="56" y="118" width="266" height="1"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="TRJ-mz-KbV"/>
                         </constraints>
@@ -105,7 +105,7 @@
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tBM-bH-MgC" userLabel="imgDevider">
                         <rect key="frame" x="-1" y="165" width="324" height="1"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="b4G-Vv-hTh"/>
                         </constraints>
@@ -228,6 +228,9 @@
                         <exclude reference="fTv-Cb-VrY"/>
                     </mask>
                     <mask key="constraints">
+                        <exclude reference="C7b-2h-zTm"/>
+                        <exclude reference="Ggx-so-bdc"/>
+                        <exclude reference="euz-XQ-ke1"/>
                         <exclude reference="ETj-dz-fRw"/>
                         <exclude reference="Mjz-hU-mUc"/>
                         <exclude reference="Tct-xZ-fEy"/>
@@ -246,9 +249,6 @@
                         <exclude reference="csA-vr-tNy"/>
                         <exclude reference="dmJ-ip-ULg"/>
                         <exclude reference="iVh-XU-CtY"/>
-                        <exclude reference="C7b-2h-zTm"/>
-                        <exclude reference="Ggx-so-bdc"/>
-                        <exclude reference="euz-XQ-ke1"/>
                         <exclude reference="SBJ-ry-nUP"/>
                         <exclude reference="TK2-1A-dkw"/>
                         <exclude reference="P5o-4C-dyV"/>
@@ -264,6 +264,9 @@
                         <include reference="fTv-Cb-VrY"/>
                     </mask>
                     <mask key="constraints">
+                        <include reference="C7b-2h-zTm"/>
+                        <include reference="Ggx-so-bdc"/>
+                        <include reference="euz-XQ-ke1"/>
                         <include reference="ETj-dz-fRw"/>
                         <include reference="Mjz-hU-mUc"/>
                         <include reference="Tct-xZ-fEy"/>
@@ -282,9 +285,6 @@
                         <include reference="csA-vr-tNy"/>
                         <include reference="dmJ-ip-ULg"/>
                         <include reference="iVh-XU-CtY"/>
-                        <include reference="C7b-2h-zTm"/>
-                        <include reference="Ggx-so-bdc"/>
-                        <include reference="euz-XQ-ke1"/>
                         <include reference="SBJ-ry-nUP"/>
                         <include reference="TK2-1A-dkw"/>
                         <include reference="P5o-4C-dyV"/>

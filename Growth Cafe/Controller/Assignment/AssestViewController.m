@@ -16,7 +16,7 @@
 @synthesize mDelegate;
 
 - (void)viewDidLoad {
-      [AppGlobal showAlertWithMessage:MISSING_TITLE title:@""];
+      
     [super viewDidLoad];
     //iOS7 Customization, swipe to pop gesture
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
@@ -35,7 +35,7 @@
      {
          if (group)
         {
-        [group setAssetsFilter:[ALAssetsFilter allVideos]];
+       // [group setAssetsFilter:[ALAssetsFilter allVideos]];
          [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop)
           {
               if (asset) {

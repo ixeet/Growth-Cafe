@@ -14,7 +14,7 @@
 @end
 
 @implementation ProfileViewController
-@synthesize lblClass,lblEmail,lblFirstName,lblLastName,lblHomeRoom,lblSchoolAdminEmail,lblSchoolName,user;
+@synthesize lblClass,lblEmail,lblFirstName,lblLastName,lblHomeRoom,lblSchoolAdminEmail,lblSchoolName,user,imgUser;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -53,23 +53,33 @@
     lblClass.text=user.className;
     lblHomeRoom.text=user.homeRoomName;
    
+          if(user.userImage!=nil){
+           if (user.userImageData==nil) {
+                NSURL *imageURL = [NSURL URLWithString:user.userImage];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                    user.userImageData  = [NSData dataWithContentsOfURL:imageURL];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        // Update the UI
+                        UIImage *img=[UIImage imageWithData:user.userImageData];
+                        if(img!=nil)
+                        {
+                            [imgUser setImage:img];
+                            
+                            [imgUser setBackgroundColor:[UIColor clearColor]];
+                        }
+                    });
+                });
+            }else{
+                UIImage *img=[UIImage imageWithData:user.userImageData];
+                [imgUser setImage:img];
+                
+                [imgUser setBackgroundColor:[UIColor clearColor]];
+            }
+        }
     
 }
 
-//- (IBAction)btnAssignmentClick:(id)sender {
-//}
-//
-//- (IBAction)btnCourseClick:(id)sender {
-//       CourseViewController *courseView= [[CourseViewController alloc]init];
-//       [self.navigationController pushViewController:courseView animated:YES];
-//     
-//}
-//
-//- (IBAction)btnNotificationClick:(id)sender {
-//}
-//
-//- (IBAction)btnUpdateClick:(id)sender {
-//}
-//- (IBAction)btnMoreClick:(id)sender {
-//}
+- (IBAction)btnBackClick:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

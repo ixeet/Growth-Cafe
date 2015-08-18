@@ -91,7 +91,8 @@
             // set the drop down master data;
             //            NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:responseDic];
             //            [AppGlobal  setDropdownList:USER_DATA andData:userData];
-            [AppGlobal  writeUserDataOnFile:responseDic];
+            responseDic= [responseDic objectForKey:@"userDetail"];
+          //  [AppGlobal  writeUserDataOnFile:responseDic];
             
             //Create Global User Detail Data Model
             

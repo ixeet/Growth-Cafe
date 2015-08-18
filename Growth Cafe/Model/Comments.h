@@ -16,6 +16,7 @@
 @property (nonatomic,strong) NSString* commentId;
 @property (nonatomic,strong) NSString* parentCommentId;
 @property (nonatomic,strong) NSString* commentBy;
+@property (nonatomic,strong) NSString* commentById;
 @property (nonatomic,strong) NSString* commentByImage;
 @property (nonatomic,strong) NSData* commentByImageData;
 @property (nonatomic,strong) NSString* commentTxt;

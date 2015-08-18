@@ -9,6 +9,6 @@
 #import "Update.h"
 
 @implementation Update
-@synthesize isLike,likeCount,commentCount,resource,updateId,updatetime,shareCount,updateCreatedBy,updateCreatedByImage,updateDesc,updateCreatedByImageData,updateTitle,comments,isExpend,updateTitleArray;
+@synthesize isLike,likeCount,commentCount,resource,updateId,updatetime,shareCount,updateCreatedBy,updateCreatedByImage,updateDesc,updateCreatedByImageData,updateTitle,comments,isExpend,updateTitleArray,user;
 
 @end

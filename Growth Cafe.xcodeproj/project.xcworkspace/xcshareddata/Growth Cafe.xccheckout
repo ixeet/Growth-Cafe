@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>996014AC-8820-4009-B0FB-1B9952E936E9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Growth Cafe</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CFAA1B76B6FDF81F49929FA760B2A06A00E798AA</key>
+		<string>https://github.com/ixeet/Growth-Cafe.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Growth Cafe.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CFAA1B76B6FDF81F49929FA760B2A06A00E798AA</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ixeet/Growth-Cafe.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CFAA1B76B6FDF81F49929FA760B2A06A00E798AA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CFAA1B76B6FDF81F49929FA760B2A06A00E798AA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Growth-Cafe</string>
+		</dict>
+	</array>
+</dict>
+</plist>

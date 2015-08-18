@@ -51,7 +51,7 @@
             {
                 NSDictionary *userdic=[dicContent objectForKey:@"user"];
                 UserDetails *user= [[UserDetails alloc]init];
-                user.userId=[userdic objectForKey:@"feedTextArray"];
+                user.userId=[userdic objectForKey:@"userId"];
                 user.userFBID=[userdic objectForKey:@"userFbId"];
                 user.username  =[userdic objectForKey:@"userName"];
                 user.userFirstName=[userdic objectForKey:@"firstName"];
@@ -59,7 +59,8 @@
                 user.userEmail=[userdic objectForKey:@"emailId"];
                 user.title=[userdic objectForKey:@"title"];
                 user.userImage=[userdic objectForKey:@"profileImage"];
-                update.updateCreatedBy=user.userFirstName;
+                update.updateCreatedBy=[NSString stringWithFormat:@"%@ %@" ,user.userFirstName,user.userLastName];
+                update.user =user;
                 update.updateCreatedByImage=user.userImage;
             }
            if([dicContent objectForKey:@"resource"]!=nil)
@@ -78,13 +79,16 @@
                update.resource=resource;
            }
             NSMutableArray * arrayComments= [[NSMutableArray alloc]init];
-            for (NSDictionary *dicComment in [dicContent objectForKey:@"feedCommentsList"]) {
+             NSMutableArray * arrayTempComments= [dicContent objectForKey:@"feedCommentsList"];
+            
+            for (NSDictionary *dicComment in arrayTempComments) {
                 Comments *comment= [[Comments alloc]init];
                 comment.likeCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"likeCounts"]];
                 comment.shareCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"shareCounts"]];
                 comment.commentCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"commentCounts"]];
                 comment.commentId=[dicComment objectForKey:@"commentId"];
                 
+                 comment.commentById=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"commentById"]];
                 comment.parentCommentId=[dicComment objectForKey:@"parentCommentId"];
                 comment.commentBy=[dicComment objectForKey:@"commentBy"];
                 //comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
@@ -95,12 +99,14 @@
                // comment.commentDate=[dicComment objectForKey:@"subComments"];
                 [arrayComments addObject:comment];
                 NSArray *subcomment=[dicComment objectForKey:@"subComments"];
-                 if ( [dicComment objectForKey:@"subComments"]!=nil) {
-                for (NSDictionary *dicSubComment in [dicComment objectForKey:@"subComments"]) {
+                if (subcomment  !=nil) {
+                for (NSDictionary *dicSubComment in subcomment) {
                     Comments *comment= [[Comments alloc]init];
                     comment.likeCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"likeCounts"]];
                     comment.shareCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"shareCounts"]];
+                    
                     comment.commentCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"commentCounts"]];
+                    comment.commentById=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"commentById"]];
                     comment.commentId=[dicSubComment objectForKey:@"commentId"];
                     
                     comment.parentCommentId=[dicSubComment objectForKey:@"parentCommentId"];

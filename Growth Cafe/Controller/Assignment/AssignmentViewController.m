@@ -317,7 +317,12 @@
         [cell.btnExpend setImage:[UIImage imageNamed:@"icn_arrow-expand.png"] forState:UIControlStateNormal];
         if(assignment.assignmentDesc!=nil)
         {
+            
             cell.lblAssignementDetail.text=assignment.assignmentDesc;
+          
+            
+            //            if(labelSize.height>39)
+         
             [cell.lblAssignementDetail  setHidden:NO];
         }
     
@@ -387,7 +392,7 @@
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-        assignment.assignmentSubmittedDate=[NSString stringWithFormat:@"%@ %ld",monthName,(long)components.day];
+        assignment.assignmentSubmittedDate=[NSString stringWithFormat:@"%@ %ld",[monthName substringToIndex:3],(long)components.day];
     }
     cell.lblDateAssignment.text=assignment.assignmentSubmittedDate;
     
@@ -395,7 +400,7 @@
     {
         cell.btnAssignmentStatus.selected=YES;
         [cell.btnAssignmentStatus setBackgroundColor:[UIColor colorWithRed:186.0/255.0 green:0.0/255.0 blue:50.0/255.0 alpha:1]];
-        //[cell.btnAssignmentStatus setBackgroundColor:[UIColor whiteColor]];
+        [cell.btnAssignmentStatus setBackgroundColor:[UIColor whiteColor]];
         [cell.btnSubmit  addTarget:self action:@selector(btnSubmitAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
        // lblDateAssignment.text
         
@@ -409,7 +414,7 @@
           [cell.btnSubmit  addTarget:self action:@selector(btnSubmitAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
         cell.lblDateAssignment.text=assignment.assignmentSubmittedDate;
         cell.lblDateAssignment.textColor =[UIColor whiteColor];
-          if(assignment.isExpend)
+        if(assignment.isExpend)
          [cell.btnSubmit setHidden:NO];
     }
     else if([assignment.assignmentStatus isEqualToString:@"3"])
@@ -444,7 +449,7 @@
     Assignment *assignment=arrayAssignment[indexPath.row];
     if(assignment.isExpend==NO)
     {
-        return 75.0f;
+        return 90.0f;
         
     }else{
         float height=90.0f;
@@ -458,9 +463,18 @@
             CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:assignment.assignmentDesc];
             NSLog(@"%ld",(long)indexPath.row);
             
-            if(labelSize.height>39)
+//            if(labelSize.height>39)
                 height=height+labelSize.height;
         }
+        if(assignment.course.courseName!=nil){
+            
+            CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:assignment.course.courseName];
+            NSLog(@"%ld",(long)indexPath.row);
+            
+            //            if(labelSize.height>39)
+            height=height+labelSize.height;
+        }
+        
 
         if(![assignment.assignmentStatus isEqualToString:@"3"])
         {
@@ -486,11 +500,12 @@
     [tblViewContent reloadData];
 }
 - (IBAction)btnSubmitAssignmentClick:(id)sender {
-    UIButton *btn=(UIButton *)sender;
-    Assignment *assignment=[arrayAssignment objectAtIndex:btn.tag];
-    SubmitAssignmentViewController *submitViewController=[[SubmitAssignmentViewController alloc]init];
-    submitViewController.assignment=assignment;
-    [self.navigationController pushViewController:submitViewController animated:YES];
+//    UIButton *btn=(UIButton *)sender;
+//    Assignment *assignment=[arrayAssignment objectAtIndex:btn.tag];
+//    SubmitAssignmentViewController *submitViewController=[[SubmitAssignmentViewController alloc]init];
+//    submitViewController.assignment=assignment;
+//    [self.navigationController pushViewController:submitViewController animated:YES];
+    [AppGlobal showAlertWithMessage:MISSING_SUBMIT_FUNC title:@""];
     
 }
 

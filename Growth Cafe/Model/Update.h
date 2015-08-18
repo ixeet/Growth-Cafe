@@ -25,5 +25,5 @@
 @property (nonatomic,strong) NSString*  shareCount;
 @property (nonatomic,strong) NSString*  isLike;
 @property (nonatomic,assign) BOOL       isExpend;
-
+@property (nonatomic,strong) UserDetails *user;
 @end

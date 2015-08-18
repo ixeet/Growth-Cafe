@@ -73,18 +73,7 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     [self setSearchUI];
-    objCustom = [[CustomProfileView alloc] init];
-    if(coursesList==nil){
-        
-          [self  getCourses:@""];
-    }else{
-        moduleArray     = [NSMutableArray new];
-        currentExpandedIndex = -1;
-        for (Courses *course in coursesList) {
-            [moduleArray addObject:course.moduleList];
-        }
-
-    }
+    
     
     btnCourses.selected=YES;
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
@@ -113,6 +102,18 @@
 }
 -(void)viewWillAppear:(BOOL)animated    {
     
+    objCustom = [[CustomProfileView alloc] init];
+    if(coursesList==nil){
+        
+        [self  getCourses:@""];
+    }else{
+        moduleArray     = [NSMutableArray new];
+        currentExpandedIndex = -1;
+        for (Courses *course in coursesList) {
+            [moduleArray addObject:course.moduleList];
+        }
+        
+    }
     UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognizer:)];
     
     recognizer.direction = UISwipeGestureRecognizerDirectionRight;
