@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblAutherName;
 @property (strong, nonatomic) IBOutlet UILabel *lblStartedon;
 @property (strong, nonatomic) IBOutlet UILabel *lblCompletedon;
+@property (strong, nonatomic) IBOutlet UILabel *lblNextTitle;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnPlay;
 

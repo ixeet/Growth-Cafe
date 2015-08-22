@@ -9,12 +9,14 @@
 #import "SubmitAssignmentViewController.h"
 #import "CustomKeyboard.h"
 #import "AssestViewController.h"
+#import <AVFoundation/AVFoundation.h>
 @interface SubmitAssignmentViewController ()<CustomKeyboardDelegate>
 {
     //keyboard
     CustomKeyboard *customKeyboard;
     UITextView *activeTextField;
     AssestViewController *modalView2;
+  
 
 }
 @end
@@ -35,9 +37,12 @@
     [txtViewVideoDesc.layer setBorderWidth:2.0];
     [txtViewVideoTitle.layer setBorderColor:[[[UIColor grayColor] colorWithAlphaComponent:0.5] CGColor]];
     [txtViewVideoTitle.layer setBorderWidth:2.0];
+    txtViewVideoTitle.layer.cornerRadius = 10.0f;
+    txtViewURL.layer.cornerRadius = 10.0f;
+    txtViewVideoDesc.layer.cornerRadius = 10.0f;
     customKeyboard = [[CustomKeyboard alloc] init];
     customKeyboard.delegate = self;
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,17 +69,20 @@
     else if ([txtViewVideoDesc.text length] <= 0){
         [AppGlobal showAlertWithMessage:MISSING_Video_DESC title:@""];
     }
-    else if (selectedAssest ==nil|| [txtViewURL.text length]<=0){
+    else if (selectedAssest ==nil && [txtViewURL.text length]<=0){
         [AppGlobal showAlertWithMessage:MISSING_Video_URL title:@""];
     }else{
-        ALAssetRepresentation *defaultRepresentation = [selectedAssest defaultRepresentation];
-        NSString *uti = [defaultRepresentation UTI];
+       // ALAssetRepresentation *defaultRepresentation = [selectedAssest defaultRepresentation];
+       // NSString *uti = [defaultRepresentation UTI];
 //        NSURL  *videoURL = [[selectedAssest valueForProperty:ALAssetPropertyURLs] valueForKey:uti];
-    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
-    
-        [[appDelegate _engine] uploadAssignment:txtViewVideoTitle.text AndVideoDesc:txtViewVideoDesc.text AndVideoURL:txtViewURL.text AndVideoPath:selectedAssest andFileName:uti AndAssignment:assignment.assignmentId success:^(BOOL logoutValue) {
+        
+ 
+        [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+        [[appDelegate _engine] uploadAssignment:txtViewVideoTitle.text AndVideoDesc:txtViewVideoDesc.text AndVideoURL:txtViewURL.text AndVideoPath:selectedAssest andFileName:@"" AndAssignment:assignment.assignmentId success:^(BOOL logoutValue) {
         //Hide Indicator
-        [appDelegate hideSpinner];
+      [appDelegate hideSpinner];
+
+        [self.navigationController popToRootViewControllerAnimated:YES];
 
     }
                                     failure:^(NSError *error) {
@@ -87,6 +95,7 @@
                                     }];
     }
 }
+
 -(void)loginError:(NSError*)error{
     
     [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];
@@ -285,11 +294,49 @@
     [imgAssest setImage:[UIImage imageWithCGImage:[selectedAssest thumbnail]]];
     [imgAssest setHidden:NO];
     [sender dismissViewControllerAnimated:YES completion:nil];
+    
+    NSMutableDictionary   *dic = [[NSMutableDictionary alloc] init];
+    ALAssetRepresentation *defaultRepresentation = [selectedAssest defaultRepresentation];
+    NSString *uti = [defaultRepresentation UTI];
+    NSURL  *videoURL = [[selectedAssest valueForProperty:ALAssetPropertyURLs] valueForKey:uti];
+   // NSURL *outputURL = [NSURL fileURLWithPath:@"/output.mov"];
+    
+    NSArray *arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath =  [NSString stringWithFormat:@"%@/%@.mp4",[arr objectAtIndex:0],@"output" ];
+    NSURL *outputURL = [NSURL fileURLWithPath:filePath];
+    [self convertVideoToLowQuailtyWithInputURL:videoURL outputURL:outputURL handler:^(AVAssetExportSession *exportSession)
+     {
+         if (exportSession.status == AVAssetExportSessionStatusCompleted)
+         {
+             printf("completed\n");
+             NSData *data= [NSData dataWithContentsOfURL:outputURL];
+         }
+         else
+         {
+             printf("error\n");
+             
+         }
+     }];
 }
 -(void)DidNoSelectAssesst:(id)sender
 {
     [sender dismissViewControllerAnimated:YES completion:nil];
 
+}
+- (void)convertVideoToLowQuailtyWithInputURL:(NSURL*)inputURL
+                                   outputURL:(NSURL*)outputURL
+                                     handler:(void (^)(AVAssetExportSession*))handler
+{
+    [[NSFileManager defaultManager] removeItemAtURL:outputURL error:nil];
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:inputURL options:nil];
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetLowQuality];
+    exportSession.outputURL = outputURL;
+    exportSession.outputFileType = AVFileTypeMPEG4;
+    [exportSession exportAsynchronouslyWithCompletionHandler:^(void)
+     {
+         handler(exportSession);
+         
+     }];
 }
 
 @end

@@ -11,11 +11,13 @@
 #import "LoginViewController.h"
 
 @interface ForgetPasswordViewController ()
-
+{
+    BOOL isFirstLoginDone;
+}
 @end
 
 @implementation ForgetPasswordViewController
-@synthesize txtUsername;
+@synthesize txtUsername,btnFacebook;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -25,6 +27,7 @@
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
+    isFirstLoginDone=NO;
     self.btnFacebook.delegate = self;
     self.btnFacebook.readPermissions = @[@"public_profile", @"email"];
     [self changeFrameAndBackgroundImg];
@@ -34,7 +37,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    btnFacebook.delegate=self;
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    btnFacebook.delegate=nil;
+}
 /*
 #pragma mark - Navigation
 
@@ -136,7 +145,7 @@
     
     //  _btnFacebook.frame = CGRectMake(0, _btnFacebook.frame.origin.y+14, _btnFacebook.frame.size.width, 120);
     //  _btnFacebook.frame = CGRectMake(320/2 - 93/2, self.view.frame.size.height -200, 93, 40);
-    for (id loginObject in _btnFacebook.subviews)
+    for (id loginObject in btnFacebook.subviews)
     {
         if ([loginObject isKindOfClass:[UIButton class]])
         {
@@ -178,6 +187,14 @@
 
 -(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
     
+    // Check
+    if(isFirstLoginDone) {
+        // Execute code I want to run just once
+        NSLog(@"fetched");
+        return;
+    }
+    isFirstLoginDone=YES;
+    // get user id
     NSLog(@"%@", user);
     //if user is already sign in Then validate with server.
     

@@ -112,6 +112,7 @@
 #define MISSING_Video_URL @"Video URL or video content is not selected."
 #define MISSING_HOME @"Home room is not selected."
 #define MISSING_ADMIN_EMAIL @" School email can't be empty."
+#define MISSING_COMMENT @" Comment can't be empty."
 #define MISSING_ADMIN_VLID_EMAIL @" School email seems to be incorrect, Enter a valid email id  including '@' and '.' "
 
 

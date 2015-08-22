@@ -252,8 +252,8 @@
     [_moviePlayer setFullscreen:YES animated:YES];
     [_moviePlayer stop];
     [_moviePlayer play];
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+//    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+//    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
 
 }
 //- (void)moviePlayerWillEnterFullscreenNotification:(NSNotification *)notification

@@ -11,5 +11,6 @@
 @interface AssestTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *lblAssestName;
 @property (strong, nonatomic) IBOutlet UIImageView *imgAssest;
+@property (strong, nonatomic) IBOutlet UIButton *btnPlay;
 
 @end

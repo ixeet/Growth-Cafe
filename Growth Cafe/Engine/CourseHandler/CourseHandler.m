@@ -155,9 +155,17 @@
         
         for (NSDictionary *dicContent in [responseDic objectForKey:@"resourceList"]) {
             Resourse *resource= [[Resourse alloc]init];
-            resource.likeCounts=[NSString stringWithFormat:@"%@",  [dicContent objectForKey:@"likeCounts"] ];
-            resource.shareCounts=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"shareCounts"]];
-            resource.commentCounts=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"commentCounts"]];
+            if([dicContent objectForKey:@"likeCounts"]!=nil){
+                resource.likeCounts=[NSString stringWithFormat:@"%@",  [dicContent objectForKey:@"likeCounts"] ];
+            }
+            if([dicContent objectForKey:@"shareCounts"]!=nil){
+                
+                resource.shareCounts=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"shareCounts"]];
+            }
+            if([dicContent objectForKey:@"commentCounts"]!=nil){
+                
+                resource.commentCounts=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"commentCounts"]];
+            }
             resource.resourceId=[dicContent objectForKey:@"resourceId"];
             resource.islike=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"isLiked"]];
             resource.resourceImageUrl=[dicContent objectForKey:@"thumbImg"];
@@ -172,9 +180,15 @@
             NSMutableArray * arrayComments= [[NSMutableArray alloc]init];
             for (NSDictionary *dicComment in [dicContent objectForKey:@"commentList"]) {
                 Comments *comment= [[Comments alloc]init];
+                 if([dicComment objectForKey:@"likeCounts"]!=nil){
                 comment.likeCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"likeCounts"]];
+                 }
+                if([dicComment objectForKey:@"shareCounts"]!=nil){
                 comment.shareCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"shareCounts"]];
+                }
+                 if([dicComment objectForKey:@"commentCounts"]!=nil){
                 comment.commentCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"commentCounts"]];
+                 }
                 comment.commentId=[dicComment objectForKey:@"commentId"];
                 comment.commentById=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"commentById"]];
                 comment.parentCommentId=[dicComment objectForKey:@"parentCommentId"];
@@ -188,9 +202,16 @@
                
                 for (NSDictionary *dicSubComment in [dicComment objectForKey:@"subComments"]) {
                     Comments *comment= [[Comments alloc]init];
+                    if([dicSubComment objectForKey:@"likeCounts"]!=nil){
                     comment.likeCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"likeCounts"]];
-                    comment.shareCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"shareCounts"]];
+                    }
+                    if([dicSubComment objectForKey:@"shareCounts"]!=nil){
+                        comment.shareCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"shareCounts"]];
+                    }
+                    if([dicSubComment objectForKey:@"commentCounts"]!=nil){
+
                     comment.commentCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"commentCounts"]];
+                    }
                     comment.commentId=[dicSubComment objectForKey:@"commentId"];
                      comment.commentById=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"commentById"]];
                     comment.parentCommentId=[dicSubComment objectForKey:@"parentCommentId"];
@@ -215,6 +236,7 @@
                 resource.resourceDesc=[dicRelatedResource objectForKey:@"resourceDesc"];
                 resource.resourceImageUrl=[dicRelatedResource objectForKey:@"thumbImg"];
                 resource.uploadedDate=[dicRelatedResource objectForKey:@"uploadedDate"];
+                  resource.authorName=[dicRelatedResource objectForKey:@"authorName"];
                 [arrayRelatedResource addObject:resource];
             }
             
@@ -303,9 +325,17 @@
 
             for (NSDictionary *dicContent in [responseDic objectForKey:@"resourceList"]) {
                 Resourse *resource= [[Resourse alloc]init];
-                resource.likeCounts=[NSString stringWithFormat:@"%@",  [dicContent objectForKey:@"likeCounts"] ];
+                if([dicContent objectForKey:@"likeCounts"]!=nil){
+                    resource.likeCounts=[NSString stringWithFormat:@"%@",  [dicContent objectForKey:@"likeCounts"] ];
+                }
+                if([dicContent objectForKey:@"shareCounts"]!=nil){
+
                 resource.shareCounts=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"shareCounts"]];
+                }
+                if([dicContent objectForKey:@"commentCounts"]!=nil){
+
                 resource.commentCounts=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"commentCounts"]];
+                }
                 resource.resourceId=[dicContent objectForKey:@"resourceId"];
                 resource.islike=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"isLiked"]];
                 resource.resourceImageUrl=[dicContent objectForKey:@"thumbImg"];
@@ -320,9 +350,15 @@
                 NSMutableArray * arrayComments= [[NSMutableArray alloc]init];
                 for (NSDictionary *dicComment in [dicContent objectForKey:@"commentList"]) {
                     Comments *comment= [[Comments alloc]init];
-                    comment.likeCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"likeCounts"]];
-                    comment.shareCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"shareCounts"]];
-                    comment.commentCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"commentCounts"]];
+                    if([dicComment objectForKey:@"likeCounts"]!=nil){
+                        comment.likeCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"likeCounts"]];
+                    }
+                    if([dicComment objectForKey:@"shareCounts"]!=nil){
+                        comment.shareCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"shareCounts"]];
+                    }
+                    if([dicComment objectForKey:@"commentCounts"]!=nil){
+                        comment.commentCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"commentCounts"]];
+                    }
                     comment.commentId=[dicComment objectForKey:@"commentId"];
                     
                     comment.parentCommentId=[dicComment objectForKey:@"parentCommentId"];
@@ -338,9 +374,17 @@
                     
                     for (NSDictionary *dicSubComment in [dicComment objectForKey:@"subComments"]) {
                         Comments *comment= [[Comments alloc]init];
-                        comment.likeCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"likeCounts"]];
-                        comment.shareCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"shareCounts"]];
-                        comment.commentCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"commentCounts"]];
+                        if([dicSubComment objectForKey:@"likeCounts"]!=nil){
+                            comment.likeCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"likeCounts"]];
+                        }
+                        if([dicSubComment objectForKey:@"shareCounts"]!=nil){
+                            comment.shareCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"shareCounts"]];
+                        }
+                        if([dicSubComment objectForKey:@"commentCounts"]!=nil){
+                            
+                            comment.commentCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"commentCounts"]];
+                        }
+
                         comment.commentId=[dicSubComment objectForKey:@"commentId"];
                         
                         comment.parentCommentId=[dicSubComment objectForKey:@"parentCommentId"];
@@ -366,6 +410,8 @@
                     resource.resourceDesc=[dicRelatedResource objectForKey:@"resourceDesc"];
                     resource.resourceImageUrl=[dicRelatedResource objectForKey:@"thumbImg"];
                     resource.uploadedDate=[dicRelatedResource objectForKey:@"uploadedDate"];
+                    resource.resourceTitle=[dicRelatedResource objectForKey:@"resourceName"];
+                     resource.authorName=[dicRelatedResource objectForKey:@"authorName"];
                     [arrayRelatedResource addObject:resource];
                 }
                 

@@ -10,16 +10,25 @@
 #import "RegisterationViewController.h"
 #import "LoginViewController.h"
 @interface HomeViewController ()
-
+{
+    BOOL isFirstLoginDone;
+}
 @end
 
 @implementation HomeViewController
-@synthesize _homeViewController,_navigationController_Login;
+@synthesize _homeViewController,_navigationController_Login,btnFacebook;
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    isFirstLoginDone=NO;
     if(  [AppSingleton sharedInstance].isUserLoggedIn==YES)
     {
+        
+        [FBSession.activeSession closeAndClearTokenInformation];
+        [FBSession.activeSession close];
+        [FBSession setActiveSession:nil];
+        
+        [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
+        [AppSingleton sharedInstance].isUserLoggedIn=NO;
         [self.tabBarController.tabBar setHidden:NO];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
@@ -37,12 +46,19 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    btnFacebook.delegate=self;
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    btnFacebook.delegate=nil;
+}
 -(void)changeFrameAndBackgroundImg
 {
     
 //  _btnFacebook.frame = CGRectMake(0, _btnFacebook.frame.origin.y+14, _btnFacebook.frame.size.width, 120);
   //  _btnFacebook.frame = CGRectMake(320/2 - 93/2, self.view.frame.size.height -200, 93, 40);
-    for (id loginObject in _btnFacebook.subviews)
+    for (id loginObject in btnFacebook.subviews)
     {
         if ([loginObject isKindOfClass:[UIButton class]])
         {
@@ -86,7 +102,13 @@
 
 -(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
     
-    NSLog(@"%@", user);
+    // Check
+    if(isFirstLoginDone) {
+        // Execute code I want to run just once
+        NSLog(@"fetched");
+        return;
+    }
+    isFirstLoginDone=YES;
     //if user is already sign in Then validate with server.
     
    // get user id

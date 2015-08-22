@@ -22,4 +22,5 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imgAssest;
 @property (strong, nonatomic) IBOutlet ALAsset *selectedAssest;
 
+
 @end

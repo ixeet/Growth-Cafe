@@ -98,7 +98,7 @@
                     <variation key="heightClass=regular-widthClass=compact" constant="3"/>
                 </constraint>
                 <constraint firstItem="5Zr-Lg-ccF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="326" id="OYn-uS-NC4">
-                    <variation key="heightClass=regular-widthClass=compact" constant="22"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="30"/>
                 </constraint>
                 <constraint firstItem="ZAD-cd-J1p" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="53" id="RWN-2K-Amk">
                     <variation key="heightClass=regular-widthClass=compact" constant="19"/>
@@ -108,7 +108,7 @@
                 <constraint firstItem="8XI-Ra-WeO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cCj-G1-C5P"/>
                 <constraint firstAttribute="trailing" secondItem="8XI-Ra-WeO" secondAttribute="trailing" id="dwd-2n-dmK"/>
                 <constraint firstItem="ZAD-cd-J1p" firstAttribute="leading" secondItem="5Zr-Lg-ccF" secondAttribute="trailing" constant="20" id="g6X-am-VmM">
-                    <variation key="heightClass=regular-widthClass=compact" constant="9"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="1"/>
                 </constraint>
                 <constraint firstAttribute="trailing" secondItem="rdF-gS-kYe" secondAttribute="trailing" id="loz-bg-Ub8"/>
                 <constraint firstItem="zRs-Ru-Bvy" firstAttribute="top" secondItem="8XI-Ra-WeO" secondAttribute="bottom" constant="-1" id="oAB-Zu-DSY"/>
@@ -239,7 +239,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <color key="backgroundColor" white="0.66666666669999997" alpha="0.76000000000000001" colorSpace="calibratedWhite"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="pS1-Mb-Kva"/>
@@ -305,6 +305,6 @@
     </objects>
     <resources>
         <image name="img_search-boxn.png" width="230" height="44"/>
-        <image name="profile-menunn.png" width="26" height="24"/>
+        <image name="profile-menunn.png" width="30" height="30"/>
     </resources>
 </document>

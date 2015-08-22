@@ -16,7 +16,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    [imgAssessaryview setImage:[UIImage imageNamed:@"icn_arrow-expand.png"]];
+ //   [imgAssessaryview setImage:[UIImage imageNamed:@"icn_arrow-expand.png"]];
     // Configure the view for the selected state
     [btnImg setSelected:selected];
 }

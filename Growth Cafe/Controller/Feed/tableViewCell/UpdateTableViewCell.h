@@ -10,13 +10,13 @@
 
 @interface UpdateTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIButton *btnUpdatedBy;
-@property (strong, nonatomic) IBOutlet UIView *viewDetail;
+@property (strong, nonatomic) IBOutlet UITextView *txtView;
 @property (strong, nonatomic) IBOutlet UIImageView *imgResorces;
 @property (strong, nonatomic) IBOutlet UIButton *btnPlay;
 @property (strong, nonatomic) IBOutlet UILabel *txtviewDetail;
 @property (strong, nonatomic) IBOutlet UIButton *btnLike;
 @property (strong, nonatomic) IBOutlet UIButton *btnShare;
 @property (strong, nonatomic) IBOutlet UIButton *btnComment;
-@property (strong, nonatomic) IBOutlet UILabel *lblUpdateBy;
+
 
 @end

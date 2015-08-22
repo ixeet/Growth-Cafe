@@ -77,7 +77,7 @@
                         <action selector="btnRegisterClick:" destination="-1" eventType="touchUpInside" id="Biu-GN-b87"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="iqb-9u-Wn6">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo1.png" translatesAutoresizingMaskIntoConstraints="NO" id="iqb-9u-Wn6">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4IT-Lo-xIO" userLabel="btnFacebook" customClass="FBLoginView">
@@ -107,7 +107,9 @@
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>
                 <constraint firstItem="B3e-8s-orZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="37K-xU-ZVv"/>
-                <constraint firstAttribute="centerX" secondItem="iqb-9u-Wn6" secondAttribute="centerX" id="59N-66-RhX"/>
+                <constraint firstAttribute="centerX" secondItem="iqb-9u-Wn6" secondAttribute="centerX" id="59N-66-RhX">
+                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                </constraint>
                 <constraint firstItem="e8k-Q5-Rpg" firstAttribute="baseline" secondItem="LzE-1J-GrG" secondAttribute="baseline" id="ETq-Fl-Pi8"/>
                 <constraint firstItem="4IT-Lo-xIO" firstAttribute="top" secondItem="LzE-1J-GrG" secondAttribute="bottom" constant="1" id="PrN-iI-k5Q">
                     <variation key="heightClass=regular-widthClass=compact" constant="1"/>
@@ -186,6 +188,6 @@
     </objects>
     <resources>
         <image name="bg_home.png" width="320" height="568"/>
-        <image name="logo.png" width="135" height="131"/>
+        <image name="logo1.png" width="150" height="150"/>
     </resources>
 </document>

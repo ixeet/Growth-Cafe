@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
@@ -9,7 +10,10 @@
                 <outlet property="btnFacebook" destination="yFU-ib-IpB" id="n2F-kx-ZTk"/>
                 <outlet property="btnImg" destination="pwI-RS-4nu" id="1Vc-Kh-hBK"/>
                 <outlet property="btnLogout" destination="SpE-31-TxW" id="KEl-FP-PH3"/>
+                <outlet property="lblClass" destination="mNt-bx-SWq" id="8x3-ZM-eqS"/>
+                <outlet property="lblHome" destination="5QC-IZ-daC" id="ng2-B6-e1x"/>
                 <outlet property="lblName" destination="CMN-zD-WEa" id="sVo-qJ-6Vg"/>
+                <outlet property="lblSchoolName" destination="fes-eB-GdU" id="rs4-Pk-HzU"/>
                 <outlet property="view" destination="iN0-l3-epB" id="g7z-9w-VCc"/>
             </connections>
         </placeholder>
@@ -29,13 +33,13 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Mayank Dixit" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CMN-zD-WEa" userLabel="lblName">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CMN-zD-WEa" userLabel="lblName">
                     <rect key="frame" x="104" y="277" width="221" height="39"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="KYT-mQ-yKa"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                    <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
@@ -48,7 +52,7 @@
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Weldson Public School" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fes-eB-GdU" userLabel="lblSchoolName">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fes-eB-GdU" userLabel="lblSchoolName">
                     <rect key="frame" x="104" y="336" width="245" height="39"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="EYx-kh-i7k">
@@ -56,7 +60,7 @@
                         </constraint>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                    <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
@@ -69,7 +73,7 @@
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Class X" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mNt-bx-SWq" userLabel="lblClass">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mNt-bx-SWq" userLabel="lblClass">
                     <rect key="frame" x="104" y="396" width="221" height="39"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="UWT-yG-gSJ">
@@ -77,7 +81,7 @@
                         </constraint>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                    <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
@@ -116,13 +120,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="60" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="K1G-Fe-gX4">
-                            <variation key="heightClass=regular-widthClass=compact" constant="25"/>
+                            <variation key="heightClass=regular-widthClass=compact" constant="44"/>
                         </constraint>
                         <constraint firstAttribute="width" constant="60" id="MOq-Sd-uoQ">
-                            <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                            <variation key="heightClass=regular-widthClass=compact" constant="49"/>
                         </constraint>
                     </constraints>
-                    <state key="normal" image="profile-menu.png">
+                    <state key="normal" image="profile-menunn.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <variation key="default">
@@ -164,7 +168,7 @@
                         </mask>
                     </variation>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Home Room A" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5QC-IZ-daC" userLabel="lblHome">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5QC-IZ-daC" userLabel="lblHome">
                     <rect key="frame" x="104" y="456" width="221" height="39"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="gh4-6B-fKP">
@@ -172,7 +176,7 @@
                         </constraint>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                    <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
@@ -203,6 +207,9 @@
                             <include reference="lRA-wz-HZg"/>
                         </mask>
                     </variation>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="dqV-xO-pEf"/>
+                    </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.72941176470000002" green="0.0" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
@@ -240,7 +247,7 @@
                     <variation key="heightClass=regular-widthClass=compact" constant="-2"/>
                 </constraint>
                 <constraint firstItem="HQf-Wx-73u" firstAttribute="top" secondItem="Uow-iZ-Jlx" secondAttribute="bottom" id="M7m-Ox-7Fv">
-                    <variation key="heightClass=regular-widthClass=compact" constant="19"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="9"/>
                 </constraint>
                 <constraint firstItem="HQf-Wx-73u" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="SHa-qO-nsf"/>
                 <constraint firstItem="5QC-IZ-daC" firstAttribute="top" secondItem="mNt-bx-SWq" secondAttribute="bottom" constant="8" id="Yma-Cm-GBC"/>
@@ -253,7 +260,7 @@
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>
                 <constraint firstItem="Uow-iZ-Jlx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lFA-We-JZN">
-                    <variation key="heightClass=regular-widthClass=compact" constant="3"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>
                 <constraint firstAttribute="trailing" secondItem="5QC-IZ-daC" secondAttribute="trailing" constant="16" id="low-hM-715">
                     <variation key="heightClass=regular-widthClass=compact" constant="69"/>
@@ -270,7 +277,7 @@
                     <variation key="heightClass=regular-widthClass=compact" constant="28"/>
                 </constraint>
                 <constraint firstItem="Uow-iZ-Jlx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zIn-z5-5vT">
-                    <variation key="heightClass=regular-widthClass=compact" constant="28"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="19"/>
                 </constraint>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -344,18 +351,13 @@
                     <include reference="mb8-sN-Snn"/>
                 </mask>
             </variation>
-            <connections>
-                <outlet property="lblClass" destination="mNt-bx-SWq" id="zIp-ce-unk"/>
-                <outlet property="lblHome" destination="5QC-IZ-daC" id="bND-hR-G43"/>
-                <outlet property="lblSchoolName" destination="fes-eB-GdU" id="ZbY-M9-1WT"/>
-            </connections>
             <point key="canvasLocation" x="241" y="-5220"/>
         </view>
     </objects>
     <resources>
         <image name="edit-profile@3x.png" width="82" height="82"/>
         <image name="logout.png" width="280" height="50"/>
-        <image name="profile-menu.png" width="26" height="24"/>
+        <image name="profile-menunn.png" width="30" height="30"/>
         <image name="user-profile.png" width="142" height="142"/>
     </resources>
 </document>

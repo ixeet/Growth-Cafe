@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ModuleTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="46" id="KGk-i7-Jjw" customClass="ModuleTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -20,7 +20,7 @@
                         <rect key="frame" x="82" y="9" width="155" height="32"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="AEQ-0X-R9M">
-                                <variation key="heightClass=regular-widthClass=compact" constant="42"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="36"/>
                             </constraint>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
@@ -125,10 +125,10 @@
                         <variation key="heightClass=regular-widthClass=compact" constant="-4"/>
                     </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="WZ0-9J-v3H" secondAttribute="trailing" constant="-9" id="NoW-Bh-Mmm">
-                        <variation key="heightClass=regular-widthClass=compact" constant="-19"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="-13"/>
                     </constraint>
                     <constraint firstItem="WZ0-9J-v3H" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="75" id="P7V-ZK-kFK">
-                        <variation key="heightClass=regular-widthClass=compact" constant="113"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="107"/>
                     </constraint>
                     <constraint firstItem="bkg-PP-gEb" firstAttribute="leading" secondItem="hnm-QO-hox" secondAttribute="trailing" constant="2" id="SHJ-7M-RbR">
                         <variation key="heightClass=regular-widthClass=compact" constant="3"/>
@@ -143,14 +143,16 @@
                         <variation key="heightClass=regular-widthClass=compact" constant="43"/>
                     </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="WZ0-9J-v3H" secondAttribute="trailing" constant="-9" id="czA-LI-MHn">
-                        <variation key="heightClass=regular-widthClass=compact" constant="-19"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="-13"/>
                     </constraint>
                     <constraint firstItem="bkg-PP-gEb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="meE-EX-UJB"/>
-                    <constraint firstItem="WZ0-9J-v3H" firstAttribute="top" secondItem="hnm-QO-hox" secondAttribute="bottom" constant="-1" id="rHY-3b-2HO"/>
+                    <constraint firstItem="WZ0-9J-v3H" firstAttribute="top" secondItem="hnm-QO-hox" secondAttribute="bottom" constant="-1" id="rHY-3b-2HO">
+                        <variation key="heightClass=regular-widthClass=compact" constant="2"/>
+                    </constraint>
                     <constraint firstItem="VV3-Si-adN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="uFn-cl-1iR"/>
                     <constraint firstItem="VVt-6A-Iqw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="wK4-FS-3wV"/>
                     <constraint firstItem="WZ0-9J-v3H" firstAttribute="leading" secondItem="hnm-QO-hox" secondAttribute="leading" id="yA1-8n-QQf">
-                        <variation key="heightClass=regular-widthClass=compact" constant="6"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
                     <constraint firstItem="VV3-Si-adN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-2" id="yPD-Sd-rro">
                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
@@ -210,7 +212,7 @@
                 <outlet property="lblPercent" destination="bkg-PP-gEb" id="H6K-Rx-gvd"/>
                 <outlet property="progressBarModule" destination="WZ0-9J-v3H" id="r4T-8j-IJI"/>
             </connections>
-            <point key="canvasLocation" x="336" y="26"/>
+            <point key="canvasLocation" x="336" y="26.5"/>
         </tableViewCell>
     </objects>
     <resources>

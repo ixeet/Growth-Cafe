@@ -23,6 +23,9 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     // Do any additional setup after loading the view from its nib.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillEnterFullscreenNotification:) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillExitFullscreenNotification:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
+
 }
 - (void) viewWillAppear:(BOOL)animated  {
     
@@ -35,7 +38,7 @@
      {
          if (group)
         {
-       // [group setAssetsFilter:[ALAssetsFilter allVideos]];
+        [group setAssetsFilter:[ALAssetsFilter allVideos]];
          [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop)
           {
               if (asset) {
@@ -55,7 +58,73 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)btnPlayResourceClick:(id)sender {
+    UIButton *btn=(UIButton *)sender;
+    ALAsset *asset = [self.photos objectAtIndex:btn.tag];
+    
+    NSMutableDictionary   *dic = [[NSMutableDictionary alloc] init];
+    ALAssetRepresentation *defaultRepresentation = [asset defaultRepresentation];
+    NSString *uti = [defaultRepresentation UTI];
+    NSURL  *videoURL = [[asset valueForProperty:ALAssetPropertyURLs] valueForKey:uti];
+    NSString *title = [NSString stringWithFormat:@"video %d", arc4random()%100];
+    //                     UIImage *image = [self imageFromVideoURL:videoURL];
 
+    [self PlayTheVideo:videoURL];
+    
+}
+-(void)PlayTheVideo:(NSURL *)stringUrl
+{
+    
+  
+    self.moviePlayer =  [[MPMoviePlayerController alloc]initWithContentURL:stringUrl];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlaybackComplete:)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object: self.moviePlayer];
+    
+    self.moviePlayer.controlStyle = MPMovieControlStyleDefault;
+    self.moviePlayer.shouldAutoplay = YES;
+    [ self.moviePlayer prepareToPlay];
+    [self.view addSubview: self.moviePlayer.view];
+    [ self.moviePlayer setFullscreen:YES animated:YES];
+    [ self.moviePlayer stop];
+    [ self.moviePlayer play];
+    //    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+    //    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    
+    
+    
+}
+- (void) moviePlayerWillEnterFullscreenNotification:(NSNotification*)notification {
+    [appDelegate self].allowRotation = YES;
+}
+- (void) moviePlayerWillExitFullscreenNotification:(NSNotification*)notification {
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    [appDelegate self].allowRotation = NO;
+    MPMoviePlayerController *moviePlayerController = [notification object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerPlaybackDidFinishNotification
+                                                  object:moviePlayerController];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerWillExitFullscreenNotification
+                                                  object:moviePlayerController];
+    [self.moviePlayer stop];
+    //[self.moviePlayer stop];
+    [self.moviePlayer.view removeFromSuperview];
+    self.moviePlayer=nil;
+    
+}
+- (void)moviePlaybackComplete:(NSNotification *)notification
+{
+    MPMoviePlayerController *moviePlayerController = [notification object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerPlaybackDidFinishNotification
+                                                  object:moviePlayerController];
+    
+    [moviePlayerController.view removeFromSuperview];
+    
+}
 /*
 #pragma mark - Navigation
 
@@ -161,16 +230,17 @@
 
     ALAsset *asset = [self.photos objectAtIndex:indexPath.row];
     
-//    NSMutableDictionary   *dic = [[NSMutableDictionary alloc] init];
-//                         ALAssetRepresentation *defaultRepresentation = [asset defaultRepresentation];
-//                         NSString *uti = [defaultRepresentation UTI];
-//                         NSURL  *videoURL = [[asset valueForProperty:ALAssetPropertyURLs] valueForKey:uti];
+    NSMutableDictionary   *dic = [[NSMutableDictionary alloc] init];
+                         ALAssetRepresentation *defaultRepresentation = [asset defaultRepresentation];
+                         NSString *uti = [defaultRepresentation UTI];
+                         NSURL  *videoURL = [[asset valueForProperty:ALAssetPropertyURLs] valueForKey:uti];
                          NSString *title = [NSString stringWithFormat:@"video %d", arc4random()%100];
     //                     UIImage *image = [self imageFromVideoURL:videoURL];
 
     [cell.imgAssest setImage:[UIImage imageWithCGImage:[asset thumbnail]]];
     [cell.lblAssestName setText:[NSString stringWithFormat:@"%@",title]];
-    
+    cell.btnPlay.tag   =indexPath.row;
+    [cell.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -183,7 +253,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
        
-    return 66.0f;
+    return 108.0f;
     
     
 }

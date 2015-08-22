@@ -112,6 +112,7 @@
             userDetail.address=[responseDic objectForKey:@"address"];
             userDetail.adminEmailId=[responseDic objectForKey:@"adminEmail"];
             userDetail.userFBID=[responseDic objectForKey:@"userFbId"];
+            userDetail.userImage=[responseDic objectForKey:@"profileImage"];
             //call Block function
             success(userDetail);
         }

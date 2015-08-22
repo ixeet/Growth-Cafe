@@ -10,6 +10,7 @@
 #import "CustomKeyboard.h"
 #import "UserDetail.h"
 #import "LoginViewController.h"
+#import <QuartzCore/QuartzCore.h>
 @interface RegisterationViewController () <CustomKeyboardDelegate>
 {
     //keyboard
@@ -24,7 +25,7 @@
     NSString *selectedSchoolId,*selectedClassId,*selectedRoomId;
     NSString *selectedSchoolName,*selectedClassName,*selectedRoomName;
     NSString *selectedTitle;
-    
+    BOOL isFirstLoginDone;
 }
 
 @end
@@ -33,6 +34,11 @@
 @synthesize txtPassword,txtAdminEmail,txtCnfPwd,txtEmail,txtFirstName,txtLastName,mDataPickerView,mViewAccountTypePicker,btnClass,btnFacebook,btnHome,btnSchool,btnTitle;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    btnSchool.layer.cornerRadius = 5; // this value vary as per your desire
+//    btnSchool.clipsToBounds = YES;
+//    btnSchool.layer.borderColor=(__bridge CGColorRef)([UIColor blackColor]);
+//    btnSchool.layer.borderWidth=2.0f;
     // Do any additional setup after loading the view from its nib.
     //init the keyboard
     if([AppSingleton sharedInstance].isUserLoggedIn==YES)
@@ -44,6 +50,7 @@
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
+    isFirstLoginDone=NO;
     customKeyboard = [[CustomKeyboard alloc] init];
     customKeyboard.delegate = self;
     [self toggleHiddenState:YES];
@@ -60,6 +67,13 @@
    
     // set
  }
+-(void)viewWillAppear:(BOOL)animated
+{
+    btnFacebook.delegate=self;
+}
+-(void)viewWillDisappear:(BOOL)animated{
+     btnFacebook.delegate=nil;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -301,6 +315,14 @@
 
 -(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
     
+    // Check
+    if(isFirstLoginDone) {
+        // Execute code I want to run just once
+        NSLog(@"fetched");
+        return;
+    }
+    isFirstLoginDone=YES;
+    // get user id
     NSLog(@"%@", user);
     //if user is already sign in Then validate with server.
     

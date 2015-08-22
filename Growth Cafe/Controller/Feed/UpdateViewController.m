@@ -45,12 +45,21 @@
     // Do any additional setup after loading the view from its nib.
     if(  [AppSingleton sharedInstance].isUserLoggedIn!=YES)
     {
+        [FBSession.activeSession closeAndClearTokenInformation];
+        [FBSession.activeSession close];
+        [FBSession setActiveSession:nil];
+         
+        [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
+        [AppSingleton sharedInstance].isUserLoggedIn=NO;
+
+        
         [self.tabBarController.tabBar setHidden:YES];
         HomeViewController *viewController= [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
         
         //        FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
         [self.tabBarController.tabBar setHidden:YES];
         [self.navigationController pushViewController:viewController animated:YES];
+        
     }
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -69,9 +78,10 @@
     frame1.size.height=screenHeight-50;
     frame1.size.width=screenWidth;//200;
     objCustom.view.frame=frame1;
-   
+    
     [objCustom.btnLogout  addTarget:self action:@selector(btnLogoutClick:) forControlEvents:UIControlEventTouchUpInside];
-    CGRect cmtFrame = self.cmtview.frame;
+
+        CGRect cmtFrame = self.cmtview.frame;
     cmtFrame=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
     txtframe=cmtFrame;
     self.cmtview.frame=cmtFrame;
@@ -116,13 +126,16 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
     [txfSearchField setBackgroundColor:[UIColor clearColor]];
     //[txfSearchField setLeftView:UITextFieldViewModeNever];
     [txfSearchField setBorderStyle:UITextBorderStyleNone];
-  //  [txfSearchField setTextColor:[UIColor whiteColor]];
+ [txfSearchField setTextColor:[UIColor whiteColor]];
 }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+   
     // [super viewWillAppear:animated];
     /* Listen for keyboard */
+    objCustom.btnFacebook.delegate=objCustom;
+    [objCustom setUserProfile];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
@@ -135,7 +148,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
     
     
     //set Profile
-    [objCustom setUserProfile];
+   // [objCustom setUserProfile];
     
  [self  getUpdate:@""];
     
@@ -146,27 +159,11 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
     [[NSNotificationCenter defaultCenter] removeObserver:self   name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self   name:UIKeyboardWillHideNotification object:nil];
+    objCustom.btnFacebook.delegate=nil;
+    
     
 }
-//-(void)setUserProfile {
-//    // UserDetails *user=[AppGlobal readUserDetail];
-//    UserDetails *user=[AppSingleton sharedInstance].userDetail;
-//    
-//    
-//    objCustom.lblName.text=user.userFirstName;
-//    objCustom.lblSchoolName.text=user.schoolName;
-//    
-//    objCustom.lblClass.text=user.className;
-//    objCustom.lblHome.text=user.homeRoomName;
-//    if(user.userFBID==nil)
-//    {
-//        //need to validate
-//        objCustom.btnFacebook.hidden=NO;
-//    }else{
-//        //FB allready validated
-//        objCustom.btnFacebook.hidden=YES;
-//    }
-//}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -296,86 +293,205 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
         // create custom view for title
         NSString *titleString =update.updateTitle;
         NSArray *titleWords = [titleString componentsSeparatedByString:@"$"];
-        float x,y;
-        x=0.0f;
-        y=0.0f;
+//        float x,y;
+//        x=0.0f;
+//        y=0.0f;
+//        int textIndex=0;
+//        for (NSString *strtemp in titleWords) {
+//            UILabel *lbltitle=[[UILabel alloc]init];
+//            [lbltitle setTextColor:[UIColor darkGrayColor]];
+//            NSString *strtrim = [strtemp stringByTrimmingCharactersInSet:
+//                                       [NSCharacterSet whitespaceCharacterSet]];
+//             lbltitle.text=strtrim;
+//            [lbltitle setFont:[UIFont fontWithName:@"Helvetica Neue" size:12.0]];
+//            CGSize textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
+//            
+//            CGFloat strikeWidth = textSize.width+5;
+//            lbltitle.frame=CGRectMake(x, y, strikeWidth, 21);
+//            if (x>140&& y==0) {
+//                y=y+21;
+//                x=0;
+//            }
+//           
+//            [cell.viewDetail addSubview:lbltitle];
+//            if([titleWords count]-1!=textIndex)
+//            {
+//                 x=x+strikeWidth;
+//                UIButton *btnAction=[[UIButton alloc]init];
+//                
+//                NSDictionary *dictext= update.updateTitleArray[textIndex];
+//                btnAction.tag =(int) update.updateId;
+//                NSString *strtrim = [[dictext objectForKey:@"value"] stringByTrimmingCharactersInSet:
+//                                     [NSCharacterSet whitespaceCharacterSet]];
+//              
+//                [btnAction setTitle:strtrim forState:UIControlStateNormal];
+//                [btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//
+//                [btnAction.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12.0]];
+//                textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
+//                textSize=[AppGlobal getTheExpectedSizeOfLabel:strtrim];
+//               
+//                strikeWidth = textSize.width+5;
+//                
+//                if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
+//                {
+//                    btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
+//                    [btnAction addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
+//                    
+//                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
+//                {
+//                     btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
+//                   [btnAction addTarget:self action:@selector(btnCourseDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+//                    
+//                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
+//                {
+//                     btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
+//                     [btnAction addTarget:self action:@selector(btnModuleDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+//                }
+//                else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
+//                {
+//                     btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
+//                    [btnAction addTarget:self action:@selector(btnResourceDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+//                }
+//                
+//                btnAction.frame=CGRectMake(x, y, strikeWidth, 21);
+//                textIndex=textIndex+1;
+//                [cell.viewDetail addSubview:btnAction];
+//                 x=x+strikeWidth;
+//                
+//            }
+//            if (x>140 && y==0) {
+//                y=y+21;
+//                x=0;
+//            }
+//        }
+      //  cell.viewDetail.frame=CGRectMake(0, 0, x, 60);
+        
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.lineHeightMultiple = 50.0f;
+        paragraphStyle.maximumLineHeight = 50.0f;
+        paragraphStyle.minimumLineHeight = 50.0f;
+        NSDictionary *ats = @{
+                              NSParagraphStyleAttributeName : paragraphStyle,
+                              };
+       NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"" attributes:ats];
         int textIndex=0;
         for (NSString *strtemp in titleWords) {
-            UILabel *lbltitle=[[UILabel alloc]init];
-            [lbltitle setTextColor:[UIColor darkGrayColor]];
-            NSString *strtrim = [strtemp stringByTrimmingCharactersInSet:
-                                       [NSCharacterSet whitespaceCharacterSet]];
-             lbltitle.text=strtrim;
-            [lbltitle setFont:[UIFont fontWithName:@"Helvetica Neue" size:12.0]];
-            CGSize textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
-            
-            CGFloat strikeWidth = textSize.width+5;
-            lbltitle.frame=CGRectMake(x, y, strikeWidth, 21);
-            if (x>140&& y==0) {
-                y=y+21;
-                x=0;
-            }
-           
-            [cell.viewDetail addSubview:lbltitle];
-            if([titleWords count]-1!=textIndex)
+            if([update.updateTitleArray count]<=textIndex)
+                break ;
+            if([strtemp isEqualToString:@""])
             {
-                 x=x+strikeWidth;
-                UIButton *btnAction=[[UIButton alloc]init];
+              //  NSString* tempstr=[update.updateTitleArray objectAtIndex:textIndex];
+                UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
                 
-                NSDictionary *dictext= update.updateTitleArray[textIndex];
-                btnAction.tag =(int) update.updateId;
-                NSString *strtrim = [[dictext objectForKey:@"value"] stringByTrimmingCharactersInSet:
-                                     [NSCharacterSet whitespaceCharacterSet]];
-              
-                [btnAction setTitle:strtrim forState:UIControlStateNormal];
-                [btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-
-                [btnAction.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:13.0]];
-                textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
-                textSize=[AppGlobal getTheExpectedSizeOfLabel:strtrim];
-               
-                strikeWidth = textSize.width+2;
-                
+                  NSDictionary *dictext= update.updateTitleArray[textIndex];
                 if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
                 {
-                    btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
-                    [btnAction addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
+                    NSString* tempstr=[dictext objectForKey:@"value"];
+                    
+                    NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"User" : @(YES) }];
+                    
+                    [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                    [attributedString appendAttributedString:attributedStringtemp];
+                    
+                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
+                                    {
+                                        NSString* tempstr=[dictext objectForKey:@"value"];
+                                        
+                                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Course" : @(YES) }];
+                                        
+                                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                                        [attributedString appendAttributedString:attributedStringtemp];
+                                    }
+                else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
+                                    {
+                                        NSString* tempstr=[dictext objectForKey:@"value"];
+                                        
+                                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Module" : @(YES) }];
+                                        
+                                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                                        [attributedString appendAttributedString:attributedStringtemp];
+                                       
+                                    
+            }
+                
+                else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
+                                    {
+                                        NSString* tempstr=[dictext objectForKey:@"value"];
+                                        
+                                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Resource" : @(YES) }];
+                                        
+                                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                                        [attributedString appendAttributedString:attributedStringtemp];
+                                    }
+
+                
+              
+            }else {
+                
+                
+                UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:13];
+                
+                NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:strtemp ];
+                
+                [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[strtemp length] )];
+                [attributedString appendAttributedString:attributedStringtemp];
+                
+                UIFont *Boldfont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
+                NSDictionary *dictext= update.updateTitleArray[textIndex];
+                if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
+                {
+                    NSString* tempstr=[dictext objectForKey:@"value"];
+                    
+                    NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"User" : @(YES) }];
+                    
+                    [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
+                    [attributedString appendAttributedString:attributedStringtemp];
                     
                 }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
                 {
-                     btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
-                   [btnAction addTarget:self action:@selector(btnCourseDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+                    NSString* tempstr=[dictext objectForKey:@"value"];
                     
+                    NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Course" : @(YES) }];
+                    
+                    [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
+                    [attributedString appendAttributedString:attributedStringtemp];
                 }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
                 {
-                     btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
-                     [btnAction addTarget:self action:@selector(btnModuleDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+                    NSString* tempstr=[dictext objectForKey:@"value"];
+                    
+                    NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Module" : @(YES) }];
+                    
+                    [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
+                    [attributedString appendAttributedString:attributedStringtemp];
+                    
                 }
                 else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
                 {
-                     btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
-                    [btnAction addTarget:self action:@selector(btnResourceDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+                    NSString* tempstr=[dictext objectForKey:@"value"];
+                    
+                    NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Resource" : @(YES) }];
+                    
+                    [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
+                    [attributedString appendAttributedString:attributedStringtemp];
                 }
                 
-                btnAction.frame=CGRectMake(x, y, strikeWidth, 21);
-                textIndex=textIndex+1;
-                [cell.viewDetail addSubview:btnAction];
-                 x=x+strikeWidth;
                 
             }
-            if (x>150 && y==0) {
-                y=y+21;
-                x=0;
-            }
+          
+            textIndex=textIndex+1;
         }
-      //  cell.viewDetail.frame=CGRectMake(0, 0, x, 60);
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textTapped:)];
+        
+        [ cell.txtView addGestureRecognizer:tap];
+        cell.txtView.tag=indexPath.row;
+        
+        [cell.txtView setAttributedText:attributedString ];
         if(update.updateDesc!=nil)
         {
             cell.txtviewDetail.text=update.updateDesc;
-            
         }else{
             [cell.txtviewDetail  setHidden:YES];
-
         }
          [cell.btnPlay setHidden:YES];
         if (update.resource!=nil) {
@@ -457,17 +573,17 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
             
         {
             cell.btnLike.selected=NO;
-           
+            [cell.btnLike addTarget:self action:@selector(btnLikeOnUpdateClick:) forControlEvents:UIControlEventTouchUpInside];
         }
        
        
-        cell.lblUpdateBy.text=update.updateCreatedBy;
+       // cell.lblUpdateBy.text=update.updateCreatedBy;
         cell.btnComment.tag=indexPath.section  ;
         cell.btnLike.tag=indexPath.section  ;
         cell.btnShare.tag=indexPath.section  ;
         //set action for comment and like on resource
         [cell.btnComment addTarget:self action:@selector(btnCommentOnUpdateClick:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btnLike addTarget:self action:@selector(btnLikeOnUpdateClick:) forControlEvents:UIControlEventTouchUpInside];
+       
         [cell.btnShare addTarget:self action:@selector(btnShareOnUpdateClick:) forControlEvents:UIControlEventTouchUpInside];
        if(update.likeCount==nil)
        {
@@ -509,7 +625,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
            
            // Set font, notice the range is for the whole string
-           UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+           UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [comment.commentBy length])];
         [cell.lblCmtBy setAttributedText:attributedString];
 
@@ -551,26 +667,27 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
             
         {
             cell.btnLike.selected=NO;
+            [cell.btnLike addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
         }
         
            if(comment.likeCounts  !=nil)
            {
                [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateNormal];
            }else{
-               [cell.btnLike setTitle:@"" forState:UIControlStateNormal];
+               [cell.btnLike setTitle:@" " forState:UIControlStateNormal];
            }
            if(comment.commentCounts  !=nil)
            {
                [cell.btnCMT setTitle:comment.commentCounts forState:UIControlStateNormal];
            }else{
-               [cell.btnCMT setTitle:@"" forState:UIControlStateNormal];
+               [cell.btnCMT setTitle:@" " forState:UIControlStateNormal];
            }
         cell.btnCMT.tag=[comment.commentId integerValue];
         cell.btnLike.tag=[comment.commentId integerValue];
         cell.btnMore.tag=indexPath.section;
         //set action for reply and like on comment
         [cell.btnCMT addTarget:self action:@selector(btnReplyOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btnLike addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+    
         
         cell.btnMore.hidden=YES;
         cell.imgDevider.hidden=YES;
@@ -591,7 +708,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
                 cell.btnMore.hidden=YES;
                 cell.imgDevider.hidden=NO;
                
-            }else if(indexPath.row==4 && !update.isExpend){
+            }else if(indexPath.row==3 && !update.isExpend){
                 [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[update.comments count ]-3]  forState:UIControlStateNormal];
                 cell.btnMore.hidden=NO;
@@ -630,7 +747,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
            
            // Set font, notice the range is for the whole string
-           UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+           UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [comment.commentBy length])];
            [cell.lblCmtBy setAttributedText:attributedString];
            
@@ -670,6 +787,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
                
            {
                cell.btnLike.selected=NO;
+               [cell.btnLike addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
            }
            
            
@@ -684,7 +802,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
           
            //set action for reply and like on comment
 
-           [cell.btnLike addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+//           [cell.btnLike addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
            
            cell.btnMore.hidden=YES;
            cell.imgDevider.hidden=YES;
@@ -705,7 +823,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
                    cell.btnMore.hidden=YES;
                    cell.imgDevider.hidden=NO;
                    
-               }else if(indexPath.row==4 && !update.isExpend){
+               }else if(indexPath.row==3 && !update.isExpend){
                    [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[update.comments count ]-3]  forState:UIControlStateNormal];
                    cell.btnMore.hidden=NO;
@@ -847,7 +965,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
                 }
             }
         }
-        return height=height+140;
+        return height=height+100;
     }
     else if(update.comments>0)
     {
@@ -869,7 +987,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
             }
             
         }
-    if(labelSize.height>39)
+    if(labelSize.height>30)
             return   height=height+80+labelSize.height;
         else
             return  height=height+80;
@@ -902,6 +1020,7 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
         //Hide Indicator
         CourseViewController *courseView=[[CourseViewController alloc]init];
         courseView.coursesList=courseList;
+        courseView.comeFromUpdate=YES;
         [self.navigationController pushViewController:courseView animated:YES];
         [appDelegate hideSpinner];
         
@@ -1011,8 +1130,8 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
     [ self.moviePlayer setFullscreen:YES animated:YES];
     [ self.moviePlayer stop];
     [ self.moviePlayer play];
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+//    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+//    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     
     
     
@@ -1075,8 +1194,8 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
         
         //Hide Indicator
         [appDelegate hideSpinner];
-        [tblViewContent reloadData];
-        //[self getUpdate:searchText];
+       // [tblViewContent reloadData];
+        [self getUpdate:txtSearchBar.text];
     }
                                      failure:^(NSError *error) {
                                          //Hide Indicator
@@ -1123,7 +1242,18 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
 
 - (IBAction)btnCommentDone:(id)sender {
     [txtViewCMT resignFirstResponder];
-    step=0;
+
+    if([txtViewCMT.text isEqualToString:@""])
+    {
+        //[AppGlobal showAlertWithMessage:MISSING_COMMENT title:@""];
+      step=0;
+        txtViewCMT.text=@"";
+        CGRect frame1 = self.cmtview.frame;
+        frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+        txtframe=frame1;
+        return;
+    }
+   
     // call the service
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     if (actionOn==UpdateOn) {
@@ -1191,11 +1321,15 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
     //txtview.inputAccessoryView=commentView;
+    if(textView.tag ==100)
+        return NO;
     return YES;
 }
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
-    
+    if(textView.tag ==100)
+        return NO;
+
     return YES;
 }
 
@@ -1382,24 +1516,93 @@ if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
     if (sender.direction == UISwipeGestureRecognizerDirectionLeft)
     {
         // [self.view removeFromSuperview];
-        // self.objCustom.view.hidden = NO;
+      
         
         
     }
 }
 - (IBAction)btnLogoutClick:(id)sender {
-    if(  [AppSingleton sharedInstance].isUserFBLoggedIn==YES)
-    {
+   
         [FBSession.activeSession closeAndClearTokenInformation];
         [FBSession.activeSession close];
         [FBSession setActiveSession:nil];
- 
-    }
+    objCustom.btnFacebook.delegate=nil;
     [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
     [AppSingleton sharedInstance].isUserLoggedIn=NO;
+    [objCustom removeFromSuperview ];
     [self.tabBarController.tabBar setHidden:YES];
     LoginViewController *viewCont= [[LoginViewController alloc]init];
     [self.navigationController pushViewController:viewCont animated:YES];
+    
+}
+- (void)textTapped:(UITapGestureRecognizer *)recognizer
+{
+    //UILabel *lblview= (UILabel *)recognizer.view;
+    UITextView *textView = (UITextView *)recognizer.view;
+    
+    //  Location of the tap in text-container coordinates
+    
+    NSLayoutManager *layoutManager = textView.layoutManager;
+    CGPoint location = [recognizer locationInView:textView];
+    location.x -= textView.textContainerInset.left;
+    location.y -= textView.textContainerInset.top;
+    
+    // Find the character that's been tapped on
+    
+    NSUInteger characterIndex;
+    characterIndex = [layoutManager characterIndexForPoint:location
+                                           inTextContainer:textView.textContainer
+                  fractionOfDistanceBetweenInsertionPoints:NULL];
+    
+    if (characterIndex < textView.textStorage.length) {
+        
+        NSRange range;
+        id user = [textView.attributedText attribute:@"User" atIndex:characterIndex effectiveRange:&range];
+             id course = [textView.attributedText attribute:@"Course" atIndex:characterIndex effectiveRange:&range];
+             id module = [textView.attributedText attribute:@"Module" atIndex:characterIndex effectiveRange:&range];
+          id resourse = [textView.attributedText attribute:@"Resource" atIndex:characterIndex effectiveRange:&range];
+        if(user!=nil)
+        {
+            UIButton *btn=[[UIButton alloc]init];
+            Update *update= arrayUpdates[textView.tag];
+            btn.tag=[update.user.userId integerValue];
+            [self btnUserProfileClick:btn];
+            
+        }else if(course!=nil)        // Handle as required...
+        {
+            UIButton *btn=[[UIButton alloc]init];
+            Update *update= arrayUpdates[textView.tag];
+            btn.tag=[update.updateId integerValue];
+            [self btnCourseDetailClick:btn];
+        }else if(module!=nil)        // Handle as required...
+        {
+            UIButton *btn=[[UIButton alloc]init];
+            Update *update= arrayUpdates[textView.tag];
+            btn.tag=[update.updateId integerValue];
+            [self btnModuleDetailClick:btn];
+        }else if(resourse!=nil)        // Handle as required...
+        {
+            UIButton *btn=[[UIButton alloc]init];
+            Update *update= arrayUpdates[textView.tag];
+            btn.tag=[update.updateId integerValue];
+            [self btnCourseDetailClick:btn];
+        }
+        
+        NSLog(@"%@, %d, %d", user, range.location, range.length);
+        
+    }
+    
+    CGPoint touchPoint = [recognizer locationInView: textView];
+    
+    //modify the validFrame that you would like to enable the touch
+    //or get the frame from _yourLabel using the NSMutableAttributedString, if possible
+    CGRect validFrame = CGRectMake(0, 0, 300, 200);
+    
+    if ( CGRectContainsPoint(validFrame, touchPoint ))
+    {
+        //handle here.
+        NSLog(@"hit");
+    }
     
 }
 

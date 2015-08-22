@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MediaPlayer/MediaPlayer.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 @protocol AssestViewControllerDelegate <NSObject>
 
@@ -24,5 +25,7 @@
 @property (nonatomic, strong) NSArray *photos;
 - (IBAction)btnCancleClick:(id)sender;
 + (ALAssetsLibrary *)defaultAssetsLibrary;
+
+@property (strong, nonatomic) IBOutlet MPMoviePlayerController *moviePlayer;
 @property (nonatomic,assign)  id <AssestViewControllerDelegate> mDelegate;
 @end

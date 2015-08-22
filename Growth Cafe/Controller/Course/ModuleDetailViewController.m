@@ -175,7 +175,7 @@
         [txfSearchField setBackgroundColor:[UIColor clearColor]];
         //[txfSearchField setLeftView:UITextFieldViewModeNever];
         [txfSearchField setBorderStyle:UITextBorderStyleNone];
-        //  [txfSearchField setTextColor:[UIColor whiteColor]];
+         [txfSearchField setTextColor:[UIColor whiteColor]];
     }
 }
 /*
@@ -286,8 +286,8 @@
     [ self.moviePlayer setFullscreen:YES animated:YES];
     [ self.moviePlayer stop];
     [ self.moviePlayer play];
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+//    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+//    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     
     
 
@@ -417,7 +417,16 @@
 
 - (IBAction)btnCommentDone:(id)sender {
     [txtViewCMT resignFirstResponder];
-    step=0;
+    if([txtViewCMT.text isEqualToString:@""])
+    {
+      //  [AppGlobal showAlertWithMessage:MISSING_COMMENT title:@""];
+        txtViewCMT.text=@"";
+        CGRect frame1 = self.cmtview.frame;
+        frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+        txtframe=frame1;
+         step=0;
+    }
+   
     // call the service
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     if (actionOn==Resource) {
@@ -457,10 +466,7 @@
                                             }];
 
     }
-    txtViewCMT.text=@"";
-    CGRect frame1 = self.cmtview.frame;
-    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
-    txtframe=frame1;
+   
    
 }
 
@@ -739,9 +745,24 @@
                  [ customView.btnCmtBy setImage:[UIImage imageWithData: objComment.commentByImageData ] forState:UIControlStateNormal];
                 }
             }
-        
-            customView.lblCmtBy.text=  objComment.commentBy;
-            customView.lblCmtTime.text= objComment.commentDate;
+            customView.btnCmtBy.tag =[objComment.commentById integerValue];            [customView.btnCmtBy addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
+            NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:objComment.commentDate];
+            
+            NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
+            //   cell.lblCmtDate.text=comment.commentDate;
+            scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
+                                                               withString:@""];
+            // Set label text to attributed string
+            NSString *str = [NSString stringWithFormat:@"%@ %@ ago" ,objComment.commentBy,scincetime];
+            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+            
+            // Set font, notice the range is for the whole string
+            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
+            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [objComment.commentBy length])];
+            [customView.lblCmtBy  setAttributedText:attributedString];
+           
+           // customView.lblCmtBy.text setat=  objComment.commentBy;
+           
             [customView.btnLikeCMT setTitle:objComment.likeCounts forState:UIControlStateNormal];
            // [customView.btnShareCMT    setTitle:objComment.shareCounts forState:UIControlStateNormal];
             [customView.btnCommentCMT setTitle:objComment.commentCounts forState:UIControlStateNormal];
@@ -759,7 +780,7 @@
             [customView.btnCmtBy setHidden:YES];
             //[customView.imgViewCmtBy setImage:[UIImage imageWithData:[NSData ns] ]];
            [ customView.lblCmtBy setHidden:YES];
-            [customView.lblCmtTime setHidden:YES];
+           
             [customView.btnLikeCMT setHidden:YES];
          //   [customView.btnShareCMT   setHidden:YES];
             [customView.btnCommentCMT setHidden:YES];
@@ -1057,6 +1078,7 @@
         {
             cell.btnLike.selected=NO;
           [cell.btnLike setTitle:selectedResource.likeCounts forState:UIControlStateNormal];
+             [cell.btnLike addTarget:self action:@selector(btnLikeOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
         }
         
         cell.btnComment.tag=[selectedResource.resourceId integerValue];
@@ -1064,11 +1086,24 @@
         cell.btnShare.tag=[selectedResource.resourceId integerValue];
         //set action for comment and like on resource
         [cell.btnComment addTarget:self action:@selector(btnCommentOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btnLike addTarget:self action:@selector(btnLikeOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+     
         [cell.btnShare addTarget:self action:@selector(btnShareOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
         
        [cell.btnComment setTitle:selectedResource.commentCounts forState:UIControlStateNormal];
-        
+        if([selectedResource.comments count]>0)
+        {
+            cell.lblNextTitle.text=@"Comments:";
+        }else if ([selectedResource.relatedResources count]>0)
+        {
+            cell.lblNextTitle.text=@"Related Videos:";
+
+        }else if ([assignmentList count]>0)
+        {
+            cell.lblNextTitle.text=@"Assignment:";
+
+        }else{
+            cell.lblNextTitle.hidden=YES;
+        }
         return cell;
     }else if(indexPath.section==1){
         Comments *comment= [selectedResource.comments objectAtIndex:indexPath.row];
@@ -1098,7 +1133,7 @@
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
-            UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
             [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [comment.commentBy length])];
             [cell.lblCmtBy setAttributedText:attributedString];     //   cell.lblCmtDate.text=comment.commentDate;
         cell.lblCmtText.text=comment.commentTxt;
@@ -1141,6 +1176,7 @@
         {
             cell.btnLike.selected=NO;
             [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateNormal];
+            [cell.btnLike addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
         }
        
         [cell.btnCMT setTitle:comment.commentCounts forState:UIControlStateNormal];
@@ -1150,7 +1186,7 @@
        
         //set action for reply and like on comment
         [cell.btnCMT addTarget:self action:@selector(btnReplyOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btnLike addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+    
         
         cell.btnMore.hidden=YES;
         cell.imgDevider.hidden=YES;
@@ -1181,6 +1217,17 @@
             }
             
         }
+            if ([selectedResource.relatedResources count]>0)
+            {
+                cell.lblRelatedVideo.text=@"Related Videos:";
+                
+            }else if ([assignmentList count]>0)
+            {
+                cell.lblRelatedVideo.text=@"Assignment:";
+                
+            }else{
+             cell.lblRelatedVideo.hidden=YES;
+            }
         return cell;
         }else{
             
@@ -1207,7 +1254,7 @@
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
-            UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
             [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [comment.commentBy length])];
             [cell.lblCmtBy setAttributedText:attributedString];
            // cell.lblCmtDate.text=comment.commentDate;
@@ -1251,6 +1298,8 @@
             {
                 cell.btnLike.selected=NO;
                 [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateNormal];
+                [cell.btnLike addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+                
             }
             
            // [cell.btnCMT setTitle:comment.commentCounts forState:UIControlStateNormal];
@@ -1260,8 +1309,7 @@
             
             //set action for reply and like on comment
           //  [cell.btnCMT addTarget:self action:@selector(btnReplyOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-            [cell.btnLike addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-            
+           
             cell.btnMore.hidden=YES;
             cell.imgDevider.hidden=YES;
             cell.lblRelatedVideo.hidden =YES;
@@ -1291,6 +1339,18 @@
                 }
                 
             }
+            if ([selectedResource.relatedResources count]>0)
+            {
+                cell.lblRelatedVideo.text=@"Related Videos:";
+                
+            }else if ([assignmentList count]>0)
+            {
+                cell.lblRelatedVideo.text=@"Assignment:";
+                
+            }else{
+                cell.lblRelatedVideo.hidden=YES;
+            }
+
             return cell;
         }
         
@@ -1309,8 +1369,15 @@
         Resourse *resource= [selectedResource.relatedResources objectAtIndex:indexPath.row];
         
        // [cell.imgContentURL setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
-        cell.lblContentName.text= resource.resourceDesc;
-        cell.lblContentby.text=resource.authorName;
+        cell.lblContentName.text= resource.resourceTitle;
+        NSString *str = [NSString stringWithFormat:@"By %@" ,resource.authorName];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+        
+        // Set font, notice the range is for the whole string
+        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
+        [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(1, [resource.authorName length])];
+        [cell.lblContentby setAttributedText:attributedString];
+
        // cell.lblSubmittedDate.text=resource.uploadedDate;
         NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:resource.uploadedDate];
        
@@ -1338,12 +1405,12 @@
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-        resource.uploadedDate=[NSString stringWithFormat:@"%@ %ld",monthName,(long)components.day];
+        cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Uploaded on %@ %ld",monthName,(long)components.day ];
         }
       cell.btnPlay.tag= indexPath.row;
         [cell.btnPlay  addTarget:self action:@selector(btnPlayRelatedResourceClick:) forControlEvents:UIControlEventTouchUpInside];
 
-        cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Uploaded on %@",resource.uploadedDate ];
+       
         if(indexPath.row!=([selectedResource.relatedResources count]-1))
         {
             cell.btnMore.hidden=YES;
@@ -1388,6 +1455,13 @@
             }
             
         }
+        if ([assignmentList count]>0)
+        {
+            cell.lblAssignment.text=@"Assignment:";
+            
+        }else{
+            cell.lblAssignment.hidden=YES;
+        }
 
         return cell;
         
@@ -1407,7 +1481,15 @@
         Resourse *resource=assignment.attachedResource;
        // [cell.imgContentURL setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
         cell.lblContentName.text= assignment.assignmentName;
-        cell.lblContentby.text=assignment.assignmentSubmittedBy;
+        NSString *str = [NSString stringWithFormat:@"By %@" ,assignment.assignmentSubmittedBy];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+        
+        // Set font, notice the range is for the whole string
+        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
+        [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(1, [assignment.assignmentSubmittedBy length])];
+        [cell.lblContentby setAttributedText:attributedString];
+        
+       
         
         
         if(resource.resourceImageUrl!=nil){
@@ -1437,12 +1519,13 @@
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-      assignment.assignmentSubmittedDate=[NSString stringWithFormat:@"%@ %ld",monthName,(long)components.day];
+    
+           cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",monthName,(long)components.day ];
        }
         cell.btnPlay.tag= indexPath.row;
         [cell.btnPlay  addTarget:self action:@selector(btnPlayAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
         
-        cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Submitted on %@",assignment.assignmentSubmittedDate ];
+        
         if(indexPath.row!=([assignmentList count]-1))
         {
             cell.btnMore.hidden=YES;
@@ -1457,6 +1540,7 @@
                 cell.btnMore.hidden=YES;
             }
         }
+         cell.lblAssignment.hidden=YES;
         return cell;
     }
 
@@ -1534,7 +1618,7 @@
     if(selectedResource==nil)
         return 0;
     if(indexPath.section==0)
-        return 460.0f;
+        return 430.0f;
     else if(indexPath.section==1 && selectedResource.comments>0)
     {
         Comments *cmt=selectedResource.comments[indexPath.row];
@@ -1559,7 +1643,7 @@
             
         }
         
-        if(labelSize.height>39)
+        if(labelSize.height>30)
                 return   height=height+80+labelSize.height;
             else
                 return  height=height+80;
@@ -1585,19 +1669,30 @@
             }
             
         }
-
+        Resourse *realtedResource=selectedResource.relatedResources[indexPath.row];
+        CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:realtedResource.resourceTitle];
+        
+        if(labelSize.height>30)
+             return  height=height+80.0f+labelSize.height;
+        else
+            return  height=height+80.0f;;
        
-        return  height=height+96.0f;
+       
     
     }
     
     else if(indexPath.section==3)
     {
-//        
+//
+        Assignment *assignment=[assignmentList objectAtIndex:indexPath.row];
         float height=0.0f;
-
+        CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:assignment.assignmentName];
         
-        return  height=height+96.0f;
+        if(labelSize.height>30)
+            return  height=height+80.0f+labelSize.height;
+        else
+            return  height=height+80.0f;;
+
 
     }
     return 44.0f;
@@ -1775,13 +1870,10 @@
     }
 }
 - (IBAction)btnLogoutClick:(id)sender {
-    if(  [AppSingleton sharedInstance].isUserFBLoggedIn==YES)
-    {
-        [FBSession.activeSession closeAndClearTokenInformation];
+    [FBSession.activeSession closeAndClearTokenInformation];
         [FBSession.activeSession close];
         [FBSession setActiveSession:nil];
-        
-    }
+   
     [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
     [AppSingleton sharedInstance].isUserLoggedIn=NO;
     [self.tabBarController.tabBar setHidden:YES];

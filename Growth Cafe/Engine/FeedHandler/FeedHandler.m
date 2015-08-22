@@ -38,10 +38,17 @@
         NSMutableArray *updateList= [[NSMutableArray alloc]init];
         for (NSDictionary *dicContent in [responseDic objectForKey:@"feedList"]) {
             Update *update= [[Update alloc]init];
+            if([dicContent objectForKey:@"likeCounts"]!=nil){
             update.likeCount=[NSString stringWithFormat:@"%@",  [dicContent objectForKey:@"likeCounts"] ];
+            }
+            if([dicContent objectForKey:@"shareCounts"]!=nil){
             update.shareCount=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"shareCounts"]];
+              
+            }
+            if([dicContent objectForKey:@"commentCounts"]!=nil){
+                
             update.commentCount=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"commentCounts"]];
-            
+            }
             update.isLike=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"isLiked"]];
          
             update.updateId=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"feedId"]];
@@ -83,9 +90,15 @@
             
             for (NSDictionary *dicComment in arrayTempComments) {
                 Comments *comment= [[Comments alloc]init];
+                 if([dicComment objectForKey:@"likeCounts"]!=nil){
                 comment.likeCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"likeCounts"]];
+                 }
+                   if([dicComment objectForKey:@"shareCounts"]!=nil){
                 comment.shareCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"shareCounts"]];
+                   }
+                     if([dicComment objectForKey:@"commentCounts"]!=nil){
                 comment.commentCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"commentCounts"]];
+                     }
                 comment.commentId=[dicComment objectForKey:@"commentId"];
                 
                  comment.commentById=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"commentById"]];
@@ -102,10 +115,19 @@
                 if (subcomment  !=nil) {
                 for (NSDictionary *dicSubComment in subcomment) {
                     Comments *comment= [[Comments alloc]init];
+                    if([dicSubComment objectForKey:@"likeCounts"]!=nil){
+
                     comment.likeCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"likeCounts"]];
+                    }
+                    if([dicSubComment objectForKey:@"shareCounts"]!=nil){
+                        
+
                     comment.shareCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"shareCounts"]];
-                    
+                    }
+                    if([dicSubComment objectForKey:@"commentCounts"]!=nil){
+                        
                     comment.commentCounts=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"commentCounts"]];
+                    }
                     comment.commentById=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"commentById"]];
                     comment.commentId=[dicSubComment objectForKey:@"commentId"];
                     

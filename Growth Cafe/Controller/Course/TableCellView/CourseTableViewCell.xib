@@ -179,12 +179,14 @@
                     <constraint firstAttribute="trailingMargin" secondItem="pVy-0n-Dvn" secondAttribute="trailing" constant="7" id="Bfx-CF-1sP">
                         <variation key="heightClass=regular-widthClass=compact" constant="-1"/>
                     </constraint>
-                    <constraint firstItem="3Zm-cF-Gxg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="77" id="Bjb-gg-1ck"/>
+                    <constraint firstItem="3Zm-cF-Gxg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="77" id="Bjb-gg-1ck">
+                        <variation key="heightClass=regular-widthClass=compact" constant="75"/>
+                    </constraint>
                     <constraint firstItem="vAU-7n-qmT" firstAttribute="leading" secondItem="wRu-tr-LbN" secondAttribute="trailing" constant="12" id="CZb-EA-cwB">
                         <variation key="heightClass=regular-widthClass=compact" constant="11"/>
                     </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="3Zm-cF-Gxg" secondAttribute="trailing" constant="-8" id="ELl-z2-hB6">
-                        <variation key="heightClass=regular-widthClass=compact" constant="-19"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="-17"/>
                     </constraint>
                     <constraint firstItem="HiZ-Ax-koG" firstAttribute="leading" secondItem="vAU-7n-qmT" secondAttribute="trailing" constant="2" id="Jpt-jJ-N36"/>
                     <constraint firstAttribute="bottomMargin" secondItem="wRu-tr-LbN" secondAttribute="bottom" constant="-8" id="Wqf-S1-467"/>

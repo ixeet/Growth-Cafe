@@ -17,12 +17,13 @@
     //keyboard
     CustomKeyboard *customKeyboard;
     UITextField *activeTextField;
+    BOOL isFirstLoginDone;
 }
 
 @end
 
 @implementation LoginViewController
-@synthesize btnRemember,txtPassword,txtUsername,imgLogo;
+@synthesize btnRemember,txtPassword,txtUsername,imgLogo,btnFacebook;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -62,6 +63,13 @@
     [self changeFrameAndBackgroundImg];
 
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    btnFacebook.delegate=self;
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    btnFacebook.delegate=nil;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -97,7 +105,8 @@
     
     //  _btnFacebook.frame = CGRectMake(0, _btnFacebook.frame.origin.y+14, _btnFacebook.frame.size.width, 120);
     //  _btnFacebook.frame = CGRectMake(320/2 - 93/2, self.view.frame.size.height -200, 93, 40);
-    for (id loginObject in _btnFacebook.subviews)
+   
+    for (id loginObject in btnFacebook.subviews)
     {
         if ([loginObject isKindOfClass:[UIButton class]])
         {
@@ -141,10 +150,17 @@
 
 -(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
     
-    NSLog(@"%@", user);
+  
     //if user is already sign in Then validate with server.
-    
+    // Check
+    if(isFirstLoginDone) {
+        // Execute code I want to run just once
+        NSLog(@"fetched");
+        return;
+    }
+    isFirstLoginDone=YES;
     // get user id
+      NSLog(@"%@", user);
     NSString *userid=[NSString  stringWithFormat:@"%@",[user objectForKey:@"id"]];
     
     //Show Indicator
@@ -335,9 +351,16 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    if(textField.tag==11)
+    {
+        [textField resignFirstResponder];
+        [self btnLoginClick:self];
+    }else{
+        [textField resignFirstResponder];
+        [self nextClicked:textField.tag];
+    }
     
-    [textField resignFirstResponder];
-    [self nextClicked:textField.tag];
+  
     return YES;
 }
 

@@ -17,6 +17,7 @@
 #import "ModuleDetailViewController.h"
 #import "CourseViewController.h"
 #import "SubmitAssignmentViewController.h"
+#import "SubmitContentViewController.h"
 
 @interface AssignmentViewController ()
 {
@@ -126,7 +127,8 @@
         [txfSearchField setBackgroundColor:[UIColor clearColor]];
         //[txfSearchField setLeftView:UITextFieldViewModeNever];
         [txfSearchField setBorderStyle:UITextBorderStyleNone];
-        //  [txfSearchField setTextColor:[UIColor whiteColor]];
+        [txfSearchField setTextColor:[UIColor whiteColor]];
+
     }
 }
 
@@ -158,25 +160,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self   name:UIKeyboardWillHideNotification object:nil];
     
 }
-//-(void)setUserProfile {
-//    // UserDetails *user=[AppGlobal readUserDetail];
-//    UserDetails *user=[AppSingleton sharedInstance].userDetail;
-//
-//
-//    objCustom.lblName.text=user.userFirstName;
-//    objCustom.lblSchoolName.text=user.schoolName;
-//
-//    objCustom.lblClass.text=user.className;
-//    objCustom.lblHome.text=user.homeRoomName;
-//    if(user.userFBID==nil)
-//    {
-//        //need to validate
-//        objCustom.btnFacebook.hidden=NO;
-//    }else{
-//        //FB allready validated
-//        objCustom.btnFacebook.hidden=YES;
-//    }
-//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -329,6 +312,7 @@
         if (assignment.attachedResource!=nil) {
             
             if(assignment.attachedResource.resourceImageUrl!=nil){
+                cell.btnPlay.tag=indexPath.row;
                 [cell.btnPlay setHidden:NO];
                     [cell.imgResource setHidden:NO];
                 [cell.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -392,32 +376,38 @@
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-        assignment.assignmentSubmittedDate=[NSString stringWithFormat:@"%@ %ld",[monthName substringToIndex:3],(long)components.day];
+        cell.lblDateAssignment.text=[NSString stringWithFormat:@"%@ %ld",[monthName substringToIndex:3],(long)components.day];
     }
-    cell.lblDateAssignment.text=assignment.assignmentSubmittedDate;
+  //  cell.lblDateAssignment.text=assignment.assignmentSubmittedDate;
     
     if([assignment.assignmentStatus isEqualToString:@"1"])
     {
+        NSDate *today10am =[NSDate date];
+      
+        if ([submittedDate compare:today10am] == NSOrderedDescending)
+        {
         cell.btnAssignmentStatus.selected=YES;
-        [cell.btnAssignmentStatus setBackgroundColor:[UIColor colorWithRed:186.0/255.0 green:0.0/255.0 blue:50.0/255.0 alpha:1]];
+    
         [cell.btnAssignmentStatus setBackgroundColor:[UIColor whiteColor]];
         [cell.btnSubmit  addTarget:self action:@selector(btnSubmitAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
        // lblDateAssignment.text
         
       
         cell.lblDateAssignment.textColor =[UIColor blackColor];
+        }else{
+            
+            cell.btnAssignmentStatus.selected=NO;
+            [cell.btnSubmit  addTarget:self action:@selector(btnSubmitAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
+           // cell.lblDateAssignment.text=assignment.assignmentSubmittedDate;
+            cell.lblDateAssignment.textColor =[UIColor whiteColor];
+        
+        }
         if(assignment.isExpend)
           [cell.btnSubmit setHidden:NO];
-    }else if([assignment.assignmentStatus isEqualToString:@"2"])
-    {
-       // cell.btnAssignmentStatus.selected=NO;
-          [cell.btnSubmit  addTarget:self action:@selector(btnSubmitAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
-        cell.lblDateAssignment.text=assignment.assignmentSubmittedDate;
-        cell.lblDateAssignment.textColor =[UIColor whiteColor];
-        if(assignment.isExpend)
-         [cell.btnSubmit setHidden:NO];
+        
     }
-    else if([assignment.assignmentStatus isEqualToString:@"3"])
+    
+    else if([assignment.assignmentStatus isEqualToString:@"2"])
     {
         cell.btnAssignmentStatus.highlighted =YES;
         cell.lblDateAssignment.textColor =[UIColor whiteColor];
@@ -425,7 +415,37 @@
         [cell.btnAssignmentStatus setBackgroundColor:[UIColor greenColor]];
          if(assignment.isExpend)
         [cell.lblUploadedDate setHidden:NO];
-      cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@",assignment.attachedResource.uploadedDate];
+     
+        NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.attachedResource.uploadedDate];
+        if(submittedDate!=nil){
+            NSCalendar* calendar = [NSCalendar currentCalendar];
+            NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  submittedDate]; // Get necessary date components
+            
+            
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+            cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",[monthName substringToIndex:3],(long)components.day];
+        }
+    }
+    else if([assignment.assignmentStatus isEqualToString:@"3"])
+    {
+        cell.btnAssignmentStatus.highlighted =YES;
+        cell.lblDateAssignment.textColor =[UIColor whiteColor];
+        
+        [cell.btnAssignmentStatus setBackgroundColor:[UIColor greenColor]];
+        if(assignment.isExpend)
+            [cell.lblUploadedDate setHidden:NO];
+       
+        NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.attachedResource.uploadedDate];
+        if(submittedDate!=nil){
+            NSCalendar* calendar = [NSCalendar currentCalendar];
+            NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  submittedDate]; // Get necessary date components
+            
+            
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+            cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",[monthName substringToIndex:3],(long)components.day];
+        }
     }
                 //set action for comment and like on resource
             
@@ -438,6 +458,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//   
+//    Assignment *assignment=[arrayAssignment objectAtIndex:indexPath.row];
+//    if( assignment.isExpend==YES)
+//        assignment.isExpend=NO;
+//    else
+//        assignment.isExpend=YES;
+//    [tblViewContent reloadData];
     
 }
 
@@ -500,13 +527,17 @@
     [tblViewContent reloadData];
 }
 - (IBAction)btnSubmitAssignmentClick:(id)sender {
-//    UIButton *btn=(UIButton *)sender;
-//    Assignment *assignment=[arrayAssignment objectAtIndex:btn.tag];
-//    SubmitAssignmentViewController *submitViewController=[[SubmitAssignmentViewController alloc]init];
-//    submitViewController.assignment=assignment;
-//    [self.navigationController pushViewController:submitViewController animated:YES];
-    [AppGlobal showAlertWithMessage:MISSING_SUBMIT_FUNC title:@""];
+    UIButton *btn=(UIButton *)sender;
+    Assignment *assignment=[arrayAssignment objectAtIndex:btn.tag];
+    SubmitAssignmentViewController *submitViewController=[[SubmitAssignmentViewController alloc]init];
+    submitViewController.assignment=assignment;
+    [self.navigationController pushViewController:submitViewController animated:YES];
+ // [AppGlobal showAlertWithMessage:MISSING_SUBMIT_FUNC title:@""];
     
+    
+//    SubmitContentViewController *submitViewController=[[SubmitContentViewController alloc]init];
+//      submitViewController.assignment=assignment;
+//    [self.navigationController pushViewController:submitViewController animated:YES];
 }
 
 #pragma mark - Comment and like on Assignment
@@ -536,9 +567,9 @@
     [ self.moviePlayer setFullscreen:YES animated:YES];
     [ self.moviePlayer stop];
     [ self.moviePlayer play];
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-    
+//    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+//    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+//    
     
     
 }
@@ -630,7 +661,7 @@
     
     [CATransaction begin];
     CATransition *animation = [CATransition animation];
-    // [self.view addSubview:objCustom.view];
+   
     [animation setDuration:0.5];
     
     [animation setType:kCATransitionPush];
@@ -671,19 +702,17 @@
     if (sender.direction == UISwipeGestureRecognizerDirectionLeft)
     {
         // [self.view removeFromSuperview];
-        // self.objCustom.view.hidden = NO;
+      
         
         
     }
 }
 - (IBAction)btnLogoutClick:(id)sender {
-    if(  [AppSingleton sharedInstance].isUserFBLoggedIn==YES)
-    {
+   
         [FBSession.activeSession closeAndClearTokenInformation];
         [FBSession.activeSession close];
         [FBSession setActiveSession:nil];
-        
-    }
+ 
     [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
     [AppSingleton sharedInstance].isUserLoggedIn=NO;
     [self.tabBarController.tabBar setHidden:YES];

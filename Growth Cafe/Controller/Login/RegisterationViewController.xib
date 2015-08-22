@@ -112,8 +112,9 @@
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q3V-z8-e9g" userLabel="viewLift">
                     <rect key="frame" x="0.0" y="71" width="320" height="734"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Last Name" textAlignment="center" minimumFontSize="17" background="first_nm.png" translatesAutoresizingMaskIntoConstraints="NO" id="XQw-99-1dk" userLabel="txtLastName">
+                        <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder=" Last Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XQw-99-1dk" userLabel="txtLastName">
                             <rect key="frame" x="108" y="57" width="163" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="50K-ap-Rdf"/>
                             </constraints>
@@ -133,8 +134,9 @@
                                 <outlet property="delegate" destination="-1" id="EOL-rD-ZNf"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  Email" textAlignment="center" minimumFontSize="17" background="email.png" translatesAutoresizingMaskIntoConstraints="NO" id="prN-fg-Z5a" userLabel="txtEmail">
+                        <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Email" textAlignment="center" minimumFontSize="17" background="email.png" translatesAutoresizingMaskIntoConstraints="NO" id="prN-fg-Z5a" userLabel="txtEmail">
                             <rect key="frame" x="49" y="95" width="222" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="LpO-GQ-iwh"/>
                             </constraints>
@@ -154,8 +156,9 @@
                                 <outlet property="delegate" destination="-1" id="rHo-ik-NNJ"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" tag="13" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Password" textAlignment="center" minimumFontSize="17" background="email.png" translatesAutoresizingMaskIntoConstraints="NO" id="SZf-6L-Gts" userLabel="txtPassword">
+                        <textField opaque="NO" clipsSubviews="YES" tag="13" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder=" Password" textAlignment="center" minimumFontSize="17" background="email.png" translatesAutoresizingMaskIntoConstraints="NO" id="SZf-6L-Gts" userLabel="txtPassword">
                             <rect key="frame" x="49" y="133" width="222" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="9me-Km-9AR"/>
                             </constraints>
@@ -175,8 +178,9 @@
                                 <outlet property="delegate" destination="-1" id="WRR-hI-tgO"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" tag="14" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Confirm Password" textAlignment="center" minimumFontSize="17" background="email.png" translatesAutoresizingMaskIntoConstraints="NO" id="FF3-Uh-0eG" userLabel="txtConfirmPassword">
+                        <textField opaque="NO" clipsSubviews="YES" tag="14" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder=" Confirm Password" textAlignment="center" minimumFontSize="17" background="email.png" translatesAutoresizingMaskIntoConstraints="NO" id="FF3-Uh-0eG" userLabel="txtConfirmPassword">
                             <rect key="frame" x="49" y="171" width="222" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="s66-je-8qe"/>
                             </constraints>
@@ -196,8 +200,9 @@
                                 <outlet property="delegate" destination="-1" id="bYV-Te-pG2"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" tag="15" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Organization Contact Email" textAlignment="center" minimumFontSize="17" background="email.png" translatesAutoresizingMaskIntoConstraints="NO" id="50E-vy-faL" userLabel="txtSchoolEmail">
+                        <textField opaque="NO" clipsSubviews="YES" tag="15" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Organization Contact Email" textAlignment="center" minimumFontSize="17" background="email.png" translatesAutoresizingMaskIntoConstraints="NO" id="50E-vy-faL" userLabel="txtSchoolEmail">
                             <rect key="frame" x="49" y="247" width="222" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="vN8-2X-cwz"/>
                             </constraints>
@@ -224,9 +229,9 @@
                                 <constraint firstAttribute="width" constant="72" id="yLq-iP-fLR"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                            <inset key="titleEdgeInsets" minX="-10" minY="1" maxX="0.0" maxY="0.0"/>
+                            <inset key="titleEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="13" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Title" backgroundImage="mr.png">
+                            <state key="normal" title="Title" backgroundImage="mr2.png">
                                 <color key="titleColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -264,6 +269,9 @@
                                     <include reference="SlY-Nf-EId"/>
                                 </mask>
                             </variation>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="AZ8-yv-QRA"/>
+                            </connections>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HGz-rm-xyF" userLabel="btnSingin">
                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -308,8 +316,9 @@
                                 </mask>
                             </variation>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" First Name" textAlignment="center" minimumFontSize="17" background="first_nm.png" translatesAutoresizingMaskIntoConstraints="NO" id="7zM-bU-cUJ" userLabel="txtFirstName">
+                        <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder=" First Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7zM-bU-cUJ" userLabel="txtFirstName">
                             <rect key="frame" x="108" y="19" width="163" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="uGD-CB-jdy"/>
                             </constraints>
@@ -335,8 +344,8 @@
                                 <constraint firstAttribute="height" constant="30" id="Fi3-j6-mzc"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                            <inset key="titleEdgeInsets" minX="5" minY="5" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Organization / Institution" backgroundImage="school_drop.png">
+                            <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="Organization / Institution" backgroundImage="school_drop3.png">
                                 <color key="titleColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -360,8 +369,8 @@
                                 <constraint firstAttribute="height" constant="30" id="oIx-6r-Uld"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                            <inset key="titleEdgeInsets" minX="5" minY="5" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Department / Class" backgroundImage="school_drop.png">
+                            <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="Department / Class" backgroundImage="school_drop3.png">
                                 <color key="titleColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -385,8 +394,8 @@
                                 <constraint firstAttribute="height" constant="30" id="KEX-ua-HFX"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                            <inset key="titleEdgeInsets" minX="5" minY="5" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Group / Homeroom" backgroundImage="school_drop.png">
+                            <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="Group / Homeroom" backgroundImage="school_drop3.png">
                                 <color key="titleColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -803,9 +812,8 @@
     </objects>
     <resources>
         <image name="email.png" width="251" height="41"/>
-        <image name="first_nm.png" width="176" height="41"/>
         <image name="icn_back-header.png" width="13" height="21"/>
-        <image name="mr.png" width="65" height="40"/>
-        <image name="school_drop.png" width="251" height="41"/>
+        <image name="mr2.png" width="65" height="40"/>
+        <image name="school_drop3.png" width="251" height="41"/>
     </resources>
 </document>

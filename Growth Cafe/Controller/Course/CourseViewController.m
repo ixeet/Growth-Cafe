@@ -25,7 +25,7 @@
 @end
 
 @implementation CourseViewController
-@synthesize btnAssignment,btnCourses,btnMore,btnNotification,btnUpdates,txtSearchBar,objCustom,coursesList;
+@synthesize btnAssignment,btnCourses,btnMore,btnBack,btnNotification,btnUpdates,txtSearchBar,objCustom,coursesList,comeFromUpdate;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -63,7 +63,8 @@
         [txfSearchField setBackgroundColor:[UIColor clearColor]];
         //[txfSearchField setLeftView:UITextFieldViewModeNever];
         [txfSearchField setBorderStyle:UITextBorderStyleNone];
-        //  [txfSearchField setTextColor:[UIColor whiteColor]];
+        [txfSearchField setTextColor:[UIColor whiteColor]];
+
     }
 }
 - (void)viewDidLoad {
@@ -89,7 +90,8 @@
    // [tableViewCourse  addGestureRecognizer:lpgr];
   
     // Do any additional setup after loading the view from its nib.
-  
+    [self setSearchUI];
+    objCustom = [[CustomProfileView alloc] init];
     NSLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
     objCustom.center = CGPointMake(200, 400);
     CGRect frame1=objCustom.view.frame ;
@@ -102,13 +104,14 @@
 }
 -(void)viewWillAppear:(BOOL)animated    {
     
-    objCustom = [[CustomProfileView alloc] init];
-    if(coursesList==nil){
+    
+    if(!comeFromUpdate){
         
         [self  getCourses:@""];
     }else{
+        btnBack.hidden=NO;
         moduleArray     = [NSMutableArray new];
-        currentExpandedIndex = -1;
+     
         for (Courses *course in coursesList) {
             [moduleArray addObject:course.moduleList];
         }
@@ -174,6 +177,10 @@
 //    return items;
 //}
 #pragma mark - tab bar Action
+- (IBAction)btnBackClick:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (IBAction)btnMenuClick:(id)sender {
 //    ProfileViewController *profileViewController=[[ProfileViewController alloc]init];
 //    [self.navigationController pushViewController:profileViewController animated:YES];
@@ -494,7 +501,7 @@ else {
     
     [CATransaction begin];
     CATransition *animation = [CATransition animation];
-    // [self.view addSubview:objCustom.view];
+  
     [animation setDuration:0.5];
     
     [animation setType:kCATransitionPush];
@@ -535,19 +542,16 @@ else {
     if (sender.direction == UISwipeGestureRecognizerDirectionLeft)
     {
         // [self.view removeFromSuperview];
-        // self.objCustom.view.hidden = NO;
-        
+              
         
     }
 }
 - (IBAction)btnLogoutClick:(id)sender {
-    if(  [AppSingleton sharedInstance].isUserFBLoggedIn==YES)
-    {
+   
         [FBSession.activeSession closeAndClearTokenInformation];
         [FBSession.activeSession close];
         [FBSession setActiveSession:nil];
-        
-    }
+ 
     [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
     [AppSingleton sharedInstance].isUserLoggedIn=NO;
     LoginViewController *viewCont= [[LoginViewController alloc]init];

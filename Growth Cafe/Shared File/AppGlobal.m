@@ -489,11 +489,29 @@
 }
 +(NSString*) timeLeftSinceDate: (NSDate *)dateT
 {
+ //   NSTimeZone *timeZone = [NSTimeZone defaultTimeZone];
+    // or specifc Timezone: with name
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:key_Custom_DateFormate];
+    NSString *localDateString = [dateFormatter stringFromDate:dateT];
+    
+    
+    
+    // or specifc Timezone: with name
+    NSDateFormatter *format = [[NSDateFormatter alloc]init];
+    [format setDateFormat:key_Custom_DateFormate];
+    NSTimeZone* localTimeZone = [NSTimeZone localTimeZone];
+     NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+   format.timeZone=timeZone;
+    NSDate *date=[format dateFromString:localDateString];
+   
     NSString *timeLeft;
     
     NSDate *today10am =[NSDate date];
+  
     
-    NSInteger seconds = [today10am timeIntervalSinceDate:dateT];
+    NSInteger seconds = [today10am timeIntervalSinceDate:date];
     
     NSInteger days = (int) (floor(seconds / (3600 * 24)));
     if(days) seconds -= days * 3600 * 24;
@@ -507,12 +525,13 @@
     if(days) {
         timeLeft = [NSString stringWithFormat:@"%ld Days", (long)days*-1];
     }
-    else if(hours) { timeLeft = [NSString stringWithFormat: @"%ld H", (long)hours*-1];
+    else if(hours) {
+        timeLeft = [NSString stringWithFormat: @"%ld Hrs", (long)hours*-1];
     }
-    else if(minutes) { timeLeft = [NSString stringWithFormat: @"%ld M", (long)minutes*-1];
+    else if(minutes) { timeLeft = [NSString stringWithFormat: @"%ld mins", (long)minutes*-1];
     }
     else if(seconds)
-        timeLeft = [NSString stringWithFormat: @"%lds", (long)seconds*-1];
+        timeLeft = [NSString stringWithFormat: @"%ld sec", (long)seconds*-1];
     
     return timeLeft;
 }

@@ -20,6 +20,9 @@
 @property (strong, nonatomic) IBOutlet UISearchBar *txtSearchBar;
 @property (strong, nonatomic) CustomProfileView *objCustom;
 @property (strong, nonatomic) NSMutableArray *coursesList;
+@property (assign, nonatomic) BOOL comeFromUpdate;
+- (IBAction)btnBackClick:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *btnBack;
 
 - (IBAction)btnMenuClick:(id)sender;
 
