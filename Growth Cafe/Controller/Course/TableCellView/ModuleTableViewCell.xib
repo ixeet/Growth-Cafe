@@ -23,7 +23,7 @@
                                 <variation key="heightClass=regular-widthClass=compact" constant="36"/>
                             </constraint>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
@@ -86,7 +86,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="O5p-vS-cdk"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
@@ -137,7 +137,7 @@
                         <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
                     </constraint>
                     <constraint firstItem="VVt-6A-Iqw" firstAttribute="leading" secondItem="VV3-Si-adN" secondAttribute="trailing" constant="3" id="VJa-xp-Dot">
-                        <variation key="heightClass=regular-widthClass=compact" constant="2"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="3"/>
                     </constraint>
                     <constraint firstItem="hnm-QO-hox" firstAttribute="leading" secondItem="VVt-6A-Iqw" secondAttribute="trailing" constant="51" id="W90-PH-Nfl">
                         <variation key="heightClass=regular-widthClass=compact" constant="43"/>
@@ -149,13 +149,15 @@
                     <constraint firstItem="WZ0-9J-v3H" firstAttribute="top" secondItem="hnm-QO-hox" secondAttribute="bottom" constant="-1" id="rHY-3b-2HO">
                         <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                     </constraint>
-                    <constraint firstItem="VV3-Si-adN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="uFn-cl-1iR"/>
+                    <constraint firstItem="VV3-Si-adN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="uFn-cl-1iR">
+                        <variation key="heightClass=regular-widthClass=compact" constant="3"/>
+                    </constraint>
                     <constraint firstItem="VVt-6A-Iqw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="wK4-FS-3wV"/>
                     <constraint firstItem="WZ0-9J-v3H" firstAttribute="leading" secondItem="hnm-QO-hox" secondAttribute="leading" id="yA1-8n-QQf">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
                     <constraint firstItem="VV3-Si-adN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-2" id="yPD-Sd-rro">
-                        <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
                     <constraint firstAttribute="bottomMargin" secondItem="VVt-6A-Iqw" secondAttribute="bottom" constant="-8" id="zr8-Md-vyZ"/>
                 </constraints>
@@ -212,7 +214,7 @@
                 <outlet property="lblPercent" destination="bkg-PP-gEb" id="H6K-Rx-gvd"/>
                 <outlet property="progressBarModule" destination="WZ0-9J-v3H" id="r4T-8j-IJI"/>
             </connections>
-            <point key="canvasLocation" x="336" y="26.5"/>
+            <point key="canvasLocation" x="336" y="26"/>
         </tableViewCell>
     </objects>
     <resources>

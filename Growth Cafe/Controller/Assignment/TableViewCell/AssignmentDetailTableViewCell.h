@@ -16,7 +16,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnExpend;
 @property (strong, nonatomic) IBOutlet UIButton *btnPlay;
 @property (strong, nonatomic) IBOutlet UILabel *lblCourse;
-
 @property (strong, nonatomic) IBOutlet UIButton *btnSubmit;
 @property (strong, nonatomic) IBOutlet UILabel *lblUploadedDate;
 @property (strong, nonatomic) IBOutlet UILabel *lblDateAssignment;

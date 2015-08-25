@@ -51,6 +51,7 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zRs-Ru-Bvy" userLabel="tableView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="aux-Ug-niy"/>
                         <outlet property="delegate" destination="-1" id="sxO-rw-8uA"/>
@@ -95,7 +96,7 @@
                 <constraint firstItem="rdF-gS-kYe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3MC-Nc-j1y"/>
                 <constraint firstItem="rdF-gS-kYe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-1" id="6fN-HT-PTK"/>
                 <constraint firstAttribute="trailing" secondItem="zRs-Ru-Bvy" secondAttribute="trailing" id="IRm-67-r6U">
-                    <variation key="heightClass=regular-widthClass=compact" constant="3"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="-5"/>
                 </constraint>
                 <constraint firstItem="5Zr-Lg-ccF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="326" id="OYn-uS-NC4">
                     <variation key="heightClass=regular-widthClass=compact" constant="30"/>
@@ -116,7 +117,7 @@
                     <variation key="heightClass=regular-widthClass=compact" constant="19"/>
                 </constraint>
                 <constraint firstItem="zRs-Ru-Bvy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="woR-6E-dmR">
-                    <variation key="heightClass=regular-widthClass=compact" constant="-3"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="-5"/>
                 </constraint>
             </constraints>
             <variation key="default">
@@ -173,7 +174,7 @@
                     <include reference="woR-6E-dmR"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="277" y="-2818"/>
+            <point key="canvasLocation" x="293" y="-3001"/>
         </view>
         <view contentMode="scaleToFill" id="6ab-va-IKY" userLabel="commentView">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>

@@ -13,7 +13,7 @@
 #import "CommentTableViewCell.h"
 #import "AppEngine.h"
 #import <MediaPlayer/MediaPlayer.h>
-#import "VedioPlayViewController.h"
+
 #import "LoginViewController.h"
 #import "ProfileViewController.h"
 #import "SubCommentTableViewCell.h"
@@ -33,6 +33,8 @@
     NSString* relatedURL;
     BOOL isSearching;
     NSString *moduleId,*moduleName;
+    CGPoint mPreviousTouchPoint;
+    EGRIDVIEW_SCROLLDIRECTION  mSwipeDirection;
 }
 
 
@@ -73,9 +75,9 @@
     [self setSearchUI];
 
   self.scrollView.clipsToBounds=NO;
-   
+   // self.scrollView.contentInset.bottom=200.0f;
 
-    
+   //  self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, -5, 0);
     CGRect frame1 = self.cmtview.frame;
     frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
      txtframe=frame1;
@@ -651,7 +653,7 @@
     if ((NSNull*)pageView == [NSNull null]) {
         CGRect frame = self.scrollView.bounds;
         frame.origin.x = frame.size.width * page;
-        frame.origin.y = 0.0f;
+        frame.origin.y = 10.0f;
         frame = CGRectInset(frame, 5.0f, 0.0f);
         Resourse *resource=[contentList objectAtIndex:page];
         CustomContentView *customView= [[CustomContentView alloc]init];
@@ -709,7 +711,10 @@
                  [customView.imgContent setBackgroundColor:[UIColor clearColor]];
              }
          }
-        
+       // customView.imgContent.layer.cornerRadius = 12.0f;
+        customView.view.layer.cornerRadius = 12.0f;
+
+
         [customView.btnComment addTarget:self action:@selector(btnCommentOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
         [customView.btnLike addTarget:self action:@selector(btnLikeOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
         customView.btnComment.tag=[resource.resourceId integerValue];
@@ -757,7 +762,7 @@
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
-            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
+            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
             [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [objComment.commentBy length])];
             [customView.lblCmtBy  setAttributedText:attributedString];
            
@@ -811,8 +816,144 @@
 }
 
 - (IBAction)btnProfileClick:(id)sender {
+     [txtSearchBar resignFirstResponder];
+    [txtViewCMT resignFirstResponder];
     [self fadeInAnimation:self.view];
 }
+
+
+-(EGRIDVIEW_SCROLLDIRECTION) getScrollDirection : (CGPoint) startPoint endPoint:(CGPoint) endPoint
+{
+     EGRIDVIEW_SCROLLDIRECTION direction = eScrollNone;
+    
+     EGRIDVIEW_SCROLLDIRECTION xDirection;
+     EGRIDVIEW_SCROLLDIRECTION yDirection;
+    
+    int xDirectionOffset = startPoint.x - endPoint.x;
+    if(xDirectionOffset > 0)
+        xDirection = eScrollLeft;
+    else
+        xDirection = eScrollRight;
+    
+    int yDirectionOffset = startPoint.y - endPoint.y;
+    if(yDirectionOffset > 0)
+        yDirection = eScrollTop;
+    else
+        yDirection = eScrollBottom;
+    
+    if(abs(xDirectionOffset) > abs(yDirectionOffset))
+        direction = xDirection;
+    else
+        direction = yDirection;
+    
+    return direction;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    mPreviousTouchPoint = scrollView.contentOffset;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
+    CGPoint offset = self.scrollView.contentOffset;
+    
+    //Cool... Restricting diagonal scrolling
+     mSwipeDirection = [self getScrollDirection:mPreviousTouchPoint endPoint:self.scrollView.contentOffset];
+    switch (mSwipeDirection) {
+        case eScrollLeft:
+            self.scrollView.contentOffset = CGPointMake(offset.x, mPreviousTouchPoint.y);
+            break;
+            
+        case eScrollRight:
+            self.scrollView.contentOffset = CGPointMake(offset.x, mPreviousTouchPoint.y);
+            break;
+            
+        case eScrollTop:
+            self.scrollView.contentOffset = CGPointMake(mPreviousTouchPoint.x, offset.y);
+            break;
+            
+        case eScrollBottom:
+            self.scrollView.contentOffset = CGPointMake(mPreviousTouchPoint.x, offset.y);
+            break;
+            
+        default:
+            break;
+    }
+//     NSLog(@"running");
+//        ScrollDirection scrollDirection;
+//        if(  self.scrollView.tag==20){
+//            if ( self.scrollView.contentOffset.y >2)
+//            {
+//                scrollDirection = ScrollDirectionDown;
+//                
+//                
+//                self.lastContentOffset =  self.scrollView.contentOffset.y;
+//                
+//                // get current page;
+//                NSInteger currentpage=  self.pageControl.currentPage;
+//                // get the current Content
+//                selectedResource=[contentList objectAtIndex:currentpage];
+//                // CATransition *animation = [CATransition animation];
+//                //        animation.type = kCATransitionFade;
+//                //        animation.duration = 0.0;
+//                //        [scrollView.layer addAnimation:animation forKey:nil];
+//                //
+//                //        scrollView.hidden = YES;
+//                [UIView transitionWithView: self.scrollView
+//                                  duration:0.4
+//                                   options:UIViewAnimationOptionTransitionCrossDissolve
+//                                animations:NULL
+//                                completion:NULL];
+//                self.scrollView.hidden=YES;
+//                [tblViewContent reloadData];
+//                tblViewContent.hidden =NO;
+//                //button.layer.shouldRasterize = YES;
+//            }else {
+//                self.lastContentOffset =  self.scrollView.contentOffset.y;
+//                
+//            }
+//        }else if(  self.scrollView.tag==10){
+//            if ( self.scrollView.contentOffset.y<-2)
+//            {
+//                scrollDirection = ScrollDirectionDown;
+//                
+//                
+//                self.lastContentOffsetOfTable =  self.scrollView.contentOffset.y;
+//                
+//                [UIView transitionWithView: self.scrollView
+//                                  duration:0.4
+//                                   options:UIViewAnimationOptionTransitionCrossDissolve
+//                                animations:NULL
+//                                completion:NULL];
+//                self.scrollView.hidden=NO;
+//                // [tblViewContent reloadData];
+//                
+//                tblViewContent.hidden =YES;
+//                NSInteger pageCount = [contentList count];
+//                
+//                // Set up the page control
+//                self.pageControl.currentPage = 0;
+//                self.pageControl.numberOfPages = pageCount;
+//                // Set up the content size of the scroll view
+//                // Set up the array to hold the views for each page
+//                self.pageViews = [[NSMutableArray alloc] init];
+//                for (NSInteger i = 0; i < pageCount; ++i) {
+//                    [self.pageViews addObject:[NSNull null]];
+//                }
+//                CGSize pagesScrollViewSize = self.scrollView.frame.size;
+//                self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * [contentList count], pagesScrollViewSize.height+5);
+//                [self loadVisiblePages];
+//                //button.layer.shouldRasterize = YES;
+//            }else {
+//                self.lastContentOffsetOfTable =  self.scrollView.contentOffset.y;
+//                
+//            }
+//        }
+    
+    
+}
+
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if(decelerate==YES)
@@ -820,7 +961,7 @@
         NSLog(@"running");
         ScrollDirection scrollDirection;
         if( scrollView.tag==20){
-            if (scrollView.contentOffset.y >10)
+            if (scrollView.contentOffset.y >2)
             {
                 scrollDirection = ScrollDirectionDown;
                 
@@ -851,7 +992,7 @@
                 
             }
         }else if( scrollView.tag==10){
-            if (scrollView.contentOffset.y<-10)
+            if (scrollView.contentOffset.y<-2)
             {
                 scrollDirection = ScrollDirectionDown;
                 
@@ -1133,7 +1274,7 @@
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
-            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
+            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
             [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [comment.commentBy length])];
             [cell.lblCmtBy setAttributedText:attributedString];     //   cell.lblCmtDate.text=comment.commentDate;
         cell.lblCmtText.text=comment.commentTxt;
@@ -1197,6 +1338,7 @@
             cell.btnMore.hidden=YES;
             cell.imgDevider.hidden=NO;
             cell.lblRelatedVideo.hidden =NO;
+          
             
         }
         else if([selectedResource.comments count]>=3)
@@ -1254,7 +1396,7 @@
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
-            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
+            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
             [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [comment.commentBy length])];
             [cell.lblCmtBy setAttributedText:attributedString];
            // cell.lblCmtDate.text=comment.commentDate;
@@ -1370,32 +1512,39 @@
         
        // [cell.imgContentURL setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
         cell.lblContentName.text= resource.resourceTitle;
-        NSString *str = [NSString stringWithFormat:@"By %@" ,resource.authorName];
+        NSString *str = [NSString stringWithFormat:@"by %@" ,resource.authorName];
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
         
         // Set font, notice the range is for the whole string
-        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
-        [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(1, [resource.authorName length])];
+        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+        [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(3, [resource.authorName length])];
         [cell.lblContentby setAttributedText:attributedString];
 
        // cell.lblSubmittedDate.text=resource.uploadedDate;
         NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:resource.uploadedDate];
        
         if(resource.resourceImageUrl!=nil){
+            if(resource.resourceImageData==nil)
+            {
             NSURL *imageURL = [NSURL URLWithString:resource.resourceImageUrl];
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-                
+                resource.resourceImageData = [NSData dataWithContentsOfURL:imageURL];
+             
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // Update the UI
                     
-                    UIImage *img=[UIImage imageWithData:imageData];
+                    UIImage *img=[UIImage imageWithData:resource.resourceImageData];
                     if(img!=nil)
                        cell.imgContentURL.image= img;
 
                 });
             });
+        }else{
+            UIImage *img=[UIImage imageWithData:resource.resourceImageData];
+            cell.imgContentURL.image= img;
+            [ cell.imgContentURL setBackgroundColor:[UIColor clearColor]];
+        }
         }
         
         if(submittedDate!=nil){
@@ -1409,20 +1558,24 @@
         }
       cell.btnPlay.tag= indexPath.row;
         [cell.btnPlay  addTarget:self action:@selector(btnPlayRelatedResourceClick:) forControlEvents:UIControlEventTouchUpInside];
-
+        
+        cell.imgHalfDevide.hidden=NO;
        
         if(indexPath.row!=([selectedResource.relatedResources count]-1))
         {
             cell.btnMore.hidden=YES;
             cell.imgDevider.hidden=YES;
              cell.lblAssignment.hidden=YES;
+          
         }else{
             if([selectedResource.relatedResources count]>=3)
             {
                 [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
+                 cell.imgHalfDevide.hidden=YES;
             }else{
                 cell.btnMore.hidden=YES;
+                
             }
         }
 
@@ -1481,24 +1634,27 @@
         Resourse *resource=assignment.attachedResource;
        // [cell.imgContentURL setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
         cell.lblContentName.text= assignment.assignmentName;
-        NSString *str = [NSString stringWithFormat:@"By %@" ,assignment.assignmentSubmittedBy];
+        NSString *str = [NSString stringWithFormat:@"by %@" ,assignment.assignmentSubmittedBy];
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
         
         // Set font, notice the range is for the whole string
-        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
-        [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(1, [assignment.assignmentSubmittedBy length])];
+        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+        [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(3, [assignment.assignmentSubmittedBy length])];
         [cell.lblContentby setAttributedText:attributedString];
         
        
-        
+        if(resource!=nil)
+        {
         
         if(resource.resourceImageUrl!=nil){
+            if(resource.resourceImageData==nil)
+            {
             NSURL *imageURL = [NSURL URLWithString:resource.resourceImageUrl];
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                if (resource.resourceImageData==nil) {
+               
                      resource.resourceImageData = [NSData dataWithContentsOfURL:imageURL];
-                }
+                
                dispatch_async(dispatch_get_main_queue(), ^{
                     // Update the UI
                     //cell.imgContentURL.image= [UIImage imageWithData:imageData];
@@ -1508,6 +1664,11 @@
 
                 });
             });
+        }else{
+            UIImage *img=[UIImage imageWithData:resource.resourceImageData];
+            cell.imgContentURL.image= img;
+            [ cell.imgContentURL setBackgroundColor:[UIColor clearColor]];
+        }
         }
         
         
@@ -1522,10 +1683,17 @@
     
            cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",monthName,(long)components.day ];
        }
+        
         cell.btnPlay.tag= indexPath.row;
         [cell.btnPlay  addTarget:self action:@selector(btnPlayAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
         
+        }else{
         
+            cell.btnPlay.hidden=YES;
+            [cell.imgContentURL setImage:[UIImage imageNamed:@"imPending.png"]];
+            cell.lblSubmittedDate.hidden=YES;
+            
+        }
         if(indexPath.row!=([assignmentList count]-1))
         {
             cell.btnMore.hidden=YES;
@@ -1540,6 +1708,7 @@
                 cell.btnMore.hidden=YES;
             }
         }
+        
          cell.lblAssignment.hidden=YES;
         return cell;
     }
@@ -1629,8 +1798,6 @@
         {
            height=80.0f;
                 
-           
-            
         }
         else if([selectedResource.comments count]>=3)
         {
@@ -1643,8 +1810,8 @@
             
         }
         
-        if(labelSize.height>30)
-                return   height=height+80+labelSize.height;
+        if(labelSize.height>17)
+                return   height=height+80+labelSize.height-17.0;
             else
                 return  height=height+80;
     }
@@ -1672,10 +1839,10 @@
         Resourse *realtedResource=selectedResource.relatedResources[indexPath.row];
         CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:realtedResource.resourceTitle];
         
-        if(labelSize.height>30)
-             return  height=height+80.0f+labelSize.height;
+        if(labelSize.height>17)
+             return  height=height+75.0f+labelSize.height-17.0;
         else
-            return  height=height+80.0f;;
+            return  height=height+75.0f;;
        
        
     
@@ -1688,10 +1855,10 @@
         float height=0.0f;
         CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:assignment.assignmentName];
         
-        if(labelSize.height>30)
-            return  height=height+80.0f+labelSize.height;
+        if(labelSize.height>17)
+            return  height=height+75.0f+labelSize.height-17.0;
         else
-            return  height=height+80.0f;;
+            return  height=height+75.0f;;
 
 
     }
@@ -1870,10 +2037,11 @@
     }
 }
 - (IBAction)btnLogoutClick:(id)sender {
+    
     [FBSession.activeSession closeAndClearTokenInformation];
-        [FBSession.activeSession close];
-        [FBSession setActiveSession:nil];
-   
+    [FBSession.activeSession close];
+    [FBSession setActiveSession:nil];
+    
     [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
     [AppSingleton sharedInstance].isUserLoggedIn=NO;
     [self.tabBarController.tabBar setHidden:YES];
@@ -1881,5 +2049,6 @@
     [self.navigationController pushViewController:viewCont animated:YES];
     
 }
+
 
 @end

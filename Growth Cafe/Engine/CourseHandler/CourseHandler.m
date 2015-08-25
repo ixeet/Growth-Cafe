@@ -231,12 +231,15 @@
             
             NSMutableArray * arrayRelatedResource= [[NSMutableArray alloc]init];
             for (NSDictionary *dicRelatedResource in [dicContent objectForKey:@"relatedVideoList"]) {
+             
+                
                 Resourse *resource= [[Resourse alloc]init];
                 resource.resourceId=[dicRelatedResource objectForKey:@"resourceId"];
                 resource.resourceDesc=[dicRelatedResource objectForKey:@"resourceDesc"];
                 resource.resourceImageUrl=[dicRelatedResource objectForKey:@"thumbImg"];
                 resource.uploadedDate=[dicRelatedResource objectForKey:@"uploadedDate"];
-                  resource.authorName=[dicRelatedResource objectForKey:@"authorName"];
+                resource.resourceTitle=[dicRelatedResource objectForKey:@"resourceName"];
+                resource.authorName=[dicRelatedResource objectForKey:@"authorName"];
                 [arrayRelatedResource addObject:resource];
             }
             
@@ -249,15 +252,14 @@
         
         for (NSDictionary *dicAssign in [responseDic objectForKey:@"assignmentList"]) {
             
+            Assignment  *assignment= [[Assignment   alloc]init];
+            assignment.assignmentId=[dicAssign objectForKey:@"assignmentId"];
+            assignment.assignmentName=[dicAssign objectForKey:@"assignmentName"];
+            assignment.assignmentStatus=[dicAssign objectForKey:@"assignmentStatus"];
+            assignment.assignmentSubmittedDate=[dicAssign objectForKey:@"assignmentSubmittedDate"];
             
+            assignment.assignmentSubmittedBy=[dicAssign objectForKey:@"assignmentSubmittedBy"];
             for (NSDictionary *dicRelatedResource in [dicAssign objectForKey:@"attachedResources"]) {
-                Assignment  *assignment= [[Assignment   alloc]init];
-                assignment.assignmentId=[dicAssign objectForKey:@"assignmentId"];
-                assignment.assignmentName=[dicAssign objectForKey:@"assignmentName"];
-                assignment.assignmentStatus=[dicAssign objectForKey:@"assignmentStatus"];
-                assignment.assignmentSubmittedDate=[dicAssign objectForKey:@"assignmentSubmittedDate"];
-                
-                assignment.assignmentSubmittedBy=[dicAssign objectForKey:@"assignmentSubmittedBy"];
                 
                 Resourse *resource= [[Resourse alloc]init];
                 resource.resourceId=[dicRelatedResource objectForKey:@"resourceId"];
@@ -266,9 +268,9 @@
                 resource.uploadedDate=[dicRelatedResource objectForKey:@"uploadedDate"];
                 assignment.resourceId= resource.resourceId;
                 assignment.attachedResource=resource;
-                [assignmentList addObject:assignment];
+               
             }
-            
+            [assignmentList addObject:assignment];
             
             
         }
@@ -423,16 +425,16 @@
         
         
             for (NSDictionary *dicAssign in [responseDic objectForKey:@"assignmentList"]) {
+                Assignment  *assignment= [[Assignment   alloc]init];
+                assignment.assignmentId=[dicAssign objectForKey:@"assignmentId"];
+                assignment.assignmentName=[dicAssign objectForKey:@"assignmentName"];
+                assignment.assignmentStatus=[dicAssign objectForKey:@"assignmentStatus"];
+                assignment.assignmentSubmittedDate=[dicAssign objectForKey:@"assignmentSubmittedDate"];
                 
+                assignment.assignmentSubmittedBy=[dicAssign objectForKey:@"assignmentSubmittedBy"];
                 
                 for (NSDictionary *dicRelatedResource in [dicAssign objectForKey:@"attachedResources"]) {
-                    Assignment  *assignment= [[Assignment   alloc]init];
-                    assignment.assignmentId=[dicAssign objectForKey:@"assignmentId"];
-                    assignment.assignmentName=[dicAssign objectForKey:@"assignmentName"];
-                    assignment.assignmentStatus=[dicAssign objectForKey:@"assignmentStatus"];
-                    assignment.assignmentSubmittedDate=[dicAssign objectForKey:@"assignmentSubmittedDate"];
-                    
-                    assignment.assignmentSubmittedBy=[dicAssign objectForKey:@"assignmentSubmittedBy"];
+                   
                     
                     Resourse *resource= [[Resourse alloc]init];
                     resource.resourceId=[dicRelatedResource objectForKey:@"resourceId"];
@@ -441,9 +443,9 @@
                     resource.uploadedDate=[dicRelatedResource objectForKey:@"uploadedDate"];
                     assignment.resourceId= resource.resourceId;
                     assignment.attachedResource=resource;
-                    [assignmentList addObject:assignment];
+                   
                 }
-                
+                 [assignmentList addObject:assignment];
                
                 
             }

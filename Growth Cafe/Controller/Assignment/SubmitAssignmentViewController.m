@@ -71,7 +71,13 @@
     }
     else if (selectedAssest ==nil && [txtViewURL.text length]<=0){
         [AppGlobal showAlertWithMessage:MISSING_Video_URL title:@""];
-    }else{
+        
+    }else if([txtViewURL.text length]>0 && ![AppGlobal validateUrlWithString:txtViewURL.text  ])
+    {
+        [AppGlobal showAlertWithMessage:MISSING_VALID_URL title:@""];
+    }
+
+    else{
        // ALAssetRepresentation *defaultRepresentation = [selectedAssest defaultRepresentation];
        // NSString *uti = [defaultRepresentation UTI];
 //        NSURL  *videoURL = [[selectedAssest valueForProperty:ALAssetPropertyURLs] valueForKey:uti];
@@ -295,7 +301,7 @@
     [imgAssest setHidden:NO];
     [sender dismissViewControllerAnimated:YES completion:nil];
     
-    NSMutableDictionary   *dic = [[NSMutableDictionary alloc] init];
+  //  NSMutableDictionary   *dic = [[NSMutableDictionary alloc] init];
     ALAssetRepresentation *defaultRepresentation = [selectedAssest defaultRepresentation];
     NSString *uti = [defaultRepresentation UTI];
     NSURL  *videoURL = [[selectedAssest valueForProperty:ALAssetPropertyURLs] valueForKey:uti];

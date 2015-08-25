@@ -27,6 +27,7 @@
     NSString    *searchText;
     NSString *selectedCommentId,*selectedUpdateId;
     ActionOn  actionOn;
+    UIWebView *videoView;
 }
 @end
 
@@ -69,6 +70,8 @@
     objCustom.view.frame=frame1;
     
     [objCustom.btnLogout  addTarget:self action:@selector(btnLogoutClick:) forControlEvents:UIControlEventTouchUpInside];
+  
+
 //    CGRect cmtFrame = self.cmtview.frame;
 //    cmtFrame=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
 //    txtframe=cmtFrame;
@@ -490,7 +493,7 @@
             CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:assignment.assignmentDesc];
             NSLog(@"%ld",(long)indexPath.row);
             
-//            if(labelSize.height>39)
+            if(labelSize.height>20)
                 height=height+labelSize.height;
         }
         if(assignment.course.courseName!=nil){
@@ -498,7 +501,7 @@
             CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:assignment.course.courseName];
             NSLog(@"%ld",(long)indexPath.row);
             
-            //            if(labelSize.height>39)
+                     if(labelSize.height>20)
             height=height+labelSize.height;
         }
         
@@ -546,8 +549,14 @@
     UIButton *btn=(UIButton *)sender;
     Assignment *assign=[arrayAssignment objectAtIndex:btn.tag];
     Resourse *resourse =assign.attachedResource;
-    [self PlayTheVideo:resourse.resourceUrl];
-    
+       if([resourse.resourceUrl containsString:@"youtube"])
+    {
+        [self embedYouTube:resourse.resourceUrl  frame:self.view.frame];
+      [appDelegate self].allowRotation = YES;
+    }else {
+        [self PlayTheVideo:resourse.resourceUrl];
+
+    }
 }
 
 -(void)PlayTheVideo:(NSString *)stringUrl
@@ -607,6 +616,7 @@
 
 
 - (IBAction)btnProfileClick:(id)sender {
+    [txtSearchBar resignFirstResponder];
     [self fadeInAnimation:self.view];
 }
 
@@ -721,6 +731,36 @@
     
 }
 
+- (void)embedYouTube:(NSString*)url frame:(CGRect)frame {
+    NSString* embedHTML = @"\
+    <html><head>\
+    <style type=\"text/css\">\
+    body {\
+        background-color: transparent;\
+    color: white;\
+    }\
+    </style>\
+    </head><body style=\"margin:0\">\
+    <embed id=\"yt\" src=\"%@\" type=\"application/x-shockwave-flash\" \
+    width=\"%0.0f\" height=\"%0.0f\"></embed>\
+    </body></html>";
+    NSString* html = [NSString stringWithFormat:embedHTML, url, frame.size.width, frame.size.height];
+    if(videoView == nil) {
+        videoView = [[UIWebView alloc] initWithFrame:frame];
+        [self.view addSubview:videoView];
+    }
+    [videoView loadHTMLString:html baseURL:nil];
+    
+    videoView.delegate=self;
+}
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    return YES;
+}
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
 
-
+}
 @end

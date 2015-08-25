@@ -11,7 +11,7 @@
 
 #define  APP_URL  @"http://191.239.57.54:8080/"
 
-//#define  APP_URL  @"http://192.168.0.13:8080/"
+//#define  APP_URL  @"http://192.168.0.21:8080/"
 
 #define MASTER_DATA_URL APP_URL@"SLMS/rest/common/getMasterData"
 #define USER_REGISTER_URL APP_URL@"SLMS/rest/user/register"
@@ -99,6 +99,7 @@
 #define MISSING_PASSWORD_CHAR @"Short passwords are easy to guess. Try one with at least 8 characters including a alphabet and a number."
 #define MISSING_FORGET_EMAIL  @"Email can't be empty, please enter a registered email id to get password."
 #define MISSING_VALID_EMAIL_ID @"Enter a valid email id including '@' and '.'."
+#define MISSING_VALID_URL @"Enter a valid URL."
 #define MISSING_FIRST_NAME @"First name can't be empty."
 #define MISSING_LAST_NAME @"Last name can't be empty."
 #define MISSING_EMAIL_ID @"Email can't be empty."
@@ -146,4 +147,11 @@ typedef enum ActionOn {
     UpdateOn,
     
 } ActionOn;
+typedef enum EGRIDVIEW_SCROLLDIRECTION {
+    eScrollLeft = 0,
+    eScrollRight = 1,
+    eScrollTop = 2,
+    eScrollBottom = 3,
+    eScrollNone = 4
+} EGRIDVIEW_SCROLLDIRECTION;
 #endif

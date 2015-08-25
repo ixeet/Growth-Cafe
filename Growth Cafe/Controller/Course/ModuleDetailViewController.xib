@@ -168,7 +168,7 @@
                 <constraint firstItem="9hJ-X8-CQn" firstAttribute="top" secondItem="J4G-30-MhE" secondAttribute="bottom" constant="-2" id="4V7-LO-yNZ"/>
                 <constraint firstItem="J4G-30-MhE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="9US-OA-eHj"/>
                 <constraint firstItem="lr9-Wg-5YW" firstAttribute="centerY" secondItem="xne-zy-o5M" secondAttribute="centerY" id="ASZ-nP-Xro">
-                    <variation key="heightClass=regular-widthClass=compact" constant="16.5"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="11.5"/>
                 </constraint>
                 <constraint firstItem="sKf-Kl-tVB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="26" id="Dpw-Gc-tLq">
                     <variation key="heightClass=regular-widthClass=compact" constant="19"/>
@@ -182,7 +182,7 @@
                 </constraint>
                 <constraint firstItem="xne-zy-o5M" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="I3J-w7-lvH"/>
                 <constraint firstAttribute="trailing" secondItem="lr9-Wg-5YW" secondAttribute="trailing" id="NVo-em-fko">
-                    <variation key="heightClass=regular-widthClass=compact" constant="-10"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="-5"/>
                 </constraint>
                 <constraint firstItem="sKf-Kl-tVB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="9" id="Tt2-Md-nsf"/>
                 <constraint firstItem="KH9-aq-b0g" firstAttribute="leading" secondItem="VhF-ro-RoI" secondAttribute="trailing" constant="20" id="Z1l-Ka-7mS">
@@ -211,7 +211,7 @@
                     <variation key="heightClass=regular-widthClass=compact" constant="19"/>
                 </constraint>
                 <constraint firstItem="lr9-Wg-5YW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qTL-27-Z43">
-                    <variation key="heightClass=regular-widthClass=compact" constant="-10"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="-5"/>
                 </constraint>
                 <constraint firstItem="J4G-30-MhE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qhx-Rz-Xnf"/>
                 <constraint firstAttribute="trailing" secondItem="VhF-ro-RoI" secondAttribute="trailing" constant="69" id="rWe-5A-5Yp">

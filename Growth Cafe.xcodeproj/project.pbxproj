@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A826DC671B8B37ED0037E94F /* profile_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A826DC651B8B37ED0037E94F /* profile_img@2x.png */; };
+		A826DC681B8B37ED0037E94F /* profile_img@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A826DC661B8B37ED0037E94F /* profile_img@3x.png */; };
+		A826DC711B8C4B8E0037E94F /* logouta@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A826DC6D1B8C4B8E0037E94F /* logouta@2x.png */; };
+		A826DC721B8C4B8F0037E94F /* logouta@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A826DC6E1B8C4B8E0037E94F /* logouta@3x.png */; };
+		A826DC731B8C4B8F0037E94F /* validatefb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A826DC6F1B8C4B8E0037E94F /* validatefb@2x.png */; };
+		A826DC741B8C4B8F0037E94F /* validatefb@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A826DC701B8C4B8E0037E94F /* validatefb@3x.png */; };
 		A86A0DD91B7C67F20039E45B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86A0DD81B7C67F20039E45B /* FacebookSDK.framework */; };
 		A86A0DDA1B7C67F20039E45B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86A0DD81B7C67F20039E45B /* FacebookSDK.framework */; };
 		A86A0DE41B7C9A820039E45B /* login_red1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A86A0DE21B7C9A820039E45B /* login_red1@2x.png */; };
@@ -16,6 +22,8 @@
 		A86A0DEB1B7CCFA70039E45B /* appLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A86A0DE91B7CCFA70039E45B /* appLogo@3x.png */; };
 		A881C9AE1B7F9FC70016F049 /* SubCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A881C9AC1B7F9FC70016F049 /* SubCommentTableViewCell.m */; };
 		A881C9AF1B7F9FC70016F049 /* SubCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A881C9AD1B7F9FC70016F049 /* SubCommentTableViewCell.xib */; };
+		A8AD43211B8AEAB300AAD7E8 /* UpdateProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD431F1B8AEAB300AAD7E8 /* UpdateProfileViewController.m */; };
+		A8AD43221B8AEAB300AAD7E8 /* UpdateProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8AD43201B8AEAB300AAD7E8 /* UpdateProfileViewController.xib */; };
 		A8CAA0581B8339D80066C893 /* icn_reply@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CAA0561B8339D80066C893 /* icn_reply@2x.png */; };
 		A8CAA0591B8339D80066C893 /* icn_reply@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CAA0571B8339D80066C893 /* icn_reply@3x.png */; };
 		A8CAA0801B849DD70066C893 /* profile-menunn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CAA07E1B849DD70066C893 /* profile-menunn@2x.png */; };
@@ -37,8 +45,6 @@
 		A8DFB2BC1B85ACD40031C332 /* mr2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DFB2BA1B85ACD40031C332 /* mr2@3x.png */; };
 		A8DFEA9A1B87571A00B55D2E /* logo1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DFEA981B87571A00B55D2E /* logo1@2x.png */; };
 		A8DFEA9B1B87571A00B55D2E /* logo1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DFEA991B87571A00B55D2E /* logo1@3x.png */; };
-		A8E361421B8877F400CA0514 /* SubmitContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E361401B8877F400CA0514 /* SubmitContentViewController.m */; };
-		A8E361431B8877F400CA0514 /* SubmitContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E361411B8877F400CA0514 /* SubmitContentViewController.xib */; };
 		A8E361471B8881C000CA0514 /* SubmitAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E361451B8881C000CA0514 /* SubmitAssignmentViewController.m */; };
 		A8E361481B8881C000CA0514 /* SubmitAssignmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E361461B8881C000CA0514 /* SubmitAssignmentViewController.xib */; };
 		C9C263EF1B7B76AF00EA4F38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C263EE1B7B76AF00EA4F38 /* main.m */; };
@@ -122,8 +128,6 @@
 		C9C265351B7B803700EA4F38 /* ModuleDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C264F41B7B803700EA4F38 /* ModuleDetailTableViewCell.m */; };
 		C9C265361B7B803700EA4F38 /* ModuleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C264F61B7B803700EA4F38 /* ModuleTableViewCell.m */; };
 		C9C265371B7B803700EA4F38 /* ModuleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9C264F71B7B803700EA4F38 /* ModuleTableViewCell.xib */; };
-		C9C265381B7B803700EA4F38 /* VedioPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C264F91B7B803700EA4F38 /* VedioPlayViewController.m */; };
-		C9C265391B7B803700EA4F38 /* VedioPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9C264FA1B7B803700EA4F38 /* VedioPlayViewController.xib */; };
 		C9C2653A1B7B803700EA4F38 /* UpdateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C264FE1B7B803700EA4F38 /* UpdateTableViewCell.m */; };
 		C9C2653B1B7B803700EA4F38 /* UpdateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9C264FF1B7B803700EA4F38 /* UpdateTableViewCell.xib */; };
 		C9C2653C1B7B803700EA4F38 /* UpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C265011B7B803700EA4F38 /* UpdateViewController.m */; };
@@ -282,6 +286,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A826DC651B8B37ED0037E94F /* profile_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_img@2x.png"; sourceTree = "<group>"; };
+		A826DC661B8B37ED0037E94F /* profile_img@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_img@3x.png"; sourceTree = "<group>"; };
+		A826DC6D1B8C4B8E0037E94F /* logouta@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logouta@2x.png"; sourceTree = "<group>"; };
+		A826DC6E1B8C4B8E0037E94F /* logouta@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logouta@3x.png"; sourceTree = "<group>"; };
+		A826DC6F1B8C4B8E0037E94F /* validatefb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "validatefb@2x.png"; sourceTree = "<group>"; };
+		A826DC701B8C4B8E0037E94F /* validatefb@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "validatefb@3x.png"; sourceTree = "<group>"; };
 		A86A0DD81B7C67F20039E45B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = SOURCE_ROOT; };
 		A86A0DE21B7C9A820039E45B /* login_red1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_red1@2x.png"; sourceTree = "<group>"; };
 		A86A0DE31B7C9A820039E45B /* login_red1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_red1@3x.png"; sourceTree = "<group>"; };
@@ -291,6 +301,9 @@
 		A881C9AB1B7F9FC70016F049 /* SubCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCommentTableViewCell.h; sourceTree = "<group>"; };
 		A881C9AC1B7F9FC70016F049 /* SubCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCommentTableViewCell.m; sourceTree = "<group>"; };
 		A881C9AD1B7F9FC70016F049 /* SubCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubCommentTableViewCell.xib; sourceTree = "<group>"; };
+		A8AD431E1B8AEAB300AAD7E8 /* UpdateProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateProfileViewController.h; sourceTree = "<group>"; };
+		A8AD431F1B8AEAB300AAD7E8 /* UpdateProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateProfileViewController.m; sourceTree = "<group>"; };
+		A8AD43201B8AEAB300AAD7E8 /* UpdateProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateProfileViewController.xib; sourceTree = "<group>"; };
 		A8CAA0561B8339D80066C893 /* icn_reply@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_reply@2x.png"; sourceTree = "<group>"; };
 		A8CAA0571B8339D80066C893 /* icn_reply@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_reply@3x.png"; sourceTree = "<group>"; };
 		A8CAA07E1B849DD70066C893 /* profile-menunn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-menunn@2x.png"; sourceTree = "<group>"; };
@@ -314,9 +327,6 @@
 		A8DFB2BA1B85ACD40031C332 /* mr2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mr2@3x.png"; sourceTree = "<group>"; };
 		A8DFEA981B87571A00B55D2E /* logo1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo1@2x.png"; sourceTree = "<group>"; };
 		A8DFEA991B87571A00B55D2E /* logo1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo1@3x.png"; sourceTree = "<group>"; };
-		A8E3613F1B8877F400CA0514 /* SubmitContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitContentViewController.h; sourceTree = "<group>"; };
-		A8E361401B8877F400CA0514 /* SubmitContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitContentViewController.m; sourceTree = "<group>"; };
-		A8E361411B8877F400CA0514 /* SubmitContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubmitContentViewController.xib; sourceTree = "<group>"; };
 		A8E361441B8881C000CA0514 /* SubmitAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitAssignmentViewController.h; sourceTree = "<group>"; };
 		A8E361451B8881C000CA0514 /* SubmitAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitAssignmentViewController.m; sourceTree = "<group>"; };
 		A8E361461B8881C000CA0514 /* SubmitAssignmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubmitAssignmentViewController.xib; sourceTree = "<group>"; };
@@ -470,9 +480,6 @@
 		C9C264F51B7B803700EA4F38 /* ModuleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleTableViewCell.h; sourceTree = "<group>"; };
 		C9C264F61B7B803700EA4F38 /* ModuleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleTableViewCell.m; sourceTree = "<group>"; };
 		C9C264F71B7B803700EA4F38 /* ModuleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModuleTableViewCell.xib; sourceTree = "<group>"; };
-		C9C264F81B7B803700EA4F38 /* VedioPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VedioPlayViewController.h; sourceTree = "<group>"; };
-		C9C264F91B7B803700EA4F38 /* VedioPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VedioPlayViewController.m; sourceTree = "<group>"; };
-		C9C264FA1B7B803700EA4F38 /* VedioPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VedioPlayViewController.xib; sourceTree = "<group>"; };
 		C9C264FD1B7B803700EA4F38 /* UpdateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateTableViewCell.h; sourceTree = "<group>"; };
 		C9C264FE1B7B803700EA4F38 /* UpdateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateTableViewCell.m; sourceTree = "<group>"; };
 		C9C264FF1B7B803700EA4F38 /* UpdateTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateTableViewCell.xib; sourceTree = "<group>"; };
@@ -920,9 +927,6 @@
 				A8D73DCF1B7E04E00022C1A0 /* AssestViewController.h */,
 				A8D73DD01B7E04E00022C1A0 /* AssestViewController.m */,
 				A8D73DD11B7E04E00022C1A0 /* AssestViewController.xib */,
-				A8E3613F1B8877F400CA0514 /* SubmitContentViewController.h */,
-				A8E361401B8877F400CA0514 /* SubmitContentViewController.m */,
-				A8E361411B8877F400CA0514 /* SubmitContentViewController.xib */,
 			);
 			path = Assignment;
 			sourceTree = "<group>";
@@ -953,9 +957,6 @@
 				C9C264E11B7B803700EA4F38 /* ScrollViewContainer.h */,
 				C9C264E21B7B803700EA4F38 /* ScrollViewContainer.m */,
 				C9C264E31B7B803700EA4F38 /* TableCellView */,
-				C9C264F81B7B803700EA4F38 /* VedioPlayViewController.h */,
-				C9C264F91B7B803700EA4F38 /* VedioPlayViewController.m */,
-				C9C264FA1B7B803700EA4F38 /* VedioPlayViewController.xib */,
 			);
 			path = Course;
 			sourceTree = "<group>";
@@ -1055,6 +1056,9 @@
 				C9C265141B7B803700EA4F38 /* RegisterationViewController.h */,
 				C9C265151B7B803700EA4F38 /* RegisterationViewController.m */,
 				C9C265161B7B803700EA4F38 /* RegisterationViewController.xib */,
+				A8AD431E1B8AEAB300AAD7E8 /* UpdateProfileViewController.h */,
+				A8AD431F1B8AEAB300AAD7E8 /* UpdateProfileViewController.m */,
+				A8AD43201B8AEAB300AAD7E8 /* UpdateProfileViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1223,6 +1227,10 @@
 		C9C265BA1B7B819000EA4F38 /* login */ = {
 			isa = PBXGroup;
 			children = (
+				A826DC6D1B8C4B8E0037E94F /* logouta@2x.png */,
+				A826DC6E1B8C4B8E0037E94F /* logouta@3x.png */,
+				A826DC6F1B8C4B8E0037E94F /* validatefb@2x.png */,
+				A826DC701B8C4B8E0037E94F /* validatefb@3x.png */,
 				A86A0DE21B7C9A820039E45B /* login_red1@2x.png */,
 				A86A0DE31B7C9A820039E45B /* login_red1@3x.png */,
 				C9C265BB1B7B819000EA4F38 /* checkBox.png */,
@@ -1256,6 +1264,8 @@
 		C9C265CA1B7B819000EA4F38 /* Register */ = {
 			isa = PBXGroup;
 			children = (
+				A826DC651B8B37ED0037E94F /* profile_img@2x.png */,
+				A826DC661B8B37ED0037E94F /* profile_img@3x.png */,
 				A8DFB2B51B85A96E0031C332 /* school_drop3@2x.png */,
 				A8DFB2B61B85A96E0031C332 /* school_drop3@3x.png */,
 				A8DFB2B11B85A4FF0031C332 /* school_drop11@2x.png */,
@@ -1371,6 +1381,7 @@
 				C9C265EB1B7B819100EA4F38 /* edit-profile@2x.png in Resources */,
 				C9C266271B7B819100EA4F38 /* user-profile@2x.png in Resources */,
 				A8DFB2B71B85A96E0031C332 /* school_drop3@2x.png in Resources */,
+				A826DC681B8B37ED0037E94F /* profile_img@3x.png in Resources */,
 				A8D73DDB1B7E0DF90022C1A0 /* logo@2x.png in Resources */,
 				C9C265FA1B7B819100EA4F38 /* icn_course-selectedn@3x.png in Resources */,
 				C9C266281B7B819100EA4F38 /* user-profile@3x.png in Resources */,
@@ -1472,8 +1483,8 @@
 				C9C265E31B7B819100EA4F38 /* icn_grade@2x.png in Resources */,
 				C9C265F81B7B819100EA4F38 /* icn_course-defaultn@3x.png in Resources */,
 				C9C266551B7B819100EA4F38 /* icn_droparrow@3x.png in Resources */,
-				C9C265391B7B803700EA4F38 /* VedioPlayViewController.xib in Resources */,
 				C9C266191B7B819100EA4F38 /* img_search-boxn1111@2x.png in Resources */,
+				A826DC741B8C4B8F0037E94F /* validatefb@3x.png in Resources */,
 				C9C266051B7B819100EA4F38 /* icn_more-selectedn@2x.png in Resources */,
 				C9C265411B7B803700EA4F38 /* CustomProfileView.xib in Resources */,
 				C9C2663A1B7B819100EA4F38 /* profile-menun@3x.png in Resources */,
@@ -1484,9 +1495,11 @@
 				C9C265E81B7B819100EA4F38 /* icn_pending-assignment@3x.png in Resources */,
 				C9C2652E1B7B803700EA4F38 /* CommentTableViewCell.xib in Resources */,
 				C9C266151B7B819100EA4F38 /* icn_updates-defaultn@2x.png in Resources */,
+				A826DC721B8C4B8F0037E94F /* logouta@3x.png in Resources */,
 				C9C266521B7B819100EA4F38 /* first_nm@2x.png in Resources */,
 				C9C265471B7B803700EA4F38 /* ProfileViewController.xib in Resources */,
 				A8DFB2BB1B85ACD40031C332 /* mr2@2x.png in Resources */,
+				A826DC671B8B37ED0037E94F /* profile_img@2x.png in Resources */,
 				A8CAA0591B8339D80066C893 /* icn_reply@3x.png in Resources */,
 				C9C265491B7B803700EA4F38 /* RegisterationViewController.xib in Resources */,
 				C9C265E11B7B819100EA4F38 /* icn_grade1@2x.png in Resources */,
@@ -1501,14 +1514,16 @@
 				C9C266311B7B819100EA4F38 /* img_search-boxn@2x.png in Resources */,
 				C9C266421B7B819100EA4F38 /* checkBox.png in Resources */,
 				C9C265DC1B7B819100EA4F38 /* btn_radio-unselected@2x.png in Resources */,
-				A8E361431B8877F400CA0514 /* SubmitContentViewController.xib in Resources */,
 				C9C2664A1B7B819100EA4F38 /* login_white@2x.png in Resources */,
 				C9C266401B7B819100EA4F38 /* progress_vertical_line@2x.png in Resources */,
+				A8AD43221B8AEAB300AAD7E8 /* UpdateProfileViewController.xib in Resources */,
 				A8DFB2B81B85A96E0031C332 /* school_drop3@3x.png in Resources */,
 				C9C265F91B7B819100EA4F38 /* icn_course-selectedn@2x.png in Resources */,
 				C9C2664E1B7B819100EA4F38 /* splash@2x.png in Resources */,
+				A826DC711B8C4B8E0037E94F /* logouta@2x.png in Resources */,
 				C9C265E71B7B819100EA4F38 /* icn_pending-assignment@2x.png in Resources */,
 				C9C265F61B7B819100EA4F38 /* icn_comment@3x.png in Resources */,
+				A826DC731B8C4B8F0037E94F /* validatefb@2x.png in Resources */,
 				C9C265F01B7B819100EA4F38 /* icn_assignment-defaultn@3x.png in Resources */,
 				A86A0DE51B7C9A820039E45B /* login_red1@3x.png in Resources */,
 				A8DFB2B31B85A4FF0031C332 /* school_drop11@2x.png in Resources */,
@@ -1566,6 +1581,7 @@
 				C9C265481B7B803700EA4F38 /* RegisterationViewController.m in Sources */,
 				C9C265281B7B803700EA4F38 /* NSArray+PureLayout.m in Sources */,
 				A8E361471B8881C000CA0514 /* SubmitAssignmentViewController.m in Sources */,
+				A8AD43211B8AEAB300AAD7E8 /* UpdateProfileViewController.m in Sources */,
 				C9C2651F1B7B803700EA4F38 /* AssignmentViewController.m in Sources */,
 				C9C264761B7B7B2600EA4F38 /* LoginHandler.m in Sources */,
 				C9C2648E1B7B7BCB00EA4F38 /* AppSingleton.m in Sources */,
@@ -1578,7 +1594,6 @@
 				C9C2654A1B7B803700EA4F38 /* MoreViewController.m in Sources */,
 				A8D73DD71B7E06D30022C1A0 /* AssestTableViewCell.m in Sources */,
 				C9C263EF1B7B76AF00EA4F38 /* main.m in Sources */,
-				A8E361421B8877F400CA0514 /* SubmitContentViewController.m in Sources */,
 				C9C265291B7B803700EA4F38 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				C9C2643D1B7B799700EA4F38 /* AFHTTPRequestOperationManager.m in Sources */,
 				C9C265421B7B803700EA4F38 /* ForgetPasswordViewController.m in Sources */,
@@ -1589,7 +1604,6 @@
 				C9C264741B7B7B2600EA4F38 /* CourseHandler.m in Sources */,
 				C9C265461B7B803700EA4F38 /* ProfileViewController.m in Sources */,
 				C9C264491B7B799700EA4F38 /* UIImageView+AFNetworking.m in Sources */,
-				C9C265381B7B803700EA4F38 /* VedioPlayViewController.m in Sources */,
 				C9C264B41B7B7C4E00EA4F38 /* Module.m in Sources */,
 				C9C2643C1B7B799700EA4F38 /* AFHTTPRequestOperation.m in Sources */,
 				C9C264B21B7B7C4E00EA4F38 /* Courses.m in Sources */,

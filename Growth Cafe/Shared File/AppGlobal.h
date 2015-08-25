@@ -69,6 +69,8 @@
 +(UIImage*)generateThumbnail:(NSString *)url;
 // check the valid email
 + (BOOL)validateEmailWithString:(NSString*)email;
+//validate URL
++ (BOOL) validateUrlWithString: (NSString *) stringURL;
 //calculate the size
 +(CGSize)getTheExpectedSizeOfLabel:(NSString*) labelstring ;
 +(void)writeUserDataOnFile:(NSDictionary *)arrayData;

@@ -19,7 +19,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblComment;
 @property (strong, nonatomic) IBOutlet UIButton *btnCmtBy;
 
-@property (strong, nonatomic) IBOutlet UITextView *txtCmtView;
+@property (strong, nonatomic) IBOutlet UILabel *txtCmtView;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLike;
 @property (strong, nonatomic) IBOutlet UIButton *btnShare;

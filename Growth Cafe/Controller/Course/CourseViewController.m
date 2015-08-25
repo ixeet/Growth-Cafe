@@ -184,6 +184,7 @@
 - (IBAction)btnMenuClick:(id)sender {
 //    ProfileViewController *profileViewController=[[ProfileViewController alloc]init];
 //    [self.navigationController pushViewController:profileViewController animated:YES];
+     [txtSearchBar resignFirstResponder];
     [self fadeInAnimation:self.view];
 }
 
@@ -547,15 +548,17 @@ else {
     }
 }
 - (IBAction)btnLogoutClick:(id)sender {
-   
-        [FBSession.activeSession closeAndClearTokenInformation];
-        [FBSession.activeSession close];
-        [FBSession setActiveSession:nil];
- 
+    
+    [FBSession.activeSession closeAndClearTokenInformation];
+    [FBSession.activeSession close];
+    [FBSession setActiveSession:nil];
+    
     [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
     [AppSingleton sharedInstance].isUserLoggedIn=NO;
+    [self.tabBarController.tabBar setHidden:YES];
     LoginViewController *viewCont= [[LoginViewController alloc]init];
     [self.navigationController pushViewController:viewCont animated:YES];
     
 }
+
 @end

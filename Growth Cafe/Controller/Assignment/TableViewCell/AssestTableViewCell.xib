@@ -48,14 +48,14 @@
                         </state>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="sPk-Nm-JiZ"/>
                                 <exclude reference="51P-ZW-yKo"/>
+                                <exclude reference="sPk-Nm-JiZ"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="sPk-Nm-JiZ"/>
                                 <include reference="51P-ZW-yKo"/>
+                                <include reference="sPk-Nm-JiZ"/>
                             </mask>
                         </variation>
                     </button>

@@ -470,6 +470,12 @@
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return ![emailTest evaluateWithObject:email];
 }
++ (BOOL) validateUrlWithString: (NSString *) stringURL {
+    NSString *urlRegEx =
+    @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
+    return [urlTest evaluateWithObject:stringURL];
+}
 +(CGSize)getTheExpectedSizeOfLabel:(NSString*) labelstring
 {
     //Calculate the expected size based on the font and linebreak mode of your label
