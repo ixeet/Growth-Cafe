@@ -50,7 +50,8 @@
     self.btnFacebook.readPermissions = @[@"public_profile", @"email"];
     [self changeFrameAndBackgroundImg];
      arraySchools=[AppGlobal getDropdownList:SCHOOL_DATA];
-
+    arrayClass=  [[arraySchools objectAtIndex:0] objectForKey:@"classList"];
+    arrayHome=  [[arrayClass objectAtIndex:0] objectForKey:@"homeRoomList"];
     isFirstLoginDone=NO;
     customKeyboard = [[CustomKeyboard alloc] init];
     customKeyboard.delegate = self;
@@ -119,14 +120,36 @@
     [btnDeprtment setTitle:user.className forState:UIControlStateNormal];
     [btnGroup setTitle:user.homeRoomName forState:UIControlStateNormal];
     [btnTitle setTitle:user.title forState:UIControlStateNormal];
-    //     if(user.userFBID==nil)
-    //    {
+    if(user.userFBID==nil)
+    {
     //need to validate
     btnFacebook.hidden=NO;
-    //    }else{
-    //        //FB allready validated
-    //        btnFacebook.hidden=YES;
-    //    }
+    }else{
+        //FB allready validated
+        btnFacebook.hidden=YES;
+    }
+    if(user.userImage!=nil){
+   
+        if (user.userImageData==nil) {
+            NSURL *imageURL = [NSURL URLWithString:user.userImage];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                user.userImageData  = [NSData dataWithContentsOfURL:imageURL];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Update the UI
+                    UIImage *img=[UIImage imageWithData:user.userImageData];
+                    if(img!=nil)
+                    {
+                        [imgProfile setImage:img];
+                        
+                    }
+                });
+            });
+        }else{
+            UIImage *img=[UIImage imageWithData:user.userImageData];
+            [imgProfile setImage:img];
+            
+        }
+    }
 }
 - (IBAction)btnBackClick:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
