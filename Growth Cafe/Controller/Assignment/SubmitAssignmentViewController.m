@@ -161,7 +161,7 @@
 {
     //txtview.inputAccessoryView=commentView;
     if([textView isEqual:txtViewURL]){
-        [self setPositionOfLoginBaseViewWhenStartEditing:-190];
+        [self setPositionOfLoginBaseViewWhenStartEditing:-200];
         
     }
     

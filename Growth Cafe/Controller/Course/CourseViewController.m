@@ -14,6 +14,7 @@
 #import "ModuleDetailViewController.h"
 #import "ProfileViewController.h"
 #import "LoginViewController.h"
+#import "UpdateProfileViewController.h"
 @interface CourseViewController ()
 {
    
@@ -184,8 +185,10 @@
 - (IBAction)btnMenuClick:(id)sender {
 //    ProfileViewController *profileViewController=[[ProfileViewController alloc]init];
 //    [self.navigationController pushViewController:profileViewController animated:YES];
-     [txtSearchBar resignFirstResponder];
-    [self fadeInAnimation:self.view];
+   [txtSearchBar resignFirstResponder];
+//    [self fadeInAnimation:self.view];
+    UpdateProfileViewController *updateView=[[UpdateProfileViewController alloc]init];
+    [self.navigationController pushViewController:updateView animated:YES];
 }
 
 //- (IBAction)btnAssignmentClick:(id)sender {

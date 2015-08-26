@@ -18,5 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnShare;
 @property (strong, nonatomic) IBOutlet UIButton *btnComment;
 
+@property (strong, nonatomic) IBOutlet UIImageView *imgBelowLine1;
+@property (strong, nonatomic) IBOutlet UIImageView *imgBelowLine8;
 
 @end

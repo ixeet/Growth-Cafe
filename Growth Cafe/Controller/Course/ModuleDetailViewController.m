@@ -17,6 +17,7 @@
 #import "LoginViewController.h"
 #import "ProfileViewController.h"
 #import "SubCommentTableViewCell.h"
+#import "UpdateProfileViewController.h"
 
 @interface ModuleDetailViewController ()
 {
@@ -35,6 +36,7 @@
     NSString *moduleId,*moduleName;
     CGPoint mPreviousTouchPoint;
     EGRIDVIEW_SCROLLDIRECTION  mSwipeDirection;
+    BOOL isTableSelect;
 }
 
 
@@ -53,7 +55,7 @@
 @implementation ModuleDetailViewController
 @synthesize btnAssignment,btnCourses,btnMore,btnNotification,btnUpdates,txtSearchBar,feedId,scollViewContainer;
 @synthesize scrollView = _scrollView;
-@synthesize pageControl = _pageControl;
+
 @synthesize pageViews = _pageViews;
 @synthesize pageImages = _pageImages;
 @synthesize step,title,txtViewCMT,objCustom;;
@@ -99,7 +101,7 @@
     profileFrame.size.width=screenWidth;//200;
     objCustom.view.frame=profileFrame;
    [objCustom.btnLogout  addTarget:self action:@selector(btnLogoutClick:) forControlEvents:UIControlEventTouchUpInside];
-    
+    isTableSelect=NO;
     if(feedId==nil){
         
         [self getModuleDetail:@""];
@@ -265,8 +267,8 @@
 //    selectedResource=[contentList objectAtIndex:currentpage];
 //    vedioView.filePath=selectedResource.resourceUrl;
 //    [self.navigationController pushViewController:vedioView animated:YES];
- 
-    NSInteger currentpage=  self.pageControl.currentPage;
+  NSInteger page = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + self.scrollView.frame.size.width) / (self.scrollView.frame.size.width * 2.0f));
+    NSInteger currentpage=  page;
     // get the current Content
     selectedResource=[contentList objectAtIndex:currentpage];
     [self PlayTheVideo:selectedResource.resourceUrl];
@@ -326,7 +328,8 @@
 }
 - (IBAction)btnCommentOnResourceClick:(id)sender {
     UIButton *btn=(UIButton *)sender;
-    NSInteger currentpage=  self.pageControl.currentPage;
+    NSInteger currentpage = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + self.scrollView.frame.size.width) / (self.scrollView.frame.size.width * 2.0f));
+//    NSInteger currentpage=  page;
     // get the current Content
     selectedResource=[contentList objectAtIndex:currentpage];
     selectedResourceId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
@@ -338,7 +341,9 @@
 - (IBAction)btnLikeOnResourceClick:(id)sender {
     // call the service
     UIButton *btn=(UIButton *)sender;
-    NSInteger currentpage=  self.pageControl.currentPage;
+    NSInteger currentpage = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + self.scrollView.frame.size.width) / (self.scrollView.frame.size.width * 2.0f));
+
+   
     // get the current Content
     selectedResource=[contentList objectAtIndex:currentpage];
     selectedResourceId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
@@ -439,7 +444,7 @@
             
             //Hide Indicator
             [appDelegate hideSpinner];
-            
+            txtViewCMT.text=@"";
             [self getModuleDetail:searchText];
         }
                                             failure:^(NSError *error) {
@@ -458,6 +463,8 @@
             
             //Hide Indicator
             [appDelegate hideSpinner];
+             txtViewCMT.text=@"";
+               [self getModuleDetail:searchText];
         }
                                             failure:^(NSError *error) {
                                                 //Hide Indicator
@@ -519,7 +526,6 @@
     isSearching=NO;
 }
 #pragma mark Course Private functions
-#pragma mark Course Private functions
 -(void) getModuleDetail:(NSString *) txtSearch
 {
     NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance ].userDetail.userId];
@@ -531,27 +537,38 @@
         
         contentList=[moduleDetails objectForKey:@"resourceList"];
         assignmentList=[moduleDetails objectForKey:@"assignmentList"];
-        NSInteger pageCount = [contentList count];
-        
-        // Set up the page control
-        self.pageControl.currentPage = 0;
-        self.pageControl.numberOfPages = pageCount;
-        // Set up the content size of the scroll view
-        // Set up the array to hold the views for each page
-        self.pageViews = [[NSMutableArray alloc] init];
-        for (NSInteger i = 0; i < pageCount; ++i) {
-            [self.pageViews addObject:[NSNull null]];
+        for (Resourse *resource in contentList) {
+            if([resource.resourceId isEqualToString:selectedResource.resourceId])
+            {
+                selectedResource=resource;
+                break;
+            }
         }
-        CGSize pagesScrollViewSize = self.scrollView.frame.size;
-        self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * [contentList count], pagesScrollViewSize.height+10);
-        
-        // Load the initial set of pages that are on screen
-        [self loadVisiblePages];
-        [tblViewContent reloadData];
-        
         
         //Hide Indicator
         [appDelegate hideSpinner];
+        if (isTableSelect) {
+            [tblViewContent reloadData];
+        }else{
+            NSInteger pageCount = [contentList count];
+            
+            // Set up the page control
+//            NSInteger page = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + self.scrollView.frame.size.width) / (self.scrollView.frame.size.width * 2.0f));
+            
+            
+            // Set up the content size of the scroll view
+            // Set up the array to hold the views for each page
+            self.pageViews = [[NSMutableArray alloc] init];
+            for (NSInteger i = 0; i < pageCount; ++i) {
+                [self.pageViews addObject:[NSNull null]];
+            }
+            CGSize pagesScrollViewSize = self.scrollView.frame.size;
+            self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * [contentList count], pagesScrollViewSize.height+10);
+            
+            // Load the initial set of pages that are on screen
+            [self loadVisiblePages];
+            
+        }
     }
                                    failure:^(NSError *error) {
                                        //Hide Indicator
@@ -575,11 +592,25 @@
          //Hide Indicator
         contentList=[moduleDetails objectForKey:@"resourceList"];
         assignmentList=[moduleDetails objectForKey:@"assignmentList"];
+         for (Resourse *resource in contentList) {
+             if([resource.resourceId isEqualToString:selectedResource.resourceId])
+             {
+                 selectedResource=resource;
+                 break;
+             }
+         }
+         
+         //Hide Indicator
+         [appDelegate hideSpinner];
+         if (isTableSelect) {
+             [tblViewContent reloadData];
+         }else{
         NSInteger pageCount = [contentList count];
         
         // Set up the page control
-        self.pageControl.currentPage = 0;
-        self.pageControl.numberOfPages = pageCount;
+         NSInteger page = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + self.scrollView.frame.size.width) / (self.scrollView.frame.size.width * 2.0f));
+         
+
         // Set up the content size of the scroll view
         // Set up the array to hold the views for each page
         self.pageViews = [[NSMutableArray alloc] init];
@@ -591,11 +622,10 @@
         
         // Load the initial set of pages that are on screen
         [self loadVisiblePages];
-       [tblViewContent reloadData];
+         }
       
         
-        //Hide Indicator
-        [appDelegate hideSpinner];
+        
     }
                                failure:^(NSError *error) {
                                    //Hide Indicator
@@ -621,7 +651,7 @@
     NSInteger page = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + pageWidth) / (pageWidth * 2.0f));
     
     // Update the page control
-    self.pageControl.currentPage = page;
+   
     
     // Work out which pages we want to load
     NSInteger firstPage = page - 1;
@@ -780,6 +810,18 @@
        
             [customView.btnCommentCMT addTarget:self action:@selector(btnReplyOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
             [customView.btnLikeCMT addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+            if([objComment.isLike isEqualToString:@"1"])
+            {
+                customView.btnLikeCMT.selected=YES;
+               // [customView.btnLikeCMT setTitle:selectedResource.likeCounts forState:UIControlStateSelected];
+            }else
+                
+            {
+                customView.btnLikeCMT.selected=NO;
+               // [customView.btnLikeCMT setTitle:selectedResource.likeCounts forState:UIControlStateNormal];
+                //[customView.btnLikeCMT addTarget:self action:@selector(btnLikeOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+            }
+
         }
         else{
             [customView.btnCmtBy setHidden:YES];
@@ -790,6 +832,7 @@
          //   [customView.btnShareCMT   setHidden:YES];
             [customView.btnCommentCMT setHidden:YES];
             [customView.txtCmtView setHidden:YES];
+            [customView.lblComment setHidden:YES];
         }
         
         customView.clipsToBounds=YES    ;
@@ -818,7 +861,9 @@
 - (IBAction)btnProfileClick:(id)sender {
      [txtSearchBar resignFirstResponder];
     [txtViewCMT resignFirstResponder];
-    [self fadeInAnimation:self.view];
+//    [self fadeInAnimation:self.view];
+    UpdateProfileViewController *updateView=[[UpdateProfileViewController alloc]init];
+    [self.navigationController pushViewController:updateView animated:YES];
 }
 
 
@@ -969,7 +1014,11 @@
                 self.lastContentOffset = scrollView.contentOffset.y;
                 
                 // get current page;
-                NSInteger currentpage=  self.pageControl.currentPage;
+                NSInteger page = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + scrollView.frame.size.width) / ( scrollView.frame.size.width * 2.0f));
+                
+                // Update the page control
+                isTableSelect=YES;
+                NSInteger currentpage=  page;
                 // get the current Content
                 selectedResource=[contentList objectAtIndex:currentpage];
                 // CATransition *animation = [CATransition animation];
@@ -1006,13 +1055,15 @@
                                 completion:NULL];
                 self.scrollView.hidden=NO;
                 // [tblViewContent reloadData];
-                
+                isTableSelect=NO;
                 tblViewContent.hidden =YES;
                 NSInteger pageCount = [contentList count];
                 
                 // Set up the page control
-                self.pageControl.currentPage = 0;
-                self.pageControl.numberOfPages = pageCount;
+               // self.pageControl.currentPage = ;
+//                NSInteger page = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + self.scrollView.frame.size.width) / (self.scrollView.frame.size.width * 2.0f));
+                
+
                 // Set up the content size of the scroll view
                 // Set up the array to hold the views for each page
                 self.pageViews = [[NSMutableArray alloc] init];
@@ -1817,7 +1868,7 @@
     }
     else if(indexPath.section==2 )
     {
-        float height=0.0f;
+        float height=17.0f;
        
         if(([selectedResource.relatedResources count]<3) && (indexPath.row==[selectedResource.relatedResources count]-1))
         {
@@ -1840,9 +1891,9 @@
         CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:realtedResource.resourceTitle];
         
         if(labelSize.height>17)
-             return  height=height+75.0f+labelSize.height-17.0;
+             return  height=height+70.0f+labelSize.height;
         else
-            return  height=height+75.0f;;
+            return  height=height+70.0f;;
        
        
     

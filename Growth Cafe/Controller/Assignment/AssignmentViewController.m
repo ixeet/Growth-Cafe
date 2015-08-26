@@ -18,6 +18,7 @@
 #import "CourseViewController.h"
 #import "SubmitAssignmentViewController.h"
 #import "SubmitContentViewController.h"
+#import "UpdateProfileViewController.h"
 
 @interface AssignmentViewController ()
 {
@@ -297,7 +298,7 @@
     [cell.btnPlay setHidden:YES];
     [cell.lblAssignementDetail  setHidden:YES];
     [cell.lblUploadedDate setHidden:YES];
-    [cell.btnSubmit setHidden:YES];
+   // [cell.btnSubmit setHidden:YES];
     if(assignment.isExpend){
         
         [cell.btnExpend setImage:[UIImage imageNamed:@"icn_arrow-expand.png"] forState:UIControlStateNormal];
@@ -389,33 +390,37 @@
       
         if ([submittedDate compare:today10am] == NSOrderedDescending)
         {
-        cell.btnAssignmentStatus.selected=YES;
-    
-        [cell.btnAssignmentStatus setBackgroundColor:[UIColor whiteColor]];
-        [cell.btnSubmit  addTarget:self action:@selector(btnSubmitAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
+       // cell.btnAssignmentStatus.selected=YES;
+        [cell.btnAssignmentStatus setImage:[UIImage imageNamed:@"icn_new-assignment.png"] forState:UIControlStateNormal];
+         
+            
+           
+        [cell.btnAssignmentStatus setBackgroundColor:[UIColor clearColor]];
+        [cell.btnAssignmentStatus  addTarget:self action:@selector(btnSubmitAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
        // lblDateAssignment.text
         
       
-        cell.lblDateAssignment.textColor =[UIColor blackColor];
+       // cell.lblDateAssignment.textColor =[UIColor blackColor];
         }else{
             
-            cell.btnAssignmentStatus.selected=NO;
-            [cell.btnSubmit  addTarget:self action:@selector(btnSubmitAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
+          //  cell.btnAssignmentStatus.selected=NO;
+            [cell.btnAssignmentStatus setImage:[UIImage imageNamed:@"icn_pending-assignment.png"] forState:UIControlStateNormal];
+            [cell.btnAssignmentStatus  addTarget:self action:@selector(btnSubmitAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
            // cell.lblDateAssignment.text=assignment.assignmentSubmittedDate;
-            cell.lblDateAssignment.textColor =[UIColor whiteColor];
+           // cell.lblDateAssignment.textColor =[UIColor b];
         
         }
-        if(assignment.isExpend)
-          [cell.btnSubmit setHidden:NO];
+//        if(assignment.isExpend)
+//         // [cell.btnSubmit setHidden:NO];
         
     }
     
     else if([assignment.assignmentStatus isEqualToString:@"2"])
     {
-        cell.btnAssignmentStatus.highlighted =YES;
-        cell.lblDateAssignment.textColor =[UIColor whiteColor];
+          [cell.btnAssignmentStatus setImage:[UIImage imageNamed:@"icn_assignment-submitted.png"] forState:UIControlStateNormal];
+      //  cell.lblDateAssignment.textColor =[UIColor blackColor];
         
-        [cell.btnAssignmentStatus setBackgroundColor:[UIColor greenColor]];
+        [cell.btnAssignmentStatus setBackgroundColor:[UIColor clearColor]];
          if(assignment.isExpend)
         [cell.lblUploadedDate setHidden:NO];
      
@@ -433,9 +438,9 @@
     else if([assignment.assignmentStatus isEqualToString:@"3"])
     {
         cell.btnAssignmentStatus.highlighted =YES;
-        cell.lblDateAssignment.textColor =[UIColor whiteColor];
+     //   cell.lblDateAssignment.textColor =[UIColor whiteColor];
         
-        [cell.btnAssignmentStatus setBackgroundColor:[UIColor greenColor]];
+     //   [cell.btnAssignmentStatus setBackgroundColor:[UIColor greenColor]];
         if(assignment.isExpend)
             [cell.lblUploadedDate setHidden:NO];
        
@@ -508,7 +513,7 @@
 
         if(![assignment.assignmentStatus isEqualToString:@"3"])
         {
-            height=height+42.0f;
+            height=height+30.0f;
         }// if assignment not submitted
         return height;
     }
@@ -617,7 +622,9 @@
 
 - (IBAction)btnProfileClick:(id)sender {
     [txtSearchBar resignFirstResponder];
-    [self fadeInAnimation:self.view];
+  //  [self fadeInAnimation:self.view];
+    UpdateProfileViewController *updateView=[[UpdateProfileViewController alloc]init];
+    [self.navigationController pushViewController:updateView animated:YES];
 }
 
 

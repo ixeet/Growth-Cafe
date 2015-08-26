@@ -538,7 +538,8 @@
     }
     else if(seconds)
         timeLeft = [NSString stringWithFormat: @"%ld sec", (long)seconds*-1];
-    
+    if(timeLeft==nil)
+        timeLeft=@"0 sec";
     return timeLeft;
 }
 @end

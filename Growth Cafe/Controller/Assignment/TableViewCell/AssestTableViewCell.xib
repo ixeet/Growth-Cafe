@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="-22" id="KGk-i7-Jjw" customClass="AssestTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="-113" id="KGk-i7-Jjw" customClass="AssestTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -26,17 +26,6 @@
                             </constraint>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVX-Yl-yzX" userLabel="lblAssestName">
-                        <rect key="frame" x="93" y="19" width="214" height="28"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="28" id="mD0-Nh-u4h">
-                                <variation key="heightClass=regular-widthClass=compact" constant="26"/>
-                            </constraint>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpo-7s-g4s" userLabel="btnPlay">
                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                         <constraints>
@@ -59,10 +48,21 @@
                             </mask>
                         </variation>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVX-Yl-yzX" userLabel="lblAssestName">
+                        <rect key="frame" x="93" y="19" width="214" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="mD0-Nh-u4h">
+                                <variation key="heightClass=regular-widthClass=compact" constant="26"/>
+                            </constraint>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="MVX-Yl-yzX" secondAttribute="trailing" constant="5" id="1aG-8d-Nwg">
-                        <variation key="heightClass=regular-widthClass=compact" constant="4"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
                     </constraint>
                     <constraint firstItem="qpo-7s-g4s" firstAttribute="centerX" secondItem="65F-Cj-x4k" secondAttribute="centerX" constant="0.5" id="Due-68-RY9">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.5"/>
@@ -72,7 +72,7 @@
                     </constraint>
                     <constraint firstItem="qpo-7s-g4s" firstAttribute="centerY" secondItem="65F-Cj-x4k" secondAttribute="centerY" id="hyJ-gK-Fv6"/>
                     <constraint firstItem="MVX-Yl-yzX" firstAttribute="leading" secondItem="65F-Cj-x4k" secondAttribute="trailing" constant="8" id="p78-i0-yjv">
-                        <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                     </constraint>
                     <constraint firstItem="65F-Cj-x4k" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="rZK-aG-L4t">
                         <variation key="heightClass=regular-widthClass=compact" constant="-3"/>
@@ -105,7 +105,7 @@
                 <outlet property="imgAssest" destination="65F-Cj-x4k" id="MJ6-C3-KOX"/>
                 <outlet property="lblAssestName" destination="MVX-Yl-yzX" id="gBA-I5-w7F"/>
             </connections>
-            <point key="canvasLocation" x="166" y="192.5"/>
+            <point key="canvasLocation" x="166" y="147"/>
         </tableViewCell>
     </objects>
     <resources>

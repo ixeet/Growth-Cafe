@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="250" id="KGk-i7-Jjw" customClass="CommentTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="185" id="KGk-i7-Jjw" customClass="CommentTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -21,8 +21,8 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="gfX-1c-BSs"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" red="0.27058823529411763" green="0.27058823529411763" blue="0.27058823529411763" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                        <color key="textColor" red="0.078431372550000003" green="0.094117647060000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
                             <mask key="constraints">
@@ -39,8 +39,8 @@
                         <rect key="frame" x="56" y="30" width="249" height="52"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <string key="text">LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel</string>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                        <color key="textColor" red="0.51764705882352935" green="0.51764705882352935" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" red="0.078431372549019607" green="0.094117647058823528" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rc9-NV-lwD" userLabel="btnLike">
@@ -49,10 +49,10 @@
                             <constraint firstAttribute="height" constant="22" id="feW-4f-0qa"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                        <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="titleEdgeInsets" minX="8" minY="5" maxX="0.0" maxY="0.0"/>
                         <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" image="icn_like.png">
-                            <color key="titleColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="0.5725490196078431" green="0.59607843137254901" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </state>
                         <state key="selected" image="icn_like_c.png"/>
@@ -73,10 +73,10 @@
                             <constraint firstAttribute="height" constant="22" id="8yA-PM-iml"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                        <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="titleEdgeInsets" minX="8" minY="5" maxX="0.0" maxY="0.0"/>
                         <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <state key="normal" image="icn_reply.png">
-                            <color key="titleColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="0.5725490196078431" green="0.59607843137254901" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </state>
                         <variation key="default">
@@ -92,7 +92,7 @@
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qOV-88-Rkq" userLabel="imgHalfDevider">
                         <rect key="frame" x="56" y="118" width="266" height="1"/>
-                        <color key="backgroundColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="TRJ-mz-KbV"/>
                         </constraints>
@@ -109,9 +109,11 @@
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tBM-bH-MgC" userLabel="imgDevider">
                         <rect key="frame" x="-1" y="165" width="324" height="1"/>
-                        <color key="backgroundColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.82745098039215681" green="0.83921568627450982" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="b4G-Vv-hTh"/>
+                            <constraint firstAttribute="height" constant="1" id="b4G-Vv-hTh">
+                                <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -126,23 +128,11 @@
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M5G-Ti-fad">
                         <rect key="frame" x="116" y="129" width="88" height="28"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="28" id="FyW-Ye-NWo"/>
-                        </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                         <state key="normal" title="+5 More">
+                            <color key="titleColor" red="0.50588235290000005" green="0.51764705879999995" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="FyW-Ye-NWo"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="FyW-Ye-NWo"/>
-                            </mask>
-                        </variation>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Related Videos:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oES-EN-JZw">
                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -186,37 +176,52 @@
                         </variation>
                     </button>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstItem="mF9-K0-drP" firstAttribute="leading" secondItem="fTv-Cb-VrY" secondAttribute="trailing" constant="8" id="1mq-cu-F5k"/>
-                    <constraint firstItem="tBM-bH-MgC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-9" id="Bbc-8z-6PY"/>
-                    <constraint firstItem="oES-EN-JZw" firstAttribute="top" secondItem="tBM-bH-MgC" secondAttribute="bottom" constant="14" id="C7b-2h-zTm">
-                        <variation key="heightClass=regular-widthClass=compact" constant="7"/>
+                    <constraint firstItem="mF9-K0-drP" firstAttribute="leading" secondItem="fTv-Cb-VrY" secondAttribute="trailing" constant="8" id="1mq-cu-F5k">
+                        <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                     </constraint>
-                    <constraint firstItem="qOV-88-Rkq" firstAttribute="top" secondItem="rc9-NV-lwD" secondAttribute="bottom" constant="6" id="E99-0T-yLe"/>
+                    <constraint firstItem="tBM-bH-MgC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-9" id="Bbc-8z-6PY">
+                        <variation key="heightClass=regular-widthClass=compact" constant="-18"/>
+                    </constraint>
+                    <constraint firstItem="oES-EN-JZw" firstAttribute="top" secondItem="tBM-bH-MgC" secondAttribute="bottom" constant="14" id="C7b-2h-zTm">
+                        <variation key="heightClass=regular-widthClass=compact" constant="-1"/>
+                    </constraint>
+                    <constraint firstItem="qOV-88-Rkq" firstAttribute="top" secondItem="rc9-NV-lwD" secondAttribute="bottom" constant="6" id="E99-0T-yLe">
+                        <variation key="heightClass=regular-widthClass=compact" constant="2"/>
+                    </constraint>
                     <constraint firstItem="fTv-Cb-VrY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ETj-dz-fRw"/>
                     <constraint firstItem="tBM-bH-MgC" firstAttribute="top" secondItem="M5G-Ti-fad" secondAttribute="bottom" constant="8" id="Enx-3V-0eD">
-                        <variation key="heightClass=regular-widthClass=compact" constant="7"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="1"/>
                     </constraint>
                     <constraint firstItem="mF9-K0-drP" firstAttribute="top" secondItem="urH-QY-Byu" secondAttribute="bottom" constant="1" id="G5Q-fe-SKz"/>
                     <constraint firstItem="oES-EN-JZw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="Ggx-so-bdc">
                         <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
                     </constraint>
                     <constraint firstItem="fTv-Cb-VrY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Mjz-hU-mUc">
-                        <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="-2"/>
                     </constraint>
                     <constraint firstItem="DgS-EM-T3v" firstAttribute="leading" secondItem="rc9-NV-lwD" secondAttribute="trailing" constant="22" id="P5o-4C-dyV">
                         <variation key="heightClass=regular-widthClass=compact" constant="28"/>
                     </constraint>
                     <constraint firstItem="M5G-Ti-fad" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="108" id="PGj-PE-JQv"/>
-                    <constraint firstItem="DgS-EM-T3v" firstAttribute="top" secondItem="mF9-K0-drP" secondAttribute="bottom" constant="8" id="Qah-HA-oOS"/>
+                    <constraint firstItem="DgS-EM-T3v" firstAttribute="top" secondItem="mF9-K0-drP" secondAttribute="bottom" constant="8" id="Qah-HA-oOS">
+                        <variation key="heightClass=regular-widthClass=compact" constant="2"/>
+                    </constraint>
                     <constraint firstItem="DgS-EM-T3v" firstAttribute="width" secondItem="rc9-NV-lwD" secondAttribute="width" id="Qgv-ek-1vr"/>
-                    <constraint firstItem="rc9-NV-lwD" firstAttribute="top" secondItem="mF9-K0-drP" secondAttribute="bottom" constant="8" id="SBJ-ry-nUP"/>
+                    <constraint firstItem="rc9-NV-lwD" firstAttribute="top" secondItem="mF9-K0-drP" secondAttribute="bottom" constant="8" id="SBJ-ry-nUP">
+                        <variation key="heightClass=regular-widthClass=compact" constant="2"/>
+                    </constraint>
                     <constraint firstItem="rc9-NV-lwD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="173" id="TK2-1A-dkw">
                         <variation key="heightClass=regular-widthClass=compact" constant="168"/>
                     </constraint>
                     <constraint firstItem="urH-QY-Byu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Tct-xZ-fEy"/>
-                    <constraint firstItem="urH-QY-Byu" firstAttribute="leading" secondItem="fTv-Cb-VrY" secondAttribute="trailing" constant="8" id="ZKo-pF-ob0"/>
-                    <constraint firstItem="mF9-K0-drP" firstAttribute="leading" secondItem="qOV-88-Rkq" secondAttribute="leading" id="Zzb-gU-JIr"/>
+                    <constraint firstItem="urH-QY-Byu" firstAttribute="leading" secondItem="fTv-Cb-VrY" secondAttribute="trailing" constant="8" id="ZKo-pF-ob0">
+                        <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                    </constraint>
+                    <constraint firstItem="mF9-K0-drP" firstAttribute="leading" secondItem="qOV-88-Rkq" secondAttribute="leading" id="Zzb-gU-JIr">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
                     <constraint firstAttribute="centerX" secondItem="M5G-Ti-fad" secondAttribute="centerX" id="csA-vr-tNy"/>
                     <constraint firstAttribute="trailingMargin" secondItem="M5G-Ti-fad" secondAttribute="trailing" constant="108" id="dmJ-ip-ULg"/>
                     <constraint firstAttribute="trailingMargin" secondItem="oES-EN-JZw" secondAttribute="trailing" constant="139" id="euz-XQ-ke1">
@@ -225,14 +230,20 @@
                     <constraint firstAttribute="trailingMargin" secondItem="DgS-EM-T3v" secondAttribute="trailing" constant="17" id="evR-Rb-NNu">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
-                    <constraint firstAttribute="trailingMargin" secondItem="qOV-88-Rkq" secondAttribute="trailing" constant="-10" id="hm2-n0-yeR"/>
-                    <constraint firstItem="M5G-Ti-fad" firstAttribute="top" secondItem="qOV-88-Rkq" secondAttribute="bottom" constant="10" id="iVh-XU-CtY"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="qOV-88-Rkq" secondAttribute="trailing" constant="-10" id="hm2-n0-yeR">
+                        <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
+                    </constraint>
+                    <constraint firstItem="M5G-Ti-fad" firstAttribute="top" secondItem="qOV-88-Rkq" secondAttribute="bottom" constant="10" id="iVh-XU-CtY">
+                        <variation key="heightClass=regular-widthClass=compact" constant="2"/>
+                    </constraint>
                     <constraint firstItem="DgS-EM-T3v" firstAttribute="trailing" secondItem="mF9-K0-drP" secondAttribute="trailing" id="njY-0t-8K4"/>
                     <constraint firstAttribute="trailingMargin" secondItem="urH-QY-Byu" secondAttribute="trailing" constant="17" id="pNY-Bh-uBE">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="mF9-K0-drP" secondAttribute="trailing" constant="17" id="v5G-Xi-T7n"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="tBM-bH-MgC" secondAttribute="trailing" constant="-11" id="ve0-Re-O5H"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="tBM-bH-MgC" secondAttribute="trailing" constant="-11" id="ve0-Re-O5H">
+                        <variation key="heightClass=regular-widthClass=compact" constant="-15"/>
+                    </constraint>
                 </constraints>
                 <variation key="default">
                     <mask key="subviews">
@@ -307,17 +318,19 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="btnCMT" destination="DgS-EM-T3v" id="LMb-7U-QM8"/>
                 <outlet property="btnCommentedBy" destination="fTv-Cb-VrY" id="AAu-Ne-q74"/>
                 <outlet property="btnLike" destination="rc9-NV-lwD" id="6kI-HQ-bDU"/>
                 <outlet property="btnMore" destination="M5G-Ti-fad" id="Nm9-C1-ycW"/>
                 <outlet property="imgDevider" destination="tBM-bH-MgC" id="Sly-L7-YLq"/>
+                <outlet property="imgHalfDevider" destination="qOV-88-Rkq" id="ocn-00-idh"/>
                 <outlet property="lblCmtBy" destination="urH-QY-Byu" id="jXx-WW-Crj"/>
                 <outlet property="lblCmtText" destination="mF9-K0-drP" id="dSR-j2-77Q"/>
                 <outlet property="lblRelatedVideo" destination="oES-EN-JZw" id="qpd-HE-HGQ"/>
             </connections>
-            <point key="canvasLocation" x="233" y="88"/>
+            <point key="canvasLocation" x="233" y="55"/>
         </tableViewCell>
     </objects>
     <resources>

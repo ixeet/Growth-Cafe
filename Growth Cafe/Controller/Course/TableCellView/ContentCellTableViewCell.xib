@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="6255" id="KGk-i7-Jjw" customClass="ContentCellTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="6646" id="KGk-i7-Jjw" customClass="ContentCellTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -63,7 +63,7 @@
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eY7-2C-Vzm" userLabel="standingImage">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                        <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="43" id="44X-Ji-BBd">
@@ -149,7 +149,7 @@
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="978-JY-7RB" userLabel="SubImage">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                        <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="nf4-Ym-0zB"/>
@@ -237,7 +237,7 @@
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aii-Xy-ExU" userLabel="DeviderImage">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                        <color key="backgroundColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="0LO-yG-9Ay"/>
@@ -303,9 +303,10 @@
                         </variation>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="KqR-m9-yMf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="4" id="11I-WN-4Mr">
-                        <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="-3"/>
                     </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="aii-Xy-ExU" secondAttribute="trailing" constant="-8" id="1Ky-yP-Wcq"/>
                     <constraint firstItem="Qgp-Xi-jqF" firstAttribute="trailing" secondItem="UC7-MH-UCY" secondAttribute="trailing" constant="8" id="581-I3-4oF">
@@ -348,7 +349,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="6ds-O4-byB" secondAttribute="trailing" constant="-8" id="cRv-Ry-GmS"/>
                     <constraint firstItem="6ds-O4-byB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="cWY-RG-fwo"/>
                     <constraint firstAttribute="trailingMargin" secondItem="KqR-m9-yMf" secondAttribute="trailing" constant="125" id="eMl-UG-eGz">
-                        <variation key="heightClass=regular-widthClass=compact" constant="137"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="132"/>
                     </constraint>
                     <constraint firstItem="PDG-a1-zwQ" firstAttribute="trailing" secondItem="978-JY-7RB" secondAttribute="trailing" id="eZG-c3-krJ">
                         <variation key="heightClass=regular-widthClass=compact" constant="1"/>
@@ -503,6 +504,7 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="btnComment" destination="Qgp-Xi-jqF" id="Ddg-eA-giQ"/>
                 <outlet property="btnLike" destination="PLW-aw-qA5" id="8gW-a5-yqS"/>
@@ -514,7 +516,7 @@
                 <outlet property="lblNextTitle" destination="KqR-m9-yMf" id="ZE8-NE-1cA"/>
                 <outlet property="lblStartedon" destination="QeS-lx-aDO" id="rR3-I6-8EY"/>
             </connections>
-            <point key="canvasLocation" x="12" y="594"/>
+            <point key="canvasLocation" x="-15" y="591.5"/>
         </tableViewCell>
     </objects>
     <resources>

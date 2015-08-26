@@ -8,6 +8,7 @@
 
 #import "UpdateProfileViewController.h"
 #import "CustomKeyboard.h"
+#import "LoginViewController.h"
 
 @interface UpdateProfileViewController () <CustomKeyboardDelegate>
 {
@@ -15,17 +16,30 @@
     CustomKeyboard *customKeyboard;
     UITextField *activeTextField;
     UserDetails *user;
+    
+    
+    
+    int             mIntRow;
+    NSMutableArray *arrayAllData;
+    NSMutableArray *arraySchools;
+    NSMutableArray *arrayClass;
+    NSMutableArray *arrayHome;
+    AppDropdownType selectedPicker;
+    NSString *selectedSchoolId,*selectedClassId,*selectedRoomId;
+    NSString *selectedSchoolName,*selectedClassName,*selectedRoomName;
+    NSString *selectedTitle;
+    BOOL isFirstLoginDone;
 }
 
 @end
 
 @implementation UpdateProfileViewController
-@synthesize imgProfile,btnFacebook,lblFirstName,lblLastName,btnDeprtment,btnGroup,btnMr,btnOrg;
+@synthesize imgProfile,btnFacebook,lblFirstName,lblLastName,btnDeprtment,btnGroup,btnTitle,btnOrg,mViewAccountTypePicker,mDataPickerView,txtFirstName,txtLastName;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-//    CALayer *imageLayer = imgProfile.layer;
-//    [imageLayer setCornerRadius:75];
+    //    CALayer *imageLayer = imgProfile.layer;
+    //    [imageLayer setCornerRadius:75];
     imgProfile.layer.cornerRadius = imgProfile.frame.size.width / 2;
     imgProfile.clipsToBounds = NO;
     [self setUserProfile];
@@ -35,7 +49,11 @@
     self.btnFacebook.delegate = self;
     self.btnFacebook.readPermissions = @[@"public_profile", @"email"];
     [self changeFrameAndBackgroundImg];
- 
+     arraySchools=[AppGlobal getDropdownList:SCHOOL_DATA];
+
+    isFirstLoginDone=NO;
+    customKeyboard = [[CustomKeyboard alloc] init];
+    customKeyboard.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,14 +62,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 #pragma mark - Private method implementation
 -(void)changeFrameAndBackgroundImg
 {
@@ -64,7 +82,7 @@
         if ([loginObject isKindOfClass:[UIButton class]])
         {
             UIButton * loginButton =  loginObject;
-            UIImage *loginImage = [UIImage imageNamed:@"validate-facebook.png"];
+            UIImage *loginImage = [UIImage imageNamed:@"validatefb.png"];
             // loginButton.alpha = 0.7;
             [loginButton setBackgroundColor:[UIColor colorWithRed:186.0 green:0.0 blue:50.0 alpha:0.0]];
             [loginButton setBackgroundImage:nil forState:UIControlStateSelected];
@@ -94,35 +112,210 @@
     
     
     lblFirstName.text=user.userFirstName;
-    lblLastName.text=user.userLastName;
+    txtFirstName.text=user.userFirstName;
+    lblLastName.text=user.userEmail;
+    txtLastName.text=user.userLastName;
     [btnOrg setTitle:user.schoolName forState:UIControlStateNormal];
     [btnDeprtment setTitle:user.className forState:UIControlStateNormal];
     [btnGroup setTitle:user.homeRoomName forState:UIControlStateNormal];
-    [btnMr setTitle:user.title forState:UIControlStateNormal];
-     if(user.userFBID==nil)
-    {
-        //need to validate
-        btnFacebook.hidden=NO;
-    }else{
-        //FB allready validated
-        btnFacebook.hidden=YES;
-    }
+    [btnTitle setTitle:user.title forState:UIControlStateNormal];
+    //     if(user.userFBID==nil)
+    //    {
+    //need to validate
+    btnFacebook.hidden=NO;
+    //    }else{
+    //        //FB allready validated
+    //        btnFacebook.hidden=YES;
+    //    }
 }
 - (IBAction)btnBackClick:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)btnPhotoClick:(id)sender {
+    
+    
+    UIActionSheet *popUpSheet = [[UIActionSheet alloc]
+                                 initWithTitle:nil
+                                 delegate:self
+                                 cancelButtonTitle:nil
+                                 destructiveButtonTitle:nil
+                                 otherButtonTitles: nil];
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        
+        [popUpSheet addButtonWithTitle:@"Camera"];
+        [popUpSheet addButtonWithTitle:@"Photo Library"];
+        // [popUpSheet addButtonWithTitle:@"Camera Roll"];
+        
+        [popUpSheet addButtonWithTitle:@"Cancel"];
+        
+        popUpSheet.cancelButtonIndex = popUpSheet.numberOfButtons-1;
+        
+    }   else {
+        
+        [popUpSheet addButtonWithTitle:@"Photo Library"];
+        //   [popUpSheet addButtonWithTitle:@"Camera Roll"];
+        
+        [popUpSheet addButtonWithTitle:@"Cancel"];
+        
+        popUpSheet.cancelButtonIndex = popUpSheet.numberOfButtons-1;
+        
+    }
+    
+    [popUpSheet showFromBarButtonItem: self.toolbarItems[0] animated:YES];  }
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        
+        if (buttonIndex == 0) {
+            
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            
+            [self presentViewController:picker animated:YES completion:nil];
+        }
+        //     //  else if (buttonIndex == 1) {
+        //
+        //            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        //
+        //            [self presentViewController:picker animated:YES completion:nil];
+        //
+        //        }
+        else if (buttonIndex == 2) {
+            picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            
+            [self presentViewController:picker animated:YES completion:nil];
+            
+        }
+        
+    } else {
+        
+        if (buttonIndex == 0) {
+            
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            
+            
+            [self presentViewController:picker animated:NO completion:NULL];
+            
+            
+        }
+        else if (buttonIndex == 1) {
+            
+            picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            
+            [self presentViewController:picker animated:YES completion:NULL];
+            
+            
+        }
+        
+        
+    }
 }
 
-- (IBAction)btnMrClick:(id)sender {
+
+- (IBAction)btnGroupClick:(id)sender {
+    selectedPicker=ROOM_DATA;
+    //  arrayAllData=[AppGlobal getDropdownList:ROOM_DATA];
+    if (arrayHome!=nil &&[arrayHome count]>0)
+        
+    {
+        
+        
+        
+        [mDataPickerView reloadAllComponents];
+        [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
+        [self allTxtFieldsResignFirstResponder];
+    }
+    else{
+        [AppGlobal showAlertWithMessage:DEPART_NOT_FILLED title:@"Department"];
+    }
 }
 - (IBAction)btnOrgClick:(id)sender {
+    selectedPicker=SCHOOL_DATA;
+    
+    
+    [mDataPickerView reloadAllComponents];
+    [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
+    [self allTxtFieldsResignFirstResponder];
+    
+//    if((btnDeprtment!=@"Department") ||(btnDeprtment!=@"Group"))
+//    {
+//        //  [btnDeprtment setTitle:@"Department" forState:UIControlStateNormal];
+//        // [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
+//        selectedClassId=nil;
+//        selectedClassName=nil;
+//        selectedRoomId=nil;
+//        selectedRoomName=nil;
+//        
+//    }else{
+//        
+//        [btnDeprtment setTitle:@"Department" forState:UIControlStateNormal];
+//        [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
+//        selectedClassId=nil;
+//        selectedClassName=nil;
+//        selectedRoomId=nil;
+//        selectedRoomName=nil;
+//        
+//    }
+    
+    
 }
 - (IBAction)btnDeprtmentClick:(id)sender {
+    selectedPicker=CLASS_DATA;
+    // arrayAllData=[AppGlobal getDropdownList:CLASS_DATA];
+    
+    
+    if (arrayClass!=nil &&[arrayClass count]>0)
+        
+    {
+        
+        [mDataPickerView reloadAllComponents];
+        [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
+        [self allTxtFieldsResignFirstResponder];
+        
+        
+//        if (btnGroup!=@"Group") {
+//            // [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
+//            
+//            selectedRoomId=nil;
+//            selectedRoomName=nil;
+//        }else {
+//            
+//            [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
+//            
+//            selectedRoomId=nil;
+//            selectedRoomName=nil;
+//        }
+    }
+    else{
+        [AppGlobal showAlertWithMessage:ORG_NOT_FILLED title:@"Organization"];
+        
+    }
+    
 }
-- (IBAction)btnGroupClick:(id)sender {
+
+- (IBAction)btnTitleClick:(id)sender {
+    selectedPicker=TITLE_DATA;
+    arrayAllData=[AppGlobal getDropdownList:TITLE_DATA];
+    [mDataPickerView reloadAllComponents];
+    [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
+    [self allTxtFieldsResignFirstResponder];
+    
 }
+
+-(void)allTxtFieldsResignFirstResponder{
+    
+    [txtFirstName resignFirstResponder];
+    [txtLastName resignFirstResponder];
+    
+}
+
+
 #pragma --
 #pragma mark -- UITextFieldDelegate
 
@@ -132,7 +325,7 @@
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
- 
+    
     
     activeTextField = textField;
     
@@ -154,18 +347,18 @@
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-  
+    
     if (textField.tag == 10) {
-    user.userFirstName=textField.text;
+        user.userFirstName=textField.text;
     }else{
-     user.userLastName=textField.text;
+        user.userLastName=textField.text;
     }
 }
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-       [textField resignFirstResponder];
+    [textField resignFirstResponder];
     
     return YES;
 }
@@ -199,7 +392,7 @@
     NSInteger nextTag = activeTextField.tag -1;
     
     UITextField *nextResponder = (UITextField*) [self.view  viewWithTag:nextTag];
-   
+    
     
     
     while(!nextResponder.enabled)
@@ -222,6 +415,261 @@
     
     
     [activeTextField resignFirstResponder];
+    
+}
+
+#pragma mark -
+#pragma mark UIPickerViewDataSource
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView;
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)componen
+{    switch(selectedPicker) {
+    case SCHOOL_DATA:
+    {
+        return  [arraySchools count];
+    }break;
+    case CLASS_DATA:
+    {
+        return [arrayClass count];
+        
+    }break;
+    case ROOM_DATA:
+    {
+        return [arrayHome count];
+        
+    }break;
+    case TITLE_DATA:
+    {
+        return [arrayAllData count];
+        
+    }break;
+    case COURSE_DATA:
+    {
+        return [arrayAllData count];
+        
+    }break;
+        
+        break;
+    default:
+        [NSException raise:NSGenericException format:@"Unexpected FormatType."];
+        
+}
+    
+    
+    
+}
+#pragma mark -
+#pragma mark UIPickerViewDelegate
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    
+    mIntRow=row;
+    [pickerView selectRow:row inComponent:component animated:NO];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    
+    switch(selectedPicker) {
+        case SCHOOL_DATA:
+        {
+            NSDictionary *responseDic = [ arraySchools objectAtIndex:row];
+            
+            return [responseDic objectForKey:@"schoolName"];
+            
+            
+            break;
+        }
+        case CLASS_DATA:
+        {
+            NSDictionary *responseDic = [ arrayClass objectAtIndex:row];
+            return [responseDic objectForKey:@"className"];
+            
+            break;
+        }
+        case ROOM_DATA:
+        {
+            NSDictionary *responseDic = [ arrayHome objectAtIndex:row];
+            return [responseDic objectForKey:@"homeRoomName"];
+            
+            break;
+        }
+        case TITLE_DATA:
+        {
+            NSDictionary *responseDic = [ arrayAllData objectAtIndex:row];
+            return [responseDic objectForKey:@"Title"];
+            break;
+        }
+        case COURSE_DATA:
+        {
+            NSDictionary *responseDic = [ arrayAllData objectAtIndex:row];
+            return [responseDic objectForKey:@"Title"];
+            break;
+        }
+            
+        default:
+            [NSException raise:NSGenericException format:@"Unexpected FormatType."];
+    }
+    
+}
+- (IBAction)mBtnCancelPicker:(id)sender {
+    [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:NO];
+    
+}
+
+- (IBAction)btnLogoutClick:(id)sender {
+    [FBSession.activeSession closeAndClearTokenInformation];
+    [FBSession.activeSession close];
+    [FBSession setActiveSession:nil];
+    
+    [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
+    [AppSingleton sharedInstance].isUserLoggedIn=NO;
+    // [objCustom removeFromSuperview ];
+    [self.tabBarController.tabBar setHidden:YES];
+    LoginViewController *viewCont= [[LoginViewController alloc]init];
+    [self.navigationController pushViewController:viewCont animated:YES];
+}
+
+- (IBAction)mBtnDonePicker:(id)sender {
+    
+    [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:NO];
+    switch(selectedPicker) {
+        case SCHOOL_DATA:
+        {
+            NSDictionary *responseDic = [ arraySchools objectAtIndex:mIntRow];
+            arrayClass=  [responseDic objectForKey:@"classList"];
+            if(![[responseDic objectForKey:@"schoolId"]isEqualToString:selectedSchoolId])
+            {
+                selectedClassId=nil;
+                selectedClassName=nil;
+                selectedRoomId=nil;
+                selectedRoomName=nil;
+                [btnDeprtment setTitle:@"Department" forState:UIControlStateNormal];
+                [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
+            }
+            selectedSchoolId=  [responseDic objectForKey:@"schoolId"];
+            selectedSchoolName=  [responseDic objectForKey:@"schoolName"];
+            [btnOrg setTitle:selectedSchoolName forState:UIControlStateNormal];
+            [btnOrg setTitleColor:[UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:1.0] forState: UIControlStateNormal ];
+            //[responseDic objectForKey:@"SchoolName"];
+            
+            break;
+        }
+        case CLASS_DATA:
+        {
+            NSDictionary *responseDic = [ arrayClass objectAtIndex:mIntRow];
+            arrayHome=  [responseDic objectForKey:@"homeRoomList"];
+            if(![[responseDic objectForKey:@"classId"]isEqualToString:selectedClassId])
+            {
+                
+                selectedRoomId=nil;
+                selectedRoomName=nil;
+                [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
+            }
+            selectedClassId=  [responseDic objectForKey:@"classId"];
+            selectedClassName=  [responseDic objectForKey:@"className"];
+            //[responseDic objectForKey:@"ClassName"];
+            [btnDeprtment setTitle:selectedClassName forState:UIControlStateNormal];
+            [btnDeprtment setTitleColor:[UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:1.0] forState: UIControlStateNormal ];
+            break;
+        }
+        case ROOM_DATA:
+        {
+            NSDictionary *responseDic = [ arrayHome objectAtIndex:mIntRow];
+            selectedRoomId=  [responseDic objectForKey:@"homeRoomId"];
+            selectedRoomName=  [responseDic objectForKey:@"homeRoomName"];
+            // [responseDic objectForKey:@"HoomRoom"];
+            [btnGroup setTitle:selectedRoomName forState:UIControlStateNormal];
+            [btnGroup setTitleColor:[UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:1.0] forState: UIControlStateNormal ];
+            
+            break;
+        }
+        case TITLE_DATA:
+        {
+            NSDictionary *responseDic = [ arrayAllData objectAtIndex:mIntRow];
+            selectedTitle= [responseDic objectForKey:@"Title"];
+            [btnTitle setTitle:selectedTitle forState:UIControlStateNormal];
+            [btnTitle setTitleColor:[UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:1.0] forState: UIControlStateNormal ];
+            break;
+        }
+            
+        default:
+            [NSException raise:NSGenericException format:@"Unexpected FormatType."];
+    }
+}
+
+#pragma mark - FBLoginView Delegate method implementation
+-(void)loginViewShowingLoggedInUser:(FBLoginView *)loginView{
+    // self.lblLoginStatus.text = @"You are logged in.";
+    
+    //    [self toggleHiddenState:NO];
+    //    [self changeFrameAndBackgroundImg];
+}
+-(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
+    NSLog(@"%@", user);
+    //if user is already sign in Then validate with server.
+    
+    // get user id
+    NSString *fbuserid=[NSString  stringWithFormat:@"%@",[user objectForKey:@"id"]];
+    //set user Profile
+    //Show Indicator
+    NSString *username=[AppSingleton sharedInstance].userDetail.userEmail;
+    
+    
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    [[appDelegate _engine] SetFBloginWithUserID:username FBID:fbuserid success:^(bool status) {
+        self.btnFacebook.hidden=YES;
+        [self loginSucessFullWithFB:fbuserid];
+        //Hide Indicator
+        [appDelegate hideSpinner];
+        
+        
+    } failure:^(NSError *error) {
+        //Hide Indicator
+        [appDelegate hideSpinner];
+        NSLog(@"failure JsonData %@",[error description]);
+        [self loginViewShowingLoggedOutUser:loginView];
+        
+        [self loginError:error];
+        
+    }];
+    
+}
+-(void)loginSucessFullWithFB:(NSString*)userid {
+    // if FB Varification is done then navigate the main screen
+    
+    [AppGlobal  setValueInDefault:userid value:key_FBUSERID];
+    
+}
+-(void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView{
+    // self.lblLoginStatus.text = @"You are logged out";
+    [FBSession.activeSession closeAndClearTokenInformation];
+    [FBSession.activeSession close];
+    [FBSession setActiveSession:nil];
+    //[self toggleHiddenState:YES];
+}
+-(void)loginError:(NSError*)error{
+    
+    [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
+}
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    //     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    //    imgProfile.image =imagePicker;
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
     
 }
 @end

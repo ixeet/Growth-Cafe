@@ -50,8 +50,10 @@
                 </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zRs-Ru-Bvy" userLabel="tableView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <color key="sectionIndexBackgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="aux-Ug-niy"/>
                         <outlet property="delegate" destination="-1" id="sxO-rw-8uA"/>
@@ -87,7 +89,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ZAD-cd-J1p" secondAttribute="trailing" constant="-279" id="0hh-p0-kks">
                     <variation key="heightClass=regular-widthClass=compact" constant="10"/>
@@ -105,14 +107,18 @@
                     <variation key="heightClass=regular-widthClass=compact" constant="19"/>
                 </constraint>
                 <constraint firstItem="8XI-Ra-WeO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Xam-kS-0Gz"/>
-                <constraint firstAttribute="bottom" secondItem="zRs-Ru-Bvy" secondAttribute="bottom" constant="65" id="anQ-bW-z02"/>
+                <constraint firstAttribute="bottom" secondItem="zRs-Ru-Bvy" secondAttribute="bottom" constant="65" id="anQ-bW-z02">
+                    <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                </constraint>
                 <constraint firstItem="8XI-Ra-WeO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cCj-G1-C5P"/>
                 <constraint firstAttribute="trailing" secondItem="8XI-Ra-WeO" secondAttribute="trailing" id="dwd-2n-dmK"/>
                 <constraint firstItem="ZAD-cd-J1p" firstAttribute="leading" secondItem="5Zr-Lg-ccF" secondAttribute="trailing" constant="20" id="g6X-am-VmM">
                     <variation key="heightClass=regular-widthClass=compact" constant="1"/>
                 </constraint>
                 <constraint firstAttribute="trailing" secondItem="rdF-gS-kYe" secondAttribute="trailing" id="loz-bg-Ub8"/>
-                <constraint firstItem="zRs-Ru-Bvy" firstAttribute="top" secondItem="8XI-Ra-WeO" secondAttribute="bottom" constant="-1" id="oAB-Zu-DSY"/>
+                <constraint firstItem="zRs-Ru-Bvy" firstAttribute="top" secondItem="8XI-Ra-WeO" secondAttribute="bottom" constant="-1" id="oAB-Zu-DSY">
+                    <variation key="heightClass=regular-widthClass=compact" constant="-2"/>
+                </constraint>
                 <constraint firstItem="5Zr-Lg-ccF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="41" id="tpc-jv-68W">
                     <variation key="heightClass=regular-widthClass=compact" constant="19"/>
                 </constraint>

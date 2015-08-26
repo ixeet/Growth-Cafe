@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
+            startingLineNumber = "487"
+            endingLineNumber = "487"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "462091977.955807"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "580"
-            endingLineNumber = "580"
+            startingLineNumber = "610"
+            endingLineNumber = "610"
             landmarkName = "-getModuleDetailByFeed"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "462091977.955807"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "588"
-            endingLineNumber = "588"
+            startingLineNumber = "619"
+            endingLineNumber = "619"
             landmarkName = "-getModuleDetailByFeed"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "526"
-            endingLineNumber = "526"
+            startingLineNumber = "527"
+            endingLineNumber = "527"
             landmarkName = "-btnExpendClick:"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,13 +154,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "549"
-            endingLineNumber = "549"
-            landmarkName = "-btnPlayResourceClick:"
-            landmarkType = "5">
+            startingLineNumber = "550"
+            endingLineNumber = "550"
+            landmarkName = "@implementation AssignmentViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -200,7 +200,7 @@
                   moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/Growth-Cafe/Growth%20Cafe/Controller/Assignment/SubmitAssignmentViewController.h"
-                  timestampString = "462189891.106224"
+                  timestampString = "462291447.867127"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "18"
@@ -215,7 +215,7 @@
                   moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/Growth-Cafe/Growth%20Cafe/Controller/Assignment/SubmitAssignmentViewController.h"
-                  timestampString = "462189891.106412"
+                  timestampString = "462291447.867286"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "18"
@@ -280,11 +280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "462091977.955807"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "-btnPlayAssignmentClick:"
             landmarkType = "5">
          </BreakpointContent>
@@ -296,11 +296,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "462091977.955807"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
             landmarkName = "-btnPlayRelatedResourceClick:"
             landmarkType = "5">
          </BreakpointContent>
@@ -472,7 +472,7 @@
                   moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/Growth-Cafe/Growth%20Cafe/NetworkHandler/AFNetworking/AFHTTPRequestOperationManager.m"
-                  timestampString = "462189891.124861"
+                  timestampString = "462291447.876293"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "189"
@@ -487,7 +487,7 @@
                   moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/Growth-Cafe/Growth%20Cafe/NetworkHandler/AFNetworking/AFHTTPRequestOperationManager.m"
-                  timestampString = "462189891.12507"
+                  timestampString = "462291447.876513"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "189"
@@ -552,11 +552,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/CourseViewController.m"
-            timestampString = "461847607.574041"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -632,7 +632,7 @@
                   moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/Growth-Cafe/Growth%20Cafe/Engine/FeedHandler/FeedHandler.m"
-                  timestampString = "462189891.131729"
+                  timestampString = "462291447.881603"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "202"
@@ -647,7 +647,7 @@
                   moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/Growth-Cafe/Growth%20Cafe/Engine/FeedHandler/FeedHandler.m"
-                  timestampString = "462189891.132028"
+                  timestampString = "462291447.881782"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "202"
@@ -696,7 +696,7 @@
                   moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/Growth-Cafe/Growth%20Cafe/Engine/CourseHandler/CourseHandler.m"
-                  timestampString = "462189891.13397"
+                  timestampString = "462291447.883291"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "598"
@@ -711,7 +711,7 @@
                   moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/Growth-Cafe/Growth%20Cafe/Engine/CourseHandler/CourseHandler.m"
-                  timestampString = "462189891.134155"
+                  timestampString = "462291447.883465"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "598"
@@ -728,11 +728,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -744,11 +744,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "403"
-            endingLineNumber = "403"
+            startingLineNumber = "404"
+            endingLineNumber = "404"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -760,27 +760,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "462091977.955807"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "532"
-            endingLineNumber = "532"
-            landmarkName = "-getModuleDetail:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "462091977.955807"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "550"
-            endingLineNumber = "550"
+            startingLineNumber = "538"
+            endingLineNumber = "538"
             landmarkName = "-getModuleDetail:"
             landmarkType = "5">
          </BreakpointContent>
@@ -792,11 +776,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/CourseViewController.m"
-            timestampString = "461847607.574041"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -808,11 +792,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/CourseViewController.m"
-            timestampString = "461847607.574041"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -824,11 +808,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/CourseViewController.m"
-            timestampString = "462091977.955807"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "-getCourses:"
             landmarkType = "5">
          </BreakpointContent>
@@ -840,11 +824,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "387"
-            endingLineNumber = "387"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -888,11 +872,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Home/HomeViewController.m"
-            timestampString = "461673507.259571"
+            timestampString = "462270367.139001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "-loginViewFetchedUserInfo:user:"
             landmarkType = "5">
          </BreakpointContent>
@@ -904,11 +888,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Home/HomeViewController.m"
-            timestampString = "461673507.259571"
+            timestampString = "462270367.139001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "-loginViewFetchedUserInfo:user:"
             landmarkType = "5">
          </BreakpointContent>
@@ -926,54 +910,6 @@
             startingLineNumber = "162"
             endingLineNumber = "162"
             landmarkName = "-loginViewFetchedUserInfo:user:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Controller/Login/CustomProfileView.m"
-            timestampString = "461666407.155475"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "-loginViewShowingLoggedOutUser:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Controller/Login/RegisterationViewController.m"
-            timestampString = "461743884.294311"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Controller/Login/RegisterationViewController.m"
-            timestampString = "461743884.294311"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "-viewWillDisappear:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1022,38 +958,6 @@
             startingLineNumber = "153"
             endingLineNumber = "153"
             landmarkName = "-loginViewFetchedUserInfo:user:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Engine/CourseHandler/CourseHandler.m"
-            timestampString = "462122606.479194"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "436"
-            endingLineNumber = "436"
-            landmarkName = "-getModuleDetail:AndTextSearch:AndSelectModule:AndSelectCourse:success:failure:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Engine/CourseHandler/CourseHandler.m"
-            timestampString = "462122606.479194"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
-            landmarkName = "-getModuleDetail:AndTextSearch:AndSelectModule:AndSelectCourse:success:failure:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1112,12 +1016,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
-            landmarkName = "-btnSubmitAssignmentClick:"
+            startingLineNumber = "534"
+            endingLineNumber = "534"
+            landmarkName = "-btnExpendClick:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1160,43 +1064,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "392"
-            endingLineNumber = "392"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "390"
-            endingLineNumber = "390"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1208,11 +1080,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "462123329.744856"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1676"
-            endingLineNumber = "1676"
+            startingLineNumber = "1727"
+            endingLineNumber = "1727"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1224,11 +1096,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/CourseViewController.m"
-            timestampString = "461847607.574041"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -1240,11 +1112,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/CourseViewController.m"
-            timestampString = "461847607.574041"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1256,11 +1128,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/CourseViewController.m"
-            timestampString = "462091977.955807"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
             landmarkName = "-getCourses:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1272,13 +1144,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "463"
-            endingLineNumber = "463"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            startingLineNumber = "464"
+            endingLineNumber = "464"
+            landmarkName = "@implementation AssignmentViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1288,11 +1160,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1512,11 +1384,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/CourseViewController.m"
-            timestampString = "462091977.955807"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1528,27 +1400,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/CourseViewController.m"
-            timestampString = "462091977.955807"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "338"
-            endingLineNumber = "338"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Controller/Course/CourseViewController.m"
-            timestampString = "462091977.955807"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1656,11 +1512,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "565"
-            endingLineNumber = "565"
+            startingLineNumber = "566"
+            endingLineNumber = "566"
             landmarkName = "-PlayTheVideo:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1672,11 +1528,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "551"
-            endingLineNumber = "551"
+            startingLineNumber = "552"
+            endingLineNumber = "552"
             landmarkName = "-btnPlayResourceClick:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1704,43 +1560,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "462123329.744856"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1858"
-            endingLineNumber = "1858"
-            landmarkName = "-tableView:heightForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1752,11 +1576,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "758"
-            endingLineNumber = "758"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "-viewWillAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
+            timestampString = "462203640.469387"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "761"
+            endingLineNumber = "761"
+            landmarkName = "-embedYouTube:frame:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
+            timestampString = "462203640.469387"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "762"
+            endingLineNumber = "762"
+            landmarkName = "-embedYouTube:frame:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
+            timestampString = "462203640.469387"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "765"
+            endingLineNumber = "765"
             landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1768,27 +1640,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "759"
-            endingLineNumber = "759"
-            landmarkName = "-webViewDidStartLoad:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "762"
-            endingLineNumber = "762"
+            startingLineNumber = "768"
+            endingLineNumber = "768"
             landmarkName = "-webViewDidFinishLoad:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1800,27 +1656,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "765"
-            endingLineNumber = "765"
-            landmarkName = "-webView:didFailLoadWithError:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Controller/Assignment/AssignmentViewController.m"
-            timestampString = "462107219.221427"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "748"
-            endingLineNumber = "748"
+            startingLineNumber = "751"
+            endingLineNumber = "751"
             landmarkName = "-embedYouTube:frame:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1831,44 +1671,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Engine/FeedHandler/FeedHandler.m"
-            timestampString = "462111974.709243"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "-getUpdates:AndTextSearch:success:failure:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Engine/FeedHandler/FeedHandler.m"
-            timestampString = "462111977.850536"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "-getUpdates:AndTextSearch:success:failure:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "462112809.016248"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -1911,44 +1719,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Engine/CourseHandler/CourseHandler.m"
-            timestampString = "462122606.479194"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
-            landmarkName = "-getModuleDetail:AndTextSearch:AndSelectModule:AndSelectCourse:success:failure:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/Engine/CourseHandler/CourseHandler.m"
-            timestampString = "462122606.479194"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "427"
-            endingLineNumber = "427"
-            landmarkName = "-getModuleDetail:AndTextSearch:AndSelectModule:AndSelectCourse:success:failure:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Feed/UpdateViewController.m"
-            timestampString = "462173971.019061"
+            timestampString = "462283188.807267"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1566"
-            endingLineNumber = "1566"
+            startingLineNumber = "1598"
+            endingLineNumber = "1598"
             landmarkName = "-textTapped:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1960,11 +1736,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Feed/UpdateViewController.m"
-            timestampString = "462173971.019061"
+            timestampString = "462283188.807267"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1569"
-            endingLineNumber = "1569"
+            startingLineNumber = "1601"
+            endingLineNumber = "1601"
             landmarkName = "-textTapped:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1976,11 +1752,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Feed/UpdateViewController.m"
-            timestampString = "462173971.019061"
+            timestampString = "462283188.807267"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1068"
-            endingLineNumber = "1068"
+            startingLineNumber = "1100"
+            endingLineNumber = "1100"
             landmarkName = "-btnUserProfileClick:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2023,13 +1799,157 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Growth Cafe/NetworkHandler/AFNetworking/AFHTTPRequestOperationManager.m"
-            timestampString = "462124814.210427"
+            filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
+            timestampString = "462203640.469387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "-GET:parameters:success:failure:"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
+            landmarkName = "-btnPlayResourceClick:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
+            timestampString = "462203640.469387"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1023"
+            endingLineNumber = "1023"
+            landmarkName = "-scrollViewDidEndDragging:willDecelerate:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
+            timestampString = "462203640.469387"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "427"
+            endingLineNumber = "427"
+            landmarkName = "-btnCommentDone:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
+            timestampString = "462203640.469387"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "438"
+            endingLineNumber = "438"
+            landmarkName = "-btnCommentDone:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
+            timestampString = "462203640.469387"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
+            landmarkName = "-btnCommentDone:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
+            timestampString = "462203640.469387"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "654"
+            endingLineNumber = "654"
+            landmarkName = "-loadVisiblePages"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
+            timestampString = "462203640.469387"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1302"
+            endingLineNumber = "1302"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
+            timestampString = "462204001.636702"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "543"
+            endingLineNumber = "543"
+            landmarkName = "-getModuleDetail:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Engine/CourseHandler/CourseHandler.m"
+            timestampString = "462204215.965384"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "321"
+            endingLineNumber = "321"
+            landmarkName = "-getModuleDetail:AndTextSearch:AndSelectModule:AndSelectCourse:success:failure:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Engine/CourseHandler/CourseHandler.m"
+            timestampString = "462206806.087769"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "-getModuleDetailByFeed:success:failure:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2040,11 +1960,75 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Growth Cafe/Controller/Feed/UpdateViewController.m"
-            timestampString = "462189419.112887"
+            timestampString = "462283831.413979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "986"
-            endingLineNumber = "986"
+            startingLineNumber = "1016"
+            endingLineNumber = "1016"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Controller/Feed/UpdateViewController.m"
+            timestampString = "462283836.231859"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1015"
+            endingLineNumber = "1015"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
+            timestampString = "462286819.224792"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1900"
+            endingLineNumber = "1900"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Controller/Feed/UpdateViewController.m"
+            timestampString = "462290806.587585"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1014"
+            endingLineNumber = "1014"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Growth Cafe/Controller/Course/ModuleDetailViewController.m"
+            timestampString = "462291264.01664"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1893"
+            endingLineNumber = "1893"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>

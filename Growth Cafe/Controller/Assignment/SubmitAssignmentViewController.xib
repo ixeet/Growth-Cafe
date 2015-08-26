@@ -103,7 +103,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="x3Q-VP-jfY"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                     <variation key="default">
@@ -327,7 +327,7 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PAO-ky-8Ri" secondAttribute="trailing" constant="20" id="AUe-1e-rXq"/>
                 <constraint firstItem="dgj-yp-8TB" firstAttribute="leading" secondItem="JdI-n2-1H9" secondAttribute="leading" id="CeM-YR-RvV"/>
                 <constraint firstItem="KdS-2x-niZ" firstAttribute="leading" secondItem="n44-IE-J2q" secondAttribute="trailing" constant="6" id="DAv-Es-lIM">
-                    <variation key="heightClass=regular-widthClass=compact" constant="26"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="-2"/>
                 </constraint>
                 <constraint firstItem="PAO-ky-8Ri" firstAttribute="leading" secondItem="5r0-Tz-PXy" secondAttribute="leading" id="DSi-TL-LtA"/>
                 <constraint firstItem="UBw-28-9EZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="21" id="Ded-LH-vjS"/>
@@ -361,7 +361,7 @@
                 <constraint firstItem="dPY-Rc-MxV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="21" id="Q11-ms-HWk"/>
                 <constraint firstItem="7fk-02-auo" firstAttribute="leading" secondItem="jMg-sg-XOB" secondAttribute="trailing" constant="8" id="QsC-l5-4cy"/>
                 <constraint firstItem="n44-IE-J2q" firstAttribute="leading" secondItem="mbz-GA-HAK" secondAttribute="trailing" constant="13" id="T1I-sZ-ViW">
-                    <variation key="heightClass=regular-widthClass=compact" constant="65"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="37"/>
                 </constraint>
                 <constraint firstItem="4i3-nc-bAs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="T8T-43-GbF"/>
                 <constraint firstItem="JdI-n2-1H9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="21" id="Tlp-PX-tqh"/>

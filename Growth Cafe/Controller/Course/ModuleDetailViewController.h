@@ -28,7 +28,6 @@ IBOutlet UITableView *tblViewContent;
 @property (strong, nonatomic)  Module *selectedModule;
 @property (assign , nonatomic)  NSInteger  step;
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, strong) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet ScrollViewContainer *scollViewContainer;
 @property (strong, nonatomic) IBOutlet UITextView *txtViewCMT;
 @property (strong, nonatomic) IBOutlet MPMoviePlayerController *moviePlayer;

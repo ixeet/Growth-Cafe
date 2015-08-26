@@ -41,6 +41,7 @@
     self.btnFacebook.delegate = self;
     self.btnFacebook.readPermissions = @[@"public_profile", @"email"];
     [self changeFrameAndBackgroundImg];
+    [self fetchedMasterData];
     //iOS7 Customization, swipe to pop gesture
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
@@ -162,7 +163,28 @@
     [self toggleHiddenState:YES];
 }
 
-
+-(void)fetchedMasterData{
+    
+    
+    
+    //Show Indicator
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    [[appDelegate _engine] getMasterData:^(BOOL success) {
+        //Hide Indicator
+        [appDelegate hideSpinner];
+      
+    } failure:^(NSError *error) {
+        //Hide Indicator
+        [appDelegate hideSpinner];
+        NSLog(@"failure JsonData %@",[error description]);
+    }];
+    // if user valid then navigate to main screen.
+    
+    //    self.profilePicture.profileID = user.id;
+    //    self.lblUsername.text = user.name;
+    //    self.lblEmail.text = [user objectForKey:@"email"];
+}
 -(void)loginView:(FBLoginView *)loginView handleError:(NSError *)error{
     NSLog(@"%@", [error localizedDescription]);
 }

@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet FBLoginView *btnFacebook;
 @property (strong, nonatomic) IBOutlet UILabel *lblFirstName;
 @property (strong, nonatomic) IBOutlet UILabel *lblLastName;
-@property (strong, nonatomic) IBOutlet UIButton *btnMr;
+@property (strong, nonatomic) IBOutlet UIButton *btnTitle;
 @property (strong, nonatomic) IBOutlet UITextField *txtFirstName;
 @property (strong, nonatomic) IBOutlet UITextField *txtLastName;
 - (IBAction)btnDeprtmentClick:(id)sender;
@@ -26,7 +26,10 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnGroup;
 - (IBAction)btnBackClick:(id)sender;
 - (IBAction)btnPhotoClick:(id)sender;
-- (IBAction)btnMrClick:(id)sender;
+- (IBAction)btnTitleClick:(id)sender;
 - (IBAction)btnGroupClick:(id)sender;
-
+@property (strong, nonatomic) IBOutlet UIView *mViewAccountTypePicker;
+- (IBAction)mBtnCancelPicker:(id)sender ;
+- (IBAction)btnLogoutClick:(id)sender;
+- (IBAction)mBtnDonePicker:(id)sender ;
 @end

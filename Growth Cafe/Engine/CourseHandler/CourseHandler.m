@@ -193,7 +193,7 @@
                 comment.commentById=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"commentById"]];
                 comment.parentCommentId=[dicComment objectForKey:@"parentCommentId"];
                 comment.commentBy=[dicComment objectForKey:@"commentBy"];
-                //comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
+                comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
                 comment.commentTxt=[dicComment objectForKey:@"commentTxt"];
                 comment.isLike= [NSString stringWithFormat:@"%@",[dicComment objectForKey:@"isLiked"]];
                 comment.commentDate=[dicComment objectForKey:@"commentDate"];
@@ -216,7 +216,7 @@
                      comment.commentById=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"commentById"]];
                     comment.parentCommentId=[dicSubComment objectForKey:@"parentCommentId"];
                     comment.commentBy=[dicSubComment objectForKey:@"commentBy"];
-                    //comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
+                   comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
                     comment.commentTxt=[dicSubComment objectForKey:@"commentTxt"];
                     comment.isLike=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"isLiked"]];
                     comment.commentDate=[dicSubComment objectForKey:@"commentDate"];
@@ -365,7 +365,7 @@
                     
                     comment.parentCommentId=[dicComment objectForKey:@"parentCommentId"];
                     comment.commentBy=[dicComment objectForKey:@"commentBy"];
-                    //comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
+                   comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
                     comment.commentTxt=[dicComment objectForKey:@"commentTxt"];
                     comment.isLike= [NSString stringWithFormat:@"%@",[dicComment objectForKey:@"isLiked"]];
                     comment.commentDate=[dicComment objectForKey:@"commentDate"];
@@ -391,7 +391,7 @@
                         
                         comment.parentCommentId=[dicSubComment objectForKey:@"parentCommentId"];
                         comment.commentBy=[dicSubComment objectForKey:@"commentBy"];
-                        //comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
+                        comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
                         comment.commentTxt=[dicSubComment objectForKey:@"commentTxt"];
                         comment.isLike=[NSString stringWithFormat:@"%@",[dicSubComment objectForKey:@"isLiked"]];
                         comment.commentDate=[dicSubComment objectForKey:@"commentDate"];

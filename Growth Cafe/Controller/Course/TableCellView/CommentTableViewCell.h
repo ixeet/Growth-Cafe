@@ -17,5 +17,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnMore;
 @property (strong, nonatomic) IBOutlet UIImageView *imgDevider;
 @property (strong, nonatomic) IBOutlet UILabel *lblRelatedVideo;
+@property (strong, nonatomic) IBOutlet UIImageView *imgHalfDevider;
 
 @end

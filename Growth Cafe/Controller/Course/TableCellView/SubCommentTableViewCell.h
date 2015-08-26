@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblCmtText;
 @property (strong, nonatomic) IBOutlet UIButton *btnLike;
 
+@property (strong, nonatomic) IBOutlet UIImageView *imgHalfDevider;
 @property (strong, nonatomic) IBOutlet UIButton *btnMore;
 @property (strong, nonatomic) IBOutlet UIImageView *imgDevider;
 @property (strong, nonatomic) IBOutlet UILabel *lblRelatedVideo;

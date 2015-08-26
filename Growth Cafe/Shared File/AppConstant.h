@@ -105,18 +105,19 @@
 #define MISSING_EMAIL_ID @"Email can't be empty."
 #define MISSING_CNF_PASSWORD @"Confirm Password does n't match with password."
 #define MISSING_CNF_PASSWORD_NOT_MATCH @"Your new password and confirm password do not match."
-#define MISSING_SCHOOL @"School name is not selected."
-#define MISSING_CLASS @" Class is not selected."
+#define MISSING_SCHOOL @"Organization is not selected."
+#define MISSING_CLASS @" Department is not selected."
 #define MISSING_TITLE @" Title is not selected."
 #define MISSING_Video_TITLE @"Video Title is not selected."
 #define MISSING_Video_DESC @"Video description is not selected."
 #define MISSING_Video_URL @"Video URL or video content is not selected."
-#define MISSING_HOME @"Home room is not selected."
-#define MISSING_ADMIN_EMAIL @" School email can't be empty."
+#define MISSING_HOME @"Group is not selected."
+#define MISSING_ADMIN_EMAIL @" Organization email can't be empty."
 #define MISSING_COMMENT @" Comment can't be empty."
-#define MISSING_ADMIN_VLID_EMAIL @" School email seems to be incorrect, Enter a valid email id  including '@' and '.' "
+#define MISSING_ADMIN_VLID_EMAIL @" Organization email seems to be incorrect, Enter a valid email id  including '@' and '.' "
 
-
+#define ORG_NOT_FILLED @"First select your Organization."
+#define DEPART_NOT_FILLED @"First select your Department. "
 #define MISSING_SUBMIT_FUNC @"Not implemented."
 // Success Message Alert Title
 

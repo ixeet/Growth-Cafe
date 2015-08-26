@@ -154,7 +154,7 @@
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="THa-k8-jqR" userLabel="SubImage">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="ji1-eO-XqN"/>
@@ -172,7 +172,7 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="frq-Eb-YF3" userLabel="DeviderImage">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <color key="backgroundColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="quY-XP-foZ"/>
@@ -190,7 +190,7 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6fM-Dn-Fc3" userLabel="standingImage">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="1" id="2wi-DR-V0U"/>
@@ -240,7 +240,7 @@
                         </constraint>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                    <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="titleEdgeInsets" minX="8" minY="5" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" image="icn_like.png">
                         <color key="titleColor" red="0.51764705882352935" green="0.51764705882352935" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
@@ -261,6 +261,7 @@
                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CC-CG-bzZ" userLabel="btnShare">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <inset key="titleEdgeInsets" minX="8" minY="5" maxX="0.0" maxY="0.0"/>
                     <state key="normal" image="icn_share.png">
                         <color key="titleColor" red="0.51764705882352935" green="0.51764705882352935" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -276,7 +277,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                     <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="titleEdgeInsets" minX="8" minY="5" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" image="icn_comment.png">
                         <color key="titleColor" red="0.51764705882352935" green="0.51764705882352935" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
@@ -305,7 +306,7 @@
                         <constraint firstAttribute="width" constant="54" id="7NS-19-rKU"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                    <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="titleEdgeInsets" minX="8" minY="5" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" image="icn_like.png">
                         <color key="titleColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -329,7 +330,7 @@
                         <constraint firstAttribute="width" constant="54" id="7DU-O2-7cy"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                    <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="titleEdgeInsets" minX="8" minY="5" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" image="icn_comment.png">
                         <color key="titleColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -404,7 +405,7 @@
                     <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                 </constraint>
                 <constraint firstAttribute="trailing" secondItem="GH1-Ei-B4L" secondAttribute="trailing" constant="213" id="CSI-Zd-F3C">
-                    <variation key="heightClass=regular-widthClass=compact" constant="133"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="128"/>
                 </constraint>
                 <constraint firstItem="6fM-Dn-Fc3" firstAttribute="centerX" secondItem="9CC-CG-bzZ" secondAttribute="centerX" constant="-3.5" id="CUO-0Q-YxN">
                     <variation key="heightClass=regular-widthClass=compact" constant="0.5"/>
@@ -450,7 +451,7 @@
                 <constraint firstItem="d3d-io-Ufh" firstAttribute="top" secondItem="QYd-ks-2n8" secondAttribute="bottom" constant="3" id="Xxl-nV-KGF"/>
                 <constraint firstItem="pak-bS-qGw" firstAttribute="top" secondItem="THa-k8-jqR" secondAttribute="bottom" constant="5" id="Y57-DJ-EOz"/>
                 <constraint firstItem="GH1-Ei-B4L" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="11" id="YbS-D6-emQ">
-                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                 </constraint>
                 <constraint firstItem="9CC-CG-bzZ" firstAttribute="top" secondItem="6fM-Dn-Fc3" secondAttribute="bottom" constant="16" id="auF-aX-ukJ">
                     <variation key="heightClass=regular-widthClass=compact" constant="11"/>
@@ -464,7 +465,7 @@
                     <variation key="heightClass=regular-widthClass=compact" constant="32"/>
                 </constraint>
                 <constraint firstItem="KCo-mM-Raw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="e0B-W7-9il">
-                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="6"/>
                 </constraint>
                 <constraint firstItem="frq-Eb-YF3" firstAttribute="top" secondItem="9CC-CG-bzZ" secondAttribute="bottom" constant="10" id="eVD-SJ-89w">
                     <variation key="heightClass=regular-widthClass=compact" constant="5"/>
@@ -498,7 +499,7 @@
                     <variation key="heightClass=regular-widthClass=compact" constant="-10"/>
                 </constraint>
                 <constraint firstItem="d3d-io-Ufh" firstAttribute="leading" secondItem="KCo-mM-Raw" secondAttribute="trailing" constant="5" id="uCP-So-XC6">
-                    <variation key="heightClass=regular-widthClass=compact" constant="9"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                 </constraint>
                 <constraint firstItem="d3d-io-Ufh" firstAttribute="leading" secondItem="QYd-ks-2n8" secondAttribute="leading" id="wn2-fK-0Ym"/>
                 <constraint firstAttribute="centerX" secondItem="6fM-Dn-Fc3" secondAttribute="centerX" constant="-0.5" id="ztY-81-liF"/>

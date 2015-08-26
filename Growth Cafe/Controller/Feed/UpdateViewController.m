@@ -261,12 +261,12 @@
     {
         rowCount=[update.comments count] +1;
     }else{
-        if([update.comments count]<3)
+        if([update.comments count]<1)
         {
             rowCount=[update.comments count]+1;
         }
         else{
-            rowCount=4;
+            rowCount=2;
         }
         
         
@@ -439,6 +439,7 @@
                 [attributedString appendAttributedString:attributedStringtemp];
                 
                 UIFont *Boldfont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+               
                 NSDictionary *dictext= update.updateTitleArray[textIndex];
                 if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
                 {
@@ -488,12 +489,14 @@
         //   cell.txtView.tag=indexPath.row;
         
         [cell.txtView setAttributedText:attributedString ];
+        [cell.txtView setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
         if(update.updateDesc!=nil)
         {
             cell.txtviewDetail.text=update.updateDesc;
         }else{
             [cell.txtviewDetail  setHidden:YES];
         }
+     
         [cell.btnPlay setHidden:YES];
         if (update.resource!=nil) {
             
@@ -529,7 +532,19 @@
             
             cell.btnUpdatedBy.tag = [update.user.userId  integerValue];
         }
+        if([update.comments count]==0)
+        {cell.imgBelowLine8.hidden=NO;
+            cell.imgBelowLine1.hidden=YES;
+           
+           
+        }else{
+            
+            cell.imgBelowLine8.hidden=YES;
+            cell.imgBelowLine1.hidden=NO;
+        }
+        
         cell.txtView.tag=indexPath.section;
+        cell.txtView.selectable=YES;
         if(update.updateCreatedByImage!=nil){
             
             
@@ -621,11 +636,11 @@
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
-            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
             [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [comment.commentBy length])];
             [cell.lblCmtBy setAttributedText:attributedString];
-            
-            cell.lblCmtText.text=comment.commentTxt;
+            [cell.lblCmtBy  setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
+             cell.lblCmtText.text=comment.commentTxt;
             
             cell.lblRelatedVideo.hidden=YES;
             if(comment.commentByImage!=nil){
@@ -687,15 +702,15 @@
             
             cell.btnMore.hidden=YES;
             cell.imgDevider.hidden=YES;
-            
-            if(([update.comments count]<3) && (indexPath.row==[update.comments count]))
+            cell.btnMore.tag=indexPath.section;
+            if(([update.comments count]<1) && (indexPath.row==[update.comments count]))
             {
                 cell.btnMore.hidden=YES;
                 cell.imgDevider.hidden=NO;
                 
                 
             }
-            else if([update.comments count]>=3)
+            else if([update.comments count]>=1)
             {
                 if(update.isExpend && (indexPath.row==[update.comments count]))
                 {
@@ -704,11 +719,18 @@
                     cell.btnMore.hidden=YES;
                     cell.imgDevider.hidden=NO;
                     
-                }else if(indexPath.row==3 && !update.isExpend){
+                }else if(indexPath.row==1 && !update.isExpend){
                     [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[update.comments count ]-3]  forState:UIControlStateNormal];
+                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[update.comments count ]-1]  forState:UIControlStateNormal];
                     cell.btnMore.hidden=NO;
                     cell.imgDevider.hidden=NO;
+                    if([update.comments count]==1)
+                    {
+                        cell.btnMore.hidden=YES;
+                        cell.imgHalfDevider.hidden=YES;
+                        
+                    }
+
                     
                 }
                 
@@ -743,7 +765,7 @@
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
-            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
             [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [comment.commentBy length])];
             [cell.lblCmtBy setAttributedText:attributedString];
             
@@ -810,20 +832,27 @@
                 
                 
             }
-            else if([update.comments count]>=3)
+            else if([update.comments count]>=1)
             {
                 if(update.isExpend && (indexPath.row==[update.comments count]))
                 {
                     [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[update.comments count ]-3]  forState:UIControlStateNormal];
+                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[update.comments count ]-1]  forState:UIControlStateNormal];
                     cell.btnMore.hidden=YES;
                     cell.imgDevider.hidden=NO;
                     
-                }else if(indexPath.row==3 && !update.isExpend){
+                }else if(indexPath.row==1 && !update.isExpend){
                     [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[update.comments count ]-3]  forState:UIControlStateNormal];
+                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[update.comments count ]-1]  forState:UIControlStateNormal];
                     cell.btnMore.hidden=NO;
                     cell.imgDevider.hidden=NO;
+                    
+                }else if(indexPath.row==1 && update.isExpend){
+                    
+                    cell.btnMore.hidden=YES;
+                    cell.imgHalfDevider.hidden=NO;
+                    
+                    cell.imgDevider.hidden=YES;
                     
                 }
                 
@@ -886,7 +915,7 @@
         {
             
             height=163.0f;
-        }else{
+        }
             
             NSString *titleString =update.updateTitle;
             NSArray *titleWords = [titleString componentsSeparatedByString:@"$"];
@@ -896,8 +925,7 @@
             int textIndex=0;
             for (NSString *strtemp in titleWords) {
                 UILabel *lbltitle=[[UILabel alloc]init];
-                [lbltitle setTextColor:[UIColor darkGrayColor]];
-                NSString *strtrim = [strtemp stringByTrimmingCharactersInSet:
+               [lbltitle setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];                NSString *strtrim = [strtemp stringByTrimmingCharactersInSet:
                                      [NSCharacterSet whitespaceCharacterSet]];
                 lbltitle.text=strtrim;
                 [lbltitle setFont:[UIFont fontWithName:@"Helvetica Neue" size:12.0]];
@@ -905,7 +933,7 @@
                 
                 CGFloat strikeWidth = textSize.width+5;
                 lbltitle.frame=CGRectMake(x, y, strikeWidth, 21);
-                if (x>140 && y==0) {
+                if (x>97 && y==0) {
                     y=y+21;
                     x=0;
                 }
@@ -956,12 +984,12 @@
                     x=x+strikeWidth;
                     
                 }
-                if (y>50) {
-                    height=height+y-50;
-                }
             }
+        if (y>21) {
+            height=height+y;
         }
-        return height=height+150;
+
+        return height=height+97;
     }
     else if(update.comments>0)
     {
@@ -969,22 +997,26 @@
         CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:cmt.commentTxt];
         float height=0.0f;
         NSLog(@"%ld",(long)indexPath.row);
-        if(([update.comments count]<3) && (indexPath.row==[update.comments count]))
+        if(([update.comments count]<1) && (indexPath.row==[update.comments count]))
         {
-            height=50.0f;
+            height=35.0f;
         }
-        else if([update.comments count]>=3)
+        else if([update.comments count]>=1)
         {
             if(update.isExpend && (indexPath.row==[update.comments count]))
             {
-                height=50.0f;
-            }else if(indexPath.row==3 && !update.isExpend){
-                height=50.0f;
+                height=35.0f;
+            }else if(indexPath.row==1 && !update.isExpend){
+                height=35.0f;
             }
             
         }
+        if([cmt.parentCommentId integerValue] !=0 && (labelSize.height<17))
+        {
+            height=height-15;
+        }
         if(labelSize.height>17)
-            return   height=height+80+labelSize.height-17;
+            return   height=height+65+labelSize.height;
         else
             return  height=height+80;
     }
