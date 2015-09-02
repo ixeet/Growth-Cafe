@@ -70,7 +70,7 @@
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tn0-Ga-w8g" userLabel="tableView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="OrN-Lh-Uqf"/>
                         <outlet property="delegate" destination="-1" id="aaG-zD-yoy"/>
@@ -87,7 +87,9 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="tn0-Ga-w8g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-4" id="1wz-CY-Uun"/>
+                <constraint firstItem="tn0-Ga-w8g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-4" id="1wz-CY-Uun">
+                    <variation key="heightClass=regular-widthClass=compact" constant="-5"/>
+                </constraint>
                 <constraint firstItem="W5i-0q-l1i" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-2" id="3Da-ci-OM8"/>
                 <constraint firstItem="W5i-0q-l1i" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-1" id="3Ud-61-zkO"/>
                 <constraint firstItem="tn0-Ga-w8g" firstAttribute="top" secondItem="OdI-YP-OJL" secondAttribute="bottom" constant="-1" id="5b9-ek-How"/>
@@ -98,7 +100,9 @@
                 <constraint firstItem="OdI-YP-OJL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-1" id="F6I-p2-c8d"/>
                 <constraint firstAttribute="bottom" secondItem="W5i-0q-l1i" secondAttribute="bottom" constant="2" id="IeB-Ru-fsB"/>
                 <constraint firstAttribute="trailing" secondItem="OdI-YP-OJL" secondAttribute="trailing" constant="1" id="Rng-Kn-JSg"/>
-                <constraint firstAttribute="bottom" secondItem="tn0-Ga-w8g" secondAttribute="bottom" constant="66" id="U4J-pS-ybN"/>
+                <constraint firstAttribute="bottom" secondItem="tn0-Ga-w8g" secondAttribute="bottom" constant="66" id="U4J-pS-ybN">
+                    <variation key="heightClass=regular-widthClass=compact" constant="42"/>
+                </constraint>
                 <constraint firstAttribute="trailing" secondItem="W5i-0q-l1i" secondAttribute="trailing" constant="1" id="V7t-WI-mho"/>
                 <constraint firstItem="bqW-kB-t1d" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="18" id="l6K-Y6-igA">
                     <variation key="heightClass=regular-widthClass=compact" constant="19"/>
@@ -109,7 +113,9 @@
                 <constraint firstAttribute="trailing" secondItem="QGs-IE-ct3" secondAttribute="trailing" constant="20" id="tR5-vI-4C6">
                     <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                 </constraint>
-                <constraint firstAttribute="trailing" secondItem="tn0-Ga-w8g" secondAttribute="trailing" constant="4" id="thG-SD-oE3"/>
+                <constraint firstAttribute="trailing" secondItem="tn0-Ga-w8g" secondAttribute="trailing" constant="4" id="thG-SD-oE3">
+                    <variation key="heightClass=regular-widthClass=compact" constant="-5"/>
+                </constraint>
                 <constraint firstItem="QGs-IE-ct3" firstAttribute="leading" secondItem="bqW-kB-t1d" secondAttribute="trailing" constant="23" id="tsB-qT-2c6">
                     <variation key="heightClass=regular-widthClass=compact" constant="1"/>
                 </constraint>

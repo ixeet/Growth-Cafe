@@ -29,6 +29,7 @@
     NSString *selectedSchoolName,*selectedClassName,*selectedRoomName;
     NSString *selectedTitle;
     BOOL isFirstLoginDone;
+    BOOL isUpdate;
 }
 
 @end
@@ -40,19 +41,16 @@
     // Do any additional setup after loading the view from its nib.
     //    CALayer *imageLayer = imgProfile.layer;
     //    [imageLayer setCornerRadius:75];
-    imgProfile.layer.cornerRadius = imgProfile.frame.size.width / 2;
-    imgProfile.clipsToBounds = NO;
+   
     [self setUserProfile];
+    isUpdate=NO;
     //  [self toggleHiddenState:YES];
     // self.lblLoginStatus.text = @"";
     
     self.btnFacebook.delegate = self;
     self.btnFacebook.readPermissions = @[@"public_profile", @"email"];
     [self changeFrameAndBackgroundImg];
-     arraySchools=[AppGlobal getDropdownList:SCHOOL_DATA];
-    arrayClass=  [[arraySchools objectAtIndex:0] objectForKey:@"classList"];
-    arrayHome=  [[arrayClass objectAtIndex:0] objectForKey:@"homeRoomList"];
-    isFirstLoginDone=NO;
+        isFirstLoginDone=NO;
     customKeyboard = [[CustomKeyboard alloc] init];
     customKeyboard.delegate = self;
 }
@@ -130,7 +128,7 @@
     }
     if(user.userImage!=nil){
    
-        if (user.userImageData==nil) {
+       
             NSURL *imageURL = [NSURL URLWithString:user.userImage];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                 user.userImageData  = [NSData dataWithContentsOfURL:imageURL];
@@ -140,20 +138,136 @@
                     if(img!=nil)
                     {
                         [imgProfile setImage:img];
+                        imgProfile.layer.cornerRadius = imgProfile.frame.size.width / 2;
+                        imgProfile.clipsToBounds = YES;
+
                         
                     }
                 });
             });
-        }else{
-            UIImage *img=[UIImage imageWithData:user.userImageData];
-            [imgProfile setImage:img];
-            
-        }
+//        }else{
+//            UIImage *img=[UIImage imageWithData:user.userImageData];
+//            [imgProfile setImage:img];
+//            imgProfile.layer.cornerRadius = imgProfile.frame.size.width / 2;
+//            imgProfile.clipsToBounds = YES;
+//
+//            
+//        }
     }
+    arraySchools=[AppGlobal getDropdownList:SCHOOL_DATA];
+    
+    for (NSDictionary *dicSch in arraySchools) {
+        if([[dicSch  objectForKey:@"schoolName"] isEqualToString:user.schoolName])
+        {
+            selectedSchoolId=  [dicSch objectForKey:@"schoolId"];
+            selectedSchoolName=  [dicSch objectForKey:@"schoolName"];
+            arrayClass=  [dicSch objectForKey:@"classList"];
+        }
+        
+    }
+    
+    for (NSDictionary *dicClass in arrayClass) {
+        if([[dicClass  objectForKey:@"className"] isEqualToString:user.className])
+        {
+            
+            
+            selectedClassId=  [dicClass objectForKey:@"classId"];
+            selectedClassName=  [dicClass objectForKey:@"className"];
+            arrayHome=  [dicClass objectForKey:@"homeRoomList"];
+        }
+        
+    }
+    arrayAllData=[AppGlobal getDropdownList:TITLE_DATA];
+    for (NSDictionary *dicTitle in arrayAllData) {
+        if([[dicTitle  objectForKey:@"Title"] isEqualToString:user.title])
+        
+            selectedTitle= [dicTitle objectForKey:@"Title"];
+        
+    }
+
+
 }
 - (IBAction)btnBackClick:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    UserDetails *usrDetail= [[UserDetails alloc]init];
+    
+if(![txtFirstName.text isEqualToString:  user.userFirstName])
+{
+    isUpdate=YES;
+    
+}else if(![txtLastName.text isEqualToString:  user.userLastName])
+    {
+        isUpdate=YES;
+        
+    }else if(![selectedTitle isEqualToString:  user.title])
+    {
+        isUpdate=YES;
+        
+    }
+    if(isUpdate){
+    usrDetail.userFirstName=txtFirstName.text;
+    usrDetail.userLastName=txtLastName.text;
+    usrDetail.title=selectedTitle;
+    usrDetail.userId =user.userId;
+    usrDetail.userEmail=user.userEmail;
+//    usrDetail.schoolName=selectedSchoolName;
+//    usrDetail.schoolId=selectedSchoolId;
+//    usrDetail.classId   =selectedClassId;
+//    usrDetail.className=selectedClassName;
+//    usrDetail.homeRoomName=selectedRoomName;
+//    usrDetail.homeRoomId=selectedRoomId;
+  
+    
+    if ([usrDetail.title length] <= 0){
+        [AppGlobal showAlertWithMessage:MISSING_TITLE title:@""];
+    }
+    else if ([usrDetail.userFirstName length] <= 0){
+        [AppGlobal showAlertWithMessage:MISSING_FIRST_NAME title:@""];
+    }
+    else if ([usrDetail.userLastName length] <= 0){
+        [AppGlobal showAlertWithMessage:MISSING_LAST_NAME title:@""];
+    }
+    
+    
+    else{
+        [activeTextField resignFirstResponder];
+        //Show Indicator
+        [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+        
+        [[appDelegate _engine] updateUserDetail:usrDetail  success:^(UserDetails *userDetail) {
+            
+            
+            user.userFirstName=txtFirstName.text;
+            user.userLastName=txtLastName.text;
+            user.title=selectedTitle;
+            //Hide Indicator
+            [appDelegate hideSpinner];
+            //navigate to feed view Controller
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            //            FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
+            //            CourseViewController *viewController= [[CourseViewController alloc]initWithNibName:@"CourseViewController" bundle:nil];
+            //
+            //            [self.navigationController pushViewController:viewController animated:YES];
+        }
+                                              failure:^(NSError *error) {
+                                                  //Hide Indicator
+                                                  [appDelegate hideSpinner];
+                                                  NSLog(@"failure Json Data %@",[error description]);
+                                                  [self registerationError:error];
+                                                  
+                                              }];
+    }
+    
+    }else {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    }
+   
 }
+-(void)registerationError:(NSError*)error{
+    
+    [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];
+}
+
 
 - (IBAction)btnPhotoClick:(id)sender {
     
@@ -169,7 +283,7 @@
         
         [popUpSheet addButtonWithTitle:@"Camera"];
         [popUpSheet addButtonWithTitle:@"Photo Library"];
-        // [popUpSheet addButtonWithTitle:@"Camera Roll"];
+        //  [popUpSheet addButtonWithTitle:@"Camera Roll"];
         
         [popUpSheet addButtonWithTitle:@"Cancel"];
         
@@ -186,7 +300,8 @@
         
     }
     
-    [popUpSheet showFromBarButtonItem: self.toolbarItems[0] animated:YES];  }
+    [popUpSheet showFromBarButtonItem: self.toolbarItems[0] animated:YES];
+}
 
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -202,129 +317,122 @@
             
             [self presentViewController:picker animated:YES completion:nil];
         }
-        //     //  else if (buttonIndex == 1) {
-        //
-        //            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        //
-        //            [self presentViewController:picker animated:YES completion:nil];
-        //
-        //        }
-        else if (buttonIndex == 2) {
-            picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-            
-            [self presentViewController:picker animated:YES completion:nil];
-            
-        }
-        
-    } else {
-        
-        if (buttonIndex == 0) {
+        else if (buttonIndex == 1) {
             
             picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             
+            [self presentViewController:picker animated:YES completion:nil];
             
-            [self presentViewController:picker animated:NO completion:NULL];
+        } else {
+            
+            if (buttonIndex == 0) {
+                
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                
+                
+                [self presentViewController:picker animated:NO completion:NULL];
+                
+                
+            }
+            else if (buttonIndex == 1) {
+                
+                picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                
+                [self presentViewController:picker animated:YES completion:NULL];
+                
+                
+            }
             
             
         }
-        else if (buttonIndex == 1) {
-            
-            picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-            
-            [self presentViewController:picker animated:YES completion:NULL];
-            
-            
-        }
-        
-        
     }
 }
 
 
 - (IBAction)btnGroupClick:(id)sender {
-    selectedPicker=ROOM_DATA;
-    //  arrayAllData=[AppGlobal getDropdownList:ROOM_DATA];
-    if (arrayHome!=nil &&[arrayHome count]>0)
-        
-    {
-        
-        
-        
-        [mDataPickerView reloadAllComponents];
-        [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
-        [self allTxtFieldsResignFirstResponder];
-    }
-    else{
-        [AppGlobal showAlertWithMessage:DEPART_NOT_FILLED title:@"Department"];
-    }
+//    selectedPicker=ROOM_DATA;
+//    //  arrayAllData=[AppGlobal getDropdownList:ROOM_DATA];
+//    if (arrayHome!=nil &&[arrayHome count]>0)
+//        
+//    {
+//        
+//        
+//        
+//        [mDataPickerView reloadAllComponents];
+//        [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
+//        [self allTxtFieldsResignFirstResponder];
+//    }
+//    else{
+//        [AppGlobal showAlertWithMessage:DEPART_NOT_FILLED title:@"Department"];
+//    }
 }
 - (IBAction)btnOrgClick:(id)sender {
-    selectedPicker=SCHOOL_DATA;
-    
-    
-    [mDataPickerView reloadAllComponents];
-    [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
-    [self allTxtFieldsResignFirstResponder];
-    
-//    if((btnDeprtment!=@"Department") ||(btnDeprtment!=@"Group"))
-//    {
-//        //  [btnDeprtment setTitle:@"Department" forState:UIControlStateNormal];
-//        // [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
-//        selectedClassId=nil;
-//        selectedClassName=nil;
-//        selectedRoomId=nil;
-//        selectedRoomName=nil;
-//        
-//    }else{
-//        
-//        [btnDeprtment setTitle:@"Department" forState:UIControlStateNormal];
-//        [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
-//        selectedClassId=nil;
-//        selectedClassName=nil;
-//        selectedRoomId=nil;
-//        selectedRoomName=nil;
-//        
-//    }
-    
+//    selectedPicker=SCHOOL_DATA;
+//    
+//    
+//    [mDataPickerView reloadAllComponents];
+//    [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
+//    [self allTxtFieldsResignFirstResponder];
+//    
+////    if((btnDeprtment!=@"Department") ||(btnDeprtment!=@"Group"))
+////    {
+////        //  [btnDeprtment setTitle:@"Department" forState:UIControlStateNormal];
+////        // [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
+////        selectedClassId=nil;
+////        selectedClassName=nil;
+////        selectedRoomId=nil;
+////        selectedRoomName=nil;
+////        
+////    }else{
+////        
+////        [btnDeprtment setTitle:@"Department" forState:UIControlStateNormal];
+////        [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
+////        selectedClassId=nil;
+////        selectedClassName=nil;
+////        selectedRoomId=nil;
+////        selectedRoomName=nil;
+////        
+////    }
+//    
     
 }
 - (IBAction)btnDeprtmentClick:(id)sender {
-    selectedPicker=CLASS_DATA;
-    // arrayAllData=[AppGlobal getDropdownList:CLASS_DATA];
-    
-    
-    if (arrayClass!=nil &&[arrayClass count]>0)
-        
-    {
-        
-        [mDataPickerView reloadAllComponents];
-        [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
-        [self allTxtFieldsResignFirstResponder];
-        
-        
-//        if (btnGroup!=@"Group") {
-//            // [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
-//            
-//            selectedRoomId=nil;
-//            selectedRoomName=nil;
-//        }else {
-//            
-//            [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
-//            
-//            selectedRoomId=nil;
-//            selectedRoomName=nil;
-//        }
-    }
-    else{
-        [AppGlobal showAlertWithMessage:ORG_NOT_FILLED title:@"Organization"];
-        
-    }
+//    selectedPicker=CLASS_DATA;
+//    // arrayAllData=[AppGlobal getDropdownList:CLASS_DATA];
+//    
+//    
+//    if (arrayClass!=nil &&[arrayClass count]>0)
+//        
+//    {
+//        
+//        [mDataPickerView reloadAllComponents];
+//        [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
+//        [self allTxtFieldsResignFirstResponder];
+//        
+//        
+////        if (btnGroup!=@"Group") {
+////            // [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
+////            
+////            selectedRoomId=nil;
+////            selectedRoomName=nil;
+////        }else {
+////            
+////            [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
+////            
+////            selectedRoomId=nil;
+////            selectedRoomName=nil;
+////        }
+//    }
+//    else{
+//        [AppGlobal showAlertWithMessage:ORG_NOT_FILLED title:@"Organization"];
+//        
+//    }
     
 }
 
 - (IBAction)btnTitleClick:(id)sender {
     selectedPicker=TITLE_DATA;
-    arrayAllData=[AppGlobal getDropdownList:TITLE_DATA];
+   
     [mDataPickerView reloadAllComponents];
     [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
     [self allTxtFieldsResignFirstResponder];
@@ -681,15 +789,61 @@
     [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
-}
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    //     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    //    imgProfile.image =imagePicker;
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    [picker dismissViewControllerAnimated:YES completion:nil];
+        UIImage *image = info[UIImagePickerControllerOriginalImage];
+
+    
+    //Show Indicator
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    [[appDelegate _engine] updateUserImage:image success:^(BOOL successValue) {
+        
+        
+      
+        //Hide Indicator
+        [appDelegate hideSpinner];
+       
+         user=[AppSingleton sharedInstance].userDetail;
+        if(user.userImage!=nil){
+            
+            
+            NSURL *imageURL = [NSURL URLWithString:user.userImage];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                user.userImageData  = [NSData dataWithContentsOfURL:imageURL];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Update the UI
+                    UIImage *img=[UIImage imageWithData:user.userImageData];
+                    if(img!=nil)
+                    {
+                        [imgProfile setImage:img];
+                        imgProfile.layer.cornerRadius = imgProfile.frame.size.width / 2;
+                        imgProfile.clipsToBounds = YES;
+                        
+                        
+                    }
+                });
+            });
+        }
+        
+    }
+                                    failure:^(NSError *error) {
+                                        //Hide Indicator
+                                        [appDelegate hideSpinner];
+                                        NSLog(@"failure Json Data %@",[error description]);
+                                        [self registerationError:error];
+                                        
+                                    }];
+
+   [picker dismissViewControllerAnimated:YES completion:nil];
     
 }
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
+//   
+//    imgProfile.image = image;
+//    [picker dismissViewControllerAnimated:YES completion:nil];
+//}
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     
     [picker dismissViewControllerAnimated:YES completion:nil];

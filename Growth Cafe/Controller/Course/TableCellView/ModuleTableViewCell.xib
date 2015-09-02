@@ -119,7 +119,7 @@
                         </variation>
                     </imageView>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="bkg-PP-gEb" secondAttribute="trailing" constant="3" id="4R5-i2-GIP">
                         <variation key="heightClass=regular-widthClass=compact" constant="-4"/>
@@ -208,6 +208,7 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="lblDate" destination="VV3-Si-adN" id="V1d-mS-I2D"/>
                 <outlet property="lblModuleName" destination="hnm-QO-hox" id="4W3-Lw-zIp"/>

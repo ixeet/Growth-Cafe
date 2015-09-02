@@ -29,6 +29,11 @@
 -(void)logout:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure;
 //User Register
 -(void)registerWithUserDetail:(UserDetails*)user success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure;
+//Update user Profile
+-(void)updateUserDetail:(UserDetails*)user success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure;
+//Update user Profile Image
+-(void)updateUserImage:(UIImage*)image success:(void (^)(BOOL successValue))success  failure:(void (^)(NSError *error))failure;
+
 -(void)ForgetPasswordWithUserName:(NSString*)userName success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure;
 
 //FB Varification by Server

@@ -95,6 +95,39 @@
         failure(error);
     }];
 }
+//Update user Profile
+-(void)updateUserDetail:(UserDetails*)user success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure{
+    
+    LoginHandler *login=[[LoginHandler alloc] init];
+    //   user.userPassword=  [user.userPassword AES256EncryptWithKey:@"m@zd@10017017Int33r@IT"];
+    [login updateUserDetail:user  success:^(UserDetails *userDetail){
+        
+        
+        
+        success(userDetail);
+        
+    }failure:^(NSError *error){
+        // [AppGlobal setValueInDefault:key_rememberMe value:[NSNumber numberWithBool:NO]];
+        failure(error);
+    }];
+}
+//Update user Profile Image
+-(void)updateUserImage:(UIImage*)image success:(void (^)(BOOL successValue))success  failure:(void (^)(NSError *error))failure{
+    
+    LoginHandler *login=[[LoginHandler alloc] init];
+    //   user.userPassword=  [user.userPassword AES256EncryptWithKey:@"m@zd@10017017Int33r@IT"];
+    [login updateUserImage:image  success:^(BOOL successValue){
+        
+        
+        
+        success(successValue);
+        
+    }failure:^(NSError *error){
+        // [AppGlobal setValueInDefault:key_rememberMe value:[NSNumber numberWithBool:NO]];
+        failure(error);
+    }];
+}
+
 //FB Varification by Server
 -(void)FBloginWithUserID:(NSString*)userid success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure{
     

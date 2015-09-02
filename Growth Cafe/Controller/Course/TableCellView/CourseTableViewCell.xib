@@ -173,7 +173,7 @@
                         </variation>
                     </button>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="3Zm-cF-Gxg" firstAttribute="top" secondItem="vAU-7n-qmT" secondAttribute="bottom" constant="2" id="0iX-1H-ls9"/>
                     <constraint firstAttribute="trailingMargin" secondItem="pVy-0n-Dvn" secondAttribute="trailing" constant="7" id="Bfx-CF-1sP">
@@ -277,6 +277,7 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="btnImg" destination="pVy-0n-Dvn" id="DCg-7H-fEq"/>
                 <outlet property="imgAssessaryview" destination="D7Z-3d-K6d" id="bHG-K9-6zX"/>

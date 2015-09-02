@@ -9,6 +9,8 @@
 #import "HomeViewController.h"
 #import "RegisterationViewController.h"
 #import "LoginViewController.h"
+#import <CrashReporter/CrashReporter.h>
+//#import "SubmitAssignmentViewController.h"
 @interface HomeViewController ()
 {
     BOOL isFirstLoginDone;
@@ -209,6 +211,10 @@
 - (IBAction)btnLoginClick:(id)sender {
     LoginViewController *loginViewController= [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
     [self.navigationController pushViewController:loginViewController animated:YES];
+    
+    
+//    SubmitAssignmentViewController *loginViewController= [[SubmitAssignmentViewController alloc]initWithNibName:@"SubmitAssignmentViewController" bundle:nil];
+//    [self.navigationController pushViewController:loginViewController animated:YES];
 }
 
 - (IBAction)btnRegisterClick:(id)sender {
@@ -216,4 +222,130 @@
     [self.navigationController pushViewController:viewController animated:YES];
 
 }
+-(void)ShowCrashLogAlert{
+    //    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Mazda Crash Log Agreement" message:@"Crash Log" delegate:self cancelButtonTitle:@"Decline" otherButtonTitles:@"Agree", nil];
+    //    alertView.tag = 6;
+    //    [alertView show];
+    //    [alertView release];
+    //    alertView = nil;
+    //    return;
+    
+    
+//    [Utilities showWaitingSpinner:self isShow:YES];
+//   	[[INTNetworkManager getInstance] makeJsonRequestWithMethod:kCrashLogMessageURL delegate:self requestType:kRequestTypeCrashWarningMessage requestMethod:kRequestMethodGet];
+}
+-(void)HandleCrash{
+    PLCrashReporter *crashReporter = [PLCrashReporter sharedReporter];
+    NSError *error = NULL;
+    
+    // Check if we previously crashed
+    if ([crashReporter hasPendingCrashReport]){
+        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+        if ([userDefault boolForKey:@"sendcrashlog"])
+            [self SendCrashLogToServer];
+        //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Info" message:@"There was a problem with the application. The log was sent to Mazda for further investigation." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"View", @"Send", nil];
+        //        alertView.tag = 4;
+        //        [alertView show];
+        //        [alertView release];
+        //        alertView = nil;
+        
+    }
+    
+    // Enable the Crash Reporter
+    if (![crashReporter enableCrashReporterAndReturnError: &error])
+        NSLog(@"Warning: Could not enable crash reporter: %@", error);
+}
+
+#pragma mark - PLCrashReporter
+
+//
+// Called to handle a pending crash report.
+//
+- (NSString *) handleCrashReport {
+    PLCrashReporter *crashReporter = [PLCrashReporter sharedReporter];
+    NSData *crashData;
+    NSError *error;
+    NSString *humanReadable = nil;
+    // Try loading the crash report
+    crashData = [crashReporter loadPendingCrashReportDataAndReturnError: &error];
+    
+    /*NSString* newStr = [[NSString alloc] initWithBytes:[crashData bytes] length:[crashData length] encoding:NSStringEncodingConversionAllowLossy];
+     NSLog(@"%@", newStr);*/
+    
+    if (crashData == nil) {
+        NSLog(@"Could not load crash report: %@", error);
+        [self CleanCrashReport];
+    }
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *_crashesDir = [NSString stringWithFormat:@"%@", [[paths objectAtIndex:0] stringByAppendingPathComponent:@"/crashes/"]];
+    NSFileManager *_fileManager = [[NSFileManager alloc] init];
+    if (![_fileManager fileExistsAtPath:_crashesDir]) {
+        NSDictionary *attributes = [NSDictionary dictionaryWithObject: [NSNumber numberWithUnsignedLong: 0755] forKey: NSFilePosixPermissions];
+        NSError *theError = NULL;
+        
+        [_fileManager createDirectoryAtPath:_crashesDir withIntermediateDirectories: YES attributes: attributes error: &theError];
+    }
+    
+    
+    // We could send the report from here, but we'll just print out
+    // some debugging info instead
+    PLCrashReport *report = [[PLCrashReport alloc] initWithData: crashData error: &error];
+    
+    humanReadable = [PLCrashReportTextFormatter stringValueForCrashReport:report withTextFormat:PLCrashReportTextFormatiOS];
+    NSLog(@"Report: %@", humanReadable);
+    
+    
+    
+    // Try loading the crash report
+    //crashData = [[NSData alloc] initWithData:[crashReporter loadPendingCrashReportDataAndReturnError: &error]];
+    
+    NSString *cacheFilename = [NSString stringWithFormat: @"%.0f.crash", [NSDate timeIntervalSinceReferenceDate]];
+    
+    if (crashData == nil) {
+        NSLog(@"Could not load crash report: %@", error);
+    } else {
+        //[self RequestWSWithUrl:@"" requestType:kRequestTypeCrashedData withDelegate:self withCrashData:humanReadable];
+        //        [INTNetworkManager getInstance].postString = [NSString stringWithFormat:@"crashdata=%@", humanReadable];
+        //        [Utilities showWaitingSpinner:self isShow:YES];
+        //        [[INTNetworkManager getInstance] makeJsonRequestWithMethod:kCrashRepoterUrl delegate:self requestType:kRequestTypeCrashedData requestMethod:kRequestMethodPost];
+        NSString *myString = [[NSString alloc] initWithData:crashData encoding:NSUTF32LittleEndianStringEncoding];
+        
+        NSLog(@"Sending Data: %@", crashData);
+        NSLog(@"Sending Data: \n %@", myString);
+        
+        [crashData writeToFile:[_crashesDir stringByAppendingPathComponent: cacheFilename] atomically:YES];
+    }
+    if (report == nil) {
+        NSLog(@"Could not parse crash report");
+        [self CleanCrashReport];
+    }
+    
+    NSLog(@"Crashed on %@\n %@", report.systemInfo.timestamp, [_crashesDir stringByAppendingPathComponent: cacheFilename]);
+    NSLog(@"Crashed with signal %@ (code %@, address=0x%" PRIx64 ")", report.signalInfo.name,
+          report.signalInfo.code, report.signalInfo.address);
+    
+    
+    if ([_fileManager fileExistsAtPath:[_crashesDir stringByAppendingPathComponent: cacheFilename]]) {
+        NSLog(@"YES");
+    }
+    
+    return humanReadable;
+}
+
+-(void)CleanCrashReport{
+    PLCrashReporter *crashReporter = [PLCrashReporter sharedReporter];
+    [crashReporter purgePendingCrashReport];
+}
+
+-(void)SendCrashLogToServer{
+    NSString *strHumanReadableCrashLog = [self handleCrashReport];
+//    NSString *deviceName = [[UIDevice currentDevice] machine];
+//    NSLog(@"%@", deviceName);
+//    [INTNetworkManager getInstance].postString = [NSString stringWithFormat:@"crashdata=%@&devicetype=IPHONE&userid=%@&guid=%@&devicemodel=%@", strHumanReadableCrashLog, @"", [NPUserData sharedNPUserData].guid, deviceName];
+//    NSLog(@"Sending >>>>>>>>> %@", [INTNetworkManager getInstance].postString);
+//    [Utilities showWaitingSpinner:self isShow:YES];
+//    [[INTNetworkManager getInstance] makeJsonRequestWithMethod:kCrashRepoterUrl delegate:self requestType:kRequestTypeCrashedData requestMethod:kRequestMethodPost];
+}
+
 @end

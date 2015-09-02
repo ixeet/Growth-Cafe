@@ -160,13 +160,22 @@
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
     //txtview.inputAccessoryView=commentView;
-    if([textView isEqual:txtViewURL]){
-        [self setPositionOfLoginBaseViewWhenStartEditing:-200];
-        
-    }
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+   // CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+  
     
     activeTextField = textView;
-    
+    if([textView isEqual:txtViewURL]){
+        
+        if( screenHeight > 480 && screenHeight < 667 ){
+            
+            [self setPositionOfLoginBaseViewWhenStartEditing:-250];
+        }else{
+            
+            [self setPositionOfLoginBaseViewWhenStartEditing:-160];
+        }
+    }
+
     UIToolbar* toolbar;
     if (textView.tag == 10) {
         toolbar = [customKeyboard getToolbarWithPrevNextDone:FALSE :TRUE];
@@ -181,13 +190,18 @@
     }
     [textView setInputAccessoryView:toolbar];
     
-    
     return YES;
 }
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
-    
-    return YES;
+  if(txtViewURL==textView)
+  {
+      [self setPositionOfLoginBaseViewWhenEndEditing];
+      [textView resignFirstResponder];
+      
+     
+  }
+     return YES;
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
@@ -199,7 +213,13 @@
 {
     
 }
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self setPositionOfLoginBaseViewWhenEndEditing];
+    [textField resignFirstResponder];
+    
+    return YES;
+}
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
   
    
@@ -240,7 +260,11 @@
     UITextField *nextResponder = (UITextField*) [self.view  viewWithTag:nextTag];
    
     
-    
+    if([txtViewURL isEqual:activeTextField]){
+        
+        [self setPositionOfLoginBaseViewWhenEndEditing];
+        
+    }
     while(!nextResponder.enabled)
     {
         nextResponder = (UITextField*)[self.view  viewWithTag:nextTag-1];
@@ -260,8 +284,7 @@
 {
     [self setPositionOfLoginBaseViewWhenEndEditing];
     [self allTxtFieldsResignFirstResponder];
-    
-    [activeTextField resignFirstResponder];
+  
     
 }
 #pragma --
@@ -270,7 +293,7 @@
 -(void)setPositionOfLoginBaseViewWhenStartEditing:(CGFloat)yAxis{
     
     if (self.view.frame.origin.y != yAxis) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardHide:) name:UIKeyboardWillHideNotification object:nil];       [AppGlobal setViewPositionWithView:self.view axisX:self.view.frame.origin.x axisY:yAxis withAnimation:YES];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardHide:) name:UIKeyboardWillHideNotification object:nil];       [AppGlobal setViewPositionWithView:self.view axisX:self.view.frame.origin.x axisY:yAxis withAnimation:NO];
     }
 }
 

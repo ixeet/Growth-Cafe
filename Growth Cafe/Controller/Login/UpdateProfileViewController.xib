@@ -100,7 +100,7 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-profile.png" translatesAutoresizingMaskIntoConstraints="NO" id="DRa-CL-9a5" userLabel="imgProfile">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="Ixu-Ab-yRl">
                                     <variation key="heightClass=regular-widthClass=compact" constant="90"/>
@@ -422,7 +422,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="L2A-cJ-4c6">
-                            <variation key="heightClass=regular-widthClass=compact" constant="41"/>
+                            <variation key="heightClass=regular-widthClass=compact" constant="40"/>
                         </constraint>
                     </constraints>
                     <variation key="default">
@@ -861,7 +861,7 @@
     </objects>
     <resources>
         <image name="icn_back-header.png" width="13" height="21"/>
-        <image name="logouta.png" width="321" height="41"/>
+        <image name="logouta.png" width="321" height="50"/>
         <image name="profile_img.png" width="134" height="123"/>
         <image name="user-profile.png" width="142" height="142"/>
     </resources>

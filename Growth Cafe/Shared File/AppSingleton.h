@@ -17,4 +17,5 @@
 @property(nonatomic,strong) UserDetails *userDetail;
 @property(nonatomic,assign) BOOL isUserLoggedIn;
 @property(nonatomic,assign) BOOL isUserFBLoggedIn;
+@property(nonatomic) BOOL isKeepMeloggedIn;
 @end

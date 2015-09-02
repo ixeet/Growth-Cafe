@@ -37,6 +37,10 @@
     CGPoint mPreviousTouchPoint;
     EGRIDVIEW_SCROLLDIRECTION  mSwipeDirection;
     BOOL isTableSelect;
+    CGFloat screenHeight ;
+    NSMutableArray *tableViewCellsArray;
+      NSMutableArray *tableViewCellsRelatedResourseArray;
+    CGFloat screenWidth;
 }
 
 
@@ -95,8 +99,8 @@
     NSLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
     objCustom.center = CGPointMake(200, 400);
     CGRect profileFrame=objCustom.view.frame ;
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+   screenHeight = [UIScreen mainScreen].bounds.size.height;
+   screenWidth = [UIScreen mainScreen].bounds.size.width;
     profileFrame.size.height=screenHeight-50;
     profileFrame.size.width=screenWidth;//200;
     objCustom.view.frame=profileFrame;
@@ -126,7 +130,9 @@
     
     [objCustom.view addGestureRecognizer:recognizer];    //set Profile
     [objCustom setUserProfile];
-    
+    tableViewCellsArray=[[NSMutableArray alloc]init];
+    tableViewCellsRelatedResourseArray=[[NSMutableArray alloc]init];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -154,8 +160,8 @@
 {
     if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
         
-        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+        screenHeight = [UIScreen mainScreen].bounds.size.height;
+        screenWidth = [UIScreen mainScreen].bounds.size.width;
         if( screenHeight < screenWidth ){
             screenHeight = screenWidth;
         }
@@ -167,7 +173,7 @@
             [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn_6Small.png"]];
             
         } else if ( screenHeight > 480 ){
-           // [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn.png"]];
+          [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn_6Small.png"]];
             
             NSLog(@"iPhone 6 Plus");
         } else {
@@ -792,7 +798,7 @@
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
-            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
             [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [objComment.commentBy length])];
             [customView.lblCmtBy  setAttributedText:attributedString];
            
@@ -1296,6 +1302,7 @@
         }else{
             cell.lblNextTitle.hidden=YES;
         }
+        [tableViewCellsArray addObject:cell];
         return cell;
     }else if(indexPath.section==1){
         Comments *comment= [selectedResource.comments objectAtIndex:indexPath.row];
@@ -1325,7 +1332,7 @@
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
-            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
             [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [comment.commentBy length])];
             [cell.lblCmtBy setAttributedText:attributedString];     //   cell.lblCmtDate.text=comment.commentDate;
         cell.lblCmtText.text=comment.commentTxt;
@@ -1421,6 +1428,7 @@
             }else{
              cell.lblRelatedVideo.hidden=YES;
             }
+            [tableViewCellsArray addObject:cell];
         return cell;
         }else{
             
@@ -1447,7 +1455,7 @@
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
-            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+            UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
             [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [comment.commentBy length])];
             [cell.lblCmtBy setAttributedText:attributedString];
            // cell.lblCmtDate.text=comment.commentDate;
@@ -1543,7 +1551,7 @@
             }else{
                 cell.lblRelatedVideo.hidden=YES;
             }
-
+[tableViewCellsArray addObject:cell];
             return cell;
         }
         
@@ -1567,7 +1575,7 @@
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
         
         // Set font, notice the range is for the whole string
-        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
         [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(3, [resource.authorName length])];
         [cell.lblContentby setAttributedText:attributedString];
 
@@ -1666,7 +1674,7 @@
         }else{
             cell.lblAssignment.hidden=YES;
         }
-
+[tableViewCellsRelatedResourseArray addObject:cell];
         return cell;
         
     }
@@ -1689,7 +1697,7 @@
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
         
         // Set font, notice the range is for the whole string
-        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
         [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(3, [assignment.assignmentSubmittedBy length])];
         [cell.lblContentby setAttributedText:attributedString];
         
@@ -1761,6 +1769,7 @@
         }
         
          cell.lblAssignment.hidden=YES;
+        [tableViewCellsArray addObject:cell];
         return cell;
     }
 
@@ -1835,15 +1844,47 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    int section=indexPath.section;
+//    //add the cells to a mutable array
+//    if(section==2 && IsRelatedConentExpended)
+//    {
+//        //the nil scenario happens when the cell is created for first time
+//        if([tableViewCellsRelatedResourseArray count]>indexPath.row){
+//        UITableViewCell *cell=[tableViewCellsRelatedResourseArray objectAtIndex:indexPath.row];
+//        //your code here
+//          AssignmentTableViewCell *cmtcell=(AssignmentTableViewCell*)cell;
+//            NSLog(@"%f",cmtcell.lblContentName.frame.size.width);
+//        }
+//
+//         [selectedResource.relatedResources count];
+//    }
+//    else if(section==2 && !IsRelatedConentExpended)
+//    {
+//        //the nil scenario happens when the cell is created for first time
+//       
+//        //your code here
+//        if([tableViewCellsRelatedResourseArray count]>indexPath.row){
+//             UITableViewCell *cell=[tableViewCellsRelatedResourseArray objectAtIndex:indexPath.row];
+//        AssignmentTableViewCell *cmtcell=(AssignmentTableViewCell*)cell;
+//        NSLog(@"%f",cmtcell.lblContentName.frame.size.width);
+//        }
+//        
+//       
+//    }
+   
+       
+    
+   
+    
     if(selectedResource==nil)
         return 0;
     if(indexPath.section==0)
         return 430.0f;
     else if(indexPath.section==1 && selectedResource.comments>0)
     {
-        Comments *cmt=selectedResource.comments[indexPath.row];
-        CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:cmt.commentTxt];
-        float height=0.0f;
+        
+        
+                      float height=0.0f;
         NSLog(@"%ld",(long)indexPath.row);
         if(([selectedResource.comments count]<3) && (indexPath.row==[selectedResource.comments count]-1))
         {
@@ -1860,7 +1901,17 @@
             }
             
         }
-        
+        Comments *comment=selectedResource.comments[indexPath.row];
+        float width=200;
+        if( screenHeight <740 && screenHeight >667 )
+        {
+            width=298;
+            
+        }else if  (screenHeight > 568 && screenHeight <= 667 )
+        {
+            width=270;
+        }
+        CGSize labelSize=[AppGlobal   getTheExpectedSizeOfLabel:comment.commentTxt andFontSize:13 labelWidth:width];
         if(labelSize.height>17)
                 return   height=height+80+labelSize.height-17.0;
             else
@@ -1868,11 +1919,13 @@
     }
     else if(indexPath.section==2 )
     {
-        float height=17.0f;
-       
+        float height=73.0f;
+        static NSString *identifier = @"AssignmentTableViewCell";
+        AssignmentTableViewCell *cell = (AssignmentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        NSLog(@"%f",cell.lblContentName.frame.size.width);
         if(([selectedResource.relatedResources count]<3) && (indexPath.row==[selectedResource.relatedResources count]-1))
         {
-            height=75.0f;
+            height=height+30.0f;
             
             
             
@@ -1881,19 +1934,41 @@
         {
             if(IsRelatedConentExpended && (indexPath.row==[selectedResource.relatedResources count]-1))
             {
-                height=75.0f;
+                height=height+50.0f;
             }else if(indexPath.row==2 && !IsRelatedConentExpended){
-                height=75.0f;
+                height=height+56.0f;
             }
             
         }
+       
         Resourse *realtedResource=selectedResource.relatedResources[indexPath.row];
-        CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:realtedResource.resourceTitle];
+        float width=200;
+        if( screenHeight <740 && screenHeight >667 )
+        {
+            width=298;
+            
+        }else if  (screenHeight > 568 && screenHeight <= 667 )
+        {
+            width=270;
+        }
+        CGSize labelSize=[AppGlobal   getTheExpectedSizeOfLabel:realtedResource.resourceTitle andFontSize:13 labelWidth:width];
         
-        if(labelSize.height>17)
-             return  height=height+70.0f+labelSize.height;
-        else
-            return  height=height+70.0f;;
+//        if(labelSize.height>17){
+             return  height=height+labelSize.height-17;
+       // }
+//        else if([realtedResource.resourceTitle length]>34 &&  (screenHeight > 480 && screenHeight < 667 ))
+//        {
+//            
+//            return  height=height+labelSize.height;
+//        }else if([realtedResource.resourceTitle length]>42 &&  screenHeight < 480)
+//        {
+//            
+//            return  height=height+labelSize.height;
+//        }
+        
+        return height;
+//        else
+//            return  height=height+70.0f;;
        
        
     
@@ -1902,18 +1977,60 @@
     else if(indexPath.section==3)
     {
 //
-        Assignment *assignment=[assignmentList objectAtIndex:indexPath.row];
-        float height=0.0f;
-        CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:assignment.assignmentName];
+        float height=73.0f;
         
-        if(labelSize.height>17)
-            return  height=height+75.0f+labelSize.height-17.0;
-        else
-            return  height=height+75.0f;;
+        if(([assignmentList count]<3) && (indexPath.row==[assignmentList count]-1))
+        {
+            height=height+30.0f;
+            
+            
+            
+        }
+        else if([assignmentList count]>=3)
+        {
+            if(IsAsignmentExpended && (indexPath.row==[assignmentList count]-1))
+            {
+                height=height+56.0f;
+            }else if(indexPath.row==2 && !IsAsignmentExpended){
+                height=height+56.0f;
+            }
+            
+        }
+        Assignment *assignment=assignmentList[indexPath.row];
+       
+        float width=200;
+        if( screenHeight <740 && screenHeight >667 )
+        {
+            width=298;
+            
+        }else if  (screenHeight > 568 && screenHeight <= 667 )
+        {
+            width=270;
+        }
+        CGSize labelSize=[AppGlobal   getTheExpectedSizeOfLabel:assignment.assignmentName  andFontSize:13 labelWidth:width];
+        
+        //        if(labelSize.height>17){
+        return  height=height+labelSize.height-17;
+        // }
 
+//        
+//        if(labelSize.height>17){
+//            return  height=height+labelSize.height-10;
+//        }else if([assignment.assignmentName length]>34 &&  (screenHeight > 480 && screenHeight < 667 ))
+//        {
+//            
+//            return  height=height+labelSize.height;
+//        }else if([assignment.assignmentName length]>42 &&  screenHeight < 480)
+//        {
+//            
+//            return  height=height+labelSize.height;
+//        }
+       // return height;
 
     }
-    return 44.0f;
+    //create cell
+    
+       return 44.0f;
 }
 
 //- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

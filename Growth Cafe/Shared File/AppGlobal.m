@@ -476,13 +476,13 @@
     NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
     return [urlTest evaluateWithObject:stringURL];
 }
-+(CGSize)getTheExpectedSizeOfLabel:(NSString*) labelstring
++(CGSize)getTheExpectedSizeOfLabel:(NSString*) labelstring andFontSize:(int) fontsize labelWidth:(float )width
 {
     //Calculate the expected size based on the font and linebreak mode of your label
-    CGSize maximumLabelSize = CGSizeMake(296,9999);
+    CGSize maximumLabelSize = CGSizeMake(width,9999);
 
-    CGSize expectedLabelSize = [labelstring sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:13] constrainedToSize:maximumLabelSize
-                                           lineBreakMode:NSLineBreakByCharWrapping];
+    CGSize expectedLabelSize = [labelstring sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:fontsize] constrainedToSize:maximumLabelSize
+                                           lineBreakMode:NSLineBreakByTruncatingTail];
    // CGSize size = [labelstring sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:12]}];
     
     // Values are fractional -- you should take the ceilf to get equivalent values
@@ -491,6 +491,23 @@
     //CGRect newFrame = yourLabel.frame;
    // newFrame.size.height = expectedLabelSize.height;
    // yourLabel.frame = newFrame;
+    return expectedLabelSize;
+}
++(CGSize)getTheExpectedSizeOfLabel:(NSString*) labelstring
+{
+    //Calculate the expected size based on the font and linebreak mode of your label
+    CGSize maximumLabelSize = CGSizeMake(296,9999);
+    
+    CGSize expectedLabelSize = [labelstring sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:13] constrainedToSize:maximumLabelSize
+                                           lineBreakMode:NSLineBreakByCharWrapping];
+    // CGSize size = [labelstring sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:12]}];
+    
+    // Values are fractional -- you should take the ceilf to get equivalent values
+    //   CGSize adjustedSize = CGSizeMake(ceilf(281.0f), ceilf(size.height));
+    //adjust the label the the new height.
+    //CGRect newFrame = yourLabel.frame;
+    // newFrame.size.height = expectedLabelSize.height;
+    // yourLabel.frame = newFrame;
     return expectedLabelSize;
 }
 +(NSString*) timeLeftSinceDate: (NSDate *)dateT
@@ -541,6 +558,57 @@
     if(timeLeft==nil)
         timeLeft=@"0 sec";
     return timeLeft;
+}
+// this method is used to get the server's url from settings bundle
++ (NSString*)getServerURL
+{
+    NSString* settingsUrl = [[NSUserDefaults standardUserDefaults] valueForKey:@"url_preference"];
+    
+    NSString *bPath = [[NSBundle mainBundle] bundlePath];
+    NSString *settingsBundlePath = [bPath stringByAppendingPathComponent:@"Settings.bundle"];
+    NSString *finalPath = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
+    NSDictionary *settingsDict = [NSDictionary dictionaryWithContentsOfFile:finalPath];
+    NSArray *prefSpecifierArray = [settingsDict objectForKey:@"PreferenceSpecifiers"];
+    
+    NSString*  firstValueDefault = nil;
+    NSDictionary *prefItem;
+    for (prefItem in prefSpecifierArray)
+    {
+        NSString *keyValueStr = [prefItem objectForKey:@"Key"];
+        id defaultValue       = [prefItem objectForKey:@"DefaultValue"];
+        
+        if ([keyValueStr isEqualToString:@"url_preference"]){
+            firstValueDefault = defaultValue;
+        }
+    }
+    
+    NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:firstValueDefault,@"url_preference",nil];
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    settingsUrl = [[NSUserDefaults standardUserDefaults] valueForKey:@"url_preference"];
+    
+    if(settingsUrl == nil){
+        settingsUrl = kProdURL;
+    }
+    
+    NSString *serverURL = kGROWTHURL(settingsUrl);
+    
+    return serverURL ;
+}
+// this method removes unwanted white spaces from a string
++ (NSString*)removeUnwantedspaces:(NSString*)oldString
+{
+    NSString* newString = oldString;
+    
+    NSCharacterSet* whitespaces = [NSCharacterSet whitespaceCharacterSet];
+    NSPredicate* noEmptyStrings = [NSPredicate predicateWithFormat:@"SELF != ''"];
+    
+    NSArray* parts = [newString componentsSeparatedByCharactersInSet:whitespaces];
+    NSArray* filteredArray = [parts filteredArrayUsingPredicate:noEmptyStrings];
+    newString = [filteredArray componentsJoinedByString:@" "];
+    
+    return newString;
 }
 @end
 

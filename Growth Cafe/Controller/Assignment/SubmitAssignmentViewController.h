@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *txtViewVideoTitle;
 @property (strong, nonatomic) IBOutlet UIImageView *imgAssest;
 @property (strong, nonatomic) IBOutlet ALAsset *selectedAssest;
+@property (strong, nonatomic) IBOutlet UIView *subView;
 
 
 @end

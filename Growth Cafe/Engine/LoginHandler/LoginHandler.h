@@ -19,6 +19,11 @@
 
 //User Register
 -(void)registerWithUserDetail:(UserDetails*)user success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure;
+//Update user Profile
+-(void)updateUserDetail:(UserDetails*)user success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure;
+
+//Update user Profile Image
+-(void)updateUserImage:(UIImage*)image success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure;
 
 //User Validation From FB
 -(void)FBloginWithUserID:(NSString*)userid   success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure;

@@ -109,7 +109,9 @@ UILabel *activityLabel;
     
     [FBLoginView class];
     [FBProfilePictureView class];
+    [AppSingleton sharedInstance].isKeepMeloggedIn  = [[NSUserDefaults standardUserDefaults] boolForKey:@"keep_loggedIn"];
     
+
     
     return YES;
 }

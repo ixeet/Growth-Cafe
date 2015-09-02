@@ -673,7 +673,9 @@
                 selectedRoomId=nil;
                 selectedRoomName=nil;
                 [btnClass setTitle:@"Department" forState:UIControlStateNormal];
+                [btnClass setTitleColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0] forState:UIControlStateNormal];
                 [btnHome   setTitle:@"Group" forState:UIControlStateNormal];
+                [btnHome setTitleColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0] forState:UIControlStateNormal];
             }
             selectedSchoolId=  [responseDic objectForKey:@"schoolId"];
             selectedSchoolName=  [responseDic objectForKey:@"schoolName"];
@@ -693,6 +695,7 @@
                 selectedRoomId=nil;
                 selectedRoomName=nil;
                 [btnHome   setTitle:@"Group" forState:UIControlStateNormal];
+                [btnHome setTitleColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0] forState:UIControlStateNormal];
             }
             selectedClassId=  [responseDic objectForKey:@"classId"];
             selectedClassName=  [responseDic objectForKey:@"className"];

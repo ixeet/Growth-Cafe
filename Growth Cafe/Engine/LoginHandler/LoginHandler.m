@@ -50,6 +50,7 @@
             userDetail.adminEmailId=[responseDic objectForKey:@"adminEmail"];
             userDetail.address=[responseDic objectForKey:@"address"];
             userDetail.userFBID=[responseDic objectForKey:@"userFbId"];
+            userDetail.userImage=[responseDic objectForKey:@"profileImage"];
             //call Block function
             success(userDetail);
         }
@@ -305,7 +306,49 @@
     }];
     
 }
+//Update user Profile
+-(void)updateUserDetail:(UserDetails*)user success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure{
+    user.address=@"";
+    
+    NSDictionary *parameters = @{@"userid":user.userId,@"userName":user.userEmail,@"firstName":user.userFirstName,@"lastName":user.userLastName,@"title":user.title,@"emailId":user.userEmail};
+
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manager POST:USER_UPDATE_PROFILE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+        
+        //Success Full Login
+        if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+            
+            //Create new  User Detail Data Model
+            // NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:responseDic];
+          //  [AppGlobal  writeUserDataOnFile:responseDic];
+        //user.userId= [responseDic objectForKey:@"userId"];
+            //call Block function
+            success(user);
+        }
+        else {
+            //call Block function
+            failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+        }
+        
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        //call Block function
+        failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+        NSLog(@"Error: %@", error);
+    }];
+    
+}
 //User Set FB  with user id
+
+
 
 -(void)SetFBloginWithUserID:(NSString*)username FBID:(NSString*)fbid success:(void (^)(bool status))success  failure:(void (^)(NSError *error))failure{
     
@@ -385,4 +428,95 @@
         failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
         
     }];}
+//Update user Profile Image
+-(void)updateUserImage:(UIImage*)image success:(void (^)(BOOL successValue))success  failure:(void (^)(NSError *error))failure{
+  
+    NSData* userImageData = UIImageJPEGRepresentation(image, 0.8);
+    
+    
+    
+    NSString *BoundaryConstant = @"---------------------------14737809831466499882746641449";
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [request setHTTPShouldHandleCookies:NO];
+    [request setTimeoutInterval:30];
+    [request setHTTPMethod:@"POST"];
+    [request setURL:[NSURL URLWithString:POST_USER_PROFILE_IMG_URL]];
+    UserDetails * objUser=[AppSingleton  sharedInstance].userDetail;
+    
+    
+    // set Content-Type in HTTP header
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BoundaryConstant];
+    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    // post body
+    NSMutableData *body = [NSMutableData data];
+    
+    // add params (all params are strings)
+    NSMutableDictionary *_params=[[NSMutableDictionary alloc]init];
+    [_params setObject:objUser.userEmail forKey:@"userName"];
+    
+    
+    for (NSString *param in _params) {
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", param] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"%@\r\n", [_params objectForKey:param]] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    // add image data
+    //NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"logo@2x.png"], 1.0);
+    if (userImageData) {
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"output.png\"\r\n", @"profilePhoto"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Type: image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:userImageData];
+        [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // setting the body of the post to the reqeust
+    [request setHTTPBody:body];
+    
+    // set the content-length
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[body length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    // set URL
+    
+    //    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    //
+    //    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    //    NSError* error;
+    //    NSDictionary* responseDic = [NSJSONSerialization JSONObjectWithData:returnData
+    //                                                         options:kNilOptions
+    //                                                           error:&error];
+    
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         if ([data length] > 0 && error == nil){
+             NSDictionary* responseDic = [NSJSONSerialization JSONObjectWithData:data
+                                                                         options:kNilOptions
+                                                                           error:&error];
+             // NSLog(@"%@",returnString);
+             //Success Full Logout
+             if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+                 [AppSingleton sharedInstance].userDetail.userImage=[responseDic objectForKey:@"uploadLocation"];
+                 success(YES);
+             }else{
+                 failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+             }
+             
+         }
+         else if (error != nil)
+             failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+     }];
+    
+    
+}
+
 @end

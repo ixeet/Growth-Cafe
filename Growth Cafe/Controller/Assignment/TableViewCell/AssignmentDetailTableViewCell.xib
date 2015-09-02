@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="3042" id="KGk-i7-Jjw" customClass="AssignmentDetailTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="3232" id="KGk-i7-Jjw" customClass="AssignmentDetailTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -111,8 +111,8 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="bMB-nD-ona"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                        <color key="textColor" red="0.078431372550000003" green="0.094117647060000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
                             <mask key="constraints">
@@ -168,6 +168,7 @@
                         </variation>
                     </button>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="IE8-FY-ECy" secondAttribute="trailing" constant="13" id="1Ru-y2-GUR"/>
                     <constraint firstItem="zL9-SB-wPE" firstAttribute="top" secondItem="4CP-SE-n1p" secondAttribute="bottom" constant="13" id="28x-TQ-hfY">
@@ -197,7 +198,7 @@
                     </constraint>
                     <constraint firstItem="PWE-b7-gOR" firstAttribute="leading" secondItem="nWw-ge-edJ" secondAttribute="trailing" constant="8" id="Umh-q0-elq"/>
                     <constraint firstItem="PWE-b7-gOR" firstAttribute="top" secondItem="IE8-FY-ECy" secondAttribute="bottom" constant="3" id="W6A-6u-ogB">
-                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                     </constraint>
                     <constraint firstItem="zL9-SB-wPE" firstAttribute="leading" secondItem="4CP-SE-n1p" secondAttribute="leading" id="XU4-Zf-Rx5"/>
                     <constraint firstItem="4CP-SE-n1p" firstAttribute="top" secondItem="TzM-cs-mtD" secondAttribute="bottom" constant="4" id="ZWQ-BX-Z7v">
@@ -214,13 +215,13 @@
                         <variation key="heightClass=regular-widthClass=compact" constant="13"/>
                     </constraint>
                     <constraint firstItem="IE8-FY-ECy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="i1H-Wi-q0U">
-                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="-1"/>
                     </constraint>
                     <constraint firstItem="nWw-ge-edJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="owC-eg-QPn">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
                     <constraint firstItem="TzM-cs-mtD" firstAttribute="top" secondItem="PWE-b7-gOR" secondAttribute="bottom" constant="2" id="pwZ-Ry-ons">
-                        <variation key="heightClass=regular-widthClass=compact" constant="1"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
                     <constraint firstItem="TzM-cs-mtD" firstAttribute="centerX" secondItem="djF-qf-JeC" secondAttribute="centerX" constant="-10" id="qTM-Zm-Vyd">
                         <variation key="heightClass=regular-widthClass=compact" constant="-0.5"/>
@@ -337,6 +338,7 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="btnAssignmentStatus" destination="nWw-ge-edJ" id="M5L-TB-ONS"/>
                 <outlet property="btnExpend" destination="XQI-If-LhS" id="2w4-rd-cPX"/>
@@ -348,7 +350,7 @@
                 <outlet property="lblDateAssignment" destination="OeN-E0-EZR" id="isU-hu-wtg"/>
                 <outlet property="lblUploadedDate" destination="zL9-SB-wPE" id="SeO-jN-Zaa"/>
             </connections>
-            <point key="canvasLocation" x="233" y="739"/>
+            <point key="canvasLocation" x="210" y="788"/>
         </tableViewCell>
     </objects>
     <resources>

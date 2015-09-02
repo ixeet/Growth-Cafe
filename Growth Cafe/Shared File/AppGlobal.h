@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface AppGlobal : NSObject
-
++ (NSString*)getServerURL;
 //Show warning message
 +(void)showAlertWithMessage:(NSString*)msg title:(NSString*)title;
 
@@ -73,7 +73,10 @@
 + (BOOL) validateUrlWithString: (NSString *) stringURL;
 //calculate the size
 +(CGSize)getTheExpectedSizeOfLabel:(NSString*) labelstring ;
++(CGSize)getTheExpectedSizeOfLabel:(NSString*) labelstring andFontSize:(int) fontsize labelWidth:(float )width;
+
 +(void)writeUserDataOnFile:(NSDictionary *)arrayData;
 +(UserDetails*)readUserDetail;
 +(NSString*) timeLeftSinceDate: (NSDate *)dateT;
++ (NSString*)removeUnwantedspaces:(NSString*)oldString;
 @end

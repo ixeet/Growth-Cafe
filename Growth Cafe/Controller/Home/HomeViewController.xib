@@ -104,7 +104,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="4IT-Lo-xIO" secondAttribute="bottom" constant="-2" id="1os-nx-nYt">
-                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="-1"/>
                 </constraint>
                 <constraint firstItem="B3e-8s-orZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="37K-xU-ZVv"/>
                 <constraint firstAttribute="centerX" secondItem="iqb-9u-Wn6" secondAttribute="centerX" id="59N-66-RhX">

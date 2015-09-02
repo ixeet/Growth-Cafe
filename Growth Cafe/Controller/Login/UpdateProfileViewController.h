@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface UpdateProfileViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
+@interface UpdateProfileViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate,UIActionSheetDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *imgProfile;
 @property (weak, nonatomic) IBOutlet FBLoginView *btnFacebook;
