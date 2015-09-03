@@ -108,7 +108,7 @@
                 </constraint>
                 <constraint firstItem="8XI-Ra-WeO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Xam-kS-0Gz"/>
                 <constraint firstAttribute="bottom" secondItem="zRs-Ru-Bvy" secondAttribute="bottom" constant="65" id="anQ-bW-z02">
-                    <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="40"/>
                 </constraint>
                 <constraint firstItem="8XI-Ra-WeO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cCj-G1-C5P"/>
                 <constraint firstAttribute="trailing" secondItem="8XI-Ra-WeO" secondAttribute="trailing" id="dwd-2n-dmK"/>

@@ -249,7 +249,7 @@
     if([userid isEqualToString:@"(null)"])
         return ;
     //Show Indicator
-    if( self.offsetRecord==0){
+    if( self.offsetRecord==0 && tblViewContent.tableHeaderView==nil){
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     }
     [[appDelegate _engine] getUpdates:userid  AndTextSearch:txtSearch Offset:(int)self.offsetRecord  NoOfRecords:UPDATE_PER_PAGE  success:^(NSMutableDictionary *dicUpdates) {
@@ -257,7 +257,8 @@
         
         self.totalRecord=[[dicUpdates objectForKey:@"updatesCount"] integerValue] ;
         self.pendingRecord=self.totalRecord-(self.offsetRecord+UPDATE_PER_PAGE);
-       
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
         // [self loginSucessFullWithFB];
         if( self.offsetRecord==0){
             //Hide Indicator
@@ -266,10 +267,12 @@
              arrayUpdates=[dicUpdates objectForKey:@"updates"]  ;
             [tblViewContent reloadData];
              [appDelegate hideSpinner];
+            
         }else{
         [arrayUpdates addObjectsFromArray: [dicUpdates objectForKey:@"updates"]]  ;
                        [tblViewContent reloadData];
         }
+        
         self.offsetRecord=self.offsetRecord+UPDATE_PER_PAGE;
         
     }
@@ -1106,11 +1109,11 @@
         }
         else{
 //             cellHeight=cellHeight+height+80;
-            if(cellCMTHeight<height+80)
+            if(cellCMTHeight<height+70)
             {
-                cellCMTHeight=height+80;
+                cellCMTHeight=height+70;
             }
-            return  height=height+80;
+            return  height=height+70;
         }
     }
     
@@ -1776,15 +1779,27 @@
  //    tblViewContent.tableHeaderView = footerView;
     [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
 
-    if (self.pendingRecord>0 && endOfTable && !scrollView.dragging && !scrollView.decelerating)
+    if (self.pendingRecord>0 && scrollView.contentOffset.y>0 && endOfTable && !scrollView.dragging && !scrollView.decelerating)
     {
         [self initFooterView];
         tblViewContent.tableFooterView = footerView;
         
         [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
         [self getUpdate:@""];
-    }else{
+    }else  if (scrollView.contentOffset.y<=0  && !scrollView.dragging && !scrollView.decelerating)
+    {
+        [self initFooterView];
+        tblViewContent.tableHeaderView = footerView;
+        
+        [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
+        self.offsetRecord=0;
+        [self getUpdate:@""];
+        
+    }
+    else{
        [footerView removeFromSuperview];
+//        tblViewContent.tableFooterView=nil;
+//        tblViewContent.tableHeaderView=nil;
 
     }
     
