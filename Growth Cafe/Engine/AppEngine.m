@@ -262,10 +262,10 @@
     }];
     
 }
--(void)getUpdates:(NSString*)userid  AndTextSearch:(NSString*)txtSearch success:(void (^)(NSMutableArray *updates))success   failure:(void (^)(NSError *error))failure{
+-(void)getUpdates:(NSString*)userid  AndTextSearch:(NSString*)txtSearch Offset:(int)offset NoOfRecords:(int)noOfRecords success:(void (^)(NSMutableDictionary *updates))success   failure:(void (^)(NSError *error))failure{
 
     FeedHandler *feed=[[FeedHandler alloc] init];
-    [feed getUpdates:userid  AndTextSearch:txtSearch success:^(NSMutableArray *updates){
+    [feed getUpdates:userid  AndTextSearch:txtSearch Offset:offset NoOfRecords:noOfRecords success:^(NSMutableDictionary *updates){
         success(updates);
         
     }failure:^(NSError *error){

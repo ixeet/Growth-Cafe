@@ -13,16 +13,16 @@
 
 @implementation FeedHandler
 //get Updates Data
--(void)getUpdates:(NSString*)userid  AndTextSearch:(NSString*)txtSearch success:(void (^)(NSMutableArray *updates))success   failure:(void (^)(NSError *error))failure{
+-(void)getUpdates:(NSString*)userid  AndTextSearch:(NSString*)txtSearch Offset:(int)offset NoOfRecords:(int)noOfRecords success:(void (^)(NSMutableDictionary *updates))success   failure:(void (^)(NSError *error))failure{
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
     NSDictionary *parameters = @{@"userId":userid,
-                                 @"searchText":txtSearch,
+                                 @"searchText":txtSearch,@"offset":[NSString stringWithFormat:@"%d",offset],@"noOfRecords":[NSString stringWithFormat:@"%d",noOfRecords]
                                  };
-    
+  
     [manager POST:GET_UPDATE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
@@ -36,6 +36,8 @@
         
         //call Block function
         NSMutableArray *updateList= [[NSMutableArray alloc]init];
+        NSMutableDictionary *dicUpdate= [[NSMutableDictionary alloc]init];
+        NSString *totalRecords=[responseDic objectForKey:@"totalRecords"];
         for (NSDictionary *dicContent in [responseDic objectForKey:@"feedList"]) {
             Update *update= [[Update alloc]init];
             if([dicContent objectForKey:@"likeCounts"]!=nil){
@@ -147,7 +149,9 @@
             [updateList addObject:update];
         }
         //call Block function
-      success(updateList);
+        [dicUpdate setObject:updateList forKey:@"updates"];
+        [dicUpdate setObject:totalRecords forKey:@"updatesCount"];
+      success(dicUpdate);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);

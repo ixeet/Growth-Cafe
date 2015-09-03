@@ -1,20 +1,16 @@
 //
-//  FeedViewController.h
-//  sLMS
+//  UpdateDetailViewController.h
+//  Growth Cafe
 //
-//  Created by Mayank on 07/07/15.
-//  Copyright (c) 2015 Mayank. All rights reserved.
+//  Created by Mayank on 02/09/15.
+//  Copyright (c) 2015 Scolere. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "CustomProfileView.h"
-
-@interface UpdateViewController : UIViewController
-{
-    UIView * footerView;
-   }
-@property (assign, nonatomic)   BOOL isLoading;
+#import "Update.h"
+@interface UpdateDetailViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIView *cmtview;
 
 
@@ -25,12 +21,10 @@
 @property (strong, nonatomic) IBOutlet UITextView *txtViewCMT;
 @property (strong, nonatomic) IBOutlet MPMoviePlayerController *moviePlayer;
 @property (strong, nonatomic)  CustomProfileView *objCustom;
-
-@property (assign, nonatomic)  NSInteger totalRecord;
-@property (assign, nonatomic)  NSInteger pendingRecord;
-
-@property (assign, nonatomic)  NSInteger offsetRecord;
+@property (strong, nonatomic)  Update *objUpdate;
 - (IBAction)btnCommentDone:(id)sender;
 - (IBAction)btnCommentCancle:(id)sender;
 - (IBAction)btnProfileClick:(id)sender;
+- (IBAction)btnBackClick:(id)sender;
+
 @end

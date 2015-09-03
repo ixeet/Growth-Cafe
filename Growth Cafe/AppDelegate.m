@@ -5,7 +5,6 @@
 //  Created by Ixeet Software Solutions Pvt Limited on 8/12/15.
 //  Copyright (c) 2015 Scolere. All rights reserved.
 //
-
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "UpdateViewController.h"
@@ -26,7 +25,7 @@ UILabel *activityLabel;
 
 
 @synthesize _engine;
-@synthesize _homeViewController,_navHomeViewController;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.

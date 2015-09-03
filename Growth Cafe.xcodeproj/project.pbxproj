@@ -22,6 +22,8 @@
 		A881C9AE1B7F9FC70016F049 /* SubCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A881C9AC1B7F9FC70016F049 /* SubCommentTableViewCell.m */; };
 		A881C9AF1B7F9FC70016F049 /* SubCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A881C9AD1B7F9FC70016F049 /* SubCommentTableViewCell.xib */; };
 		A8AC9D591B95D17500FCE284 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8AC9D581B95D17500FCE284 /* CrashReporter.framework */; };
+		A8AC9D5D1B96E47900FCE284 /* UpdateDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AC9D5B1B96E47900FCE284 /* UpdateDetailViewController.m */; };
+		A8AC9D5E1B96E47900FCE284 /* UpdateDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8AC9D5C1B96E47900FCE284 /* UpdateDetailViewController.xib */; };
 		A8AD43211B8AEAB300AAD7E8 /* UpdateProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AD431F1B8AEAB300AAD7E8 /* UpdateProfileViewController.m */; };
 		A8AD43221B8AEAB300AAD7E8 /* UpdateProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8AD43201B8AEAB300AAD7E8 /* UpdateProfileViewController.xib */; };
 		A8CAA0581B8339D80066C893 /* icn_reply@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CAA0561B8339D80066C893 /* icn_reply@2x.png */; };
@@ -304,6 +306,9 @@
 		A881C9AC1B7F9FC70016F049 /* SubCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCommentTableViewCell.m; sourceTree = "<group>"; };
 		A881C9AD1B7F9FC70016F049 /* SubCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubCommentTableViewCell.xib; sourceTree = "<group>"; };
 		A8AC9D581B95D17500FCE284 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
+		A8AC9D5A1B96E47800FCE284 /* UpdateDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateDetailViewController.h; sourceTree = "<group>"; };
+		A8AC9D5B1B96E47900FCE284 /* UpdateDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateDetailViewController.m; sourceTree = "<group>"; };
+		A8AC9D5C1B96E47900FCE284 /* UpdateDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateDetailViewController.xib; sourceTree = "<group>"; };
 		A8AD431E1B8AEAB300AAD7E8 /* UpdateProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateProfileViewController.h; sourceTree = "<group>"; };
 		A8AD431F1B8AEAB300AAD7E8 /* UpdateProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateProfileViewController.m; sourceTree = "<group>"; };
 		A8AD43201B8AEAB300AAD7E8 /* UpdateProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateProfileViewController.xib; sourceTree = "<group>"; };
@@ -1023,6 +1028,9 @@
 				C9C265001B7B803700EA4F38 /* UpdateViewController.h */,
 				C9C265011B7B803700EA4F38 /* UpdateViewController.m */,
 				C9C265021B7B803700EA4F38 /* UpdateViewController.xib */,
+				A8AC9D5A1B96E47800FCE284 /* UpdateDetailViewController.h */,
+				A8AC9D5B1B96E47900FCE284 /* UpdateDetailViewController.m */,
+				A8AC9D5C1B96E47900FCE284 /* UpdateDetailViewController.xib */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -1424,6 +1432,7 @@
 				C9C266231B7B819100EA4F38 /* logout@2x.png in Resources */,
 				C9C266331B7B819100EA4F38 /* list_vertical_line@2x.png in Resources */,
 				C9C266361B7B819100EA4F38 /* loadingBG@2x.png in Resources */,
+				A8AC9D5E1B96E47900FCE284 /* UpdateDetailViewController.xib in Resources */,
 				C9C265FC1B7B819100EA4F38 /* icn_grade1@3x.png in Resources */,
 				C9C265451B7B803700EA4F38 /* LoginViewController.xib in Resources */,
 				C9C265FE1B7B819100EA4F38 /* icn_like@3x.png in Resources */,
@@ -1602,6 +1611,7 @@
 				C9C265331B7B803700EA4F38 /* CustomContentView.m in Sources */,
 				C9C2653A1B7B803700EA4F38 /* UpdateTableViewCell.m in Sources */,
 				C9C264921B7B7BCB00EA4F38 /* NSData+AESCrypt.m in Sources */,
+				A8AC9D5D1B96E47900FCE284 /* UpdateDetailViewController.m in Sources */,
 				C9C264401B7B799700EA4F38 /* AFSecurityPolicy.m in Sources */,
 				C9C2654A1B7B803700EA4F38 /* MoreViewController.m in Sources */,
 				A8D73DD71B7E06D30022C1A0 /* AssestTableViewCell.m in Sources */,

@@ -66,23 +66,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     btnFacebook.delegate=self;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if ([defaults boolForKey:@"keep_loggedIn"])
-    {
-        NSString* useremail =  [AppGlobal removeUnwantedspaces:[defaults objectForKey:@"loginName"]];
-        NSString* userpassword = [AppGlobal removeUnwantedspaces:[defaults objectForKey:@"Password"]];
-        useremail = ([useremail length] > 0) ? useremail : nil;
-        userpassword = ([userpassword length] > 0) ? userpassword :nil;
-        txtUsername.text = useremail;
-        txtPassword.text = userpassword;
-        
-        if (useremail != nil && userpassword != nil)
-        {
-            [self btnLoginClick:self];
-        }
-
-    }
 }
 -(void)viewWillDisappear:(BOOL)animated{
     btnFacebook.delegate=nil;

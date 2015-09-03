@@ -53,7 +53,7 @@
 
 
 #pragma Comment and Like on Update
--(void)getUpdates:(NSString*)userid  AndTextSearch:(NSString*)txtSearch success:(void (^)(NSMutableArray *updates))success   failure:(void (^)(NSError *error))failure;
+-(void)getUpdates:(NSString*)userid  AndTextSearch:(NSString*)txtSearch Offset:(int)offset NoOfRecords:(int)noOfRecords success:(void (^)(NSMutableDictionary *updates))success   failure:(void (^)(NSError *error))failure;
 //Comment and Like on Resource
 -(void)setCommentOnUpdate:(NSString*)updateId  AndCommentText:(NSString*)txtComment success:(void (^)(BOOL logoutValue))success   failure:(void (^)(NSError *error))failure;
 -(void)setLikeOnUpdate:(NSString*)updateId  success:(void (^)(BOOL logoutValue))success   failure:(void (^)(NSError *error))failure;

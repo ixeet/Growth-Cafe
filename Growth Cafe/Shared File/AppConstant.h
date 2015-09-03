@@ -131,7 +131,7 @@
 
 #define SUCCESS_MESSAGE_ALERT_TITLE @"Info"
 #define DATA_LOADING_MSG @"Please wait..."
-
+#define UPDATE_PER_PAGE 1
 //Dropdown Enums
 typedef NS_ENUM(NSInteger, AppDropdownType){
     

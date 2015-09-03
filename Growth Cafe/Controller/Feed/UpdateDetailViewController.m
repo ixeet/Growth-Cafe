@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Mayank. All rights reserved.
 //
 
-#import "UpdateViewController.h"
+#import "UpdateDetailViewController.h"
 #import "CourseViewController.h"
 #import "CourseViewController.h"
 #import "UpdateViewController.h"
@@ -21,10 +21,9 @@
 #import "CourseViewController.h"
 #import "SubCommentTableViewCell.h"
 #import "UpdateProfileViewController.h"
-#import "UpdateDetailViewController.h"
-@interface UpdateViewController ()
+@interface UpdateDetailViewController ()
 {
-    NSMutableArray *arrayUpdates;
+   
     BOOL isSearching;
     CGRect txtframe;
     NSString    *searchText;
@@ -32,17 +31,13 @@
     ActionOn  actionOn;
     NSString* useremail;
     NSString* userpassword;
-    float cellCMTHeight;
-    CGFloat screenHeight;
-    CGFloat screenWidth;
-    float cellMainHeight;
 }
 
 @end
 
-@implementation UpdateViewController
+@implementation UpdateDetailViewController
 @synthesize txtSearchBar,tblViewContent;
-@synthesize step,txtViewCMT,objCustom;
+@synthesize step,txtViewCMT,objCustom,objUpdate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,73 +46,22 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     // Do any additional setup after loading the view from its nib.
-
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if ([defaults boolForKey:@"keep_loggedIn"])
-    {
-        useremail =  [AppGlobal removeUnwantedspaces:[defaults objectForKey:@"loginName"]];
-        userpassword = [AppGlobal removeUnwantedspaces:[defaults objectForKey:@"Password"]];
-        useremail = ([useremail length] > 0) ? useremail : nil;
-        userpassword = ([userpassword length] > 0) ? userpassword :nil;
-        if (useremail != nil && userpassword != nil)
-        {
-            //Show Indicator
-            [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
-            
-            [[appDelegate _engine] loginWithUserName:useremail password:userpassword  rememberMe:YES
-                                             success:^(UserDetails *userDetail) {
-                                                 [AppSingleton sharedInstance].userDetail=userDetail;
-                                                 [AppSingleton sharedInstance].isUserLoggedIn=YES;
-                                                 [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
-                                                 [self loginSucessFull];
-                                                 
-                                                 //Hide Indicator
-                                                 [appDelegate hideSpinner];
-                                                 [self  getUpdate:@""];
-                                             }
-                                             failure:^(NSError *error) {
-                                                 //Hide Indicator
-                                                 [appDelegate hideSpinner];
-                                                 NSLog(@"failure JsonData %@",[error description]);
-                                                 [self loginError:error];
-                                                 
-                                             }];
-        }
-        
-    }else if(  [AppSingleton sharedInstance].isUserLoggedIn!=YES)
-    {
-        [FBSession.activeSession closeAndClearTokenInformation];
-        [FBSession.activeSession close];
-        [FBSession setActiveSession:nil];
-        
-        [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
-        [AppSingleton sharedInstance].isUserLoggedIn=NO;
-        
-        
-        [self.tabBarController.tabBar setHidden:YES];
-        HomeViewController *viewController= [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
-        
-        //        FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-        [self.tabBarController.tabBar setHidden:YES];
-        [self.navigationController pushViewController:viewController animated:YES];
-        
-    }
-
-       UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
     
     [self.view addGestureRecognizer:tap];
-    self.isLoading=true;
+    
     // Custom initialization
     [self setSearchUI];
     objCustom = [[CustomProfileView alloc] init];
     NSLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
     objCustom.center = CGPointMake(200, 400);
     CGRect frame1=objCustom.view.frame ;
-//    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-//    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     frame1.size.height=screenHeight-50;
     frame1.size.width=screenWidth;//200;
     objCustom.view.frame=frame1;
@@ -131,7 +75,6 @@
     [self.view addSubview:self.cmtview];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillEnterFullscreenNotification:) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillExitFullscreenNotification:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
-    
 }
 
 -(void)loginSucessFull{
@@ -139,7 +82,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:useremail     forKey:@"loginName"];
     [defaults setObject:userpassword  forKey:@"Password"];
-   
+    
     
 }
 
@@ -155,8 +98,8 @@
 {
     if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
         
-         screenHeight = [UIScreen mainScreen].bounds.size.height;
-         screenWidth = [UIScreen mainScreen].bounds.size.width;
+        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
         if( screenHeight < screenWidth ){
             screenHeight = screenWidth;
         }
@@ -188,16 +131,11 @@
     
     // [super viewWillAppear:animated];
     /* Listen for keyboard */
-  //  NSInteger numberOfViewControllers = self.navigationController.viewControllers.count;
-    
-  
     objCustom.btnFacebook.delegate=objCustom;
     [objCustom setUserProfile];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    // [objCustom setUserProfile];
-    if([arrayUpdates count]==0)
-    {
+    
     UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognizer:)];
     
     recognizer.direction = UISwipeGestureRecognizerDirectionRight;
@@ -207,14 +145,11 @@
     
     
     //set Profile
-
-    self.offsetRecord=0;
+    // [objCustom setUserProfile];
     
-    [self  getUpdate:@""];
-     }
+    //[self  getUpdate:@""];
     
 }
-
 -(void)viewDidDisappear:(BOOL)animated
 {
     /* remove for keyboard */
@@ -241,49 +176,37 @@
  }
  */
 
-#pragma mark Update Private functions
--(void) getUpdate:(NSString *) txtSearch
-{
-    
-    NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId];
-    if([userid isEqualToString:@"(null)"])
-        return ;
-    //Show Indicator
-    if( self.offsetRecord==0){
-    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
-    }
-    [[appDelegate _engine] getUpdates:userid  AndTextSearch:txtSearch Offset:(int)self.offsetRecord  NoOfRecords:UPDATE_PER_PAGE  success:^(NSMutableDictionary *dicUpdates) {
-       
-        
-        self.totalRecord=[[dicUpdates objectForKey:@"updatesCount"] integerValue] ;
-        self.pendingRecord=self.totalRecord-(self.offsetRecord+UPDATE_PER_PAGE);
-       
-        // [self loginSucessFullWithFB];
-        if( self.offsetRecord==0){
-            //Hide Indicator
-            
-           
-             arrayUpdates=[dicUpdates objectForKey:@"updates"]  ;
-            [tblViewContent reloadData];
-             [appDelegate hideSpinner];
-        }else{
-        [arrayUpdates addObjectsFromArray: [dicUpdates objectForKey:@"updates"]]  ;
-                       [tblViewContent reloadData];
-        }
-        self.offsetRecord=self.offsetRecord+UPDATE_PER_PAGE;
-        
-    }
-                              failure:^(NSError *error) {
-                                  //Hide Indicator
-                                  [appDelegate hideSpinner];
-                                  NSLog(@"failure JsonData %@",[error description]);
-                                  [self loginError:error];
-                                  //                                         [self loginViewShowingLoggedOutUser:loginView];
-                                  
-                              }];
-    
-    
-}
+//#pragma mark Update Private functions
+//-(void) getUpdate:(NSString *) txtSearch
+//{
+//    
+//    NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId];
+//    if([userid isEqualToString:@"(null)"])
+//        return ;
+//    //Show Indicator
+//    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+//    
+//    [[appDelegate _engine] getUpdates:userid  AndTextSearch:txtSearch success:^(NSMutableArray *updates) {
+//        arrayUpdates=updates;
+//        
+//        
+//        [tblViewContent reloadData];
+//        // [self loginSucessFullWithFB];
+//        
+//        //Hide Indicator
+//        [appDelegate hideSpinner];
+//    }
+//                              failure:^(NSError *error) {
+//                                  //Hide Indicator
+//                                  [appDelegate hideSpinner];
+//                                  NSLog(@"failure JsonData %@",[error description]);
+//                                  [self loginError:error];
+//                                  //                                         [self loginViewShowingLoggedOutUser:loginView];
+//                                  
+//                              }];
+//    
+//    
+//}
 //- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
 //    UIViewController *vc = tabBarController.selectedViewController;
 //
@@ -322,29 +245,12 @@
 {
     // Return the number of sections.
     NSLog(@"You are in: %s", __FUNCTION__);
-    return [arrayUpdates count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    int rowCount=0;
-    Update *update=arrayUpdates[section];
-    
-    if(update.isExpend)
-    {
-        rowCount=[update.comments count] +1;
-    }else{
-        if([update.comments count]<1)
-        {
-            rowCount=[update.comments count]+1;
-        }
-        else{
-            rowCount=2;
-        }
-        
-        
-    }
-    return rowCount;
+    return [objUpdate.comments count]+1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -362,84 +268,11 @@
             cell = [topLevelObjects objectAtIndex:0];
             [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         }
-        Update *update=[arrayUpdates objectAtIndex:indexPath.section];
+       
         
         // create custom view for title
-        NSString *titleString =update.updateTitle;
+        NSString *titleString =objUpdate.updateTitle;
         NSArray *titleWords = [titleString componentsSeparatedByString:@"$"];
-        //        float x,y;
-        //        x=0.0f;
-        //        y=0.0f;
-        //        int textIndex=0;
-        //        for (NSString *strtemp in titleWords) {
-        //            UILabel *lbltitle=[[UILabel alloc]init];
-        //            [lbltitle setTextColor:[UIColor darkGrayColor]];
-        //            NSString *strtrim = [strtemp stringByTrimmingCharactersInSet:
-        //                                       [NSCharacterSet whitespaceCharacterSet]];
-        //             lbltitle.text=strtrim;
-        //            [lbltitle setFont:[UIFont fontWithName:@"Helvetica Neue" size:12.0]];
-        //            CGSize textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
-        //
-        //            CGFloat strikeWidth = textSize.width+5;
-        //            lbltitle.frame=CGRectMake(x, y, strikeWidth, 21);
-        //            if (x>140&& y==0) {
-        //                y=y+21;
-        //                x=0;
-        //            }
-        //
-        //            [cell.viewDetail addSubview:lbltitle];
-        //            if([titleWords count]-1!=textIndex)
-        //            {
-        //                 x=x+strikeWidth;
-        //                UIButton *btnAction=[[UIButton alloc]init];
-        //
-        //                NSDictionary *dictext= update.updateTitleArray[textIndex];
-        //                btnAction.tag =(int) update.updateId;
-        //                NSString *strtrim = [[dictext objectForKey:@"value"] stringByTrimmingCharactersInSet:
-        //                                     [NSCharacterSet whitespaceCharacterSet]];
-        //
-        //                [btnAction setTitle:strtrim forState:UIControlStateNormal];
-        //                [btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        //
-        //                [btnAction.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12.0]];
-        //                textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
-        //                textSize=[AppGlobal getTheExpectedSizeOfLabel:strtrim];
-        //
-        //                strikeWidth = textSize.width+5;
-        //
-        //                if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
-        //                {
-        //                    btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
-        //                    [btnAction addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
-        //
-        //                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
-        //                {
-        //                     btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
-        //                   [btnAction addTarget:self action:@selector(btnCourseDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-        //
-        //                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
-        //                {
-        //                     btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
-        //                     [btnAction addTarget:self action:@selector(btnModuleDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-        //                }
-        //                else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
-        //                {
-        //                     btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
-        //                    [btnAction addTarget:self action:@selector(btnResourceDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-        //                }
-        //
-        //                btnAction.frame=CGRectMake(x, y, strikeWidth, 21);
-        //                textIndex=textIndex+1;
-        //                [cell.viewDetail addSubview:btnAction];
-        //                 x=x+strikeWidth;
-        //
-        //            }
-        //            if (x>140 && y==0) {
-        //                y=y+21;
-        //                x=0;
-        //            }
-        //        }
-        //  cell.viewDetail.frame=CGRectMake(0, 0, x, 60);
         
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle.lineHeightMultiple = 50.0f;
@@ -451,14 +284,14 @@
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"" attributes:ats];
         int textIndex=0;
         for (NSString *strtemp in titleWords) {
-            if([update.updateTitleArray count]<=textIndex)
+            if([objUpdate.updateTitleArray count]<=textIndex)
                 break ;
             if([strtemp isEqualToString:@""])
             {
                 //  NSString* tempstr=[update.updateTitleArray objectAtIndex:textIndex];
                 UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
                 
-                NSDictionary *dictext= update.updateTitleArray[textIndex];
+                NSDictionary *dictext= objUpdate.updateTitleArray[textIndex];
                 if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
                 {
                     NSString* tempstr=[dictext objectForKey:@"value"];
@@ -512,8 +345,8 @@
                 [attributedString appendAttributedString:attributedStringtemp];
                 
                 UIFont *Boldfont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
-               
-                NSDictionary *dictext= update.updateTitleArray[textIndex];
+                
+                NSDictionary *dictext= objUpdate.updateTitleArray[textIndex];
                 if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
                 {
                     NSString* tempstr=[dictext objectForKey:@"value"];
@@ -563,26 +396,26 @@
         
         [cell.txtView setAttributedText:attributedString ];
         [cell.txtView setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
-        if(update.updateDesc!=nil)
+        if(objUpdate.updateDesc!=nil)
         {
-            cell.txtviewDetail.text=update.updateDesc;
+            cell.txtviewDetail.text=objUpdate.updateDesc;
         }else{
             [cell.txtviewDetail  setHidden:YES];
         }
-     
+        
         [cell.btnPlay setHidden:YES];
-        if (update.resource!=nil) {
+        if (objUpdate.resource!=nil) {
             
-            if(update.resource.resourceImageUrl!=nil){
+            if(objUpdate.resource.resourceImageUrl!=nil){
                 [cell.btnPlay setHidden:NO];
                 [cell.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
-                if (update.resource.resourceImageData==nil) {
-                    NSURL *imageURL = [NSURL URLWithString:update.resource.resourceImageUrl];
+                if (objUpdate.resource.resourceImageData==nil) {
+                    NSURL *imageURL = [NSURL URLWithString:objUpdate.resource.resourceImageUrl];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                        update.resource.resourceImageData  = [NSData dataWithContentsOfURL:imageURL];
+                        objUpdate.resource.resourceImageData  = [NSData dataWithContentsOfURL:imageURL];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             // Update the UI
-                            UIImage *img=[UIImage imageWithData:update.resource.resourceImageData];
+                            UIImage *img=[UIImage imageWithData:objUpdate.resource.resourceImageData];
                             if(img!=nil)
                             {
                                 [cell.imgResorces setImage:img];
@@ -592,24 +425,24 @@
                         });
                     });
                 }else{
-                    UIImage *img=[UIImage imageWithData:update.resource.resourceImageData];
+                    UIImage *img=[UIImage imageWithData:objUpdate.resource.resourceImageData];
                     [cell.imgResorces setImage:img];
                     
                     [cell.imgResorces setBackgroundColor:[UIColor clearColor]];
                 }
             }
         }
-        if(update.user !=nil)
+        if(objUpdate.user !=nil)
         {
             [cell.btnUpdatedBy addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
             
-            cell.btnUpdatedBy.tag = [update.user.userId  integerValue];
+            cell.btnUpdatedBy.tag = [objUpdate.user.userId  integerValue];
         }
-        if([update.comments count]==0)
+        if([objUpdate.comments count]==0)
         {cell.imgBelowLine8.hidden=NO;
             cell.imgBelowLine1.hidden=YES;
-           
-           
+            
+            
         }else{
             
             cell.imgBelowLine8.hidden=YES;
@@ -618,16 +451,16 @@
         
         cell.txtView.tag=indexPath.section;
         cell.txtView.selectable=YES;
-        if(update.updateCreatedByImage!=nil){
+        if(objUpdate.updateCreatedByImage!=nil){
             
             
-            if (update.updateCreatedByImageData==nil) {
-                NSURL *imageURL = [NSURL URLWithString:update.updateCreatedByImage];
+            if (objUpdate.updateCreatedByImageData==nil) {
+                NSURL *imageURL = [NSURL URLWithString:objUpdate.updateCreatedByImage];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                    update.updateCreatedByImageData  = [NSData dataWithContentsOfURL:imageURL];
+                    objUpdate.updateCreatedByImageData  = [NSData dataWithContentsOfURL:imageURL];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // Update the UI
-                        UIImage *img=[UIImage imageWithData:update.updateCreatedByImageData ];
+                        UIImage *img=[UIImage imageWithData:objUpdate.updateCreatedByImageData ];
                         if(img!=nil)
                         {
                             [cell.btnUpdatedBy setImage:img forState:UIControlStateNormal];                   [cell.btnUpdatedBy setBackgroundColor:[UIColor clearColor]];
@@ -635,27 +468,27 @@
                     });
                 });
             }else{
-                UIImage *img=[UIImage imageWithData:update.updateCreatedByImageData ];
+                UIImage *img=[UIImage imageWithData:objUpdate.updateCreatedByImageData ];
                 [cell.btnUpdatedBy setImage:img forState:UIControlStateNormal];
                 [cell.btnUpdatedBy setBackgroundColor:[UIColor clearColor]];
             }
         }
         NSString *strCount;
-        if(update.likeCount  !=nil)
+        if(objUpdate.likeCount  !=nil)
         {
-            strCount=[NSString stringWithFormat:@"%@ Likes",update.likeCount] ;
+            strCount=[NSString stringWithFormat:@"%@ Likes",objUpdate.likeCount] ;
         }else{
-           strCount=@"";
+            strCount=@"";
         }
-        if(update.commentCount  !=nil)
+        if(objUpdate.commentCount  !=nil)
         {
-             strCount=[NSString stringWithFormat:@"%@ %@ Comments",strCount,update.commentCount] ;
-           
+            strCount=[NSString stringWithFormat:@"%@ %@ Comments",strCount,objUpdate.commentCount] ;
+            
         }else{
             strCount=[NSString stringWithFormat:@"%@",strCount] ;
         }
         cell.lblLikeAndCmtConut.text=strCount;
-        if([update.isLike  isEqualToString:@"1"])
+        if([objUpdate.isLike  isEqualToString:@"1"])
         {
             cell.btnLike.selected=YES;
             
@@ -675,13 +508,13 @@
         [cell.btnComment addTarget:self action:@selector(btnCommentOnUpdateClick:) forControlEvents:UIControlEventTouchUpInside];
         
         [cell.btnShare addTarget:self action:@selector(btnShareOnUpdateClick:) forControlEvents:UIControlEventTouchUpInside];
-       
+        
         
         return cell;
     }
     else{
-        Update *update=[arrayUpdates objectAtIndex:indexPath.section];
-        Comments *comment= [update.comments objectAtIndex:indexPath.row-1];
+       
+        Comments *comment= [objUpdate.comments objectAtIndex:indexPath.row-1];
         if([comment.parentCommentId integerValue] ==0)
         {
             static NSString *identifier = @"CommentTableViewCell";
@@ -714,7 +547,7 @@
             [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [comment.commentBy length])];
             [cell.lblCmtBy setAttributedText:attributedString];
             [cell.lblCmtBy  setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
-             cell.lblCmtText.text=comment.commentTxt;
+            cell.lblCmtText.text=comment.commentTxt;
             
             cell.lblRelatedVideo.hidden=YES;
             if(comment.commentByImage!=nil){
@@ -777,34 +610,34 @@
             cell.btnMore.hidden=YES;
             cell.imgDevider.hidden=YES;
             cell.btnMore.tag=indexPath.section;
-            if(([update.comments count]<1) && (indexPath.row==[update.comments count]))
+            if(([objUpdate.comments count]<10) && (indexPath.row==[objUpdate.comments count]))
             {
                 cell.btnMore.hidden=YES;
                 cell.imgDevider.hidden=NO;
                 
                 
             }
-            else if([update.comments count]>=1)
+            else if([objUpdate.comments count]>=10)
             {
-                if(update.isExpend && (indexPath.row==[update.comments count]))
+                if(objUpdate.isExpend && (indexPath.row==[objUpdate.comments count]))
                 {
                     [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[update.comments count ]-3]  forState:UIControlStateNormal];
+                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[objUpdate.comments count ]-10]  forState:UIControlStateNormal];
                     cell.btnMore.hidden=YES;
                     cell.imgDevider.hidden=NO;
                     
-                }else if(indexPath.row==1 && !update.isExpend){
+                }else if(indexPath.row==10 && !objUpdate.isExpend){
                     [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[update.comments count ]-1]  forState:UIControlStateNormal];
+                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[objUpdate.comments count ]-10]  forState:UIControlStateNormal];
                     cell.btnMore.hidden=NO;
                     cell.imgDevider.hidden=NO;
-                    if([update.comments count]==1)
+                    if([objUpdate.comments count]==10)
                     {
                         cell.btnMore.hidden=YES;
                         cell.imgHalfDevider.hidden=YES;
                         
                     }
-
+                    
                     
                 }
                 
@@ -899,29 +732,29 @@
             cell.btnMore.hidden=YES;
             cell.imgDevider.hidden=YES;
             cell.btnMore.tag=indexPath.section;
-            if(([update.comments count]<3) && (indexPath.row==[update.comments count]))
+            if(([objUpdate.comments count]<10) && (indexPath.row==[objUpdate.comments count]))
             {
                 cell.btnMore.hidden=YES;
                 cell.imgDevider.hidden=NO;
                 
                 
             }
-            else if([update.comments count]>=1)
+            else if([objUpdate.comments count]>=10)
             {
-                if(update.isExpend && (indexPath.row==[update.comments count]))
+                if(objUpdate.isExpend && (indexPath.row==[objUpdate.comments count]))
                 {
                     [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[update.comments count ]-1]  forState:UIControlStateNormal];
+                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[objUpdate.comments count ]-1]  forState:UIControlStateNormal];
                     cell.btnMore.hidden=YES;
                     cell.imgDevider.hidden=NO;
                     
-                }else if(indexPath.row==1 && !update.isExpend){
+                }else if(indexPath.row==10 && !objUpdate.isExpend){
                     [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[update.comments count ]-1]  forState:UIControlStateNormal];
+                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[objUpdate.comments count ]-10]  forState:UIControlStateNormal];
                     cell.btnMore.hidden=NO;
                     cell.imgDevider.hidden=NO;
                     
-                }else if(indexPath.row==1 && update.isExpend){
+                }else if(indexPath.row==10 && objUpdate.isExpend){
                     
                     cell.btnMore.hidden=YES;
                     cell.imgHalfDevider.hidden=NO;
@@ -978,114 +811,106 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([arrayUpdates count]==0)
-        return 0;
-    Update *update=arrayUpdates[indexPath.section];
     
     if(indexPath.row==0)
     {
         float height=0.0f;
-        if(update.resource!=nil)
+        if(objUpdate.resource!=nil)
         {
             
             height=163.0f;
         }
+        
+        NSString *titleString =objUpdate.updateTitle;
+        NSArray *titleWords = [titleString componentsSeparatedByString:@"$"];
+        float x,y;
+        x=0.0f;
+        y=0.0f;
+        int textIndex=0;
+        for (NSString *strtemp in titleWords) {
+            UILabel *lbltitle=[[UILabel alloc]init];
+            [lbltitle setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];                NSString *strtrim = [strtemp stringByTrimmingCharactersInSet:
+                                                                                                                                                       [NSCharacterSet whitespaceCharacterSet]];
+            lbltitle.text=strtrim;
+            [lbltitle setFont:[UIFont fontWithName:@"Helvetica Neue" size:12.0]];
+            CGSize textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
             
-            NSString *titleString =update.updateTitle;
-            NSArray *titleWords = [titleString componentsSeparatedByString:@"$"];
-            float x,y;
-            x=0.0f;
-            y=0.0f;
-            int textIndex=0;
-            for (NSString *strtemp in titleWords) {
-                UILabel *lbltitle=[[UILabel alloc]init];
-               [lbltitle setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];                NSString *strtrim = [strtemp stringByTrimmingCharactersInSet:
-                                     [NSCharacterSet whitespaceCharacterSet]];
-                lbltitle.text=strtrim;
-                [lbltitle setFont:[UIFont fontWithName:@"Helvetica Neue" size:12.0]];
-                CGSize textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
-                
-                CGFloat strikeWidth = textSize.width+5;
-                lbltitle.frame=CGRectMake(x, y, strikeWidth, 21);
-                if (x>97 && y==0) {
-                    y=y+21;
-                    x=0;
-                }
-                
-                
-                if([titleWords count]-1!=textIndex)
-                {
-                    x=x+strikeWidth;
-                    UIButton *btnAction=[[UIButton alloc]init];
-                    
-                    NSDictionary *dictext= update.updateTitleArray[textIndex];
-                    btnAction.tag =(int) update.updateId;
-                    NSString *strtrim = [[dictext objectForKey:@"value"] stringByTrimmingCharactersInSet:
-                                         [NSCharacterSet whitespaceCharacterSet]];
-                    
-                    [btnAction setTitle:strtrim forState:UIControlStateNormal];
-                    [btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                    
-                    [btnAction.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:13.0]];
-                    textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
-                    textSize=[AppGlobal getTheExpectedSizeOfLabel:strtrim];
-                    
-                    strikeWidth = textSize.width;
-                    
-                    if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
-                    {
-                        btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
-                        [btnAction addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
-                        
-                    }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
-                    {
-                        btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
-                        [btnAction addTarget:self action:@selector(btnCourseDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-                        
-                    }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
-                    {
-                        btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
-                        [btnAction addTarget:self action:@selector(btnModuleDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-                    }
-                    else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
-                    {
-                        btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
-                        [btnAction addTarget:self action:@selector(btnResourceDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-                    }
-                    
-                    btnAction.frame=CGRectMake(x, y, strikeWidth, 21);
-                    textIndex=textIndex+1;
-                    x=x+strikeWidth;
-                    
-                }
+            CGFloat strikeWidth = textSize.width+5;
+            lbltitle.frame=CGRectMake(x, y, strikeWidth, 21);
+            if (x>97 && y==0) {
+                y=y+21;
+                x=0;
             }
+            
+            
+            if([titleWords count]-1!=textIndex)
+            {
+                x=x+strikeWidth;
+                UIButton *btnAction=[[UIButton alloc]init];
+                
+                NSDictionary *dictext= objUpdate.updateTitleArray[textIndex];
+                btnAction.tag =(int) objUpdate.updateId;
+                NSString *strtrim = [[dictext objectForKey:@"value"] stringByTrimmingCharactersInSet:
+                                     [NSCharacterSet whitespaceCharacterSet]];
+                
+                [btnAction setTitle:strtrim forState:UIControlStateNormal];
+                [btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                
+                [btnAction.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:13.0]];
+                textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
+                textSize=[AppGlobal getTheExpectedSizeOfLabel:strtrim];
+                
+                strikeWidth = textSize.width;
+                
+                if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
+                {
+                    btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
+                    [btnAction addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
+                    
+                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
+                {
+                    btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
+                    [btnAction addTarget:self action:@selector(btnCourseDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+                    
+                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
+                {
+                    btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
+                    [btnAction addTarget:self action:@selector(btnModuleDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+                }
+                else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
+                {
+                    btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
+                    [btnAction addTarget:self action:@selector(btnResourceDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+                }
+                
+                btnAction.frame=CGRectMake(x, y, strikeWidth, 21);
+                textIndex=textIndex+1;
+                x=x+strikeWidth;
+                
+            }
+        }
         if (y>21) {
             height=height+y;
         }
-      
-        if(cellMainHeight<height+97)
-        {
-            cellMainHeight=height+97;
-        }
-      
+        
         return height=height+97;
     }
-    else if(update.comments>0)
+    else if(objUpdate.comments>0)
     {
-        Comments *cmt=update.comments[indexPath.row-1];
+        Comments *cmt=objUpdate.comments[indexPath.row-1];
         CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:cmt.commentTxt];
         float height=0.0f;
         NSLog(@"%ld",(long)indexPath.row);
-        if(([update.comments count]<1) && (indexPath.row==[update.comments count]))
+        if(([objUpdate.comments count]<10) && (indexPath.row==[objUpdate.comments count]))
         {
             height=35.0f;
         }
-        else if([update.comments count]>=1)
+        else if([objUpdate.comments count]>=10)
         {
-            if(update.isExpend && (indexPath.row==[update.comments count]))
+            if(objUpdate.isExpend && (indexPath.row==[objUpdate.comments count]))
             {
                 height=35.0f;
-            }else if(indexPath.row==1 && !update.isExpend){
+            }else if(indexPath.row==1 && !objUpdate.isExpend){
                 height=35.0f;
             }
             
@@ -1095,23 +920,9 @@
             height=height-15;
         }
         if(labelSize.height>17)
-        {
-//           cellHeight=cellHeight+height+65+labelSize.height;
-            if(cellCMTHeight<height+65+labelSize.height)
-            {
-                cellCMTHeight=height+65+labelSize.height;
-            }
-
             return   height=height+65+labelSize.height;
-        }
-        else{
-//             cellHeight=cellHeight+height+80;
-            if(cellCMTHeight<height+80)
-            {
-                cellCMTHeight=height+80;
-            }
+        else
             return  height=height+80;
-        }
     }
     
     
@@ -1215,22 +1026,21 @@
 }
 - (IBAction)btnMoreCommentClick:(id)sender {
     UIButton *btn=(UIButton *)sender;
-    
-    Update *update=[arrayUpdates objectAtIndex:btn.tag];
-    update.isExpend=YES;
-   
-    
-    UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]init];
-    updateDetailView.objUpdate=update;
-    [self.navigationController pushViewController:updateDetailView animated:YES];
+//    
+//    for (Update *update in arrayUpdates) {
+//        update.isExpend=NO;
+//    }
+//    Update *update=[arrayUpdates objectAtIndex:btn.tag];
+//    objUpdate.isExpend=YES;
+//    [tblViewContent reloadData];
     
 }
 #pragma mark - Comment and like on Update
 
 - (IBAction)btnPlayResourceClick:(id)sender {
     UIButton *btn=(UIButton *)sender;
-    Update *update=[arrayUpdates objectAtIndex:btn.tag];
-    Resourse *resourse =update.resource;
+ 
+    Resourse *resourse =objUpdate.resource;
     [self PlayTheVideo:resourse.resourceUrl];
     
 }
@@ -1292,8 +1102,8 @@
     UIButton *btn=(UIButton *)sender;
     //  NSInteger currentpage=  self.pageControl.currentPage;
     // get the current Content
-    Update *update=[arrayUpdates objectAtIndex:btn.tag];
-    selectedUpdateId=update.updateId;
+//    Update *update=[arrayUpdates objectAtIndex:btn.tag];
+    selectedUpdateId=objUpdate.updateId;
     
     actionOn=UpdateOn;
     [txtViewCMT becomeFirstResponder];
@@ -1304,20 +1114,26 @@
     // call the service
     UIButton *btn=(UIButton *)sender;
     // get the current Content
-    Update *update=[arrayUpdates objectAtIndex:btn.tag];
+  //  Update *update=[arrayUpdates objectAtIndex:btn.tag];
     
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
     
-    [[appDelegate _engine] setLikeOnUpdate:update.updateId  success:^(BOOL success) {
+    [[appDelegate _engine] setLikeOnUpdate:objUpdate.updateId  success:^(BOOL success) {
         
         
         
         
         //Hide Indicator
         [appDelegate hideSpinner];
-        // [tblViewContent reloadData];
-        [self getUpdate:txtSearchBar.text];
+        objUpdate.isLike=@"1";
+        int count=0;
+        if (objUpdate.likeCount!=nil) {
+            count=[objUpdate.likeCount intValue]+1;
+        }
+        objUpdate.likeCount=[NSString stringWithFormat:@"%d",count];
+         [tblViewContent reloadData];
+        //[self getUpdate:txtSearchBar.text];
     }
                                    failure:^(NSError *error) {
                                        //Hide Indicator
@@ -1349,8 +1165,21 @@
     [[appDelegate _engine] setLikeOnComment:selectedCommentId AndisFeed:YES success:^(BOOL success) {
         //Hide Indicator
         
-        [appDelegate hideSpinner];
-        [self  getUpdate:txtSearchBar.text];
+        for (Comments *cmt in objUpdate.comments) {
+            if([cmt.commentId integerValue] == [selectedCommentId integerValue])
+            {
+                cmt.isLike=@"1";
+                int count=0;
+                if (cmt.likeCounts!=nil) {
+                    count=[cmt.likeCounts intValue]+1;
+                }
+                cmt.likeCounts=[NSString stringWithFormat:@"%d",count];
+
+            }
+        }
+        [tblViewContent reloadData];
+         [appDelegate hideSpinner];
+       // [self  getUpdate:txtSearchBar.text];
     }
                                     failure:^(NSError *error) {
                                         //Hide Indicator
@@ -1385,9 +1214,12 @@
             // [self loginSucessFullWithFB];
             
             //Hide Indicator
+            
+           
+
             [appDelegate hideSpinner];
             
-            [self  getUpdate:txtSearchBar.text];
+           // [self  getUpdate:txtSearchBar.text];
         }
                                           failure:^(NSError *error) {
                                               //Hide Indicator
@@ -1403,9 +1235,12 @@
             
             // [self loginSucessFullWithFB];
             
+            
+            [tblViewContent reloadData];
+
             //Hide Indicator
             [appDelegate hideSpinner];
-            [self  getUpdate:txtSearchBar.text];
+           // [self  getUpdate:txtSearchBar.text];
         }
                                            failure:^(NSError *error) {
                                                //Hide Indicator
@@ -1434,13 +1269,17 @@
 }
 
 - (IBAction)btnProfileClick:(id)sender {
-//    [txtSearchBar resignFirstResponder];
-//    [txtViewCMT resignFirstResponder];
-//    [self fadeInAnimation:self.view];
+    //    [txtSearchBar resignFirstResponder];
+    //    [txtViewCMT resignFirstResponder];
+    //    [self fadeInAnimation:self.view];
     
     UpdateProfileViewController *updateView=[[UpdateProfileViewController alloc]init];
     [self.navigationController pushViewController:updateView animated:YES];
     
+}
+
+- (IBAction)btnBackClick:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 
@@ -1581,17 +1420,14 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Cancel clicked");
     isSearching=NO;
-    [self  getUpdate:txtSearchBar.text];
+   // [self  getUpdate:txtSearchBar.text];
     [searchBar resignFirstResponder];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Search Clicked");
-    self.offsetRecord=0;
-    
-    
     searchText=searchBar.text;
-    [self  getUpdate:txtSearchBar.text];
+ //   [self  getUpdate:txtSearchBar.text];
     [searchBar resignFirstResponder];
     isSearching=NO;
 }
@@ -1695,9 +1531,9 @@
         if(user!=nil)
         {
             UIButton *btn=[[UIButton alloc]init];
-            Update *update= arrayUpdates[textView.tag];
+            
             // update.updateTitleArray;
-            for (NSDictionary *user in update.updateTitleArray) {
+            for (NSDictionary *user in objUpdate.updateTitleArray) {
                 if([[user objectForKey:@"type"] isEqualToString:@"user"])
                 {
                     btn.tag=[[user objectForKey:@"key"]  integerValue];
@@ -1710,20 +1546,19 @@
         }else if(course!=nil)        // Handle as required...
         {
             UIButton *btn=[[UIButton alloc]init];
-            Update *update= arrayUpdates[textView.tag];
-            btn.tag=[update.updateId integerValue];
+           
+            btn.tag=[objUpdate.updateId integerValue];
             [self btnCourseDetailClick:btn];
         }else if(module!=nil)        // Handle as required...
         {
             UIButton *btn=[[UIButton alloc]init];
-            Update *update= arrayUpdates[textView.tag];
-            btn.tag=[update.updateId integerValue];
+            btn.tag=[objUpdate.updateId integerValue];
             [self btnModuleDetailClick:btn];
         }else if(resourse!=nil)        // Handle as required...
         {
             UIButton *btn=[[UIButton alloc]init];
-            Update *update= arrayUpdates[textView.tag];
-            btn.tag=[update.updateId integerValue];
+          
+            btn.tag=[objUpdate.updateId integerValue];
             [self btnCourseDetailClick:btn];
         }
         
@@ -1746,48 +1581,5 @@
 }
 
 
-
--(void)initFooterView
-{
-    
-    footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, screenWidth, 40.0)];
-    
-    UIActivityIndicatorView * actInd = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
-    actInd.tag = 10;
-    
-    actInd.frame = CGRectMake((screenWidth-20)/2, 5.0, 20.0, 20.0);
-    
-    actInd.hidesWhenStopped = YES;
-    
-    [footerView addSubview:actInd];
-    
-    actInd = nil;
-}
-
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    float cellheight=cellCMTHeight+cellMainHeight*[arrayUpdates count];
-    
-    NSLog(@"Offset=%f height=%f,tableCell height=%f",scrollView.contentOffset.y ,scrollView.frame.size.height,cellheight);
-    
-    BOOL endOfTable = (scrollView.contentOffset.y >= (cellheight- scrollView.frame.size.height)); // Here 40 is row height
-   // tblViewContent.tableFooterView = footerView;
- //    tblViewContent.tableHeaderView = footerView;
-    [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
-
-    if (self.pendingRecord>0 && endOfTable && !scrollView.dragging && !scrollView.decelerating)
-    {
-        [self initFooterView];
-        tblViewContent.tableFooterView = footerView;
-        
-        [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
-        [self getUpdate:@""];
-    }else{
-       [footerView removeFromSuperview];
-
-    }
-    
-}
 
 @end
