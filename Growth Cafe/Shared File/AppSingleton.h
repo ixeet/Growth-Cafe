@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Update.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @interface AppSingleton : NSObject
@@ -18,4 +18,6 @@
 @property(nonatomic,assign) BOOL isUserLoggedIn;
 @property(nonatomic,assign) BOOL isUserFBLoggedIn;
 @property(nonatomic) BOOL isKeepMeloggedIn;
+@property(nonatomic,strong) Update *updatedUpdate;
+
 @end

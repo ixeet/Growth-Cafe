@@ -18,6 +18,9 @@
 #import "ProfileViewController.h"
 #import "SubCommentTableViewCell.h"
 #import "UpdateProfileViewController.h"
+#import "AFHTTPRequestOperationManager.h"
+#import <Social/Social.h>
+AFNetworkReachabilityStatus previousStatus;
 
 @interface ModuleDetailViewController ()
 {
@@ -115,9 +118,33 @@
         
     }
     
+    
+    
+    previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+
+    
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+        if(status==AFNetworkReachabilityStatusNotReachable)
+        {   previousStatus=status;
+            [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        }else{
+            previousStatus=status;
+            [self showNetworkStatus:REESTABLISH_INTERNET_MSG newVisibility:YES];
+            
+        }
+        //       else  if(status!=AFNetworkReachabilityStatusNotReachable)
+        //       {
+        //           previousStatus=status;
+        //           [self showNetworkStatus:@""];
+        //
+        //       }
+    }];
+
     /* Listen for keyboard */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -132,7 +159,10 @@
     [objCustom setUserProfile];
     tableViewCellsArray=[[NSMutableArray alloc]init];
     tableViewCellsRelatedResourseArray=[[NSMutableArray alloc]init];
-
+    
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -199,6 +229,13 @@
 */
 #pragma mark - table cell Action
 - (IBAction)btnUserProfileClick:(id)sender {
+    //Show Indicator
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        return;
+    }
     UIButton *btn=(UIButton *)sender;
     // call the user profile service user profile
     
@@ -281,7 +318,13 @@
 }
 -(void)PlayTheVideo:(NSString *)stringUrl
 {
-    
+    //Show Indicator
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        return;
+    }
     NSURL *url = [NSURL URLWithString:stringUrl];
     self.moviePlayer =  [[MPMoviePlayerController alloc]initWithContentURL:url];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -333,6 +376,13 @@
     
 }
 - (IBAction)btnCommentOnResourceClick:(id)sender {
+    //Show Indicator
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        return;
+    }
     UIButton *btn=(UIButton *)sender;
     NSInteger currentpage = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + self.scrollView.frame.size.width) / (self.scrollView.frame.size.width * 2.0f));
 //    NSInteger currentpage=  page;
@@ -345,6 +395,13 @@
 
 }
 - (IBAction)btnLikeOnResourceClick:(id)sender {
+    //Show Indicator
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        return;
+    }
     // call the service
     UIButton *btn=(UIButton *)sender;
     NSInteger currentpage = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + self.scrollView.frame.size.width) / (self.scrollView.frame.size.width * 2.0f));
@@ -376,10 +433,67 @@
                                             }];
 }
 - (IBAction)btnShareOnResourceClick:(id)sender {
+    
+    UIButton *btn=(UIButton *)sender;
+    NSInteger currentpage =
+    (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f +
+                      self.scrollView.frame.size.width) / (self.scrollView.frame.size.width *
+                                                           2.0f));
+    
+    
+    // get the current Content
+    selectedResource=[contentList objectAtIndex:currentpage];
+    selectedResourceId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
+    
+    
+    // get the current Content
+    
+    // Update *update=[arrayUpdates objectAtIndex:btn.tag];
+    NSURL *url = [NSURL URLWithString:selectedResource.resourceUrl];
+    if([SLComposeViewController
+        isAvailableForServiceType:SLServiceTypeFacebook]) {
+        SLComposeViewController * fbSheetOBJ = [SLComposeViewController
+                                                composeViewControllerForServiceType:SLServiceTypeFacebook];
+        
+        NSString *strText = [NSString
+                             stringWithFormat:@"%@",selectedResource.resourceDesc];
+        //      NSString *strText = [NSString stringWithFormat:@"%@\n%@",[self updateTitle:update],update.resource.resourceDesc];
+        [fbSheetOBJ  setInitialText:selectedResource.resourceDesc];
+        
+        [fbSheetOBJ addImage:[UIImage
+                              imageWithData:selectedResource.resourceImageData]];
+        
+        [fbSheetOBJ addURL:url];
+        
+        
+        
+        
+        [self presentViewController:fbSheetOBJ animated:YES
+                         completion:Nil];
+    }else {
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sign in!" message:@"Please Facebook Log In first !" delegate:nil
+                                             cancelButtonTitle:@"ok" otherButtonTitles:nil];
+        [alert show];
+        
+    }
+    
+    
+    
+    
+    
 }
+
 #pragma mark - Reply and like on Comment
 
 - (IBAction)btnReplyOnCommentClick:(id)sender {
+    //Show Indicator
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        return;
+    }
     UIButton *btn=(UIButton *)sender;
     selectedCommentId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
     actionOn=Comment;
@@ -387,6 +501,13 @@
 
 }
 - (IBAction)btnLikeOnCommentClick:(id)sender {
+    //Show Indicator
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        return;
+    }
     UIButton *btn=(UIButton *)sender;
     selectedCommentId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
     
@@ -430,6 +551,13 @@
 
 - (IBAction)btnCommentDone:(id)sender {
     [txtViewCMT resignFirstResponder];
+    //Show Indicator
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        return;
+    }
     if([txtViewCMT.text isEqualToString:@""])
     {
       //  [AppGlobal showAlertWithMessage:MISSING_COMMENT title:@""];
@@ -534,6 +662,13 @@
 #pragma mark Course Private functions
 -(void) getModuleDetail:(NSString *) txtSearch
 {
+    //Show Indicator
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        return;
+    }
     NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance ].userDetail.userId];
     // userid=@"1";
     //Show Indicator
@@ -589,7 +724,13 @@
 }
 -(void) getModuleDetailByFeed
 {
-    
+    //Show Indicator
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        return;
+    }
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
     
@@ -2216,6 +2357,18 @@
     LoginViewController *viewCont= [[LoginViewController alloc]init];
     [self.navigationController pushViewController:viewCont animated:YES];
     
+}
+
+- (void)showNetworkStatus:(NSString *)status newVisibility:(BOOL)newVisibility
+{
+    
+    _lblStatus.text=status;
+    [_viewNetwork setHidden:newVisibility];
+}
+
+
+- (IBAction)btnClose:(id)sender {
+    [self showNetworkStatus:@"" newVisibility:YES];
 }
 
 

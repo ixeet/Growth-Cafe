@@ -10,10 +10,13 @@
 #import "RegisterationViewController.h"
 #import "LoginViewController.h"
 #import <CrashReporter/CrashReporter.h>
+#import "AFHTTPRequestOperationManager.h"
 //#import "SubmitAssignmentViewController.h"
 @interface HomeViewController ()
 {
     BOOL isFirstLoginDone;
+    
+    AFNetworkReachabilityStatus previousStatus;
 }
 @end
 
@@ -35,7 +38,8 @@
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
         
-    
+    previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+
     
     [self toggleHiddenState:YES];
    // self.lblLoginStatus.text = @"";
@@ -52,6 +56,24 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     btnFacebook.delegate=self;
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+        if(status==AFNetworkReachabilityStatusNotReachable)
+        {   previousStatus=status;
+            [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        }else{
+            previousStatus=status;
+            [self showNetworkStatus:REESTABLISH_INTERNET_MSG newVisibility:YES];
+            
+        }
+        //       else  if(status!=AFNetworkReachabilityStatusNotReachable)
+        //       {
+        //           previousStatus=status;
+        //           [self showNetworkStatus:@""];
+        //
+        //       }
+    }];
+
 }
 -(void)viewWillDisappear:(BOOL)animated{
     btnFacebook.delegate=nil;
@@ -347,5 +369,15 @@
 //    [Utilities showWaitingSpinner:self isShow:YES];
 //    [[INTNetworkManager getInstance] makeJsonRequestWithMethod:kCrashRepoterUrl delegate:self requestType:kRequestTypeCrashedData requestMethod:kRequestMethodPost];
 }
+- (void)showNetworkStatus:(NSString *)status newVisibility:(BOOL)newVisibility
+{
+    
+    _lblStatus.text=status;
+    [_viewNetwork setHidden:newVisibility];
+}
 
+
+- (IBAction)btnClose:(id)sender {
+    [self showNetworkStatus:@"" newVisibility:YES];
+}
 @end

@@ -9,6 +9,7 @@
 #import "UpdateProfileViewController.h"
 #import "CustomKeyboard.h"
 #import "LoginViewController.h"
+#import "AFHTTPRequestOperationManager.h"
 
 @interface UpdateProfileViewController () <CustomKeyboardDelegate>
 {
@@ -30,6 +31,12 @@
     NSString *selectedTitle;
     BOOL isFirstLoginDone;
     BOOL isUpdate;
+    AFNetworkReachabilityStatus previousStatus;
+    
+    
+    
+    
+
 }
 
 @end
@@ -53,7 +60,8 @@
         isFirstLoginDone=NO;
     customKeyboard = [[CustomKeyboard alloc] init];
     customKeyboard.delegate = self;
-}
+    previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+ }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -69,6 +77,26 @@
  // Pass the selected object to the new view controller.
  }
  */
+-(void)viewWillAppear:(BOOL)animated
+{
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+        if(status==AFNetworkReachabilityStatusNotReachable)
+        {   previousStatus=status;
+            [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        }else{
+            previousStatus=status;
+            [self showNetworkStatus:REESTABLISH_INTERNET_MSG newVisibility:YES];
+            
+        }
+        //       else  if(status!=AFNetworkReachabilityStatusNotReachable)
+        //       {
+        //           previousStatus=status;
+        //           [self showNetworkStatus:@""];
+        //
+        //       }
+    }];
+}
 #pragma mark - Private method implementation
 -(void)changeFrameAndBackgroundImg
 {
@@ -188,6 +216,13 @@
 
 }
 - (IBAction)btnBackClick:(id)sender {
+    //Show Indicator
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        return;
+    }
     UserDetails *usrDetail= [[UserDetails alloc]init];
     
 if(![txtFirstName.text isEqualToString:  user.userFirstName])
@@ -791,10 +826,15 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
 
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    
-        UIImage *image = info[UIImagePickerControllerOriginalImage];
+          UIImage *image = info[UIImagePickerControllerOriginalImage];
 
-    
+    //Show Indicator
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        return;
+    }
+
     //Show Indicator
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
@@ -848,5 +888,16 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
     
     [picker dismissViewControllerAnimated:YES completion:nil];
     
+}
+- (void)showNetworkStatus:(NSString *)status newVisibility:(BOOL)newVisibility
+{
+    
+    _lblStatus.text=status;
+    [_viewNetwork setHidden:newVisibility];
+}
+
+
+- (IBAction)btnClose:(id)sender {
+    [self showNetworkStatus:@"" newVisibility:YES];
 }
 @end

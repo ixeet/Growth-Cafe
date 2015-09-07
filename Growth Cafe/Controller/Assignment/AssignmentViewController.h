@@ -22,4 +22,8 @@
 @property (strong, nonatomic)  CustomProfileView *objCustom;
 
 - (IBAction)btnProfileClick:(id)sender;
+@property (strong, nonatomic) IBOutlet UIView *viewNetwork;
+- (IBAction)btnClose:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lblStatus;
+
 @end

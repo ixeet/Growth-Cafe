@@ -12,12 +12,15 @@
 #import "ForgetPasswordViewController.h"
 #import "RegisterationViewController.h"
 #import "UpdateViewController.h"
+#import "AFHTTPRequestOperationManager.h"
+
 @interface LoginViewController() <CustomKeyboardDelegate>
 {
     //keyboard
     CustomKeyboard *customKeyboard;
     UITextField *activeTextField;
     BOOL isFirstLoginDone;
+    AFNetworkReachabilityStatus previousStatus;
 }
 
 @end
@@ -61,12 +64,30 @@
     self.btnFacebook.delegate = self;
     self.btnFacebook.readPermissions = @[@"public_profile", @"email"];
     [self changeFrameAndBackgroundImg];
+    previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
 
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     btnFacebook.delegate=self;
-    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+        if(status==AFNetworkReachabilityStatusNotReachable)
+        {   previousStatus=status;
+            [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        }else{
+            previousStatus=status;
+            [self showNetworkStatus:REESTABLISH_INTERNET_MSG newVisibility:YES];
+            
+        }
+        //       else  if(status!=AFNetworkReachabilityStatusNotReachable)
+        //       {
+        //           previousStatus=status;
+        //           [self showNetworkStatus:@""];
+        //
+        //       }
+    }];
+
 }
 -(void)viewWillDisappear:(BOOL)animated{
     btnFacebook.delegate=nil;
@@ -223,6 +244,13 @@
 
 
 - (IBAction)btnLoginClick:(id)sender {
+    //Show Indicator
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO];
+        return;
+    }
+
     NSString *loginID=[[txtUsername text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *password=[[txtPassword text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
@@ -420,6 +448,17 @@
     
 }
 
+- (void)showNetworkStatus:(NSString *)status newVisibility:(BOOL)newVisibility
+{
+    
+    _lblStatus.text=status;
+    [_viewNetwork setHidden:newVisibility];
+}
+
+
+- (IBAction)btnClose:(id)sender {
+    [self showNetworkStatus:@"" newVisibility:YES];
+}
 
 
 @end

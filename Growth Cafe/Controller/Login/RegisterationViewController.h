@@ -35,4 +35,8 @@
 @property (strong, nonatomic) IBOutlet UIView *mViewAccountTypePicker;
 - (IBAction)mBtnCancelPicker:(id)sender ;
 - (IBAction)mBtnDonePicker:(id)sender ;
+@property (strong, nonatomic) IBOutlet UIView *viewNetwork;
+- (IBAction)btnClose:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lblStatus;
+
 @end

@@ -33,4 +33,10 @@
 - (IBAction)btnCommentDone:(id)sender;
 - (IBAction)btnCommentCancle:(id)sender;
 - (IBAction)btnProfileClick:(id)sender;
+
+
+@property (strong, nonatomic) IBOutlet UIView *viewNetwork;
+- (IBAction)btnClose:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lblStatus;
+
 @end

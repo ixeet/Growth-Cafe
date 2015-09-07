@@ -19,6 +19,7 @@
 #import "SubmitAssignmentViewController.h"
 #import "SubmitContentViewController.h"
 #import "UpdateProfileViewController.h"
+#import "AFHTTPRequestOperationManager.h"
 
 @interface AssignmentViewController ()
 {
@@ -29,6 +30,7 @@
     NSString *selectedCommentId,*selectedUpdateId;
     ActionOn  actionOn;
     UIWebView *videoView;
+    AFNetworkReachabilityStatus previousStatus;
 }
 @end
 
@@ -80,6 +82,12 @@
 //    [self.view addSubview:self.cmtview];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillEnterFullscreenNotification:) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillExitFullscreenNotification:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
+   
+    
+    
+    
+   previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+    
 }
 
 
@@ -137,6 +145,24 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+        if(status==AFNetworkReachabilityStatusNotReachable)
+        {   previousStatus=status;
+            [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        }else{
+            previousStatus=status;
+            [self showNetworkStatus:REESTABLISH_INTERNET_MSG newVisibility:YES];
+            
+        }
+        //       else  if(status!=AFNetworkReachabilityStatusNotReachable)
+        //       {
+        //           previousStatus=status;
+        //           [self showNetworkStatus:@""];
+        //
+        //       }
+    }];
+
     // [super viewWillAppear:animated];
     /* Listen for keyboard */
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -153,7 +179,12 @@
     //set Profile
     [objCustom setUserProfile];
     
-    [self  getAssignment:@""];
+   
+    
+    
+    
+        [self  getAssignment:@""];
+
     
 }
 -(void)viewDidDisappear:(BOOL)animated
@@ -182,7 +213,15 @@
 #pragma mark Assignment Private functions
 -(void) getAssignment:(NSString *) txtSearch
 {
-    
+    //Show Indicator
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
+        
+        return;
+    }
     NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId];
     if([userid isEqualToString:@"(null)"])
         return ;
@@ -770,4 +809,16 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
 
 }
+- (void)showNetworkStatus:(NSString *)status newVisibility:(BOOL)newVisibility
+{
+    
+    _lblStatus.text=status;
+    [_viewNetwork setHidden:newVisibility];
+}
+
+
+- (IBAction)btnClose:(id)sender {
+    [self showNetworkStatus:@"" newVisibility:YES];
+}
+
 @end

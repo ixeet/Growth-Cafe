@@ -32,4 +32,8 @@
 - (IBAction)mBtnCancelPicker:(id)sender ;
 - (IBAction)btnLogoutClick:(id)sender;
 - (IBAction)mBtnDonePicker:(id)sender ;
+@property (strong, nonatomic) IBOutlet UIView *viewNetwork;
+- (IBAction)btnClose:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lblStatus;
+
 @end

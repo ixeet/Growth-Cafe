@@ -15,12 +15,14 @@
 #import "ProfileViewController.h"
 #import "LoginViewController.h"
 #import "UpdateProfileViewController.h"
+#import "AFHTTPRequestOperationManager.h"
 @interface CourseViewController ()
 {
    
    
     NSMutableArray *moduleArray; // array of arrays
     
+    AFNetworkReachabilityStatus previousStatus;
     int currentExpandedIndex;
 }
 @end
@@ -76,7 +78,7 @@
     }
     [self setSearchUI];
     
-    
+     previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
     btnCourses.selected=YES;
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
 //                                   initWithTarget:self
@@ -104,10 +106,27 @@
        [objCustom.btnLogout  addTarget:self action:@selector(btnLogoutClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)viewWillAppear:(BOOL)animated    {
-    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+        if(status==AFNetworkReachabilityStatusNotReachable)
+        {   previousStatus=status;
+            [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        }else{
+            previousStatus=status;
+            [self showNetworkStatus:REESTABLISH_INTERNET_MSG newVisibility:YES];
+            
+        }
+        //       else  if(status!=AFNetworkReachabilityStatusNotReachable)
+        //       {
+        //           previousStatus=status;
+        //           [self showNetworkStatus:@""];
+        //
+        //       }
+    }];
+
     
     if(!comeFromUpdate){
-        
+        if([coursesList count]==0)
         [self  getCourses:@""];
     }else{
         btnBack.hidden=NO;
@@ -118,6 +137,7 @@
         }
         
     }
+   
     UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognizer:)];
     
     recognizer.direction = UISwipeGestureRecognizerDirectionRight;
@@ -241,6 +261,12 @@
 #pragma mark Course Private functions
 -(void) getCourses:(NSString *) txtSearch
 {
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        return;
+    }
+
    NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId];
     
     //Show Indicator
@@ -563,5 +589,15 @@ else {
     [self.navigationController pushViewController:viewCont animated:YES];
     
 }
+- (void)showNetworkStatus:(NSString *)status newVisibility:(BOOL)newVisibility
+{
+    
+    _lblStatus.text=status;
+    [_viewNetwork setHidden:newVisibility];
+}
 
+
+- (IBAction)btnClose:(id)sender {
+    [self showNetworkStatus:@"" newVisibility:YES];
+}
 @end

@@ -13,6 +13,7 @@
 #import "CourseHandler.h"
 #import "FeedHandler.h"
 #import "AssignmentHandler.h"
+#import "AFHTTPRequestOperationManager.h"
 
 @implementation AppEngine
 
@@ -272,6 +273,29 @@
         failure(error);
     }];
     
+}
+//get Updates detail
+-(void)getUpdatesDetail:(NSString*)updateId success:(void (^)(Update *updates))success   failure:(void (^)(NSError *error))failure{
+    
+    FeedHandler *feed=[[FeedHandler alloc] init];
+    [feed getUpdatesDetail:updateId  success:^(Update *updates){
+        success(updates);
+        
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+
+}
+//get more comments
+-(void)getMoreComment:(NSString*)updateId  Offset:(int)offset NoOfRecords:(int)noOfRecords success:(void (^)( NSMutableDictionary *comments))success   failure:(void (^)(NSError *error))failure
+{
+    FeedHandler *feed=[[FeedHandler alloc] init];
+    [feed getMoreComment:updateId  Offset:offset NoOfRecords:noOfRecords success:^(NSMutableDictionary *comments){
+        success(comments);
+        
+    }failure:^(NSError *error){
+        failure(error);
+    }];
 }
 -(void)getUserDetail:(NSString* )userid success:(void (^)(UserDetails *usrDetail))success   failure:(void (^)(NSError *error))failure{
     LoginHandler *login=[[LoginHandler alloc] init];

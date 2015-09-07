@@ -31,5 +31,7 @@
 //- (IBAction)btnNotificationClick:(id)sender;
 //- (IBAction)btnUpdateClick:(id)sender;
 //- (IBAction)btnMoreClick:(id)sender;
-
+@property (strong, nonatomic) IBOutlet UIView *viewNetwork;
+- (IBAction)btnClose:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lblStatus;
 @end

@@ -43,5 +43,8 @@ IBOutlet UITableView *tblViewContent;
 //- (IBAction)btnMoreClick:(id)sender;
 - (IBAction)btnCommentDone:(id)sender;
 - (IBAction)btnCommentCancle:(id)sender;
+@property (strong, nonatomic) IBOutlet UIView *viewNetwork;
+- (IBAction)btnClose:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lblStatus;
 
 @end

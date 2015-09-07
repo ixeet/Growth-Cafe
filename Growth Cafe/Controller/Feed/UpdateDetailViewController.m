@@ -21,6 +21,8 @@
 #import "CourseViewController.h"
 #import "SubCommentTableViewCell.h"
 #import "UpdateProfileViewController.h"
+#import "AFHTTPRequestOperationManager.h"
+#import <Social/Social.h>
 @interface UpdateDetailViewController ()
 {
    
@@ -31,6 +33,12 @@
     ActionOn  actionOn;
     NSString* useremail;
     NSString* userpassword;
+    CGFloat screenHeight ;
+    CGFloat screenWidth ;
+    NSMutableArray  *cellCMTHeight;
+   
+    float cellMainHeight;
+    AFNetworkReachabilityStatus previousStatus;
 }
 
 @end
@@ -60,8 +68,7 @@
     NSLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
     objCustom.center = CGPointMake(200, 400);
     CGRect frame1=objCustom.view.frame ;
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    
     frame1.size.height=screenHeight-50;
     frame1.size.width=screenWidth;//200;
     objCustom.view.frame=frame1;
@@ -75,6 +82,10 @@
     [self.view addSubview:self.cmtview];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillEnterFullscreenNotification:) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillExitFullscreenNotification:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
+    self.totalRecord=[objUpdate.commentCount integerValue];
+    self.pendingRecord= self.totalRecord-[objUpdate.comments count];
+     self.offsetRecord=self.offsetRecord+COMMENT_PER_PAGE;
+     previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
 }
 
 -(void)loginSucessFull{
@@ -98,8 +109,8 @@
 {
     if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
         
-        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+         screenHeight = [UIScreen mainScreen].bounds.size.height;
+        screenWidth = [UIScreen mainScreen].bounds.size.width;
         if( screenHeight < screenWidth ){
             screenHeight = screenWidth;
         }
@@ -142,8 +153,23 @@
     
     [objCustom.view addGestureRecognizer:recognizer];
     NSLog(@"%d", [AppSingleton sharedInstance].isUserLoggedIn);
-    
-    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+        if(status==AFNetworkReachabilityStatusNotReachable)
+        {   previousStatus=status;
+            [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        }else{
+            previousStatus=status;
+            [self showNetworkStatus:REESTABLISH_INTERNET_MSG newVisibility:YES];
+            
+        }
+        //       else  if(status!=AFNetworkReachabilityStatusNotReachable)
+        //       {
+        //           previousStatus=status;
+        //           [self showNetworkStatus:@""];
+        //       
+        //       }
+    }];
     //set Profile
     // [objCustom setUserProfile];
     
@@ -177,36 +203,108 @@
  */
 
 //#pragma mark Update Private functions
-//-(void) getUpdate:(NSString *) txtSearch
-//{
-//    
-//    NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId];
-//    if([userid isEqualToString:@"(null)"])
-//        return ;
-//    //Show Indicator
-//    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
-//    
-//    [[appDelegate _engine] getUpdates:userid  AndTextSearch:txtSearch success:^(NSMutableArray *updates) {
-//        arrayUpdates=updates;
-//        
-//        
-//        [tblViewContent reloadData];
-//        // [self loginSucessFullWithFB];
-//        
-//        //Hide Indicator
-//        [appDelegate hideSpinner];
-//    }
-//                              failure:^(NSError *error) {
-//                                  //Hide Indicator
-//                                  [appDelegate hideSpinner];
-//                                  NSLog(@"failure JsonData %@",[error description]);
-//                                  [self loginError:error];
-//                                  //                                         [self loginViewShowingLoggedOutUser:loginView];
-//                                  
-//                              }];
-//    
-//    
-//}
+-(void) getUpdatedUpdate:(NSString *) txtSearch
+{
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
+        
+        return;
+    }
+    
+    NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId];
+    if([userid isEqualToString:@"(null)"])
+        return ;
+    //Show Indicator
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    [[appDelegate _engine] getUpdatesDetail:objUpdate.updateId   success:^(Update *updates) {
+        objUpdate=updates;
+        
+        if([objUpdate.comments count]>=COMMENT_PER_PAGE){
+            NSUInteger location=COMMENT_PER_PAGE-1;
+            NSUInteger length=[objUpdate.comments count]-COMMENT_PER_PAGE;
+            //  NSRange range = NSMakeRange(0, [string length]);
+            NSRange range= NSMakeRange(location,length);
+            
+            [objUpdate.comments removeObjectsInRange:range] ;
+            self.totalRecord=[objUpdate.commentCount integerValue];
+            self.pendingRecord= self.totalRecord-[objUpdate.comments count];
+            self.offsetRecord=self.offsetRecord+COMMENT_PER_PAGE;
+        }
+
+        [tblViewContent reloadData];
+        // [self loginSucessFullWithFB];
+        
+        //Hide Indicator
+        [appDelegate hideSpinner];
+    }
+                              failure:^(NSError *error) {
+                                  //Hide Indicator
+                                  [appDelegate hideSpinner];
+                                  NSLog(@"failure JsonData %@",[error description]);
+                                  [self loginError:error];
+                                  //                                         [self loginViewShowingLoggedOutUser:loginView];
+                                  
+                              }];
+    
+    
+}
+
+//#pragma mark Update Private functions
+-(void) getMoreComment
+{
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
+        
+        return;
+    }
+    //Show Indicator
+    if( self.offsetRecord==0 && tblViewContent.tableHeaderView==nil){
+        [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    }
+    [[appDelegate _engine] getMoreComment:objUpdate.updateId   Offset:(int)self.offsetRecord  NoOfRecords:COMMENT_PER_PAGE  success:^(NSMutableDictionary *dicUpdates) {
+        
+        
+        self.totalRecord=[[dicUpdates objectForKey:@"updatesCount"] integerValue] ;
+        self.pendingRecord=self.totalRecord-(self.offsetRecord+COMMENT_PER_PAGE);
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
+        // [self loginSucessFullWithFB];
+        if( self.offsetRecord==0){
+            //Hide Indicator
+            
+            
+            objUpdate.comments=[dicUpdates objectForKey:@"comments"]  ;
+            [tblViewContent reloadData];
+            [appDelegate hideSpinner];
+            
+        }else{
+ 
+            [ objUpdate.comments addObjectsFromArray:[dicUpdates objectForKey:@"comments"] ]  ;
+           
+           
+            [tblViewContent reloadData];
+        }
+        
+        self.offsetRecord=self.offsetRecord+COMMENT_PER_PAGE;
+        
+    }
+                              failure:^(NSError *error) {
+                                  //Hide Indicator
+                                  [appDelegate hideSpinner];
+                                  NSLog(@"failure JsonData %@",[error description]);
+                                  [self loginError:error];
+                                  //                                         [self loginViewShowingLoggedOutUser:loginView];
+                                  
+                              }];
+    
+}
 //- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
 //    UIViewController *vc = tabBarController.selectedViewController;
 //
@@ -610,38 +708,38 @@
             cell.btnMore.hidden=YES;
             cell.imgDevider.hidden=YES;
             cell.btnMore.tag=indexPath.section;
-            if(([objUpdate.comments count]<10) && (indexPath.row==[objUpdate.comments count]))
-            {
-                cell.btnMore.hidden=YES;
-                cell.imgDevider.hidden=NO;
-                
-                
-            }
-            else if([objUpdate.comments count]>=10)
-            {
-                if(objUpdate.isExpend && (indexPath.row==[objUpdate.comments count]))
-                {
-                    [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[objUpdate.comments count ]-10]  forState:UIControlStateNormal];
-                    cell.btnMore.hidden=YES;
-                    cell.imgDevider.hidden=NO;
-                    
-                }else if(indexPath.row==10 && !objUpdate.isExpend){
-                    [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[objUpdate.comments count ]-10]  forState:UIControlStateNormal];
-                    cell.btnMore.hidden=NO;
-                    cell.imgDevider.hidden=NO;
-                    if([objUpdate.comments count]==10)
-                    {
-                        cell.btnMore.hidden=YES;
-                        cell.imgHalfDevider.hidden=YES;
-                        
-                    }
-                    
-                    
-                }
-                
-            }
+//            if(indexPath.row==[objUpdate.comments count])
+//            {
+//                cell.btnMore.hidden=YES;
+//                cell.imgDevider.hidden=NO;
+//                
+//                
+//            }
+//            else if([objUpdate.comments count]>=10)
+//            {
+//                if(objUpdate.isExpend && (indexPath.row==[objUpdate.comments count]))
+//                {
+//                    [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+//                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[objUpdate.comments count ]-10]  forState:UIControlStateNormal];
+//                    cell.btnMore.hidden=YES;
+//                    cell.imgDevider.hidden=NO;
+//                    
+//                }else if(indexPath.row==10 && !objUpdate.isExpend){
+//                    [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+//                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[objUpdate.comments count ]-10]  forState:UIControlStateNormal];
+//                    cell.btnMore.hidden=NO;
+//                    cell.imgDevider.hidden=NO;
+//                    if([objUpdate.comments count]==10)
+//                    {
+//                        cell.btnMore.hidden=YES;
+//                        cell.imgHalfDevider.hidden=YES;
+//                        
+//                    }
+//                    
+//                    
+//                }
+//                
+//            }
             return cell;
         }else{
             
@@ -732,38 +830,38 @@
             cell.btnMore.hidden=YES;
             cell.imgDevider.hidden=YES;
             cell.btnMore.tag=indexPath.section;
-            if(([objUpdate.comments count]<10) && (indexPath.row==[objUpdate.comments count]))
-            {
-                cell.btnMore.hidden=YES;
-                cell.imgDevider.hidden=NO;
-                
-                
-            }
-            else if([objUpdate.comments count]>=10)
-            {
-                if(objUpdate.isExpend && (indexPath.row==[objUpdate.comments count]))
-                {
-                    [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[objUpdate.comments count ]-1]  forState:UIControlStateNormal];
-                    cell.btnMore.hidden=YES;
-                    cell.imgDevider.hidden=NO;
-                    
-                }else if(indexPath.row==10 && !objUpdate.isExpend){
-                    [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[objUpdate.comments count ]-10]  forState:UIControlStateNormal];
-                    cell.btnMore.hidden=NO;
-                    cell.imgDevider.hidden=NO;
-                    
-                }else if(indexPath.row==10 && objUpdate.isExpend){
-                    
-                    cell.btnMore.hidden=YES;
-                    cell.imgHalfDevider.hidden=NO;
-                    
-                    cell.imgDevider.hidden=YES;
-                    
-                }
-                
-            }
+//            if(([objUpdate.comments count]<10) && (indexPath.row==[objUpdate.comments count]))
+//            {
+//                cell.btnMore.hidden=YES;
+//                cell.imgDevider.hidden=NO;
+//                
+//                
+//            }
+//            else if([objUpdate.comments count]>=10)
+//            {
+//                if(objUpdate.isExpend && (indexPath.row==[objUpdate.comments count]))
+//                {
+//                    [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+//                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[objUpdate.comments count ]-1]  forState:UIControlStateNormal];
+//                    cell.btnMore.hidden=YES;
+//                    cell.imgDevider.hidden=NO;
+//                    
+//                }else if(indexPath.row==10 && !objUpdate.isExpend){
+//                    [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+//                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[objUpdate.comments count ]-10]  forState:UIControlStateNormal];
+//                    cell.btnMore.hidden=NO;
+//                    cell.imgDevider.hidden=NO;
+//                    
+//                }else if(indexPath.row==10 && objUpdate.isExpend){
+//                    
+//                    cell.btnMore.hidden=YES;
+//                    cell.imgHalfDevider.hidden=NO;
+//                    
+//                    cell.imgDevider.hidden=YES;
+//                    
+//                }
+//                
+//            }
             return cell;
         }
     }
@@ -892,7 +990,11 @@
         if (y>21) {
             height=height+y;
         }
-        
+        if(cellMainHeight<height+97)
+        {
+            cellMainHeight=height+97;
+        }
+
         return height=height+97;
     }
     else if(objUpdate.comments>0)
@@ -901,28 +1003,44 @@
         CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:cmt.commentTxt];
         float height=0.0f;
         NSLog(@"%ld",(long)indexPath.row);
-        if(([objUpdate.comments count]<10) && (indexPath.row==[objUpdate.comments count]))
-        {
-            height=35.0f;
-        }
-        else if([objUpdate.comments count]>=10)
-        {
-            if(objUpdate.isExpend && (indexPath.row==[objUpdate.comments count]))
-            {
-                height=35.0f;
-            }else if(indexPath.row==1 && !objUpdate.isExpend){
-                height=35.0f;
-            }
-            
-        }
+//        if( indexPath.row==[objUpdate.comments count])
+//        {
+//            height=35.0f;
+//        }
+//        else if([objUpdate.comments count]>=COMMENT_PER_PAGE)
+//        {
+//            if(objUpdate.isExpend && (indexPath.row==[objUpdate.comments count]))
+//            {
+//                height=35.0f;
+//            }else if(indexPath.row==11 && !objUpdate.isExpend){
+//                height=35.0f;
+//            }
+//            
+//        }
         if([cmt.parentCommentId integerValue] !=0 && (labelSize.height<17))
         {
-            height=height-15;
+            height=height-10;
         }
+        
+        
         if(labelSize.height>17)
-            return   height=height+65+labelSize.height;
-        else
-            return  height=height+80;
+        {
+            //           cellHeight=cellHeight+height+65+labelSize.height;
+          height=height+65+labelSize.height;
+          
+            [cellCMTHeight removeObjectAtIndex:indexPath.section];
+            [cellCMTHeight insertObject:[NSString stringWithFormat:@"%f",height] atIndex:indexPath.section];
+            
+            return  height;
+        }
+        else{
+            //             cellHeight=cellHeight+height+80;
+           height=height+75;
+            [cellCMTHeight removeObjectAtIndex:indexPath.section];
+            [cellCMTHeight insertObject:[NSString stringWithFormat:@"%f",height] atIndex:indexPath.section];
+            return  height;
+        }
+
     }
     
     
@@ -941,6 +1059,14 @@
     //    [self.navigationController pushViewController:profileView animated:YES];
 }
 - (IBAction)btnCourseDetailClick:(id)sender {
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
+        
+        return;
+    }
     UIButton *btn=(UIButton *)sender;
     // call the Course Detail Service
     NSString *feedId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
@@ -969,6 +1095,14 @@
 }
 
 - (IBAction)btnModuleDetailClick:(id)sender {
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
+        
+        return;
+    }
     UIButton *btn=(UIButton *)sender;
     // call the Module Detail Service
     // call the Course Detail Service
@@ -998,6 +1132,14 @@
     
 }
 - (IBAction)btnUserProfileClick:(id)sender {
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
+        
+        return;
+    }
     UIButton *btn=(UIButton *)sender;
     // call the user profile service user profile
     
@@ -1038,6 +1180,14 @@
 #pragma mark - Comment and like on Update
 
 - (IBAction)btnPlayResourceClick:(id)sender {
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
+        
+        return;
+    }
     UIButton *btn=(UIButton *)sender;
  
     Resourse *resourse =objUpdate.resource;
@@ -1099,6 +1249,14 @@
     
 }
 - (IBAction)btnCommentOnUpdateClick:(id)sender {
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
+        
+        return;
+    }
     UIButton *btn=(UIButton *)sender;
     //  NSInteger currentpage=  self.pageControl.currentPage;
     // get the current Content
@@ -1111,6 +1269,14 @@
     
 }
 - (IBAction)btnLikeOnUpdateClick:(id)sender {
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
+        
+        return;
+    }
     // call the service
     UIButton *btn=(UIButton *)sender;
     // get the current Content
@@ -1145,10 +1311,114 @@
                                    }];
 }
 - (IBAction)btnShareOnUpdateClick:(id)sender {
+    
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        return;
+    }
+    // call the service
+    UIButton *btn=(UIButton *)sender;
+    // get the current Content
+    Update *update=objUpdate;
+    NSURL *url = [NSURL URLWithString: update.resource.resourceUrl];
+    
+    if([SLComposeViewController
+        isAvailableForServiceType:SLServiceTypeFacebook]) {
+        SLComposeViewController * fbSheetOBJ = [SLComposeViewController
+                                                composeViewControllerForServiceType:SLServiceTypeFacebook];
+        
+        NSString *strText = [NSString stringWithFormat:@"%@ \n%@",[self updateTitle:update],update.resource.resourceDesc];
+        [fbSheetOBJ  setInitialText:strText];
+        
+        
+        // NSString* facebookText = @"Awesome App";
+        
+        [fbSheetOBJ addImage:[UIImage
+                              imageWithData:update.resource.resourceImageData]];
+        
+        [fbSheetOBJ addURL:url];
+        
+        
+        
+        
+        [self presentViewController:fbSheetOBJ animated:YES
+                         completion:Nil];
+    }else {
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Sign  in!" message:@"Please Facebook Log In first !" delegate:nil
+                                             cancelButtonTitle:@"ok" otherButtonTitles:nil];
+        [alert show];
+        
+    }
 }
+-(NSString*)updateTitle:(Update*)update
+{
+    
+    NSString *titleString =update.updateTitle;
+    NSArray *titleWords = [titleString componentsSeparatedByString:@"$"];
+    
+    NSMutableString *attributedString = [[NSMutableString alloc]
+                                         initWithString:@""];
+    int textIndex=0;
+    for (NSString *strtemp in titleWords) {
+        if([update.updateTitleArray count]<=textIndex)
+            break ;
+        NSString* tempstr=[update.updateTitleArray
+                           objectAtIndex:textIndex];
+        NSDictionary *dictext= update.updateTitleArray[textIndex];
+        if(![strtemp isEqualToString:@""])
+        {
+            
+            [attributedString appendString: strtemp];
+            
+        }
+        if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
+        {
+            NSString* tempstr=[dictext objectForKey:@"value"];
+            [attributedString appendString: tempstr];
+            
+        }else  if([[dictext objectForKey:@"type"]
+                   isEqualToString:@"course"])
+        {
+            NSString* tempstr=[dictext objectForKey:@"value"];
+            [attributedString appendString: tempstr];
+        }
+        else  if([[dictext objectForKey:@"type"]
+                  isEqualToString:@"module"])
+        {
+            NSString* tempstr=[dictext objectForKey:@"value"];
+            [attributedString appendString: tempstr];
+            
+        }
+        
+        else  if([[dictext objectForKey:@"type"]
+                  isEqualToString:@"resource"])
+        {
+            NSString* tempstr=[dictext objectForKey:@"value"];
+            [attributedString appendString: tempstr];
+        }
+        
+        textIndex=textIndex+1;
+        
+    }
+    
+    
+    
+    return attributedString;
+}
+
 #pragma mark - Reply and like on Comment
 
 - (IBAction)btnReplyOnCommentClick:(id)sender {
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
+        
+        return;
+    }
     UIButton *btn=(UIButton *)sender;
     selectedCommentId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
     actionOn=Comment;
@@ -1156,6 +1426,14 @@
     
 }
 - (IBAction)btnLikeOnCommentClick:(id)sender {
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
+        
+        return;
+    }
     UIButton *btn=(UIButton *)sender;
     selectedCommentId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
     
@@ -1192,6 +1470,14 @@
 }
 
 - (IBAction)btnCommentDone:(id)sender {
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
+        
+        return;
+    }
     [txtViewCMT resignFirstResponder];
     
     if([txtViewCMT.text isEqualToString:@""])
@@ -1219,7 +1505,8 @@
 
             [appDelegate hideSpinner];
             
-           // [self  getUpdate:txtSearchBar.text];
+            [self getUpdatedUpdate:@""];
+
         }
                                           failure:^(NSError *error) {
                                               //Hide Indicator
@@ -1240,7 +1527,7 @@
 
             //Hide Indicator
             [appDelegate hideSpinner];
-           // [self  getUpdate:txtSearchBar.text];
+           [self getUpdatedUpdate:@""];
         }
                                            failure:^(NSError *error) {
                                                //Hide Indicator
@@ -1279,6 +1566,7 @@
 }
 
 - (IBAction)btnBackClick:(id)sender {
+    [AppSingleton sharedInstance].updatedUpdate=objUpdate;
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -1580,6 +1868,81 @@
     
 }
 
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if(tblViewContent.tableHeaderView!=nil ||tblViewContent.tableFooterView!=nil)
+    {
+        return ;
+    }
+    
+    
+    float cellCMTHeightTotal=0.0;
+    
+    
+    for (id height in cellCMTHeight) {
+        cellCMTHeightTotal=cellCMTHeightTotal+[height floatValue];
+    }
+    float cellheight=cellMainHeight+cellCMTHeightTotal;
+    
+    NSLog(@"Offset=%f height=%f,tableCell height=%f",scrollView.contentOffset.y ,scrollView.frame.size.height,cellheight);
+    
+    BOOL endOfTable = (scrollView.contentOffset.y >= (cellheight- scrollView.frame.size.height)); // Here 40 is row height
+    // tblViewContent.tableFooterView = footerView;
+    //    tblViewContent.tableHeaderView = footerView;
+    [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
+    
+    if (self.pendingRecord>0 && endOfTable&& !scrollView.dragging && !scrollView.decelerating)
+    {
+        [self initFooterView];
+        tblViewContent.tableFooterView = footerView;
+        
+        [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
+        [self getMoreComment];
+   }//else  if (scrollView.contentOffset.y<=0  && !scrollView.dragging && !scrollView.decelerating)
+//    {
+//        [self initFooterView];
+//        tblViewContent.tableHeaderView = footerView;
+//        
+//        [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
+//       
+//        [self getUpdatedUpdate:@""];
+//        
+//    }
+    else{
+        [footerView removeFromSuperview];
+        //        tblViewContent.tableFooterView=nil;
+        //        tblViewContent.tableHeaderView=nil;
+        
+    }
+    
+}
+-(void)initFooterView
+{
+    
+    footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, screenWidth, 40.0)];
+    
+    UIActivityIndicatorView * actInd = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    actInd.tag = 10;
+    
+    actInd.frame = CGRectMake((screenWidth-20)/2, 5.0, 20.0, 20.0);
+    
+    actInd.hidesWhenStopped = YES;
+    
+    [footerView addSubview:actInd];
+    
+    actInd = nil;
+}
+- (void)showNetworkStatus:(NSString *)status newVisibility:(BOOL)newVisibility
+{
+    
+    _lblStatus.text=status;
+    [_viewNetwork setHidden:newVisibility];
+}
 
+
+- (IBAction)btnClose:(id)sender {
+    [self showNetworkStatus:@"" newVisibility:YES];
+}
 
 @end

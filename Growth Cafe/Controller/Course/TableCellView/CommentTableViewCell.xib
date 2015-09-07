@@ -204,7 +204,9 @@
                     <constraint firstItem="DgS-EM-T3v" firstAttribute="leading" secondItem="rc9-NV-lwD" secondAttribute="trailing" constant="22" id="P5o-4C-dyV">
                         <variation key="heightClass=regular-widthClass=compact" constant="28"/>
                     </constraint>
-                    <constraint firstItem="M5G-Ti-fad" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="108" id="PGj-PE-JQv"/>
+                    <constraint firstItem="M5G-Ti-fad" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="108" id="PGj-PE-JQv">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
                     <constraint firstItem="DgS-EM-T3v" firstAttribute="top" secondItem="mF9-K0-drP" secondAttribute="bottom" constant="8" id="Qah-HA-oOS">
                         <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                     </constraint>
@@ -223,7 +225,9 @@
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
                     <constraint firstAttribute="centerX" secondItem="M5G-Ti-fad" secondAttribute="centerX" id="csA-vr-tNy"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="M5G-Ti-fad" secondAttribute="trailing" constant="108" id="dmJ-ip-ULg"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="M5G-Ti-fad" secondAttribute="trailing" constant="108" id="dmJ-ip-ULg">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="oES-EN-JZw" secondAttribute="trailing" constant="139" id="euz-XQ-ke1">
                         <variation key="heightClass=regular-widthClass=compact" constant="148"/>
                     </constraint>

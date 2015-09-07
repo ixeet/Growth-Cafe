@@ -43,6 +43,13 @@
 
 #define LIKE_ON_CMT_URL(useremail,commentId) [NSString stringWithFormat:@"%@/rest/course/likeOnComment/userName/%@/commentId/%@",APP_URL,useremail,commentId]
 
+
+//get more comment
+#define GET_MORE_COMMENT_URL [NSString stringWithFormat:@"%@/rest/common/getFeedComments",APP_URL]
+
+//get Feed  List
+#define GET_UPDATE_DETAIL_URL(userid,feedid) [NSString stringWithFormat:@"%@/rest/common/getFeedDetail/userId/%@/feedId/%@",APP_URL,userid,feedid]
+
 //get Feed  List
 #define GET_UPDATE_URL [NSString stringWithFormat:@"%@/rest/common/getFeeds",APP_URL]
 //comment on feed
@@ -98,6 +105,9 @@
 #define FORGET_SUCCESS_MSG(useremail)[NSString stringWithFormat:@"Your password is sent to %@, please check SPAM folder if not received in inbox.",useremail]
 
 // Error Msg
+
+#define NO_INTERNET_MSG @"No Internet Connection."
+#define REESTABLISH_INTERNET_MSG @"Reestablishing Lost Connection."
 #define ERROR_DEFAULT_MSG @"There seems to be a problem connecting with server. Please check your network connection."
 #define MISSING_LOGIN_ID_PWD @"Email and Password can't empty, please enter a valid email and password."
 #define MISSING_LOGIN_ID @"Email can't be empty, please enter a valid email."
@@ -131,7 +141,8 @@
 
 #define SUCCESS_MESSAGE_ALERT_TITLE @"Info"
 #define DATA_LOADING_MSG @"Please wait..."
-#define UPDATE_PER_PAGE 2
+#define UPDATE_PER_PAGE 3
+#define COMMENT_PER_PAGE 5
 //Dropdown Enums
 typedef NS_ENUM(NSInteger, AppDropdownType){
     

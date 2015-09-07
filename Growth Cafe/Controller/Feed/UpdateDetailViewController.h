@@ -11,6 +11,9 @@
 #import "CustomProfileView.h"
 #import "Update.h"
 @interface UpdateDetailViewController : UIViewController
+{
+    UIView * footerView;
+}
 @property (strong, nonatomic) IBOutlet UIView *cmtview;
 
 
@@ -26,5 +29,11 @@
 - (IBAction)btnCommentCancle:(id)sender;
 - (IBAction)btnProfileClick:(id)sender;
 - (IBAction)btnBackClick:(id)sender;
+- (IBAction)btnClose:(id)sender;
+@property (assign, nonatomic)  NSInteger totalRecord;
+@property (assign, nonatomic)  NSInteger pendingRecord;
+@property (assign, nonatomic)  NSInteger offsetRecord;
+@property (strong, nonatomic) IBOutlet UIView *viewNetwork;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblStatus;
 @end

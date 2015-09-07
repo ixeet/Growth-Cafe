@@ -92,7 +92,9 @@
                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4FX-kX-NGz">
                         <rect key="frame" x="117" y="130" width="88" height="28"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="88" id="jEU-lf-GKQ"/>
+                            <constraint firstAttribute="width" constant="88" id="jEU-lf-GKQ">
+                                <variation key="heightClass=regular-widthClass=compact" constant="304"/>
+                            </constraint>
                             <constraint firstAttribute="height" constant="28" id="t0K-tm-PHS">
                                 <variation key="heightClass=regular-widthClass=compact" constant="22"/>
                             </constraint>
@@ -168,7 +170,9 @@
                     <constraint firstItem="hmu-ln-rJn" firstAttribute="leading" secondItem="EjL-cO-ePl" secondAttribute="trailing" constant="7" id="43m-8u-JJr">
                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                     </constraint>
-                    <constraint firstItem="4FX-kX-NGz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="109" id="4K5-Ra-thA"/>
+                    <constraint firstItem="4FX-kX-NGz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="109" id="4K5-Ra-thA">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
                     <constraint firstItem="lZ8-Ho-Wln" firstAttribute="leading" secondItem="LHc-DG-pP7" secondAttribute="leading" id="6ea-rq-XES"/>
                     <constraint firstItem="EjL-cO-ePl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="6pp-SK-LjM">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -215,7 +219,9 @@
                     <constraint firstAttribute="trailingMargin" secondItem="qYY-RC-OrA" secondAttribute="trailing" constant="10" id="t90-Rb-ldE">
                         <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                     </constraint>
-                    <constraint firstAttribute="trailingMargin" secondItem="4FX-kX-NGz" secondAttribute="trailing" constant="107" id="ujZ-hA-vPT"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="4FX-kX-NGz" secondAttribute="trailing" constant="107" id="ujZ-hA-vPT">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="LHc-DG-pP7" secondAttribute="trailing" constant="10" id="vCu-9D-znp"/>
                     <constraint firstItem="rAV-9M-vsI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="vRq-D7-ZZF"/>
                     <constraint firstItem="lZ8-Ho-Wln" firstAttribute="leading" secondItem="EjL-cO-ePl" secondAttribute="trailing" constant="7" id="wev-sp-NMn">
@@ -290,7 +296,7 @@
                 <outlet property="lblCmtText" destination="LHc-DG-pP7" id="tqQ-hM-rGs"/>
                 <outlet property="lblRelatedVideo" destination="KCm-qB-Mrw" id="Pfs-Jd-Sq0"/>
             </connections>
-            <point key="canvasLocation" x="229" y="128.5"/>
+            <point key="canvasLocation" x="229" y="128"/>
         </tableViewCell>
     </objects>
     <resources>
