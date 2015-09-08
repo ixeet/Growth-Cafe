@@ -40,6 +40,7 @@
     CGFloat screenWidth;
     NSMutableArray  *cellMainHeight;
     AFNetworkReachabilityStatus previousStatus;
+    BOOL ForNew;
 }
 
 @end
@@ -54,10 +55,11 @@
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
+       previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
     // Do any additional setup after loading the view from its nib.
     previousStatus=AFNetworkReachabilityStatusUnknown;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+  ForNew=NO;
     if ([defaults boolForKey:@"keep_loggedIn"])
     {
         useremail =  [AppGlobal removeUnwantedspaces:[defaults objectForKey:@"loginName"]];
@@ -237,7 +239,7 @@
     //set Profile
 
     self.offsetRecord=0;
-    
+        ForNew=YES;
     [self  getUpdate:@""];
     }else {
     if( [AppSingleton sharedInstance].updatedUpdate!=nil)
@@ -318,8 +320,22 @@
             //Hide Indicator
             
            
-             arrayUpdates=[dicUpdates objectForKey:@"updates"]  ;
-           
+            NSMutableArray *tempArray  =[dicUpdates objectForKey:@"updates"]  ;
+            
+           if(ForNew && [arrayUpdates count]>0)
+           {
+               ForNew=NO;
+               
+               Update *tempUpdate=[tempArray objectAtIndex:0];
+               Update *tempUpdate1=[arrayUpdates objectAtIndex:0];
+               if(![tempUpdate.updateId isEqualToString: tempUpdate1.updateId] )
+               {
+                   arrayUpdates=tempArray;
+               }
+                   
+           }else{
+               arrayUpdates=tempArray;
+           }
             
              [appDelegate hideSpinner];
             
@@ -637,15 +653,24 @@
         if (update.resource!=nil) {
             
             if(update.resource.resourceImageUrl!=nil){
+                //
+                
                 [cell.btnPlay setHidden:NO];
                 [cell.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+                if([AppGlobal checkImageAvailableAtLocal:update.resource.resourceImageUrl])
+                {
+                    update.resource.resourceImageData=[AppGlobal getImageAvailableAtLocal:update.resource.resourceImageUrl];
+                }
+
                 if (update.resource.resourceImageData==nil) {
                     NSURL *imageURL = [NSURL URLWithString:update.resource.resourceImageUrl];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                         update.resource.resourceImageData  = [NSData dataWithContentsOfURL:imageURL];
+                         [AppGlobal setImageAvailableAtLocal:update.resource.resourceImageUrl AndImageData:update.resource.resourceImageData];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             // Update the UI
                             UIImage *img=[UIImage imageWithData:update.resource.resourceImageData];
+                           
                             if(img!=nil)
                             {
                                 [cell.imgResorces setImage:img];
@@ -660,6 +685,7 @@
                     
                     [cell.imgResorces setBackgroundColor:[UIColor clearColor]];
                 }
+                
             }
         }
         if(update.user !=nil)
@@ -682,7 +708,10 @@
         cell.txtView.tag=indexPath.section;
         cell.txtView.selectable=YES;
         if(update.updateCreatedByImage!=nil){
-            
+            if([AppGlobal checkImageAvailableAtLocal:update.updateCreatedByImage])
+            {
+                update.updateCreatedByImageData=[AppGlobal getImageAvailableAtLocal:update.updateCreatedByImage];
+            }
             
             if (update.updateCreatedByImageData==nil) {
                 NSURL *imageURL = [NSURL URLWithString:update.updateCreatedByImage];
@@ -691,6 +720,7 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // Update the UI
                         UIImage *img=[UIImage imageWithData:update.updateCreatedByImageData ];
+                        [AppGlobal setImageAvailableAtLocal:update.updateCreatedByImage AndImageData:update.updateCreatedByImageData ];
                         if(img!=nil)
                         {
                             [cell.btnUpdatedBy setImage:img forState:UIControlStateNormal];                   [cell.btnUpdatedBy setBackgroundColor:[UIColor clearColor]];
@@ -781,6 +811,10 @@
             
             cell.lblRelatedVideo.hidden=YES;
             if(comment.commentByImage!=nil){
+                if([AppGlobal checkImageAvailableAtLocal:comment.commentByImage])
+                {
+                    comment.commentByImageData=[AppGlobal getImageAvailableAtLocal:comment.commentByImage];
+                }
                 if(comment.commentByImageData==nil)
                 {
                     
@@ -789,9 +823,11 @@
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
                         comment.commentByImageData=imageData;
+                         [AppGlobal setImageAvailableAtLocal:comment.commentByImage AndImageData:comment.commentByImageData ];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             // Update the UI
                             UIImage *img=[UIImage imageWithData:imageData];
+                            
                             if(img!=nil)
                                 [cell.btnCommentedBy setImage:img forState:UIControlStateNormal];
                             
@@ -908,6 +944,11 @@
             
             cell.lblRelatedVideo.hidden=YES;
             if(comment.commentByImage!=nil){
+                
+                if([AppGlobal checkImageAvailableAtLocal:comment.commentByImage])
+                {
+                    comment.commentByImageData=[AppGlobal getImageAvailableAtLocal:comment.commentByImage];
+                }
                 if(comment.commentByImageData==nil)
                 {
                     
@@ -916,6 +957,7 @@
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
                         comment.commentByImageData=imageData;
+                        [AppGlobal setImageAvailableAtLocal:comment.commentByImage AndImageData:comment.commentByImageData];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             // Update the UI
                             UIImage *img=[UIImage imageWithData:imageData];
@@ -1587,6 +1629,7 @@
         //Hide Indicator
         
         [appDelegate hideSpinner];
+        self.offsetRecord=0;
         [self  getUpdate:txtSearchBar.text];
     }
                                     failure:^(NSError *error) {
@@ -1628,7 +1671,7 @@
             
             //Hide Indicator
             [appDelegate hideSpinner];
-            
+            self.offsetRecord=0;
             [self  getUpdate:txtSearchBar.text];
         }
                                           failure:^(NSError *error) {
@@ -1647,6 +1690,8 @@
             
             //Hide Indicator
             [appDelegate hideSpinner];
+            self.offsetRecord=0;
+
             [self  getUpdate:txtSearchBar.text];
         }
                                            failure:^(NSError *error) {
@@ -2061,6 +2106,7 @@
         
         [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
         self.offsetRecord=0;
+        ForNew=YES;
         [self getUpdate:@""];
         
     }

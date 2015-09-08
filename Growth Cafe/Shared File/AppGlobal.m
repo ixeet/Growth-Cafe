@@ -610,5 +610,56 @@
     
     return newString;
 }
+
++(void)setImageAvailableAtLocal:(NSString*)imgName AndImageData:(NSData*)arrayData
+{
+
+    NSArray *titleWords = [imgName componentsSeparatedByString:@"/"];
+    imgName=[titleWords objectAtIndex:[titleWords count]-1];
+    NSArray *arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath =  [NSString stringWithFormat:@"%@/%@",[arr objectAtIndex:0], imgName];
+    
+    
+    
+//    NSData  *data=[NSJSONSerialization dataWithJSONObject:arrayData options:0 error:nil];
+    NSOutputStream *stream = [[NSOutputStream alloc] initToFileAtPath:filePath append:NO];
+    [stream open];
+    [stream write:arrayData.bytes maxLength:arrayData.length];
+    [stream close];
+    stream = nil;
+}
++(NSData*)getImageAvailableAtLocal:(NSString*)imgName
+{
+    NSArray *titleWords = [imgName componentsSeparatedByString:@"/"];
+    imgName=[titleWords objectAtIndex:[titleWords count]-1];
+
+    
+    NSArray *arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString  *filePath =  [NSString stringWithFormat:@"%@/%@",[arr objectAtIndex:0 ],imgName];
+    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+    return fileData;
+}
+
++(BOOL)checkImageAvailableAtLocal:(NSString*)imgName
+{
+    NSArray *titleWords = [imgName componentsSeparatedByString:@"/"];
+    imgName=[titleWords objectAtIndex:[titleWords count]-1];
+
+    NSArray *arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString  *filePath =  [NSString stringWithFormat:@"%@/%@",[arr objectAtIndex:0 ],imgName];
+    BOOL isDirectory;
+     BOOL fileExistsAtPath = [[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDirectory];
+    if(fileExistsAtPath){
+         return YES;
+    
+
+    }
+
+    
+    return NO;
+}
+
+
+
 @end
 

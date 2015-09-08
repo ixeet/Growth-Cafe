@@ -79,4 +79,9 @@
 +(UserDetails*)readUserDetail;
 +(NSString*) timeLeftSinceDate: (NSDate *)dateT;
 + (NSString*)removeUnwantedspaces:(NSString*)oldString;
+
++(void)setImageAvailableAtLocal:(NSString*)imgName AndImageData:(NSData*)arrayData;
++(NSData*)getImageAvailableAtLocal:(NSString*)imgName;
+
++(BOOL)checkImageAvailableAtLocal:(NSString*)imgName;
 @end

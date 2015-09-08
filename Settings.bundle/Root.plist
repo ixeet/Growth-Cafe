@@ -34,7 +34,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<string>191.239.57.54:8080/SLMS_test</string>
+			<string>191.239.57.54:8080/SLMS</string>
 			<key>Key</key>
 			<string>url_preference</string>
 			<key>Title</key>

@@ -44,6 +44,7 @@
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
+     previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
     // Do any additional setup after loading the view from its nib.
     if(  [AppSingleton sharedInstance].isUserLoggedIn!=YES)
     {
@@ -86,7 +87,7 @@
     
     
     
-   previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+  
     
 }
 
@@ -145,6 +146,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
         if(status==AFNetworkReachabilityStatusNotReachable)
@@ -162,7 +164,7 @@
         //
         //       }
     }];
-
+ [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     // [super viewWillAppear:animated];
     /* Listen for keyboard */
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -359,10 +361,15 @@
                 [cell.btnPlay setHidden:NO];
                     [cell.imgResource setHidden:NO];
                 [cell.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+                if([AppGlobal checkImageAvailableAtLocal:assignment.attachedResource.resourceImageUrl])
+                {
+                    assignment.attachedResource.resourceImageData=[AppGlobal getImageAvailableAtLocal:assignment.attachedResource.resourceImageUrl];
+                }
                 if (assignment.attachedResource.resourceImageData==nil) {
                     NSURL *imageURL = [NSURL URLWithString:assignment.attachedResource.resourceImageUrl];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                        assignment.attachedResource.resourceImageData  = [NSData dataWithContentsOfURL:imageURL];
+                        [AppGlobal setImageAvailableAtLocal:assignment.attachedResource.resourceImageUrl AndImageData: assignment.attachedResource.resourceImageData];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             // Update the UI
                             UIImage *img=[UIImage imageWithData:assignment.attachedResource.resourceImageData];
@@ -574,6 +581,13 @@
     [tblViewContent reloadData];
 }
 - (IBAction)btnSubmitAssignmentClick:(id)sender {
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        return;
+    }
+
     UIButton *btn=(UIButton *)sender;
     Assignment *assignment=[arrayAssignment objectAtIndex:btn.tag];
     SubmitAssignmentViewController *submitViewController=[[SubmitAssignmentViewController alloc]init];
@@ -590,6 +604,14 @@
 #pragma mark - Comment and like on Assignment
 
 - (IBAction)btnPlayResourceClick:(id)sender {
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        
+        return;
+    }
+
     UIButton *btn=(UIButton *)sender;
     Assignment *assign=[arrayAssignment objectAtIndex:btn.tag];
     Resourse *resourse =assign.attachedResource;

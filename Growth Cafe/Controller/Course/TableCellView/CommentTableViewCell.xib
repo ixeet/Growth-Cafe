@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="185" id="KGk-i7-Jjw" customClass="CommentTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="168" id="KGk-i7-Jjw" customClass="CommentTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -134,25 +134,6 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Related Videos:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oES-EN-JZw">
-                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="h8a-Fk-PIz"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="h8a-Fk-PIz"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="h8a-Fk-PIz"/>
-                            </mask>
-                        </variation>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTv-Cb-VrY" userLabel="btnCommentedBy">
                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                         <constraints>
@@ -175,6 +156,25 @@
                             </mask>
                         </variation>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Related Videos:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oES-EN-JZw">
+                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="h8a-Fk-PIz"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="h8a-Fk-PIz"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="h8a-Fk-PIz"/>
+                            </mask>
+                        </variation>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
@@ -185,7 +185,7 @@
                         <variation key="heightClass=regular-widthClass=compact" constant="-18"/>
                     </constraint>
                     <constraint firstItem="oES-EN-JZw" firstAttribute="top" secondItem="tBM-bH-MgC" secondAttribute="bottom" constant="14" id="C7b-2h-zTm">
-                        <variation key="heightClass=regular-widthClass=compact" constant="-1"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="3"/>
                     </constraint>
                     <constraint firstItem="qOV-88-Rkq" firstAttribute="top" secondItem="rc9-NV-lwD" secondAttribute="bottom" constant="6" id="E99-0T-yLe">
                         <variation key="heightClass=regular-widthClass=compact" constant="2"/>
@@ -196,7 +196,7 @@
                     </constraint>
                     <constraint firstItem="mF9-K0-drP" firstAttribute="top" secondItem="urH-QY-Byu" secondAttribute="bottom" constant="1" id="G5Q-fe-SKz"/>
                     <constraint firstItem="oES-EN-JZw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="Ggx-so-bdc">
-                        <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
                     <constraint firstItem="fTv-Cb-VrY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Mjz-hU-mUc">
                         <variation key="heightClass=regular-widthClass=compact" constant="-2"/>
@@ -229,7 +229,7 @@
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="oES-EN-JZw" secondAttribute="trailing" constant="139" id="euz-XQ-ke1">
-                        <variation key="heightClass=regular-widthClass=compact" constant="148"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="140"/>
                     </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="DgS-EM-T3v" secondAttribute="trailing" constant="17" id="evR-Rb-NNu">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -251,8 +251,8 @@
                 </constraints>
                 <variation key="default">
                     <mask key="subviews">
-                        <exclude reference="oES-EN-JZw"/>
                         <exclude reference="fTv-Cb-VrY"/>
+                        <exclude reference="oES-EN-JZw"/>
                     </mask>
                     <mask key="constraints">
                         <exclude reference="C7b-2h-zTm"/>
@@ -287,8 +287,8 @@
                 </variation>
                 <variation key="heightClass=regular-widthClass=compact">
                     <mask key="subviews">
-                        <include reference="oES-EN-JZw"/>
                         <include reference="fTv-Cb-VrY"/>
+                        <include reference="oES-EN-JZw"/>
                     </mask>
                     <mask key="constraints">
                         <include reference="C7b-2h-zTm"/>
@@ -334,7 +334,7 @@
                 <outlet property="lblCmtText" destination="mF9-K0-drP" id="dSR-j2-77Q"/>
                 <outlet property="lblRelatedVideo" destination="oES-EN-JZw" id="qpd-HE-HGQ"/>
             </connections>
-            <point key="canvasLocation" x="233" y="55"/>
+            <point key="canvasLocation" x="233" y="46.5"/>
         </tableViewCell>
     </objects>
     <resources>

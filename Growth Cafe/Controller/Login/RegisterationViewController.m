@@ -43,6 +43,7 @@
     //    btnSchool.layer.borderWidth=2.0f;
     // Do any additional setup after loading the view from its nib.
     //init the keyboard
+      previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
     if([AppSingleton sharedInstance].isUserLoggedIn==YES)
     {
         [self.tabBarController.tabBar setHidden:NO];
@@ -68,7 +69,7 @@
     //   [ btnTitle  setTitle: forState:UIControlStateNormal];
     
     // set
-    previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+  
 
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -91,7 +92,7 @@
         //
         //       }
     }];
-
+ [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     btnFacebook.delegate=nil;

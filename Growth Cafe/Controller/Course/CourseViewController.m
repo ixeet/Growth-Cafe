@@ -76,9 +76,10 @@
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
-    [self setSearchUI];
+    
     
      previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+    [self setSearchUI];
     btnCourses.selected=YES;
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
 //                                   initWithTarget:self
@@ -123,7 +124,7 @@
         //
         //       }
     }];
-
+ [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     if(!comeFromUpdate){
         if([coursesList count]==0)
@@ -355,14 +356,15 @@
         NSCalendar* calendar = [NSCalendar currentCalendar];
         
         NSDate *date = [AppGlobal convertStringDateToNSDate: course.startedOn];
-        
+        if(date!=nil){
  
 
         NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  date]; // Get necessary date components
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+        
         [cell.lblDate setText: [NSString stringWithFormat:@"%@ %ld",monthName,(long)components.day]];
-      
+        }
         [cell.lblCourseName setText: course.courseName];
         [cell.probarCourse setProgress:[course.completedPercentStatus floatValue]*stepSize animated:YES  ];
         [cell.lblPercent  setText: [NSString stringWithFormat:@"%@ %s" ,course.completedPercentStatus,"%"]];
@@ -395,7 +397,8 @@
         
        
         NSDate *date = [AppGlobal convertStringDateToNSDate: module.startedOn];
-        
+        if(date!=nil)
+        {
         NSCalendar* calendar = [NSCalendar currentCalendar];
         NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  date]; // Get necessary date components
  
@@ -405,7 +408,7 @@
         
        
         [cell.lblDate setText: [NSString stringWithFormat:@"%@ %ld",monthName,components.day]];
-        
+        }
         [cell.lblModuleName setText: module.moduleName];
         [cell.progressBarModule setProgress:[module.completedPercentStatus floatValue]* stepSize animated:YES  ];
         if ([module.completedPercentStatus floatValue]==100.00) {
@@ -422,6 +425,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     {
+        if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+        {
+            [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+                       
+            return;
+        }
 
     BOOL isChild =
     currentExpandedIndex > -1

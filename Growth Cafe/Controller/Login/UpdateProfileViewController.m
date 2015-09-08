@@ -48,7 +48,7 @@
     // Do any additional setup after loading the view from its nib.
     //    CALayer *imageLayer = imgProfile.layer;
     //    [imageLayer setCornerRadius:75];
-   
+    previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
     [self setUserProfile];
     isUpdate=NO;
     //  [self toggleHiddenState:YES];
@@ -60,7 +60,7 @@
         isFirstLoginDone=NO;
     customKeyboard = [[CustomKeyboard alloc] init];
     customKeyboard.delegate = self;
-    previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+   
  }
 
 - (void)didReceiveMemoryWarning {
@@ -96,6 +96,7 @@
         //
         //       }
     }];
+     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 }
 #pragma mark - Private method implementation
 -(void)changeFrameAndBackgroundImg
@@ -156,13 +157,24 @@
     }
     if(user.userImage!=nil){
    
-       
+       //check image available at local
+        //get image name from URL
+        if([AppGlobal checkImageAvailableAtLocal:user.userImage])
+        {
+            user.userImageData=[AppGlobal getImageAvailableAtLocal:user.userImage];
+            UIImage *img=[UIImage imageWithData:user.userImageData];
+            [imgProfile setImage:img];
+            imgProfile.layer.cornerRadius = imgProfile.frame.size.width/6;
+            imgProfile.clipsToBounds = YES;
+            NSLog(@"%@",@"yes");
+        }else{
             NSURL *imageURL = [NSURL URLWithString:user.userImage];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                 user.userImageData  = [NSData dataWithContentsOfURL:imageURL];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // Update the UI
                     UIImage *img=[UIImage imageWithData:user.userImageData];
+                    [AppGlobal setImageAvailableAtLocal:user.userImage AndImageData:user.userImageData];
                     if(img!=nil)
                     {
                         [imgProfile setImage:img];
@@ -173,6 +185,7 @@
                     }
                 });
             });
+        }
 //        }else{
 //            UIImage *img=[UIImage imageWithData:user.userImageData];
 //            [imgProfile setImage:img];
@@ -221,7 +234,7 @@
     {
         [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
         
-        return;
+       // return;
     }
     UserDetails *usrDetail= [[UserDetails alloc]init];
     

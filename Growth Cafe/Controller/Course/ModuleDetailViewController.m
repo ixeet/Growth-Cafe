@@ -72,6 +72,7 @@ AFNetworkReachabilityStatus previousStatus;
     // Do any additional setup after loading the view from its nib.
     // Set up the image we want to scroll & zoom and add it to the scroll view
     //iOS7 Customization, swipe to pop gesture
+    previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
@@ -120,7 +121,7 @@ AFNetworkReachabilityStatus previousStatus;
     
     
     
-    previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+    
 
     
     
@@ -144,7 +145,7 @@ AFNetworkReachabilityStatus previousStatus;
         //
         //       }
     }];
-
+ [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     /* Listen for keyboard */
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -837,19 +838,21 @@ AFNetworkReachabilityStatus previousStatus;
         customView.lblAutherName.text=resource.authorName;
         NSDate *dateSatrtedOn = [AppGlobal convertStringDateToNSDate:resource.startedOn];
         NSDate *dateCompletedOn = [AppGlobal convertStringDateToNSDate:resource.completedOn];
+        NSCalendar* calendar = [NSCalendar currentCalendar];
+        NSDateComponents* components ;
+        NSString *monthName;
+         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         if(dateSatrtedOn!=nil)
         {
-        NSCalendar* calendar = [NSCalendar currentCalendar];
-        NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateSatrtedOn]; // Get necessary date components
-        
-        
-        NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-        resource.startedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
-        
-        components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateCompletedOn]; // Get necessary date components
+         components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateSatrtedOn]; // Get necessary date components
         monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-        resource.completedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
+        resource.startedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
+       
+        }
+        if(dateCompletedOn!=nil){
+            components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateCompletedOn]; // Get necessary date components
+            monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+            resource.completedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
         }
         customView.lblStartedon.text=resource.startedOn;
         customView.lblCompletedon.text=resource.completedOn;
@@ -870,12 +873,15 @@ AFNetworkReachabilityStatus previousStatus;
         // [customView.imgContent setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
        
          if(resource.resourceImageUrl!=nil){
-             
+             if([AppGlobal checkImageAvailableAtLocal:resource.resourceImageUrl])
+             {
+                 resource.resourceImageData=[AppGlobal getImageAvailableAtLocal:resource.resourceImageUrl];
+             }
              if (resource.resourceImageData==nil) {
                   NSURL *imageURL = [NSURL URLWithString:resource.resourceImageUrl];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                         resource.resourceImageData  = [NSData dataWithContentsOfURL:imageURL];
-        
+                        [AppGlobal setImageAvailableAtLocal:resource.resourceImageUrl AndImageData:resource.resourceImageData];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             // Update the UI
                            customView.imgContent.image= [UIImage imageWithData: resource.resourceImageData ];
@@ -894,8 +900,10 @@ AFNetworkReachabilityStatus previousStatus;
 
         [customView.btnComment addTarget:self action:@selector(btnCommentOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
         [customView.btnLike addTarget:self action:@selector(btnLikeOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+        [customView.btnShare addTarget:self action:@selector(btnShareOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
         customView.btnComment.tag=[resource.resourceId integerValue];
         customView.btnLike.tag=[resource.resourceId integerValue];
+        customView.btnShare.tag=[resource.resourceId integerValue];
         // add vedio play
         
         [customView.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -907,6 +915,11 @@ AFNetworkReachabilityStatus previousStatus;
             Comments *objComment=[resource.comments objectAtIndex:0];
             
             if(objComment.commentByImage!=nil){
+                
+                if([AppGlobal checkImageAvailableAtLocal:objComment.commentByImage])
+                {
+                    objComment.commentByImageData=[AppGlobal getImageAvailableAtLocal:objComment.commentByImage];
+                }
                 if(objComment.commentByImageData==nil)
                 {
                 NSURL *imageURL = [NSURL URLWithString:objComment.commentByImage];
@@ -914,6 +927,7 @@ AFNetworkReachabilityStatus previousStatus;
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                     NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
                     objComment.commentByImageData=imageData;
+                    [AppGlobal setImageAvailableAtLocal:objComment.commentByImage AndImageData:objComment.commentByImageData];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // Update the UI
                         //customView.imgViewCmtBy.image= [UIImage imageWithData:imageData];
@@ -1386,11 +1400,16 @@ AFNetworkReachabilityStatus previousStatus;
        
         cell.lblCompletedon.text=selectedResource.completedOn;
         if(selectedResource.resourceImageUrl!=nil){
-            
+            if([AppGlobal checkImageAvailableAtLocal:selectedResource.resourceImageUrl])
+            {
+                selectedResource.resourceImageData=[AppGlobal getImageAvailableAtLocal:selectedResource.resourceImageUrl];
+            }
             if (selectedResource.resourceImageData==nil) {
                 NSURL *imageURL = [NSURL URLWithString:selectedResource.resourceImageUrl];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                     selectedResource.resourceImageData  = [NSData dataWithContentsOfURL:imageURL];
+                    
+                    [AppGlobal setImageAvailableAtLocal:selectedResource.resourceImageUrl AndImageData:selectedResource.resourceImageData];
                  dispatch_async(dispatch_get_main_queue(), ^{
                     // Update the UI
                     UIImage *img=[UIImage imageWithData:selectedResource.resourceImageData];
@@ -1487,6 +1506,11 @@ AFNetworkReachabilityStatus previousStatus;
 
         
         if(comment.commentByImage!=nil){
+            if([AppGlobal checkImageAvailableAtLocal:comment.commentByImage])
+            {
+                comment.commentByImageData=[AppGlobal getImageAvailableAtLocal:comment.commentByImage];
+            }
+
             if(comment.commentByImageData==nil)
             {
 
@@ -1495,6 +1519,8 @@ AFNetworkReachabilityStatus previousStatus;
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                 NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
                 comment.commentByImageData=imageData;
+                [AppGlobal setImageAvailableAtLocal:comment.commentByImage AndImageData:comment.commentByImageData];
+
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // Update the UI
                     UIImage *img=[UIImage imageWithData:imageData];
@@ -1611,6 +1637,10 @@ AFNetworkReachabilityStatus previousStatus;
             
             
             if(comment.commentByImage!=nil){
+                if([AppGlobal checkImageAvailableAtLocal:comment.commentByImage])
+                {
+                    comment.commentByImageData=[AppGlobal getImageAvailableAtLocal:comment.commentByImage];
+                }
                 if(comment.commentByImageData==nil)
                 {
                     
@@ -1619,6 +1649,8 @@ AFNetworkReachabilityStatus previousStatus;
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
                         comment.commentByImageData=imageData;
+                        [AppGlobal setImageAvailableAtLocal:comment.commentByImage AndImageData:comment.commentByImageData];
+
                         dispatch_async(dispatch_get_main_queue(), ^{
                             // Update the UI
                             UIImage *img=[UIImage imageWithData:imageData];
@@ -1724,13 +1756,17 @@ AFNetworkReachabilityStatus previousStatus;
         NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:resource.uploadedDate];
        
         if(resource.resourceImageUrl!=nil){
+            if([AppGlobal checkImageAvailableAtLocal:resource.resourceImageUrl])
+            {
+                resource.resourceImageData=[AppGlobal getImageAvailableAtLocal:resource.resourceImageUrl];
+            }
             if(resource.resourceImageData==nil)
             {
             NSURL *imageURL = [NSURL URLWithString:resource.resourceImageUrl];
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                 resource.resourceImageData = [NSData dataWithContentsOfURL:imageURL];
-             
+               [AppGlobal setImageAvailableAtLocal:resource.resourceImageUrl AndImageData:resource.resourceImageData];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // Update the UI
                     
@@ -1847,6 +1883,10 @@ AFNetworkReachabilityStatus previousStatus;
         {
         
         if(resource.resourceImageUrl!=nil){
+            if([AppGlobal checkImageAvailableAtLocal:resource.resourceImageUrl])
+            {
+                resource.resourceImageData=[AppGlobal getImageAvailableAtLocal:resource.resourceImageUrl];
+            }
             if(resource.resourceImageData==nil)
             {
             NSURL *imageURL = [NSURL URLWithString:resource.resourceImageUrl];
@@ -1854,7 +1894,7 @@ AFNetworkReachabilityStatus previousStatus;
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                
                      resource.resourceImageData = [NSData dataWithContentsOfURL:imageURL];
-                
+                  [AppGlobal setImageAvailableAtLocal:resource.resourceImageUrl AndImageData:resource.resourceImageData];
                dispatch_async(dispatch_get_main_queue(), ^{
                     // Update the UI
                     //cell.imgContentURL.image= [UIImage imageWithData:imageData];
@@ -1903,7 +1943,7 @@ AFNetworkReachabilityStatus previousStatus;
             if([assignmentList count]>3)
             {
                 [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%lu More",[assignmentList count ]-3]  forState:UIControlStateNormal];
+                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%u More",[assignmentList count ]-3]  forState:UIControlStateNormal];
             }else{
                 cell.btnMore.hidden=YES;
             }
@@ -2029,7 +2069,7 @@ AFNetworkReachabilityStatus previousStatus;
         NSLog(@"%ld",(long)indexPath.row);
         if(([selectedResource.comments count]<3) && (indexPath.row==[selectedResource.comments count]-1))
         {
-           height=80.0f;
+           height=55.0f;
                 
         }
         else if([selectedResource.comments count]>=3)

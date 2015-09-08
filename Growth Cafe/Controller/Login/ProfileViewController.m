@@ -54,10 +54,15 @@
     lblHomeRoom.text=user.homeRoomName;
    
           if(user.userImage!=nil){
+              if([AppGlobal checkImageAvailableAtLocal:user.userImage])
+              {
+                 user.userImageData=[AppGlobal getImageAvailableAtLocal:user.userImage];
+              }
            if (user.userImageData==nil) {
                 NSURL *imageURL = [NSURL URLWithString:user.userImage];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                     user.userImageData  = [NSData dataWithContentsOfURL:imageURL];
+                    [AppGlobal setImageAvailableAtLocal:user.userImage AndImageData:user.userImageData];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // Update the UI
                         UIImage *img=[UIImage imageWithData:user.userImageData];

@@ -73,6 +73,7 @@
         //
         //       }
     }];
+     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 
 }
 -(void)viewWillDisappear:(BOOL)animated{

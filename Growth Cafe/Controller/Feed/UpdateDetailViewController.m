@@ -54,7 +54,7 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     // Do any additional setup after loading the view from its nib.
-    
+    previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -85,7 +85,7 @@
     self.totalRecord=[objUpdate.commentCount integerValue];
     self.pendingRecord= self.totalRecord-[objUpdate.comments count];
      self.offsetRecord=self.offsetRecord+COMMENT_PER_PAGE;
-     previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+    
 }
 
 -(void)loginSucessFull{
@@ -142,17 +142,6 @@
     
     // [super viewWillAppear:animated];
     /* Listen for keyboard */
-    objCustom.btnFacebook.delegate=objCustom;
-    [objCustom setUserProfile];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
-    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognizer:)];
-    
-    recognizer.direction = UISwipeGestureRecognizerDirectionRight;
-    
-    [objCustom.view addGestureRecognizer:recognizer];
-    NSLog(@"%d", [AppSingleton sharedInstance].isUserLoggedIn);
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
         if(status==AFNetworkReachabilityStatusNotReachable)
@@ -167,9 +156,22 @@
         //       {
         //           previousStatus=status;
         //           [self showNetworkStatus:@""];
-        //       
+        //
         //       }
     }];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    objCustom.btnFacebook.delegate=objCustom;
+    [objCustom setUserProfile];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognizer:)];
+    
+    recognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [objCustom.view addGestureRecognizer:recognizer];
+    NSLog(@"%d", [AppSingleton sharedInstance].isUserLoggedIn);
+   
     //set Profile
     // [objCustom setUserProfile];
     
@@ -507,6 +509,11 @@
             if(objUpdate.resource.resourceImageUrl!=nil){
                 [cell.btnPlay setHidden:NO];
                 [cell.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+                if([AppGlobal checkImageAvailableAtLocal:objUpdate.resource.resourceImageUrl])
+                {
+                    objUpdate.resource.resourceImageData=[AppGlobal getImageAvailableAtLocal:objUpdate.resource.resourceImageUrl];
+                }
+
                 if (objUpdate.resource.resourceImageData==nil) {
                     NSURL *imageURL = [NSURL URLWithString:objUpdate.resource.resourceImageUrl];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
@@ -514,6 +521,7 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                             // Update the UI
                             UIImage *img=[UIImage imageWithData:objUpdate.resource.resourceImageData];
+                            [AppGlobal setImageAvailableAtLocal:objUpdate.resource.resourceImageUrl AndImageData:objUpdate.resource.resourceImageData];
                             if(img!=nil)
                             {
                                 [cell.imgResorces setImage:img];
@@ -552,10 +560,16 @@
         if(objUpdate.updateCreatedByImage!=nil){
             
             
+            if([AppGlobal checkImageAvailableAtLocal:objUpdate.updateCreatedByImage])
+            {
+                objUpdate.updateCreatedByImageData=[AppGlobal getImageAvailableAtLocal:objUpdate.updateCreatedByImage];
+            }
             if (objUpdate.updateCreatedByImageData==nil) {
                 NSURL *imageURL = [NSURL URLWithString:objUpdate.updateCreatedByImage];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                     objUpdate.updateCreatedByImageData  = [NSData dataWithContentsOfURL:imageURL];
+                    
+                    [AppGlobal setImageAvailableAtLocal:objUpdate.updateCreatedByImage AndImageData:objUpdate.updateCreatedByImageData ];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // Update the UI
                         UIImage *img=[UIImage imageWithData:objUpdate.updateCreatedByImageData ];
@@ -649,6 +663,10 @@
             
             cell.lblRelatedVideo.hidden=YES;
             if(comment.commentByImage!=nil){
+                if([AppGlobal checkImageAvailableAtLocal:comment.commentByImage])
+                {
+                    comment.commentByImageData=[AppGlobal getImageAvailableAtLocal:comment.commentByImage];
+                }
                 if(comment.commentByImageData==nil)
                 {
                     
@@ -657,6 +675,7 @@
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
                         comment.commentByImageData=imageData;
+                        [AppGlobal setImageAvailableAtLocal:comment.commentByImage AndImageData:comment.commentByImageData];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             // Update the UI
                             UIImage *img=[UIImage imageWithData:imageData];
@@ -776,6 +795,10 @@
             
             cell.lblRelatedVideo.hidden=YES;
             if(comment.commentByImage!=nil){
+                if([AppGlobal checkImageAvailableAtLocal:comment.commentByImage])
+                {
+                    comment.commentByImageData=[AppGlobal getImageAvailableAtLocal:comment.commentByImage];
+                }
                 if(comment.commentByImageData==nil)
                 {
                     
@@ -784,6 +807,7 @@
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
                         comment.commentByImageData=imageData;
+                        [AppGlobal setImageAvailableAtLocal:comment.commentByImage AndImageData:comment.commentByImageData];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             // Update the UI
                             UIImage *img=[UIImage imageWithData:imageData];
@@ -1720,7 +1744,7 @@
     isSearching=NO;
 }
 -(void)loginError:(NSError*)error{
-    
+    tblViewContent.tableFooterView =nil;
     [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];
 }
 

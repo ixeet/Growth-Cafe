@@ -31,6 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     //init the keyboard
+      previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
     if([AppSingleton sharedInstance].isUserLoggedIn==YES)
     {
         [self.tabBarController.tabBar setHidden:NO];
@@ -64,7 +65,7 @@
     self.btnFacebook.delegate = self;
     self.btnFacebook.readPermissions = @[@"public_profile", @"email"];
     [self changeFrameAndBackgroundImg];
-    previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+  
 
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -87,7 +88,7 @@
         //
         //       }
     }];
-
+ [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     btnFacebook.delegate=nil;

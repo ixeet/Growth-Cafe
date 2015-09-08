@@ -119,7 +119,7 @@
                     <color key="backgroundColor" white="0.33333333329999998" alpha="0.98999999999999999" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="1gP-7p-6Ig">
-                            <variation key="heightClass=regular-widthClass=compact" constant="800"/>
+                            <variation key="heightClass=regular-widthClass=compact" constant="40"/>
                         </constraint>
                         <constraint firstItem="TeK-EI-boV" firstAttribute="top" secondItem="lPD-48-Sou" secondAttribute="top" constant="5" id="9NZ-uW-gBv">
                             <variation key="heightClass=regular-widthClass=compact" constant="6"/>
