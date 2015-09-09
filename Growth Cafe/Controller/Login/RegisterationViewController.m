@@ -228,8 +228,22 @@
     [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];
 }
 - (IBAction)btnTitleClick:(id)sender {
+    mIntRow=0;
     selectedPicker=TITLE_DATA;
+ 
     arrayAllData=[AppGlobal getDropdownList:TITLE_DATA];
+    if(selectedTitle!=nil)
+    {
+        for (NSDictionary *dic in arrayAllData) {
+            if([[dic objectForKey:@"Title"] isEqualToString:selectedTitle] )
+            {
+                mIntRow =[arrayAllData indexOfObject:dic] ;
+                break;
+            }
+        }
+        
+    }
+    [mDataPickerView selectRow:mIntRow inComponent:0 animated:YES];
     [mDataPickerView reloadAllComponents];
     [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
     [self allTxtFieldsResignFirstResponder];
@@ -243,8 +257,18 @@
 
 - (IBAction)btnSchoolClick:(id)sender {
     selectedPicker=SCHOOL_DATA;
-    
-    
+    mIntRow=0;
+    if(selectedSchoolId!=nil)
+    {
+        for (NSDictionary *dic in arraySchools) {
+            if([[dic objectForKey:@"schoolName"] isEqualToString:selectedSchoolName] )
+            {
+                 mIntRow =[arraySchools indexOfObject:dic] ;
+            }
+        }
+       
+    }
+    [mDataPickerView selectRow:mIntRow inComponent:0 animated:YES];
     [mDataPickerView reloadAllComponents];
     [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
     [self allTxtFieldsResignFirstResponder];
@@ -268,10 +292,21 @@
 - (IBAction)btnClassClick:(id)sender {
     selectedPicker=CLASS_DATA;
     //   arrayAllData=[AppGlobal getDropdownList:CLASS_DATA];
+    mIntRow=0;
     
     if (arrayClass!=nil &&[arrayClass count]>0)
         
     {
+        if(selectedClassId!=nil)
+        {
+            for (NSDictionary *dic in arrayClass) {
+                if([[dic objectForKey:@"className"] isEqualToString:selectedClassName] )
+                {
+                    mIntRow =[arrayClass indexOfObject:dic] ;
+                }
+            }
+            
+        }
         [mDataPickerView reloadAllComponents];
         [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
         [self allTxtFieldsResignFirstResponder];
@@ -294,8 +329,19 @@
 }
 - (IBAction)btnHomeClick:(id)sender {
     selectedPicker=ROOM_DATA;
+    mIntRow=0;
     //  arrayAllData=[AppGlobal getDropdownList:ROOM_DATA];
     if (arrayHome!=nil &&[arrayHome count]>0){
+        if(selectedRoomId!=nil)
+        {
+            for (NSDictionary *dic in arrayHome) {
+                if([[dic objectForKey:@"homeRoomName"] isEqualToString:selectedRoomName] )
+                {
+                    mIntRow =[arrayHome indexOfObject:dic] ;
+                }
+            }
+            
+        }
         [mDataPickerView reloadAllComponents];
         [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
         [self allTxtFieldsResignFirstResponder];
@@ -636,7 +682,7 @@
 {
     
     mIntRow=row;
-    [pickerView selectRow:row inComponent:component animated:NO];
+    [pickerView selectRow:mIntRow inComponent:component animated:NO];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{

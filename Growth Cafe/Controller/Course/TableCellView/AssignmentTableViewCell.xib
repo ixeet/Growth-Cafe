@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="1256" id="KGk-i7-Jjw" customClass="AssignmentTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="1272" id="KGk-i7-Jjw" customClass="AssignmentTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -139,14 +139,14 @@
                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                     </constraint>
                     <constraint firstItem="LcH-kx-yym" firstAttribute="top" secondItem="CLB-by-oB0" secondAttribute="bottom" constant="16" id="Er0-n5-Wjx">
-                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                     </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="olK-fr-rdG" secondAttribute="trailing" constant="-8" id="GIF-49-XV2"/>
                     <constraint firstItem="Gx7-St-goV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="NbB-Bj-R5U">
                         <variation key="heightClass=regular-widthClass=compact" constant="-2"/>
                     </constraint>
                     <constraint firstItem="LcH-kx-yym" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="OQD-hp-XRS">
-                        <variation key="heightClass=regular-widthClass=compact" constant="-2"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
                     <constraint firstItem="4ZZ-bT-jXe" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Q8c-uu-4xc"/>
                     <constraint firstItem="4ZZ-bT-jXe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="RuL-uc-to6">
@@ -162,7 +162,7 @@
                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                     </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="LcH-kx-yym" secondAttribute="trailing" constant="140" id="b81-kQ-R9Y">
-                        <variation key="heightClass=regular-widthClass=compact" constant="142"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="140"/>
                     </constraint>
                     <constraint firstItem="Gx7-St-goV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="bix-1x-Ujt">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -297,7 +297,7 @@
                 <outlet property="lblContentby" destination="VW4-Mh-2bY" id="h8I-0T-dWF"/>
                 <outlet property="lblSubmittedDate" destination="cWG-24-1uL" id="Iqr-cX-suJ"/>
             </connections>
-            <point key="canvasLocation" x="143" y="173"/>
+            <point key="canvasLocation" x="143" y="181"/>
         </tableViewCell>
     </objects>
     <resources>

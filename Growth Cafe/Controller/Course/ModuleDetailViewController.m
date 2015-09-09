@@ -422,7 +422,15 @@ AFNetworkReachabilityStatus previousStatus;
 
             //Hide Indicator
             [appDelegate hideSpinner];
-            [self getModuleDetail:searchText];
+            if(feedId==nil){
+                
+                [self getModuleDetail:searchText];
+                
+            }else{
+                [self getModuleDetailByFeed];
+                
+            }
+
         }
                                             failure:^(NSError *error) {
                                                 //Hide Indicator
@@ -519,7 +527,16 @@ AFNetworkReachabilityStatus previousStatus;
        //Hide Indicator
         
         [appDelegate hideSpinner];
-           [self getModuleDetail:searchText];
+        
+        if(feedId==nil){
+            
+            [self getModuleDetail:searchText];
+            
+        }else{
+            [self getModuleDetailByFeed];
+            
+        }
+
     }
                                      failure:^(NSError *error) {
                                          //Hide Indicator
@@ -580,7 +597,14 @@ AFNetworkReachabilityStatus previousStatus;
             //Hide Indicator
             [appDelegate hideSpinner];
             txtViewCMT.text=@"";
-            [self getModuleDetail:searchText];
+            if(feedId==nil){
+                
+                [self getModuleDetail:searchText];
+                
+            }else{
+                [self getModuleDetailByFeed];
+                
+            }
         }
                                             failure:^(NSError *error) {
                                                 //Hide Indicator
@@ -599,7 +623,14 @@ AFNetworkReachabilityStatus previousStatus;
             //Hide Indicator
             [appDelegate hideSpinner];
              txtViewCMT.text=@"";
-               [self getModuleDetail:searchText];
+            if(feedId==nil){
+                
+                [self getModuleDetail:searchText];
+                
+            }else{
+                [self getModuleDetailByFeed];
+                
+            }
         }
                                             failure:^(NSError *error) {
                                                 //Hide Indicator
@@ -656,7 +687,14 @@ AFNetworkReachabilityStatus previousStatus;
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Search Clicked");
     searchText=searchBar.text;
-  [self getModuleDetail:searchBar.text];
+    if(feedId==nil){
+        
+        [self getModuleDetail:searchText];
+        
+    }else{
+        [self getModuleDetailByFeed];
+        
+    }
     // [self searchTableList];
     isSearching=NO;
 }
@@ -2076,9 +2114,9 @@ AFNetworkReachabilityStatus previousStatus;
         {
             if(IsCommentExpended && (indexPath.row==[selectedResource.comments count]-1))
             {
-                 height=80.0f;
+                 height=55.0f;
             }else if(indexPath.row==2 && !IsCommentExpended){
-             height=80.0f;
+             height=55.0f;
             }
             
         }
@@ -2106,7 +2144,7 @@ AFNetworkReachabilityStatus previousStatus;
         NSLog(@"%f",cell.lblContentName.frame.size.width);
         if(([selectedResource.relatedResources count]<3) && (indexPath.row==[selectedResource.relatedResources count]-1))
         {
-            height=height+30.0f;
+            height=height+50.0f;
             
             
             
@@ -2115,9 +2153,9 @@ AFNetworkReachabilityStatus previousStatus;
         {
             if(IsRelatedConentExpended && (indexPath.row==[selectedResource.relatedResources count]-1))
             {
-                height=height+50.0f;
+                height=height+60.0f;
             }else if(indexPath.row==2 && !IsRelatedConentExpended){
-                height=height+56.0f;
+                height=height+66.0f;
             }
             
         }
