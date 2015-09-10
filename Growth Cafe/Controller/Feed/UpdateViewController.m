@@ -1363,16 +1363,16 @@
     UIButton *btn=(UIButton *)sender;
     
     Update *update=[arrayUpdates objectAtIndex:btn.tag];
-    update.isExpend=YES;
+   update.isExpend=YES;
     
-    if([update.comments count]>=COMMENT_PER_PAGE){
-        NSUInteger location=COMMENT_PER_PAGE-1;
-         NSUInteger length=[update.comments count]-COMMENT_PER_PAGE;
-      //  NSRange range = NSMakeRange(0, [string length]);
-        NSRange range= NSMakeRange(location,length+1);
-        
-        [update.comments removeObjectsInRange:range] ;
-    }
+//    if(update.parentCommentCount>=COMMENT_PER_PAGE){
+//        NSUInteger location=COMMENT_PER_PAGE-1;
+//         NSUInteger length=update.parentCommentCount-COMMENT_PER_PAGE;
+//      //  NSRange range = NSMakeRange(0, [string length]);
+//        NSRange range= NSMakeRange(location,length+1);
+//        
+//        [update.comments removeObjectsInRange:range] ;
+//    }
     UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]init];
     updateDetailView.objUpdate=update;
     [self.navigationController pushViewController:updateDetailView animated:YES];

@@ -84,7 +84,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillExitFullscreenNotification:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
     self.totalRecord=[objUpdate.commentCount integerValue];
     self.pendingRecord= self.totalRecord-[objUpdate.comments count];
-     self.offsetRecord=self.offsetRecord+COMMENT_PER_PAGE;
+    self.offsetRecord=self.offsetRecord+COMMENT_PER_PAGE;
     
 }
 
@@ -185,7 +185,8 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self   name:UIKeyboardWillHideNotification object:nil];
     objCustom.btnFacebook.delegate=nil;
-    
+    objUpdate.isExpend=NO;
+    [AppSingleton sharedInstance].updatedUpdate=objUpdate;
     
 }
 
@@ -225,17 +226,19 @@
     [[appDelegate _engine] getUpdatesDetail:objUpdate.updateId   success:^(Update *updates) {
         objUpdate=updates;
         
-        if([objUpdate.comments count]>=COMMENT_PER_PAGE){
-            NSUInteger location=COMMENT_PER_PAGE-1;
-            NSUInteger length=[objUpdate.comments count]-COMMENT_PER_PAGE;
-            //  NSRange range = NSMakeRange(0, [string length]);
-            NSRange range= NSMakeRange(location,length);
-            
-            [objUpdate.comments removeObjectsInRange:range] ;
-            self.totalRecord=[objUpdate.commentCount integerValue];
-            self.pendingRecord= self.totalRecord-[objUpdate.comments count];
-            self.offsetRecord=self.offsetRecord+COMMENT_PER_PAGE;
-        }
+//        if([objUpdate.comments count]>=COMMENT_PER_PAGE){
+//            NSUInteger location=COMMENT_PER_PAGE-1;
+//            NSUInteger length=[objUpdate.comments count]-COMMENT_PER_PAGE;
+//            //  NSRange range = NSMakeRange(0, [string length]);
+//            NSRange range= NSMakeRange(location,length);
+//            
+//            [objUpdate.comments removeObjectsInRange:range] ;
+//            self.totalRecord=[objUpdate.commentCount integerValue];
+//            self.pendingRecord= self.totalRecord-[objUpdate.comments count];
+//            self.offsetRecord=self.offsetRecord+COMMENT_PER_PAGE;
+//        }
+        objUpdate.isExpend=NO;
+        [AppSingleton sharedInstance].updatedUpdate=objUpdate;
 
         [tblViewContent reloadData];
         // [self loginSucessFullWithFB];
@@ -350,6 +353,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+//    int childCount=0;
+//    for (Comments *cmt in objUpdate.comments) {
+//        childCount=childCount+[cmt.subComments count];
+//    }
     return [objUpdate.comments count]+1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1590,6 +1597,7 @@
 }
 
 - (IBAction)btnBackClick:(id)sender {
+      objUpdate.isExpend=NO;
     [AppSingleton sharedInstance].updatedUpdate=objUpdate;
     [self.navigationController popToRootViewControllerAnimated:YES];
 }

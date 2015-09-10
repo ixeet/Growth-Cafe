@@ -113,7 +113,7 @@
            }
             NSMutableArray * arrayComments= [[NSMutableArray alloc]init];
              NSMutableArray * arrayTempComments= [dicContent objectForKey:@"feedCommentsList"];
-            
+            update.parentCommentCount=[arrayTempComments count];
             for (NSDictionary *dicComment in arrayTempComments) {
                 Comments *comment= [[Comments alloc]init];
                  if([dicComment objectForKey:@"likeCounts"]!=nil){
@@ -197,7 +197,7 @@
                 }
                  }
             }
-            
+            update.isExpend=NO;
             update.comments=arrayComments;
             [updateList addObject:update];
         }

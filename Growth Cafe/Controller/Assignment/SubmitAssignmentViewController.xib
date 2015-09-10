@@ -27,10 +27,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hmf-Xh-tHm" userLabel="viewSub">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Video Titte" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZ6-U1-una" userLabel="lblVideoTitle">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Video Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZ6-U1-una" userLabel="lblVideoTitle">
                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="36" id="uEb-Nu-Bus"/>
+                                <constraint firstAttribute="height" constant="36" id="uEb-Nu-Bus">
+                                    <variation key="heightClass=regular-widthClass=compact" constant="30"/>
+                                </constraint>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                             <nil key="highlightedColor"/>
@@ -52,7 +54,7 @@
                                 <constraint firstAttribute="height" constant="46" id="dWc-vS-HaW"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" returnKeyType="next"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="dWc-vS-HaW"/>
@@ -92,7 +94,9 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Video Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oDF-t9-jYn" userLabel="lblVideoDesc">
                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="36" id="gfh-38-yb3"/>
+                                <constraint firstAttribute="height" constant="36" id="gfh-38-yb3">
+                                    <variation key="heightClass=regular-widthClass=compact" constant="30"/>
+                                </constraint>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                             <nil key="highlightedColor"/>
@@ -110,7 +114,9 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload Video" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHS-Yi-Da7" userLabel="lblUploadVideo">
                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="36" id="RgX-Pi-7z1"/>
+                                <constraint firstAttribute="height" constant="36" id="RgX-Pi-7z1">
+                                    <variation key="heightClass=regular-widthClass=compact" constant="30"/>
+                                </constraint>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                             <nil key="highlightedColor"/>
@@ -155,7 +161,9 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3z0-9j-I6q" userLabel="lblEnterURL">
                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="36" id="JEW-uH-GXW"/>
+                                <constraint firstAttribute="height" constant="36" id="JEW-uH-GXW">
+                                    <variation key="heightClass=regular-widthClass=compact" constant="30"/>
+                                </constraint>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <nil key="highlightedColor"/>
@@ -219,14 +227,20 @@
                         <constraint firstItem="sdR-xk-8cp" firstAttribute="leading" secondItem="Hmf-Xh-tHm" secondAttribute="leading" constant="20" id="8ih-3Z-O7X"/>
                         <constraint firstItem="FhF-dn-QXP" firstAttribute="leading" secondItem="Hmf-Xh-tHm" secondAttribute="leading" constant="20" id="9aG-bj-BKg"/>
                         <constraint firstItem="MHS-Yi-Da7" firstAttribute="top" secondItem="FhF-dn-QXP" secondAttribute="bottom" constant="8" id="Ayz-wA-iXP"/>
-                        <constraint firstItem="d6x-r9-jnK" firstAttribute="top" secondItem="MHS-Yi-Da7" secondAttribute="bottom" constant="8" id="CCd-kN-HoV"/>
-                        <constraint firstItem="sdR-xk-8cp" firstAttribute="top" secondItem="3z0-9j-I6q" secondAttribute="bottom" constant="8" id="GBZ-Wu-vKu"/>
+                        <constraint firstItem="d6x-r9-jnK" firstAttribute="top" secondItem="MHS-Yi-Da7" secondAttribute="bottom" constant="8" id="CCd-kN-HoV">
+                            <variation key="heightClass=regular-widthClass=compact" constant="4"/>
+                        </constraint>
+                        <constraint firstItem="sdR-xk-8cp" firstAttribute="top" secondItem="3z0-9j-I6q" secondAttribute="bottom" constant="8" id="GBZ-Wu-vKu">
+                            <variation key="heightClass=regular-widthClass=compact" constant="1"/>
+                        </constraint>
                         <constraint firstAttribute="trailing" secondItem="oDF-t9-jYn" secondAttribute="trailing" constant="21" id="H9s-UQ-oFT"/>
                         <constraint firstItem="oDF-t9-jYn" firstAttribute="leading" secondItem="Hmf-Xh-tHm" secondAttribute="leading" constant="20" id="I21-gd-dIo"/>
                         <constraint firstItem="MHS-Yi-Da7" firstAttribute="leading" secondItem="Hmf-Xh-tHm" secondAttribute="leading" constant="20" id="KoV-sy-1e6"/>
                         <constraint firstAttribute="trailing" secondItem="MHS-Yi-Da7" secondAttribute="trailing" constant="21" id="UJt-pk-JXx"/>
                         <constraint firstItem="DR8-Cm-q3J" firstAttribute="leading" secondItem="Hmf-Xh-tHm" secondAttribute="leading" constant="20" id="WRQ-7C-yO7"/>
-                        <constraint firstItem="CYX-70-lfa" firstAttribute="top" secondItem="MHS-Yi-Da7" secondAttribute="bottom" constant="8" id="XRY-SC-dGL"/>
+                        <constraint firstItem="CYX-70-lfa" firstAttribute="top" secondItem="MHS-Yi-Da7" secondAttribute="bottom" constant="8" id="XRY-SC-dGL">
+                            <variation key="heightClass=regular-widthClass=compact" constant="4"/>
+                        </constraint>
                         <constraint firstAttribute="trailing" secondItem="FhF-dn-QXP" secondAttribute="trailing" constant="21" id="YvE-Ru-otd"/>
                         <constraint firstAttribute="trailing" secondItem="eZ6-U1-una" secondAttribute="trailing" constant="21" id="cmT-BI-Y9Y"/>
                         <constraint firstAttribute="trailing" secondItem="DR8-Cm-q3J" secondAttribute="trailing" constant="21" id="emP-W3-AiO"/>
@@ -238,8 +252,12 @@
                             <variation key="heightClass=regular-widthClass=compact" constant="80"/>
                         </constraint>
                         <constraint firstItem="3z0-9j-I6q" firstAttribute="leading" secondItem="Hmf-Xh-tHm" secondAttribute="leading" constant="20" id="vIB-km-NVl"/>
-                        <constraint firstItem="DR8-Cm-q3J" firstAttribute="top" secondItem="eZ6-U1-una" secondAttribute="bottom" constant="8" id="xLk-Z3-NSR"/>
-                        <constraint firstItem="FhF-dn-QXP" firstAttribute="top" secondItem="oDF-t9-jYn" secondAttribute="bottom" constant="8" id="yuF-Qx-2f9"/>
+                        <constraint firstItem="DR8-Cm-q3J" firstAttribute="top" secondItem="eZ6-U1-una" secondAttribute="bottom" constant="8" id="xLk-Z3-NSR">
+                            <variation key="heightClass=regular-widthClass=compact" constant="1"/>
+                        </constraint>
+                        <constraint firstItem="FhF-dn-QXP" firstAttribute="top" secondItem="oDF-t9-jYn" secondAttribute="bottom" constant="8" id="yuF-Qx-2f9">
+                            <variation key="heightClass=regular-widthClass=compact" constant="1"/>
+                        </constraint>
                         <constraint firstItem="d6x-r9-jnK" firstAttribute="leading" secondItem="CYX-70-lfa" secondAttribute="trailing" constant="8" id="zhr-ng-taJ"/>
                         <constraint firstItem="CYX-70-lfa" firstAttribute="leading" secondItem="Hmf-Xh-tHm" secondAttribute="leading" constant="20" id="znw-H4-zC6"/>
                     </constraints>

@@ -643,10 +643,17 @@
 +(BOOL)checkImageAvailableAtLocal:(NSString*)imgName
 {
     NSArray *titleWords = [imgName componentsSeparatedByString:@"/"];
+   
+    
     imgName=[titleWords objectAtIndex:[titleWords count]-1];
 
     NSArray *arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString  *filePath =  [NSString stringWithFormat:@"%@/%@",[arr objectAtIndex:0 ],imgName];
+    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+    if(fileData.length<=0)
+    {
+        return NO;
+    }
     BOOL isDirectory;
      BOOL fileExistsAtPath = [[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDirectory];
     if(fileExistsAtPath){

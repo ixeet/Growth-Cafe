@@ -9,5 +9,5 @@
 #import "Comments.h"
 
 @implementation Comments
-@synthesize commentCounts,commentBy,commentByImage,commentDate,commentId,commentTxt,parentCommentId,likeCounts,isLike,commentByImageData,commentById;
+@synthesize commentCounts,commentBy,commentByImage,commentDate,commentId,commentTxt,parentCommentId,likeCounts,isLike,commentByImageData,commentById,subComments;
 @end

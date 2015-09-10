@@ -22,4 +22,5 @@
 @property (nonatomic,strong) NSString* commentTxt;
 @property (nonatomic,strong) NSString* commentDate;
 @property (nonatomic,strong) NSString *isLike;
+@property (nonatomic,strong) NSMutableArray *subComments;
 @end

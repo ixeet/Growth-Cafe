@@ -22,6 +22,7 @@
 @property (nonatomic,strong) NSString*  likeCount;
 @property (nonatomic,strong) NSMutableArray*  comments;
 @property (nonatomic,strong) NSString*  commentCount;
+@property (nonatomic,assign) NSInteger parentCommentCount;
 @property (nonatomic,strong) NSString*  shareCount;
 @property (nonatomic,strong) NSString*  isLike;
 @property (nonatomic,assign) BOOL       isExpend;
