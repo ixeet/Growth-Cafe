@@ -39,6 +39,9 @@
    
     float cellMainHeight;
     AFNetworkReachabilityStatus previousStatus;
+    NSMutableArray  *subCommentArray;
+    NSInteger startIndex,totalCount;
+   float currentTextHeight;
 }
 
 @end
@@ -63,6 +66,7 @@
     [self.view addGestureRecognizer:tap];
     
     // Custom initialization
+    
     [self setSearchUI];
     objCustom = [[CustomProfileView alloc] init];
     NSLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
@@ -85,7 +89,7 @@
     self.totalRecord=[objUpdate.commentCount integerValue];
     self.pendingRecord= self.totalRecord-[objUpdate.comments count];
     self.offsetRecord=self.offsetRecord+COMMENT_PER_PAGE;
-    
+    subCommentArray=[[NSMutableArray alloc]init];
 }
 
 -(void)loginSucessFull{
@@ -142,6 +146,8 @@
     
     // [super viewWillAppear:animated];
     /* Listen for keyboard */
+    startIndex=0;
+    totalCount=0;
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
         if(status==AFNetworkReachabilityStatusNotReachable)
@@ -226,17 +232,17 @@
     [[appDelegate _engine] getUpdatesDetail:objUpdate.updateId   success:^(Update *updates) {
         objUpdate=updates;
         
-//        if([objUpdate.comments count]>=COMMENT_PER_PAGE){
-//            NSUInteger location=COMMENT_PER_PAGE-1;
-//            NSUInteger length=[objUpdate.comments count]-COMMENT_PER_PAGE;
-//            //  NSRange range = NSMakeRange(0, [string length]);
-//            NSRange range= NSMakeRange(location,length);
-//            
-//            [objUpdate.comments removeObjectsInRange:range] ;
-//            self.totalRecord=[objUpdate.commentCount integerValue];
-//            self.pendingRecord= self.totalRecord-[objUpdate.comments count];
-//            self.offsetRecord=self.offsetRecord+COMMENT_PER_PAGE;
-//        }
+        if([objUpdate.comments count]>=COMMENT_PER_PAGE){
+            NSUInteger location=COMMENT_PER_PAGE-1;
+            NSUInteger length=[objUpdate.comments count]-COMMENT_PER_PAGE;
+            //  NSRange range = NSMakeRange(0, [string length]);
+            NSRange range= NSMakeRange(location,length);
+            
+            [objUpdate.comments removeObjectsInRange:range] ;
+            self.totalRecord=[objUpdate.commentCount integerValue];
+            self.pendingRecord= self.totalRecord-[objUpdate.comments count];
+            self.offsetRecord=self.offsetRecord+COMMENT_PER_PAGE;
+        }
         objUpdate.isExpend=NO;
         [AppSingleton sharedInstance].updatedUpdate=objUpdate;
 
@@ -353,11 +359,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    int childCount=0;
-//    for (Comments *cmt in objUpdate.comments) {
-//        childCount=childCount+[cmt.subComments count];
-//    }
-    return [objUpdate.comments count]+1;
+//    NSInteger childCount=0;
+    [subCommentArray removeAllObjects];
+    for (Comments *cmt in objUpdate.comments) {
+        //childCount=childCount+[cmt.subComments count];
+        [subCommentArray addObject:cmt];
+        [subCommentArray addObjectsFromArray:cmt.subComments];
+    }
+    //childCount=[subCommentArray count]+1;
+ return [subCommentArray count]+1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -503,6 +513,9 @@
         
         [cell.txtView setAttributedText:attributedString ];
         [cell.txtView setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
+        CGPoint origin = [cell.txtView contentOffset];
+        [cell.txtView setContentOffset:CGPointMake(origin.x, +11.0)];
+        cell.txtView.delegate=self;
         if(objUpdate.updateDesc!=nil)
         {
             cell.txtviewDetail.text=objUpdate.updateDesc;
@@ -628,14 +641,28 @@
         
         [cell.btnShare addTarget:self action:@selector(btnShareOnUpdateClick:) forControlEvents:UIControlEventTouchUpInside];
         
+        // cal calculate the time
+        NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:objUpdate.updatetime];
+        
+        NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
+        //   cell.lblCmtDate.text=comment.commentDate;
+        scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
+                                                           withString:@""];
+        // Set label text to attributed string
+        NSString *str = [NSString stringWithFormat:@"%@ ago" ,scincetime];
+        //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+        
+        cell.lblUpdateTime.text=str;
         
         return cell;
     }
     else{
-       
-        Comments *comment= [objUpdate.comments objectAtIndex:indexPath.row-1];
+        Comments *comment= [subCommentArray objectAtIndex:indexPath.row-1];
         if([comment.parentCommentId integerValue] ==0)
         {
+           
+           
+
             static NSString *identifier = @"CommentTableViewCell";
             CommentTableViewCell *cell = (CommentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
             if (cell == nil) {
@@ -646,8 +673,12 @@
                 cell = [topLevelObjects objectAtIndex:0];
                 [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
             }
-            
-            
+//            if([comment.subComments count]>0)
+//            {
+//                subCommentArray=comment.subComments;
+//                startIndex=0;
+//                totalCount=[subCommentArray count];
+//            }
             //[cell.imgCMT setImage:[AppGlobal generateThumbnail:comment.commentByImage]];
             cell.lblCmtBy.text= comment.commentBy;
             // cal calculate the time
@@ -768,7 +799,9 @@
 //            }
             return cell;
         }else{
-            
+           // Comments *comment= [subCommentArray objectAtIndex:startIndex];
+           // startIndex=startIndex+1;
+
             static NSString *identifier = @"SubCommentTableViewCell";
             SubCommentTableViewCell *cell = (SubCommentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
             if (cell == nil) {
@@ -781,6 +814,13 @@
             }
             
             
+//            if(startIndex==totalCount)
+//            {
+//                [subCommentArray removeAllObjects];
+//                startIndex=0;
+//                totalCount=0;
+//            }
+
             //[cell.imgCMT setImage:[AppGlobal generateThumbnail:comment.commentByImage]];
             cell.lblCmtBy.text= comment.commentBy;
             //cell.lblCmtDate.text=comment.commentDate;
@@ -940,6 +980,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"height==%ld",indexPath.row);
     
     if(indexPath.row==0)
     {
@@ -1021,16 +1062,16 @@
         if (y>21) {
             height=height+y;
         }
-        if(cellMainHeight<height+97)
+        if(cellMainHeight<height+160)
         {
-            cellMainHeight=height+97;
+            cellMainHeight=height+160;
         }
 
-        return height=height+97;
+        return height=height+160;
     }
     else if(objUpdate.comments>0)
     {
-        Comments *cmt=objUpdate.comments[indexPath.row-1];
+        Comments *cmt=subCommentArray[indexPath.row-1];
         CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:cmt.commentTxt];
         float height=0.0f;
         NSLog(@"%ld",(long)indexPath.row);
@@ -1311,7 +1352,7 @@
     // call the service
     UIButton *btn=(UIButton *)sender;
     // get the current Content
-  //  Update *update=[arrayUpdates objectAtIndex:btn.tag];
+    //Update *update=[arrayUpdates objectAtIndex:btn.tag];
     
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
@@ -1645,13 +1686,29 @@
         step=step-1;
     }
     
+    float floatCheck=  [self doesFit:textView string:text range:range];
     if([text isEqualToString:@"\n"]&& step<2)
     {
         txtframe=CGRectMake(txtframe.origin.x, txtframe.origin.y-30, txtframe.size.width, txtframe.size.height+30);
         
         step=step+1;
         
+    }else if (!floatCheck && step<2)
+    {
+        txtframe=CGRectMake(txtframe.origin.x, txtframe.origin.y-30, txtframe.size.width, txtframe.size.height+30);
+        
+        step=step+1;
+        
+        
     }
+    else if (floatCheck==2 && step >0)
+    {
+        txtframe=CGRectMake(txtframe.origin.x, txtframe.origin.y+30, txtframe.size.width, txtframe.size.height-30);
+        
+        step=step-1;
+        
+    }
+    
     //    CGRect frame1 = frame;
     //    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
     
@@ -1659,6 +1716,41 @@
     
     
     return YES;
+    // Check if the text exceeds the size of the UITextView
+    
+    
+}
+- (float)doesFit:(UITextView*)textView string:(NSString *)myString range:(NSRange) range;
+{
+    // Get the textView frame
+    float viewHeight = textView.frame.size.height;
+    float width = textView.textContainer.size.width;
+    
+    NSMutableAttributedString *atrs = [[NSMutableAttributedString alloc] initWithAttributedString: textView.textStorage];
+    [atrs replaceCharactersInRange:range withString:myString];
+    
+    NSTextStorage *textStorage = [[NSTextStorage alloc] initWithAttributedString:atrs];
+    NSTextContainer *textContainer = [[NSTextContainer alloc] initWithSize: CGSizeMake(width, FLT_MAX)];
+    NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
+    
+    [layoutManager addTextContainer:textContainer];
+    [textStorage addLayoutManager:layoutManager];
+    float textHeight = [layoutManager
+                        usedRectForTextContainer:textContainer].size.height;
+    
+    if (textHeight >= viewHeight - 1) {
+        currentTextHeight=textHeight;
+        return NO;
+    } else if(currentTextHeight>textHeight)
+    {
+        currentTextHeight=textHeight;
+        return 2.0;
+        
+    }else{
+        
+        return YES;
+    }
+    return 0;
 }
 - (void)textViewDidChange:(UITextView *)textView{
     
@@ -1902,6 +1994,9 @@
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
+    if(scrollView.tag==12)
+    {
+
     if(tblViewContent.tableHeaderView!=nil ||tblViewContent.tableFooterView!=nil)
     {
         return ;
@@ -1946,7 +2041,7 @@
         //        tblViewContent.tableHeaderView=nil;
         
     }
-    
+    }
 }
 -(void)initFooterView
 {
@@ -1976,5 +2071,15 @@
 - (IBAction)btnClose:(id)sender {
     [self showNetworkStatus:@"" newVisibility:YES];
 }
-
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
+    if([sender isKindOfClass:[UITextView class]])
+    {
+        if(sender.tag!=11)
+        {
+            CGPoint origin = [sender contentOffset];
+            [sender setContentOffset:CGPointMake(origin.x, +11.0)];
+        }
+    }
+}
 @end

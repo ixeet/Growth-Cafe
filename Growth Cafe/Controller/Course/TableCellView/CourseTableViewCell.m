@@ -15,10 +15,19 @@
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+  [super setSelected:selected animated:animated];
  //   [imgAssessaryview setImage:[UIImage imageNamed:@"icn_arrow-expand.png"]];
     // Configure the view for the selected state
     [btnImg setSelected:selected];
+//    if(selected){
+//       [btnImg setImage:[UIImage imageNamed:@"icn_arrow-expand.png"] forState:UIControlStateNormal]; //
+//    }else {
+//         [btnImg setImage:[UIImage imageNamed:@"icn_arrow.png"] forState:UIControlStateNormal];
+//    }
+}
+- (void)deselectRowAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated{
+    [super setSelected:NO animated:animated];
+    [btnImg setSelected:NO];
 }
 
 @end

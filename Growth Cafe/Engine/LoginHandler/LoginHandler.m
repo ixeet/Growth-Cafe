@@ -69,6 +69,44 @@
     }];
     
 }
+//register the Device Token
+//User Login
+-(void)registerTheDeviceToken:(NSString*)deviceToken deviceType:(NSString *)deviceType success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure{
+    
+    
+    NSDictionary *parameters = @{@"userId":[AppSingleton sharedInstance].userDetail.userId,
+                                 @"deviceToken":deviceToken,@"deviceType":deviceType
+                                 };
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manager POST:REGISTER_DEVICE parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+        
+        //Success Full Logout
+        if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+            
+            //call Block function
+            success(YES);
+        }
+        else {
+            //call Block function
+            failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+        }
+        
+        
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+        
+    }];
+}
 // get user Profile
 -(void)getUserDetail:(NSString* )userid success:(void (^)(UserDetails *usrDetail))success   failure:(void (^)(NSError *error))failure{
     

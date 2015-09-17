@@ -19,5 +19,6 @@
 @property(nonatomic,assign) BOOL isUserFBLoggedIn;
 @property(nonatomic) BOOL isKeepMeloggedIn;
 @property(nonatomic,strong) Update *updatedUpdate;
-
+// device token
+@property(nonatomic,strong) NSString *deviceToken;
 @end

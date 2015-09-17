@@ -17,6 +17,7 @@
 @property (nonatomic,strong) NSString* assignmentDesc;
 @property (nonatomic,strong) NSString* assignmentStatus;
 @property (nonatomic,strong) NSString* assignmentSubmittedDate;
+@property (nonatomic,strong) NSString* assignmentDueDate;
 @property (nonatomic,strong) NSString* assignmentSubmittedBy;
 @property (nonatomic,strong) Resourse* attachedResource;
 @property (nonatomic,strong) NSString* resourceId;

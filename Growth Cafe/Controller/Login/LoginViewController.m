@@ -314,6 +314,15 @@
     [defaults setObject:txtPassword.text  forKey:@"Password"];
     [txtUsername setText:@""];
     [txtPassword setText:@""];
+    if(![AppGlobal getValueInDefault:DEVICE_TOKEN_REGISTER]){
+    NSString *deviceName = [[UIDevice currentDevice] name];
+    [[appDelegate _engine] registerTheDeviceToken: [AppSingleton   sharedInstance].deviceToken deviceType: deviceName success:^(BOOL logoutValue){
+        [AppGlobal setValueInDefault:DEVICE_TOKEN_REGISTER value:@"1"];
+    }failure:^(NSError *error){
+      
+    }];
+    }
+
     [self dismissViewControllerAnimated:YES completion:^{}];
     [self.tabBarController.tabBar setHidden:NO];
     [self.navigationController popToRootViewControllerAnimated:YES];

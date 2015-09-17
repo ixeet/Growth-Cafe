@@ -39,6 +39,8 @@
             assignment.assignmentName=[dicassignment objectForKey:@"assignmentName"];
             assignment.assignmentStatus=[dicassignment objectForKey:@"assignmentStatus"];
             assignment.assignmentSubmittedDate=[dicassignment objectForKey:@"assignmentSubmittedDate"];
+            assignment.assignmentDueDate=[dicassignment objectForKey:@"assignmentDueDate"];
+            
             assignment.assignmentDesc=[dicassignment objectForKey:@"assignmentDesc"];
             
             Courses *course=[[Courses alloc]init];

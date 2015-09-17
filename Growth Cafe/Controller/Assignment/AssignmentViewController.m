@@ -31,6 +31,8 @@
     ActionOn  actionOn;
     UIWebView *videoView;
     AFNetworkReachabilityStatus previousStatus;
+    CGFloat screenHeight;
+    CGFloat screenWidth;
 }
 @end
 
@@ -67,8 +69,8 @@
     NSLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
     objCustom.center = CGPointMake(200, 400);
     CGRect frame1=objCustom.view.frame ;
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    screenHeight = [UIScreen mainScreen].bounds.size.height;
+    screenWidth = [UIScreen mainScreen].bounds.size.width;
     frame1.size.height=screenHeight-50;
     frame1.size.width=screenWidth;//200;
     objCustom.view.frame=frame1;
@@ -115,8 +117,8 @@
 {
     if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
         
-        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+         screenHeight = [UIScreen mainScreen].bounds.size.height;
+         screenWidth = [UIScreen mainScreen].bounds.size.width;
         if( screenHeight < screenWidth ){
             screenHeight = screenWidth;
         }
@@ -335,61 +337,12 @@
     cell.btnExpend.tag=indexPath.row;
     [cell.btnExpend  addTarget:self action:@selector(btnExpendClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.btnExpend setImage:[UIImage imageNamed:@"icn_arrow.png"] forState:UIControlStateNormal];
-    [cell.imgResource setHidden:YES];
+   [cell.imgResource setHidden:YES];
     [cell.btnPlay setHidden:YES];
     [cell.lblAssignementDetail  setHidden:YES];
     [cell.lblUploadedDate setHidden:YES];
    // [cell.btnSubmit setHidden:YES];
-    if(assignment.isExpend){
-        
-        [cell.btnExpend setImage:[UIImage imageNamed:@"icn_arrow-expand.png"] forState:UIControlStateNormal];
-        if(assignment.assignmentDesc!=nil)
-        {
-            
-            cell.lblAssignementDetail.text=assignment.assignmentDesc;
-          
-            
-            //            if(labelSize.height>39)
-         
-            [cell.lblAssignementDetail  setHidden:NO];
-        }
-    
-        if (assignment.attachedResource!=nil) {
-            
-            if(assignment.attachedResource.resourceImageUrl!=nil){
-                cell.btnPlay.tag=indexPath.row;
-                [cell.btnPlay setHidden:NO];
-                    [cell.imgResource setHidden:NO];
-                [cell.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
-                if([AppGlobal checkImageAvailableAtLocal:assignment.attachedResource.resourceImageUrl])
-                {
-                    assignment.attachedResource.resourceImageData=[AppGlobal getImageAvailableAtLocal:assignment.attachedResource.resourceImageUrl];
-                }
-                if (assignment.attachedResource.resourceImageData==nil) {
-                    NSURL *imageURL = [NSURL URLWithString:assignment.attachedResource.resourceImageUrl];
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                       assignment.attachedResource.resourceImageData  = [NSData dataWithContentsOfURL:imageURL];
-                        [AppGlobal setImageAvailableAtLocal:assignment.attachedResource.resourceImageUrl AndImageData: assignment.attachedResource.resourceImageData];
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            // Update the UI
-                            UIImage *img=[UIImage imageWithData:assignment.attachedResource.resourceImageData];
-                            if(img!=nil)
-                            {
-                                [cell.imgResource setImage:img];
-                                
-                                [cell.imgResource setBackgroundColor:[UIColor clearColor]];
-                            }
-                        });
-                    });
-                }else{
-                    UIImage *img=[UIImage imageWithData:assignment.attachedResource.resourceImageData];
-                    [cell.imgResource setImage:img];
-                    
-                    [cell.imgResource setBackgroundColor:[UIColor clearColor]];
-                }
-            }
-        }
-    }
+   
     // Set label text to attributed string
     NSString *str = [NSString stringWithFormat:@"%@ > %@" ,assignment.course.courseName,assignment.module.moduleName];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
@@ -418,10 +371,13 @@
 //    cell.lblCourse.text=assignment.course.courseName;
 //    cell.lblModule.text=assignment.module.moduleName;
     cell.btnSubmit.tag =indexPath.row;
-    NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.assignmentSubmittedDate];
-    if(submittedDate!=nil){
+    CGRect imgFrame=cell.imgResource.frame;
+    imgFrame=CGRectMake(imgFrame.origin.x, imgFrame.origin.y, imgFrame.size.width, 0);
+    cell.imgResource.frame=imgFrame;
+    NSDate * dueDate=[AppGlobal convertStringDateToNSDate:assignment.assignmentDueDate];
+    if(dueDate!=nil){
         NSCalendar* calendar = [NSCalendar currentCalendar];
-        NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  submittedDate]; // Get necessary date components
+        NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dueDate]; // Get necessary date components
         
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
@@ -434,7 +390,7 @@
     {
         NSDate *today10am =[NSDate date];
       
-        if ([submittedDate compare:today10am] == NSOrderedDescending)
+        if ([dueDate compare:today10am] == NSOrderedDescending)
         {
        // cell.btnAssignmentStatus.selected=YES;
         [cell.btnAssignmentStatus setImage:[UIImage imageNamed:@"icn_new-assignment.png"] forState:UIControlStateNormal];
@@ -501,8 +457,69 @@
             cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",[monthName substringToIndex:3],(long)components.day];
         }
     }
-                //set action for comment and like on resource
+    if(assignment.isExpend){
+        
+        NSLayoutConstraint *backdropViewHeight = [NSLayoutConstraint constraintWithItem:cell.imgResource attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:cell.imgResource attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
+//        NSLayoutConstraint *backdropViewCenterX = [NSLayoutConstraint constraintWithItem:cell.imgResource attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:cell.imgResource.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+//        NSLayoutConstraint *backdropViewCenterY = [NSLayoutConstraint constraintWithItem:cell.imgResource   attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:cell.imgResource.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+        
+        [cell.imgResource.superview addConstraints:@[ backdropViewHeight]];
+
+        
+        [cell.btnExpend setImage:[UIImage imageNamed:@"icn_arrow-expand.png"] forState:UIControlStateNormal];
+        if(assignment.assignmentDesc!=nil)
+        {
             
+            cell.lblAssignementDetail.text=assignment.assignmentDesc;
+            
+            
+            //            if(labelSize.height>39)
+            
+            [cell.lblAssignementDetail  setHidden:NO];
+        }
+        CGRect imgFrame=cell.imgResource.frame;
+
+        if (assignment.attachedResource!=nil) {
+            
+            if(assignment.attachedResource.resourceImageUrl!=nil){
+                cell.btnPlay.tag=indexPath.row;
+                [cell.btnPlay setHidden:NO];
+                [cell.imgResource setHidden:NO];
+                [cell.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+                if([AppGlobal checkImageAvailableAtLocal:assignment.attachedResource.resourceImageUrl])
+                {
+                    assignment.attachedResource.resourceImageData=[AppGlobal getImageAvailableAtLocal:assignment.attachedResource.resourceImageUrl];
+                }
+                if (assignment.attachedResource.resourceImageData==nil) {
+                    NSURL *imageURL = [NSURL URLWithString:assignment.attachedResource.resourceImageUrl];
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                        assignment.attachedResource.resourceImageData  = [NSData dataWithContentsOfURL:imageURL];
+                        [AppGlobal setImageAvailableAtLocal:assignment.attachedResource.resourceImageUrl AndImageData: assignment.attachedResource.resourceImageData];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            // Update the UI
+                            UIImage *img=[UIImage imageWithData:assignment.attachedResource.resourceImageData];
+                            if(img!=nil)
+                            {
+                                [cell.imgResource setImage:img];
+                                
+                                [cell.imgResource setBackgroundColor:[UIColor clearColor]];
+                                 cell.imgResource.frame = imgFrame;
+                            }
+                        });
+                    });
+                }else{
+                    UIImage *img=[UIImage imageWithData:assignment.attachedResource.resourceImageData];
+                   
+                    [cell.imgResource setImage:img];
+                    
+                    [cell.imgResource setBackgroundColor:[UIColor clearColor]];
+                    cell.imgResource.frame = imgFrame;
+                }
+            }
+        }
+       
+    }          //set action for comment and like on resource
+    
         return cell;
    
 }
@@ -539,21 +556,34 @@
             
             height=height+163.0f;
         }
+        float width=200;
+        if( screenHeight <740 && screenHeight >667 )
+        {
+            width=298;
+            
+        }else if  (screenHeight > 568 && screenHeight <= 667 )
+        {
+            width=270;
+        }
         if(assignment.assignmentDesc!=nil){
             
-            CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:assignment.assignmentDesc];
+            CGSize labelSize=[AppGlobal   getTheExpectedSizeOfLabel:assignment.assignmentDesc andFontSize:13 labelWidth:width];
+            
+
             NSLog(@"%ld",(long)indexPath.row);
             
-            if(labelSize.height>20)
-                height=height+labelSize.height;
+            if(labelSize.height>16)
+                height=height+labelSize.height-16;
         }
         if(assignment.course.courseName!=nil){
             
-            CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:assignment.course.courseName];
+            CGSize labelSize=[AppGlobal   getTheExpectedSizeOfLabel:assignment.course.courseName andFontSize:13 labelWidth:width];
+            
+
             NSLog(@"%ld",(long)indexPath.row);
             
-                     if(labelSize.height>20)
-            height=height+labelSize.height;
+                     if(labelSize.height>16)
+            height=height+labelSize.height-20;
         }
         
 

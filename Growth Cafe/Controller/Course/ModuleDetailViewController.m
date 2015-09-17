@@ -44,6 +44,7 @@ AFNetworkReachabilityStatus previousStatus;
     NSMutableArray *tableViewCellsArray;
       NSMutableArray *tableViewCellsRelatedResourseArray;
     CGFloat screenWidth;
+    float currentTextHeight;
 }
 
 
@@ -1495,7 +1496,7 @@ AFNetworkReachabilityStatus previousStatus;
 
         }else if ([assignmentList count]>0)
         {
-            cell.lblNextTitle.text=@"Assignment:";
+            cell.lblNextTitle.text=@"Assignments:";
 
         }else{
             cell.lblNextTitle.hidden=YES;
@@ -1628,7 +1629,7 @@ AFNetworkReachabilityStatus previousStatus;
                 
             }else if ([assignmentList count]>0)
             {
-                cell.lblRelatedVideo.text=@"Assignment:";
+                cell.lblRelatedVideo.text=@"Assignments:";
                 
             }else{
              cell.lblRelatedVideo.hidden=YES;
@@ -1757,7 +1758,7 @@ AFNetworkReachabilityStatus previousStatus;
                 
             }else if ([assignmentList count]>0)
             {
-                cell.lblRelatedVideo.text=@"Assignment:";
+                cell.lblRelatedVideo.text=@"Assignments:";
                 
             }else{
                 cell.lblRelatedVideo.hidden=YES;
@@ -1884,12 +1885,12 @@ AFNetworkReachabilityStatus previousStatus;
         }
         if ([assignmentList count]>0)
         {
-            cell.lblAssignment.text=@"Assignment:";
+            cell.lblAssignment.text=@"Assignments:";
             
         }else{
             cell.lblAssignment.hidden=YES;
         }
-[tableViewCellsRelatedResourseArray addObject:cell];
+        [tableViewCellsRelatedResourseArray addObject:cell];
         return cell;
         
     }
@@ -2170,20 +2171,20 @@ AFNetworkReachabilityStatus previousStatus;
         {
             width=270;
         }
-        CGSize labelSize=[AppGlobal   getTheExpectedSizeOfLabel:realtedResource.resourceTitle andFontSize:13 labelWidth:width];
+        CGSize labelSize=[AppGlobal   getTheExpectedSizeOfLabel:realtedResource.resourceTitle andFontSize:14 labelWidth:width];
         
-//        if(labelSize.height>17){
+       if(labelSize.height>17){
              return  height=height+labelSize.height-17;
-       // }
-//        else if([realtedResource.resourceTitle length]>34 &&  (screenHeight > 480 && screenHeight < 667 ))
-//        {
-//            
-//            return  height=height+labelSize.height;
-//        }else if([realtedResource.resourceTitle length]>42 &&  screenHeight < 480)
-//        {
-//            
-//            return  height=height+labelSize.height;
-//        }
+        }
+        else if([realtedResource.resourceTitle length]>34 &&  (screenHeight > 480 && screenHeight < 667 ))
+        {
+            
+            return  height=height+labelSize.height;
+        }else if([realtedResource.resourceTitle length]>42 &&  screenHeight < 480)
+        {
+            
+            return  height=height+labelSize.height;
+        }
         
         return height;
 //        else
@@ -2347,13 +2348,29 @@ AFNetworkReachabilityStatus previousStatus;
         step=step-1;
     }
     
+    float floatCheck=  [self doesFit:textView string:text range:range];
     if([text isEqualToString:@"\n"]&& step<2)
     {
         txtframe=CGRectMake(txtframe.origin.x, txtframe.origin.y-30, txtframe.size.width, txtframe.size.height+30);
         
         step=step+1;
         
+    }else if (!floatCheck && step<2)
+    {
+        txtframe=CGRectMake(txtframe.origin.x, txtframe.origin.y-30, txtframe.size.width, txtframe.size.height+30);
+        
+        step=step+1;
+        
+        
     }
+    else if (floatCheck==2 && step >0)
+    {
+        txtframe=CGRectMake(txtframe.origin.x, txtframe.origin.y+30, txtframe.size.width, txtframe.size.height-30);
+        
+        step=step-1;
+        
+    }
+    
     //    CGRect frame1 = frame;
     //    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
     
@@ -2361,6 +2378,41 @@ AFNetworkReachabilityStatus previousStatus;
     
     
     return YES;
+    // Check if the text exceeds the size of the UITextView
+    
+    
+}
+- (float)doesFit:(UITextView*)textView string:(NSString *)myString range:(NSRange) range;
+{
+    // Get the textView frame
+    float viewHeight = textView.frame.size.height;
+    float width = textView.textContainer.size.width;
+    
+    NSMutableAttributedString *atrs = [[NSMutableAttributedString alloc] initWithAttributedString: textView.textStorage];
+    [atrs replaceCharactersInRange:range withString:myString];
+    
+    NSTextStorage *textStorage = [[NSTextStorage alloc] initWithAttributedString:atrs];
+    NSTextContainer *textContainer = [[NSTextContainer alloc] initWithSize: CGSizeMake(width, FLT_MAX)];
+    NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
+    
+    [layoutManager addTextContainer:textContainer];
+    [textStorage addLayoutManager:layoutManager];
+    float textHeight = [layoutManager
+                        usedRectForTextContainer:textContainer].size.height;
+    
+    if (textHeight >= viewHeight - 1) {
+        currentTextHeight=textHeight;
+        return NO;
+    } else if(currentTextHeight>textHeight)
+    {
+        currentTextHeight=textHeight;
+        return 2.0;
+        
+    }else{
+        
+        return YES;
+    }
+    return 0;
 }
 - (void)textViewDidChange:(UITextView *)textView{
     

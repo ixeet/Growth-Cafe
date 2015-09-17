@@ -365,13 +365,13 @@
                     <rect key="frame" x="486" y="-103" width="84" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="p36-G5-b0m">
-                            <variation key="heightClass=regular-widthClass=compact" constant="30"/>
+                            <variation key="heightClass=regular-widthClass=compact" constant="44"/>
                         </constraint>
                         <constraint firstAttribute="width" constant="45" id="yto-Gk-gvp">
                             <variation key="heightClass=regular-widthClass=compact" constant="62"/>
                         </constraint>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                     <state key="normal" title="Submit">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -392,11 +392,15 @@
                         <action selector="btnSubmitClick:" destination="-1" eventType="touchUpInside" id="nTj-PS-dlE"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbz-GA-HAK" userLabel="btnBack">
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbz-GA-HAK" userLabel="btnBack">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="38" id="Av3-ca-lLH"/>
-                        <constraint firstAttribute="height" constant="22" id="pyZ-2y-Xc6"/>
+                        <constraint firstAttribute="width" constant="38" id="Av3-ca-lLH">
+                            <variation key="heightClass=regular-widthClass=compact" constant="22"/>
+                        </constraint>
+                        <constraint firstAttribute="height" constant="22" id="pyZ-2y-Xc6">
+                            <variation key="heightClass=regular-widthClass=compact" constant="44"/>
+                        </constraint>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <state key="normal" image="icn_back-header.png">
@@ -422,9 +426,11 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Submit Assignment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n44-IE-J2q">
                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="x3Q-VP-jfY"/>
+                        <constraint firstAttribute="height" constant="30" id="x3Q-VP-jfY">
+                            <variation key="heightClass=regular-widthClass=compact" constant="44"/>
+                        </constraint>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                     <variation key="default">
@@ -442,23 +448,25 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="KdS-2x-niZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="28" id="30Y-Ld-X4E">
-                    <variation key="heightClass=regular-widthClass=compact" constant="28"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="19"/>
                 </constraint>
                 <constraint firstAttribute="trailing" secondItem="4i3-nc-bAs" secondAttribute="trailing" constant="1" id="7Sv-ht-lyl">
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>
                 <constraint firstItem="KdS-2x-niZ" firstAttribute="leading" secondItem="n44-IE-J2q" secondAttribute="trailing" constant="6" id="DAv-Es-lIM">
-                    <variation key="heightClass=regular-widthClass=compact" constant="-2"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="7"/>
                 </constraint>
                 <constraint firstItem="l2v-z3-Ldl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-1" id="E1t-fs-ips">
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>
-                <constraint firstItem="n44-IE-J2q" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="26" id="Edy-eu-psT"/>
+                <constraint firstItem="n44-IE-J2q" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="26" id="Edy-eu-psT">
+                    <variation key="heightClass=regular-widthClass=compact" constant="19"/>
+                </constraint>
                 <constraint firstAttribute="trailing" secondItem="KdS-2x-niZ" secondAttribute="trailing" constant="20" id="F8N-w7-gSk">
-                    <variation key="heightClass=regular-widthClass=compact" constant="17"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                 </constraint>
                 <constraint firstItem="mbz-GA-HAK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="32" id="GxE-zv-GFf">
-                    <variation key="heightClass=regular-widthClass=compact" constant="30"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="19"/>
                 </constraint>
                 <constraint firstItem="l2v-z3-Ldl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-1" id="Jro-DX-8XM">
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -471,11 +479,13 @@
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>
                 <constraint firstItem="n44-IE-J2q" firstAttribute="leading" secondItem="mbz-GA-HAK" secondAttribute="trailing" constant="13" id="T1I-sZ-ViW">
-                    <variation key="heightClass=regular-widthClass=compact" constant="37"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="47"/>
                 </constraint>
                 <constraint firstItem="4i3-nc-bAs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="T8T-43-GbF"/>
                 <constraint firstItem="Hmf-Xh-tHm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Uou-ia-rJ5"/>
-                <constraint firstItem="n44-IE-J2q" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="26" id="YSB-q1-lbL"/>
+                <constraint firstItem="n44-IE-J2q" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="26" id="YSB-q1-lbL">
+                    <variation key="heightClass=regular-widthClass=compact" constant="19"/>
+                </constraint>
                 <constraint firstItem="4i3-nc-bAs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-1" id="gvS-eR-cYV"/>
                 <constraint firstAttribute="bottom" secondItem="Hmf-Xh-tHm" secondAttribute="bottom" id="iF1-TD-oFt">
                     <variation key="heightClass=regular-widthClass=compact" constant="-203"/>
@@ -488,7 +498,7 @@
                 </constraint>
                 <constraint firstItem="4i3-nc-bAs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="mso-KM-ph4"/>
                 <constraint firstItem="mbz-GA-HAK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="rqK-al-mpc">
-                    <variation key="heightClass=regular-widthClass=compact" constant="2"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                 </constraint>
                 <constraint firstItem="Hmf-Xh-tHm" firstAttribute="top" secondItem="4i3-nc-bAs" secondAttribute="bottom" constant="-1" id="u3Z-L9-V08">
                     <variation key="heightClass=regular-widthClass=compact" constant="-72"/>

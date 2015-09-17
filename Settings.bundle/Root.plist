@@ -14,11 +14,11 @@
 			<key>IsSecure</key>
 			<false/>
 			<key>Key</key>
-			<string>scolere.growthcafe</string>
+			<string>com.scolere.growthcafe</string>
 			<key>KeyboardType</key>
 			<string>Alphabet</string>
 			<key>Title</key>
-			<string>Growth Cafe Version                0.0.2</string>
+			<string>Growth Cafe Version                0.0.4</string>
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 		</dict>
@@ -34,7 +34,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<string>191.239.57.54:8080/SLMS</string>
+			<string>191.239.57.54:8081/SLMS</string>
 			<key>Key</key>
 			<string>url_preference</string>
 			<key>Title</key>
@@ -48,8 +48,8 @@
 			<string>PSMultiValueSpecifier</string>
 			<key>Values</key>
 			<array>
-				<string>191.239.57.54:8080/SLMS</string>
-				<string>191.239.57.54:8080/SLMS_test</string>
+				<string>191.239.57.54:8083/SLMS</string>
+				<string>191.239.57.54:8081/SLMS</string>
 			</array>
 		</dict>
 	</array>

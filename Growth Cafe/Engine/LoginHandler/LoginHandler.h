@@ -35,4 +35,5 @@
 // get user Profile
 -(void)getUserDetail:(NSString* )userid success:(void (^)(UserDetails *usrDetail))success   failure:(void (^)(NSError *error))failure;
 
+-(void)registerTheDeviceToken:(NSString*)deviceToken deviceType:(NSString *)deviceType success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure;
 @end

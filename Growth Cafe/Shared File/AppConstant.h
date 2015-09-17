@@ -15,7 +15,7 @@
 #define APP_URL [AppGlobal getServerURL]
 
 
-#define kProdURL [NSString stringWithFormat:@"191.239.57.54:8080/SLMS"]
+#define kProdURL [NSString stringWithFormat:@"191.239.57.54:8081/SLMS"]
 #define kGROWTHURL(url) [NSString stringWithFormat:@"http://%@" ,url]
 
 #define MASTER_DATA_URL [NSString stringWithFormat:@"%@/rest/common/getMasterData", APP_URL]
@@ -24,6 +24,9 @@
 #define USER_LOGIN_URL [NSString stringWithFormat:@"%@/rest/user/login",APP_URL]
 #define USER_LOGUT_URL [NSString stringWithFormat:@"%@/rest/user/logout",APP_URL]
 #define USER_FORGETPASSWORD_URL(username) [NSString stringWithFormat:@"%@/rest/user/forgetPwd/userId/%@",APP_URL,username]
+#define REGISTER_DEVICE [NSString stringWithFormat:@"%@/rest/notification/registerDevice",APP_URL]
+
+
 
 //#define USER_REGISTER_URL [NSString stringWithFormat:@"%@/rest/user/register",APP_URL];
 #define USER_UPDATE_PROFILE_URL [NSString stringWithFormat:@"%@/rest/user/updateProfile",APP_URL]
@@ -101,7 +104,7 @@
 //server Respond Key
 #define key_severRespond_Status @"status"
 #define key_severRespond_StatusMessage @"statusMessage"
-#define REGISTER_SUCCESS_MSG @"Thank you for registering with Growth Cafe, your registration is pending for approval from school admin. You will be notified in email if you are approved."
+#define REGISTER_SUCCESS_MSG @"Thank you for registering with Growth Cafe, your registration is pending for approval from Organization admin. You will be notified in email if you are approved."
 #define FORGET_SUCCESS_MSG(useremail)[NSString stringWithFormat:@"Your password is sent to %@, please check SPAM folder if not received in inbox.",useremail]
 
 // Error Msg
@@ -132,7 +135,7 @@
 #define MISSING_HOME @"Group is not selected."
 #define MISSING_ADMIN_EMAIL @" Organization email can't be empty."
 #define MISSING_COMMENT @" Comment can't be empty."
-#define MISSING_ADMIN_VLID_EMAIL @" Organization email seems to be incorrect, Enter a valid email id  including '@' and '.' "
+#define MISSING_ADMIN_VLID_EMAIL @" Organization email seems to be incorrect, enter a valid email id  including '@' and '.' "
 
 #define ORG_NOT_FILLED @"First select your Organization."
 #define DEPART_NOT_FILLED @"First select your Department. "
@@ -143,6 +146,9 @@
 #define DATA_LOADING_MSG @"Please wait..."
 #define UPDATE_PER_PAGE 3
 #define COMMENT_PER_PAGE 5
+#define DEVICE_TOKEN @"devicetoken"
+#define DEVICE_TOKEN_REGISTER @"devicetokenregister"
+
 //Dropdown Enums
 typedef NS_ENUM(NSInteger, AppDropdownType){
     

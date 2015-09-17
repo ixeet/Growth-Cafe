@@ -21,6 +21,8 @@
 		A86A0DEB1B7CCFA70039E45B /* appLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A86A0DE91B7CCFA70039E45B /* appLogo@3x.png */; };
 		A881C9AE1B7F9FC70016F049 /* SubCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A881C9AC1B7F9FC70016F049 /* SubCommentTableViewCell.m */; };
 		A881C9AF1B7F9FC70016F049 /* SubCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A881C9AD1B7F9FC70016F049 /* SubCommentTableViewCell.xib */; };
+		A8A520B51BA822B400C470AA /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A520B31BA822B400C470AA /* NotificationTableViewCell.m */; };
+		A8A520B61BA822B400C470AA /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8A520B41BA822B400C470AA /* NotificationTableViewCell.xib */; };
 		A8AC9D591B95D17500FCE284 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8AC9D581B95D17500FCE284 /* CrashReporter.framework */; };
 		A8AC9D5D1B96E47900FCE284 /* UpdateDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AC9D5B1B96E47900FCE284 /* UpdateDetailViewController.m */; };
 		A8AC9D5E1B96E47900FCE284 /* UpdateDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8AC9D5C1B96E47900FCE284 /* UpdateDetailViewController.xib */; };
@@ -46,6 +48,9 @@
 		A8DFB2B81B85A96E0031C332 /* school_drop3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DFB2B61B85A96E0031C332 /* school_drop3@3x.png */; };
 		A8DFB2BB1B85ACD40031C332 /* mr2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DFB2B91B85ACD40031C332 /* mr2@2x.png */; };
 		A8DFB2BC1B85ACD40031C332 /* mr2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DFB2BA1B85ACD40031C332 /* mr2@3x.png */; };
+		A8DFD3A21BAA9387001C3C10 /* loader@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DFD3A01BAA9387001C3C10 /* loader@3x.png */; };
+		A8DFD3A31BAA9387001C3C10 /* loader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DFD3A11BAA9387001C3C10 /* loader@2x.png */; };
+		A8DFD3AD1BAA9DF7001C3C10 /* htmlfile in Resources */ = {isa = PBXBuildFile; fileRef = A8DFD3AC1BAA9DF7001C3C10 /* htmlfile */; };
 		A8DFEA9A1B87571A00B55D2E /* logo1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DFEA981B87571A00B55D2E /* logo1@2x.png */; };
 		A8DFEA9B1B87571A00B55D2E /* logo1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DFEA991B87571A00B55D2E /* logo1@3x.png */; };
 		A8E361471B8881C000CA0514 /* SubmitAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E361451B8881C000CA0514 /* SubmitAssignmentViewController.m */; };
@@ -307,6 +312,9 @@
 		A881C9AB1B7F9FC70016F049 /* SubCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCommentTableViewCell.h; sourceTree = "<group>"; };
 		A881C9AC1B7F9FC70016F049 /* SubCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCommentTableViewCell.m; sourceTree = "<group>"; };
 		A881C9AD1B7F9FC70016F049 /* SubCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubCommentTableViewCell.xib; sourceTree = "<group>"; };
+		A8A520B21BA822B400C470AA /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationTableViewCell.h; path = NotificationCell/NotificationTableViewCell.h; sourceTree = "<group>"; };
+		A8A520B31BA822B400C470AA /* NotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationTableViewCell.m; path = NotificationCell/NotificationTableViewCell.m; sourceTree = "<group>"; };
+		A8A520B41BA822B400C470AA /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NotificationTableViewCell.xib; path = NotificationCell/NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		A8AC9D581B95D17500FCE284 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		A8AC9D5A1B96E47800FCE284 /* UpdateDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateDetailViewController.h; sourceTree = "<group>"; };
 		A8AC9D5B1B96E47900FCE284 /* UpdateDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateDetailViewController.m; sourceTree = "<group>"; };
@@ -336,6 +344,9 @@
 		A8DFB2B61B85A96E0031C332 /* school_drop3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "school_drop3@3x.png"; sourceTree = "<group>"; };
 		A8DFB2B91B85ACD40031C332 /* mr2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mr2@2x.png"; sourceTree = "<group>"; };
 		A8DFB2BA1B85ACD40031C332 /* mr2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mr2@3x.png"; sourceTree = "<group>"; };
+		A8DFD3A01BAA9387001C3C10 /* loader@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loader@3x.png"; sourceTree = "<group>"; };
+		A8DFD3A11BAA9387001C3C10 /* loader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loader@2x.png"; sourceTree = "<group>"; };
+		A8DFD3AC1BAA9DF7001C3C10 /* htmlfile */ = {isa = PBXFileReference; lastKnownFileType = folder; path = htmlfile; sourceTree = "<group>"; };
 		A8DFEA981B87571A00B55D2E /* logo1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo1@2x.png"; sourceTree = "<group>"; };
 		A8DFEA991B87571A00B55D2E /* logo1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo1@3x.png"; sourceTree = "<group>"; };
 		A8E361441B8881C000CA0514 /* SubmitAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitAssignmentViewController.h; sourceTree = "<group>"; };
@@ -680,6 +691,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A8A520B71BA822BA00C470AA /* NotificationCell */ = {
+			isa = PBXGroup;
+			children = (
+				A8A520B21BA822B400C470AA /* NotificationTableViewCell.h */,
+				A8A520B31BA822B400C470AA /* NotificationTableViewCell.m */,
+				A8A520B41BA822B400C470AA /* NotificationTableViewCell.xib */,
+			);
+			name = NotificationCell;
+			sourceTree = "<group>";
+		};
+		A8DFD3AE1BAA9DFF001C3C10 /* html */ = {
+			isa = PBXGroup;
+			children = (
+				A8DFD3AC1BAA9DF7001C3C10 /* htmlfile */,
+			);
+			name = html;
+			sourceTree = "<group>";
+		};
 		C9C263E01B7B76AF00EA4F38 = {
 			isa = PBXGroup;
 			children = (
@@ -704,6 +733,7 @@
 		C9C263EB1B7B76AF00EA4F38 /* Growth Cafe */ = {
 			isa = PBXGroup;
 			children = (
+				A8DFD3AE1BAA9DFF001C3C10 /* html */,
 				C9C2654E1B7B819000EA4F38 /* Resources */,
 				C9C264C71B7B803700EA4F38 /* Controller */,
 				C9C264781B7B7BCB00EA4F38 /* Shared File */,
@@ -1103,6 +1133,7 @@
 				C9C2651C1B7B803700EA4F38 /* NotificationViewController.h */,
 				C9C2651D1B7B803700EA4F38 /* NotificationViewController.m */,
 				C9C2651E1B7B803700EA4F38 /* NotificationViewController.xib */,
+				A8A520B71BA822BA00C470AA /* NotificationCell */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -1148,6 +1179,8 @@
 		C9C2655F1B7B819000EA4F38 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				A8DFD3A01BAA9387001C3C10 /* loader@3x.png */,
+				A8DFD3A11BAA9387001C3C10 /* loader@2x.png */,
 				A8E4A6A41B9D70AB0008B659 /* close_icon@2x.png */,
 				A8E4A6A51B9D70AB0008B659 /* close_icon@3x.png */,
 				A8CAA07E1B849DD70066C893 /* profile-menunn@2x.png */,
@@ -1369,6 +1402,7 @@
 					};
 					C9C264041B7B76AF00EA4F38 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = U38FRT5GL5;
 						TestTargetID = C9C263E81B7B76AF00EA4F38;
 					};
 				};
@@ -1403,6 +1437,7 @@
 				C9C2663E1B7B819100EA4F38 /* progress_vertica_greyl_line@2x.png in Resources */,
 				C9C266131B7B819100EA4F38 /* icn_share@2x.png in Resources */,
 				A8CAA0801B849DD70066C893 /* profile-menunn@2x.png in Resources */,
+				A8DFD3A31BAA9387001C3C10 /* loader@2x.png in Resources */,
 				C9C266251B7B819100EA4F38 /* profile-menu@2x.png in Resources */,
 				C9C265EB1B7B819100EA4F38 /* edit-profile@2x.png in Resources */,
 				C9C266271B7B819100EA4F38 /* user-profile@2x.png in Resources */,
@@ -1423,6 +1458,7 @@
 				C9C265DF1B7B819100EA4F38 /* icn_grade-aplus@2x.png in Resources */,
 				A8DFB2B41B85A4FF0031C332 /* school_drop11@3x.png in Resources */,
 				C9C2660C1B7B819100EA4F38 /* icn_notification-selectedn@3x.png in Resources */,
+				A8DFD3A21BAA9387001C3C10 /* loader@3x.png in Resources */,
 				C9C2662F1B7B819100EA4F38 /* icn_arrow@2x.png in Resources */,
 				C9C265DA1B7B819100EA4F38 /* btn_radio-selected@2x.png in Resources */,
 				C9C266291B7B819100EA4F38 /* user_dummy@2x.png in Resources */,
@@ -1532,7 +1568,9 @@
 				A8CAA0591B8339D80066C893 /* icn_reply@3x.png in Resources */,
 				C9C265491B7B803700EA4F38 /* RegisterationViewController.xib in Resources */,
 				C9C265E11B7B819100EA4F38 /* icn_grade1@2x.png in Resources */,
+				A8A520B61BA822B400C470AA /* NotificationTableViewCell.xib in Resources */,
 				C9C2653D1B7B803700EA4F38 /* UpdateViewController.xib in Resources */,
+				A8DFD3AD1BAA9DF7001C3C10 /* htmlfile in Resources */,
 				C9C266351B7B819100EA4F38 /* loadingBG.png in Resources */,
 				A8E4A6A71B9D70AB0008B659 /* close_icon@3x.png in Resources */,
 				C9C266571B7B819100EA4F38 /* mr@2x.png in Resources */,
@@ -1604,6 +1642,7 @@
 				C9C2644A1B7B799700EA4F38 /* UIProgressView+AFNetworking.m in Sources */,
 				C9C264B11B7B7C4E00EA4F38 /* Comments.m in Sources */,
 				C9C264481B7B799700EA4F38 /* UIButton+AFNetworking.m in Sources */,
+				A8A520B51BA822B400C470AA /* NotificationTableViewCell.m in Sources */,
 				C9C265271B7B803700EA4F38 /* ALView+PureLayout.m in Sources */,
 				C9C265251B7B803700EA4F38 /* ModuleDetailViewController.m in Sources */,
 				C9C2644B1B7B799700EA4F38 /* UIRefreshControl+AFNetworking.m in Sources */,
@@ -1735,8 +1774,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Deepak Nagpal (48MW29D4CA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Deepak Nagpal (48MW29D4CA)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1758,7 +1797,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "2d78d51a-6135-4685-8deb-0c2e74fa2281";
+				PROVISIONING_PROFILE = "c5c96022-d2e5-43ab-acb2-270ebc4e1a6a";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1780,8 +1819,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Deepak Nagpal (48MW29D4CA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Deepak Nagpal (48MW29D4CA)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1796,7 +1835,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "2d78d51a-6135-4685-8deb-0c2e74fa2281";
+				PROVISIONING_PROFILE = "c5c96022-d2e5-43ab-acb2-270ebc4e1a6a";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1806,8 +1845,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Deepak Nagpal (48MW29D4CA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Deepak Nagpal (48MW29D4CA)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Growth",
@@ -1826,7 +1865,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2d78d51a-6135-4685-8deb-0c2e74fa2281";
+				PROVISIONING_PROFILE = "c5c96022-d2e5-43ab-acb2-270ebc4e1a6a";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -1836,7 +1875,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Deepak Nagpal (48MW29D4CA)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Growth",
@@ -1855,7 +1894,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2d78d51a-6135-4685-8deb-0c2e74fa2281";
+				PROVISIONING_PROFILE = "c5c96022-d2e5-43ab-acb2-270ebc4e1a6a";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -1865,6 +1904,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1877,6 +1918,7 @@
 				INFOPLIST_FILE = "Growth CafeTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Growth Cafe.app/Growth Cafe";
 			};
 			name = Debug;
@@ -1885,6 +1927,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1893,6 +1937,7 @@
 				INFOPLIST_FILE = "Growth CafeTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Growth Cafe.app/Growth Cafe";
 			};
 			name = Release;

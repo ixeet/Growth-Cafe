@@ -9,5 +9,5 @@
 #import "Assignment.h"
 
 @implementation Assignment
-@synthesize assignmentId,assignmentName,assignmentStatus,assignmentSubmittedDate,attachedResource,assignmentSubmittedBy,resourceId,assignmentDesc,isExpend,course,module;
+@synthesize assignmentId,assignmentName,assignmentStatus,assignmentSubmittedDate,attachedResource,assignmentSubmittedBy,resourceId,assignmentDesc,isExpend,course,module,assignmentDueDate;
 @end

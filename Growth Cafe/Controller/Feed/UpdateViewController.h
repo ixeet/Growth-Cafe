@@ -23,9 +23,11 @@
 @property (strong, nonatomic) IBOutlet UITableView *tblViewContent;
 @property (assign , nonatomic)  NSInteger  step;
 @property (strong, nonatomic) IBOutlet UITextView *txtViewCMT;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollViewLoader;
 @property (strong, nonatomic) IBOutlet MPMoviePlayerController *moviePlayer;
 @property (strong, nonatomic)  CustomProfileView *objCustom;
 
+@property (strong, nonatomic) IBOutlet UIWebView *webViewLoader;
 @property (assign, nonatomic)  NSInteger totalRecord;
 @property (assign, nonatomic)  NSInteger pendingRecord;
 

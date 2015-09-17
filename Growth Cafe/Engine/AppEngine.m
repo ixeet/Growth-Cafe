@@ -47,6 +47,16 @@
         failure(error);
     }];
 }
+-(void)registerTheDeviceToken:(NSString*)deviceToken deviceType:(NSString *)deviceType success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure{
+    
+    LoginHandler *login=[[LoginHandler alloc] init];
+    [login registerTheDeviceToken:deviceToken deviceType:deviceType success:^(BOOL logoutValue){
+        success(logoutValue);
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+
+}
 #pragma mark - logout
 
 //User Logout

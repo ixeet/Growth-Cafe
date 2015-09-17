@@ -21,5 +21,6 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *imgBelowLine1;
 @property (strong, nonatomic) IBOutlet UIImageView *imgBelowLine8;
+@property (strong, nonatomic) IBOutlet UILabel *lblUpdateTime;
 
 @end

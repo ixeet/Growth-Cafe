@@ -1,3 +1,4 @@
+
 //
 //  FeedViewController.m
 //  sLMS
@@ -41,13 +42,16 @@
     NSMutableArray  *cellMainHeight;
     AFNetworkReachabilityStatus previousStatus;
     BOOL ForNew;
+    Update *objUpdate;
+    float currentTextHeight;
+    
 }
 
 @end
 
 @implementation UpdateViewController
 @synthesize txtSearchBar,tblViewContent;
-@synthesize step,txtViewCMT,objCustom;
+@synthesize step,txtViewCMT,objCustom,webViewLoader;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,11 +59,17 @@
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
+//    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"sample1" ofType:@"html" inDirectory:@"htmlfile"];
+//    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+//    [self.webView loadHTMLString:htmlString baseURL:nil];
+    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"sample1" ofType:@"html" inDirectory:@"htmlfile"]];
+
+    [webViewLoader loadRequest:[NSURLRequest requestWithURL:url]];
        previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
     // Do any additional setup after loading the view from its nib.
     previousStatus=AFNetworkReachabilityStatusUnknown;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  ForNew=NO;
+    ForNew=NO;
     if ([defaults boolForKey:@"keep_loggedIn"])
     {
         useremail =  [AppGlobal removeUnwantedspaces:[defaults objectForKey:@"loginName"]];
@@ -69,8 +79,8 @@
         if (useremail != nil && userpassword != nil)
         {
             //Show Indicator
-            [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
             
+             [webViewLoader setHidden:NO];
             [[appDelegate _engine] loginWithUserName:useremail password:userpassword  rememberMe:YES
                                              success:^(UserDetails *userDetail) {
                                                  [AppSingleton sharedInstance].userDetail=userDetail;
@@ -79,12 +89,12 @@
                                                  [self loginSucessFull];
                                                  
                                                  //Hide Indicator
-                                                 [appDelegate hideSpinner];
+                                                  [webViewLoader setHidden:YES];
                                                  [self  getUpdate:@""];
                                              }
                                              failure:^(NSError *error) {
                                                  //Hide Indicator
-                                                 [appDelegate hideSpinner];
+                                                  [webViewLoader setHidden:NO];
                                                  NSLog(@"failure JsonData %@",[error description]);
                                                  [self loginFail:error];
                                                  
@@ -109,8 +119,8 @@
         [self.navigationController pushViewController:viewController animated:YES];
         
     }
-
-       UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
     
@@ -122,8 +132,8 @@
     NSLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
     objCustom.center = CGPointMake(200, 400);
     CGRect frame1=objCustom.view.frame ;
-//    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-//    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    //    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    //    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     frame1.size.height=screenHeight-50;
     frame1.size.width=screenWidth;//200;
     objCustom.view.frame=frame1;
@@ -137,12 +147,12 @@
     [self.view addSubview:self.cmtview];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillEnterFullscreenNotification:) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillExitFullscreenNotification:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
-  
-        cellMainHeight=[[NSMutableArray alloc]initWithCapacity:10000];
+    
+    cellMainHeight=[[NSMutableArray alloc]initWithCapacity:10000];
     
     cellCMTHeight=[[NSMutableArray alloc]initWithCapacity:10000];
-  
-
+    
+    
 }
 
 -(void)loginSucessFull{
@@ -150,7 +160,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:useremail     forKey:@"loginName"];
     [defaults setObject:userpassword  forKey:@"Password"];
-   
+    
     
 }
 
@@ -166,8 +176,8 @@
 {
     if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
         
-         screenHeight = [UIScreen mainScreen].bounds.size.height;
-         screenWidth = [UIScreen mainScreen].bounds.size.width;
+        screenHeight = [UIScreen mainScreen].bounds.size.height;
+        screenWidth = [UIScreen mainScreen].bounds.size.width;
         if( screenHeight < screenWidth ){
             screenHeight = screenWidth;
         }
@@ -199,28 +209,28 @@
     
     // [super viewWillAppear:animated];
     /* Listen for keyboard */
-  
-  //  NSInteger numberOfViewControllers = self.navigationController.viewControllers.count;
+    
+    //  NSInteger numberOfViewControllers = self.navigationController.viewControllers.count;
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
-       if(status==AFNetworkReachabilityStatusNotReachable)
-       {   previousStatus=status;
-        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
-       }else{
-           previousStatus=status;
-           [self showNetworkStatus:REESTABLISH_INTERNET_MSG newVisibility:YES];
-           
-       }
-//       else  if(status!=AFNetworkReachabilityStatusNotReachable)
-//       {
-//           previousStatus=status;
-//           [self showNetworkStatus:@""];
-//       
-//       }
+        if(status==AFNetworkReachabilityStatusNotReachable)
+        {   previousStatus=status;
+            [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        }else{
+            previousStatus=status;
+            [self showNetworkStatus:REESTABLISH_INTERNET_MSG newVisibility:YES];
+            
+        }
+        //       else  if(status!=AFNetworkReachabilityStatusNotReachable)
+        //       {
+        //           previousStatus=status;
+        //           [self showNetworkStatus:@""];
+        //
+        //       }
     }];
     
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-  
+    
     objCustom.btnFacebook.delegate=objCustom;
     [objCustom setUserProfile];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -228,37 +238,39 @@
     // [objCustom setUserProfile];
     if([arrayUpdates count]==0)
     {
-    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognizer:)];
-    
-    recognizer.direction = UISwipeGestureRecognizerDirectionRight;
-    
-    [objCustom.view addGestureRecognizer:recognizer];
-    NSLog(@"%d", [AppSingleton sharedInstance].isUserLoggedIn);
-    
-    
-    //set Profile
-
-    self.offsetRecord=0;
+        UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognizer:)];
+        
+        recognizer.direction = UISwipeGestureRecognizerDirectionRight;
+        
+        [objCustom.view addGestureRecognizer:recognizer];
+        NSLog(@"%d", [AppSingleton sharedInstance].isUserLoggedIn);
+        
+        
+        //set Profile
+        
+        self.offsetRecord=0;
         ForNew=YES;
-    [self  getUpdate:@""];
+        [self  getUpdate:@""];
     }else {
-    if( [AppSingleton sharedInstance].updatedUpdate!=nil)
-    {
-        NSUInteger index=-1;
-        for (Update *update in arrayUpdates) {
-            if([[AppSingleton sharedInstance].updatedUpdate.updateId integerValue]==[update.updateId integerValue])
+        if( [AppSingleton sharedInstance].updatedUpdate!=nil)
+        {
+            NSUInteger index=-1;
+            for (Update *update in arrayUpdates) {
+                if([[AppSingleton sharedInstance].updatedUpdate.updateId integerValue]==[update.updateId integerValue])
+                {
+                    index=[arrayUpdates indexOfObject:update];
+                    break;
+                }
+            }
+            if(index!=-1)
             {
-                index=[arrayUpdates indexOfObject:update];
-                break;
+                [arrayUpdates removeObjectAtIndex:index];
+                Update *update=[AppSingleton sharedInstance].updatedUpdate;
+                [arrayUpdates insertObject:update atIndex:index];
+                [AppSingleton sharedInstance].updatedUpdate=nil;
+                [tblViewContent reloadData];
             }
         }
-        if(index!=-1)
-        {
-            [arrayUpdates removeObjectAtIndex:index];
-            [arrayUpdates insertObject:[AppSingleton sharedInstance].updatedUpdate atIndex:index];
-            [AppSingleton sharedInstance].updatedUpdate=nil;
-        }
-    }
     }
     
 }
@@ -302,59 +314,68 @@
         [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
         tblViewContent.tableHeaderView=nil;
         tblViewContent.tableFooterView=nil;
-
+        
         return;
     }
     if( self.offsetRecord==0 && tblViewContent.tableHeaderView==nil){
-    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+        [webViewLoader setHidden:NO];
+        //[appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     }
     [[appDelegate _engine] getUpdates:userid  AndTextSearch:txtSearch Offset:(int)self.offsetRecord  NoOfRecords:UPDATE_PER_PAGE  success:^(NSMutableDictionary *dicUpdates) {
-       
+        
         
         self.totalRecord=[[dicUpdates objectForKey:@"updatesCount"] integerValue] ;
-        self.pendingRecord=self.totalRecord-(self.offsetRecord+UPDATE_PER_PAGE);
+        
         tblViewContent.tableHeaderView=nil;
         tblViewContent.tableFooterView=nil;
         // [self loginSucessFullWithFB];
         if( self.offsetRecord==0){
             //Hide Indicator
             
-           
+            
             NSMutableArray *tempArray  =[dicUpdates objectForKey:@"updates"]  ;
             
-           if(ForNew && [arrayUpdates count]>0)
-           {
-               ForNew=NO;
-               
-               Update *tempUpdate=[tempArray objectAtIndex:0];
-               Update *tempUpdate1=[arrayUpdates objectAtIndex:0];
-               if(![tempUpdate.updateId isEqualToString: tempUpdate1.updateId] )
-               {
-                   arrayUpdates=tempArray;
-               }
-                   
-           }else{
-               arrayUpdates=tempArray;
-           }
+            //           if(ForNew && [arrayUpdates count]>0)
+            //           {
+            //               ForNew=NO;
+            //
+            //               Update *tempUpdate=[tempArray objectAtIndex:0];
+            //               Update *tempUpdate1=[arrayUpdates objectAtIndex:0];
+            //               if(![tempUpdate.updateId isEqualToString: tempUpdate1.updateId] )
+            //               {
+            //                   arrayUpdates=tempArray;
+            //                    self.pendingRecord=self.totalRecord-(self.offsetRecord+UPDATE_PER_PAGE);
+            //               }else{
+            //
+            //                   self.pendingRecord=self.totalRecord-[arrayUpdates count];
+            //               }
+            //
+            //           }else{
+            arrayUpdates=tempArray;
+            self.pendingRecord=self.totalRecord-(self.offsetRecord+UPDATE_PER_PAGE);
+            // }
             
-             [appDelegate hideSpinner];
+            [webViewLoader setHidden:YES];
             
         }else{
-        [arrayUpdates addObjectsFromArray: [dicUpdates objectForKey:@"updates"]]  ;
-            
+            [arrayUpdates addObjectsFromArray: [dicUpdates objectForKey:@"updates"]]  ;
+            self.pendingRecord=self.totalRecord-(self.offsetRecord+UPDATE_PER_PAGE);
             
         }
+        [cellMainHeight removeAllObjects];
+        [cellCMTHeight removeAllObjects];
         for (Update *update in arrayUpdates) {
             [cellMainHeight addObject:@"0"];
             [cellCMTHeight addObject:@"0"];
         }
-       [tblViewContent reloadData];
-        self.offsetRecord=self.offsetRecord+UPDATE_PER_PAGE;
+        [tblViewContent reloadData];
+        self.offsetRecord=[arrayUpdates count];
         
     }
                               failure:^(NSError *error) {
                                   //Hide Indicator
                                   [appDelegate hideSpinner];
+                                   [webViewLoader setHidden:YES];
                                   NSLog(@"failure JsonData %@",[error description]);
                                   [self loginError:error];
                                   //                                         [self loginViewShowingLoggedOutUser:loginView];
@@ -363,6 +384,62 @@
     
     
 }
+//#pragma mark Update Private functions
+-(void) getUpdatedUpdate
+{
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        tblViewContent.tableHeaderView=nil;
+        tblViewContent.tableFooterView=nil;
+        
+        return;
+    }
+    
+    NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId];
+    if([userid isEqualToString:@"(null)"])
+        return ;
+    //Show Indicator
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    [[appDelegate _engine] getUpdatesDetail:objUpdate.updateId   success:^(Update *updates) {
+        objUpdate=updates;
+        
+        NSUInteger index=-1;
+        for (Update *update in arrayUpdates) {
+            if([objUpdate.updateId integerValue]==[update.updateId integerValue])
+            {
+                index=[arrayUpdates indexOfObject:update];
+                break;
+            }
+        }
+        if(index!=-1)
+        {
+            [arrayUpdates removeObjectAtIndex:index];
+            [arrayUpdates insertObject:objUpdate atIndex:index];
+            
+        }
+        objUpdate.isExpend=NO;
+        
+        
+        [tblViewContent reloadData];
+        // [self loginSucessFullWithFB];
+        
+        //Hide Indicator
+        [appDelegate hideSpinner];
+    }
+                                    failure:^(NSError *error) {
+                                        //Hide Indicator
+                                        [appDelegate hideSpinner];
+                                        NSLog(@"failure JsonData %@",[error description]);
+                                        [self loginError:error];
+                                        //                                         [self loginViewShowingLoggedOutUser:loginView];
+                                        
+                                    }];
+    
+    
+}
+
 //- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
 //    UIViewController *vc = tabBarController.selectedViewController;
 //
@@ -591,7 +668,7 @@
                 [attributedString appendAttributedString:attributedStringtemp];
                 
                 UIFont *Boldfont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
-               
+                
                 NSDictionary *dictext= update.updateTitleArray[textIndex];
                 if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
                 {
@@ -640,15 +717,23 @@
         [ cell.txtView addGestureRecognizer:tap];
         //   cell.txtView.tag=indexPath.row;
         
-        [cell.txtView setAttributedText:attributedString ];
+        
         [cell.txtView setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
+        
+        [cell.txtView setAttributedText:attributedString ];
+        
+        CGPoint origin = [cell.txtView contentOffset];
+        [cell.txtView setContentOffset:CGPointMake(origin.x, +11.0)];
+        cell.txtView.delegate=self;
+        
+        cell.txtView.tag=100;
         if(update.updateDesc!=nil)
         {
             cell.txtviewDetail.text=update.updateDesc;
         }else{
             [cell.txtviewDetail  setHidden:YES];
         }
-     
+        
         [cell.btnPlay setHidden:YES];
         if (update.resource!=nil) {
             
@@ -661,16 +746,16 @@
                 {
                     update.resource.resourceImageData=[AppGlobal getImageAvailableAtLocal:update.resource.resourceImageUrl];
                 }
-
+                
                 if (update.resource.resourceImageData==nil) {
                     NSURL *imageURL = [NSURL URLWithString:update.resource.resourceImageUrl];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                         update.resource.resourceImageData  = [NSData dataWithContentsOfURL:imageURL];
-                         [AppGlobal setImageAvailableAtLocal:update.resource.resourceImageUrl AndImageData:update.resource.resourceImageData];
+                        [AppGlobal setImageAvailableAtLocal:update.resource.resourceImageUrl AndImageData:update.resource.resourceImageData];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             // Update the UI
                             UIImage *img=[UIImage imageWithData:update.resource.resourceImageData];
-                           
+                            
                             if(img!=nil)
                             {
                                 [cell.imgResorces setImage:img];
@@ -697,8 +782,8 @@
         if([update.comments count]==0)
         {cell.imgBelowLine8.hidden=NO;
             cell.imgBelowLine1.hidden=YES;
-           
-           
+            
+            
         }else{
             
             cell.imgBelowLine8.hidden=YES;
@@ -738,12 +823,12 @@
         {
             strCount=[NSString stringWithFormat:@"%@ Likes",update.likeCount] ;
         }else{
-           strCount=@"";
+            strCount=@"";
         }
         if(update.commentCount  !=nil)
         {
-             strCount=[NSString stringWithFormat:@"%@ %@ Comments",strCount,update.commentCount] ;
-           
+            strCount=[NSString stringWithFormat:@"%@ %@ Comments",strCount,update.commentCount] ;
+            
         }else{
             strCount=[NSString stringWithFormat:@"%@",strCount] ;
         }
@@ -758,7 +843,18 @@
             cell.btnLike.selected=NO;
             [cell.btnLike addTarget:self action:@selector(btnLikeOnUpdateClick:) forControlEvents:UIControlEventTouchUpInside];
         }
+        // cal calculate the time
+        NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:update.updatetime];
         
+        NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
+        //   cell.lblCmtDate.text=comment.commentDate;
+        scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
+                                                           withString:@""];
+        // Set label text to attributed string
+        NSString *str = [NSString stringWithFormat:@"%@ ago" ,scincetime];
+        //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+        
+        cell.lblUpdateTime.text=str;
         
         // cell.lblUpdateBy.text=update.updateCreatedBy;
         cell.btnComment.tag=indexPath.section  ;
@@ -768,7 +864,7 @@
         [cell.btnComment addTarget:self action:@selector(btnCommentOnUpdateClick:) forControlEvents:UIControlEventTouchUpInside];
         
         [cell.btnShare addTarget:self action:@selector(btnShareOnUpdateClick:) forControlEvents:UIControlEventTouchUpInside];
-       
+        
         
         return cell;
     }
@@ -807,7 +903,7 @@
             [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [comment.commentBy length])];
             [cell.lblCmtBy setAttributedText:attributedString];
             [cell.lblCmtBy  setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
-             cell.lblCmtText.text=comment.commentTxt;
+            cell.lblCmtText.text=comment.commentTxt;
             
             cell.lblRelatedVideo.hidden=YES;
             if(comment.commentByImage!=nil){
@@ -823,7 +919,7 @@
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
                         comment.commentByImageData=imageData;
-                         [AppGlobal setImageAvailableAtLocal:comment.commentByImage AndImageData:comment.commentByImageData ];
+                        [AppGlobal setImageAvailableAtLocal:comment.commentByImage AndImageData:comment.commentByImageData ];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             // Update the UI
                             UIImage *img=[UIImage imageWithData:imageData];
@@ -868,6 +964,9 @@
             }
             cell.btnCMT.tag=[comment.commentId integerValue];
             cell.btnLike.tag=[comment.commentId integerValue];
+            [cell.btnLike setTitle:[NSString stringWithFormat:@"%ld",indexPath.section] forState:UIControlStateDisabled];
+            [cell.btnCMT setTitle:[NSString stringWithFormat:@"%ld",indexPath.section] forState:UIControlStateDisabled];
+
             cell.btnMore.tag=indexPath.section;
             //set action for reply and like on comment
             [cell.btnCMT addTarget:self action:@selector(btnReplyOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -903,7 +1002,7 @@
                         cell.imgHalfDevider.hidden=YES;
                         
                     }
-
+                    
                     
                 }
                 
@@ -990,6 +1089,7 @@
             
             // cell.btnCMT.tag=[comment.commentId integerValue];
             cell.btnLike.tag=[comment.commentId integerValue];
+            [cell.btnLike setTitle:[NSString stringWithFormat:@"%ld",indexPath.section] forState:UIControlStateDisabled];
             if(comment.likeCounts  !=nil)
             {
                 [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateSelected];
@@ -1095,93 +1195,93 @@
             
             height=163.0f;
         }
+        
+        NSString *titleString =update.updateTitle;
+        NSArray *titleWords = [titleString componentsSeparatedByString:@"$"];
+        float x,y;
+        x=0.0f;
+        y=0.0f;
+        int textIndex=0;
+        for (NSString *strtemp in titleWords) {
+            UILabel *lbltitle=[[UILabel alloc]init];
+            [lbltitle setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];                NSString *strtrim = [strtemp stringByTrimmingCharactersInSet:
+                                                                                                                                                       [NSCharacterSet whitespaceCharacterSet]];
+            lbltitle.text=strtrim;
+            [lbltitle setFont:[UIFont fontWithName:@"Helvetica Neue" size:12.0]];
+            CGSize textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
             
-            NSString *titleString =update.updateTitle;
-            NSArray *titleWords = [titleString componentsSeparatedByString:@"$"];
-            float x,y;
-            x=0.0f;
-            y=0.0f;
-            int textIndex=0;
-            for (NSString *strtemp in titleWords) {
-                UILabel *lbltitle=[[UILabel alloc]init];
-               [lbltitle setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];                NSString *strtrim = [strtemp stringByTrimmingCharactersInSet:
-                                     [NSCharacterSet whitespaceCharacterSet]];
-                lbltitle.text=strtrim;
-                [lbltitle setFont:[UIFont fontWithName:@"Helvetica Neue" size:12.0]];
-                CGSize textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
-                
-                CGFloat strikeWidth = textSize.width+5;
-                lbltitle.frame=CGRectMake(x, y, strikeWidth, 21);
-                if (x>97 && y==0) {
-                    y=y+21;
-                    x=0;
-                }
-                
-                
-                if([titleWords count]-1!=textIndex)
-                {
-                    x=x+strikeWidth;
-                    UIButton *btnAction=[[UIButton alloc]init];
-                    
-                    NSDictionary *dictext= update.updateTitleArray[textIndex];
-                    btnAction.tag =(int) update.updateId;
-                    NSString *strtrim = [[dictext objectForKey:@"value"] stringByTrimmingCharactersInSet:
-                                         [NSCharacterSet whitespaceCharacterSet]];
-                    
-                    [btnAction setTitle:strtrim forState:UIControlStateNormal];
-                    [btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                    
-                    [btnAction.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:13.0]];
-                    textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
-                    textSize=[AppGlobal getTheExpectedSizeOfLabel:strtrim];
-                    
-                    strikeWidth = textSize.width;
-                    
-                    if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
-                    {
-                        btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
-                        [btnAction addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
-                        
-                    }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
-                    {
-                        btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
-                        [btnAction addTarget:self action:@selector(btnCourseDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-                        
-                    }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
-                    {
-                        btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
-                        [btnAction addTarget:self action:@selector(btnModuleDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-                    }
-                    else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
-                    {
-                        btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
-                        [btnAction addTarget:self action:@selector(btnResourceDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-                    }
-                    
-                    btnAction.frame=CGRectMake(x, y, strikeWidth, 21);
-                    textIndex=textIndex+1;
-                    x=x+strikeWidth;
-                    
-                }
+            CGFloat strikeWidth = textSize.width+5;
+            lbltitle.frame=CGRectMake(x, y, strikeWidth, 21);
+            if (x>97 && y==0) {
+                y=y+21;
+                x=0;
             }
+            
+            
+            if([titleWords count]-1!=textIndex)
+            {
+                x=x+strikeWidth;
+                UIButton *btnAction=[[UIButton alloc]init];
+                
+                NSDictionary *dictext= update.updateTitleArray[textIndex];
+                btnAction.tag =(int) update.updateId;
+                NSString *strtrim = [[dictext objectForKey:@"value"] stringByTrimmingCharactersInSet:
+                                     [NSCharacterSet whitespaceCharacterSet]];
+                
+                [btnAction setTitle:strtrim forState:UIControlStateNormal];
+                [btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                
+                [btnAction.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:13.0]];
+                textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
+                textSize=[AppGlobal getTheExpectedSizeOfLabel:strtrim];
+                
+                strikeWidth = textSize.width;
+                
+                if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
+                {
+                    btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
+                    [btnAction addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
+                    
+                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
+                {
+                    btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
+                    [btnAction addTarget:self action:@selector(btnCourseDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+                    
+                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
+                {
+                    btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
+                    [btnAction addTarget:self action:@selector(btnModuleDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+                }
+                else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
+                {
+                    btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
+                    [btnAction addTarget:self action:@selector(btnResourceDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+                }
+                
+                btnAction.frame=CGRectMake(x, y, strikeWidth, 21);
+                textIndex=textIndex+1;
+                x=x+strikeWidth;
+                
+            }
+        }
         if (y>21) {
             height=height+y;
         }
-      
-//        if(cellMainHeight<height+97)
-//        {
-//            cellMainHeight=height+97;
-//        }
-        height=height+97;
         
-       // [cellMainHeight insertObject:[NSString stringWithFormat:@"%f",height] atIndex:indexPath.section];
+        //        if(cellMainHeight<height+97)
+        //        {
+        //            cellMainHeight=height+97;
+        //        }
+        height=height+160;
+        
+        // [cellMainHeight insertObject:[NSString stringWithFormat:@"%f",height] atIndex:indexPath.section];
         NSLog(@"%@",[cellMainHeight objectAtIndex:indexPath.section]);
         [cellMainHeight removeObjectAtIndex:indexPath.section];
         [cellMainHeight insertObject:[NSString stringWithFormat:@"%f",height] atIndex:indexPath.section];
-   
-//    else {
-//        [cellMainHeight addObject:[NSString stringWithFormat:@"%f",height]];
-//    }
+        
+        //    else {
+        //        [cellMainHeight addObject:[NSString stringWithFormat:@"%f",height]];
+        //    }
         return height;
     }
     else if(update.comments>0)
@@ -1210,38 +1310,38 @@
         }
         if(labelSize.height>17)
         {
-//           cellHeight=cellHeight+height+65+labelSize.height;
-//            if(cellCMTHeight<height+65+labelSize.height)
-//            {
-//                cellCMTHeight=height+65+labelSize.height;
-//            }
+            //           cellHeight=cellHeight+height+65+labelSize.height;
+            //            if(cellCMTHeight<height+65+labelSize.height)
+            //            {
+            //                cellCMTHeight=height+65+labelSize.height;
+            //            }
             height=height+65+labelSize.height;
-//            if([cellCMTHeight objectAtIndex:indexPath.section]!=nil)
-//            {
-          [cellCMTHeight removeObjectAtIndex:indexPath.section];
+            //            if([cellCMTHeight objectAtIndex:indexPath.section]!=nil)
+            //            {
+            [cellCMTHeight removeObjectAtIndex:indexPath.section];
             // [cellCMTHeight insertObject:[NSString stringWithFormat:@"%f",height] atIndex:indexPath.section];
             [cellCMTHeight insertObject:[NSString stringWithFormat:@"%f",height] atIndex:indexPath.section];
-//            }else{
-//                [cellCMTHeight addObject:[NSString stringWithFormat:@"%f",height]];
-//            }
+            //            }else{
+            //                [cellCMTHeight addObject:[NSString stringWithFormat:@"%f",height]];
+            //            }
             
             return   height;
         }
         else{
-//             cellHeight=cellHeight+height+80;
-//            if(cellCMTHeight<height+70)
-//            {
-//                cellCMTHeight=height+70;
-//            }
+            //             cellHeight=cellHeight+height+80;
+            //            if(cellCMTHeight<height+70)
+            //            {
+            //                cellCMTHeight=height+70;
+            //            }
             
             height=height+70;
-//            if([cellCMTHeight count ]>indexPath.section)
-//            {
-         [cellCMTHeight removeObjectAtIndex:indexPath.section];
-                [cellCMTHeight insertObject:[NSString stringWithFormat:@"%f",height] atIndex:indexPath.section];
-//            }else{
-//                [cellCMTHeight addObject:[NSString stringWithFormat:@"%f",height]];
-//            }
+            //            if([cellCMTHeight count ]>indexPath.section)
+            //            {
+            [cellCMTHeight removeObjectAtIndex:indexPath.section];
+            [cellCMTHeight insertObject:[NSString stringWithFormat:@"%f",height] atIndex:indexPath.section];
+            //            }else{
+            //                [cellCMTHeight addObject:[NSString stringWithFormat:@"%f",height]];
+            //            }
             return  height;
         }
     }
@@ -1363,16 +1463,16 @@
     UIButton *btn=(UIButton *)sender;
     
     Update *update=[arrayUpdates objectAtIndex:btn.tag];
-   update.isExpend=YES;
+    update.isExpend=YES;
     
-//    if(update.parentCommentCount>=COMMENT_PER_PAGE){
-//        NSUInteger location=COMMENT_PER_PAGE-1;
-//         NSUInteger length=update.parentCommentCount-COMMENT_PER_PAGE;
-//      //  NSRange range = NSMakeRange(0, [string length]);
-//        NSRange range= NSMakeRange(location,length+1);
-//        
-//        [update.comments removeObjectsInRange:range] ;
-//    }
+    if([update.comments count]>=COMMENT_PER_PAGE){
+        NSUInteger location=COMMENT_PER_PAGE;
+        NSUInteger length=[update.comments count]-COMMENT_PER_PAGE;
+        //  NSRange range = NSMakeRange(0, [string length]);
+        NSRange range= NSMakeRange(location,length);
+        
+        [update.comments removeObjectsInRange:range] ;
+    }
     UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]init];
     updateDetailView.objUpdate=update;
     [self.navigationController pushViewController:updateDetailView animated:YES];
@@ -1452,7 +1552,7 @@
     // get the current Content
     Update *update=[arrayUpdates objectAtIndex:btn.tag];
     selectedUpdateId=update.updateId;
-    
+    objUpdate=update;
     actionOn=UpdateOn;
     [txtViewCMT becomeFirstResponder];
     
@@ -1468,7 +1568,7 @@
     UIButton *btn=(UIButton *)sender;
     // get the current Content
     Update *update=[arrayUpdates objectAtIndex:btn.tag];
-    
+    objUpdate=update;
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
     
@@ -1480,7 +1580,7 @@
         //Hide Indicator
         [appDelegate hideSpinner];
         // [tblViewContent reloadData];
-        [self getUpdate:txtSearchBar.text];
+        [self  getUpdatedUpdate];
     }
                                    failure:^(NSError *error) {
                                        //Hide Indicator
@@ -1556,7 +1656,7 @@
         if([update.updateTitleArray count]<=textIndex)
             break ;
         NSString* tempstr=[update.updateTitleArray
-    objectAtIndex:textIndex];
+                           objectAtIndex:textIndex];
         NSDictionary *dictext= update.updateTitleArray[textIndex];
         if(![strtemp isEqualToString:@""])
         {
@@ -1608,6 +1708,8 @@
         return;
     }
     UIButton *btn=(UIButton *)sender;
+    Update *update=[arrayUpdates objectAtIndex:[[ btn titleForState:UIControlStateDisabled ] integerValue]];
+    objUpdate=update;
     selectedCommentId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
     actionOn=Comment;
     [txtViewCMT becomeFirstResponder];
@@ -1621,6 +1723,8 @@
     }
     UIButton *btn=(UIButton *)sender;
     selectedCommentId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
+    Update *update=[arrayUpdates objectAtIndex:[[ btn titleForState:UIControlStateDisabled ] integerValue]];
+    objUpdate=update;
     
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
@@ -1629,8 +1733,8 @@
         //Hide Indicator
         
         [appDelegate hideSpinner];
-        self.offsetRecord=0;
-        [self  getUpdate:txtSearchBar.text];
+        
+        [self  getUpdatedUpdate];
     }
                                     failure:^(NSError *error) {
                                         //Hide Indicator
@@ -1671,8 +1775,7 @@
             
             //Hide Indicator
             [appDelegate hideSpinner];
-            self.offsetRecord=0;
-            [self  getUpdate:txtSearchBar.text];
+            [self  getUpdatedUpdate];
         }
                                           failure:^(NSError *error) {
                                               //Hide Indicator
@@ -1690,9 +1793,7 @@
             
             //Hide Indicator
             [appDelegate hideSpinner];
-            self.offsetRecord=0;
-
-            [self  getUpdate:txtSearchBar.text];
+            [self  getUpdatedUpdate];
         }
                                            failure:^(NSError *error) {
                                                //Hide Indicator
@@ -1721,9 +1822,9 @@
 }
 
 - (IBAction)btnProfileClick:(id)sender {
-//    [txtSearchBar resignFirstResponder];
-//    [txtViewCMT resignFirstResponder];
-//    [self fadeInAnimation:self.view];
+    //    [txtSearchBar resignFirstResponder];
+    //    [txtViewCMT resignFirstResponder];
+    //    [self fadeInAnimation:self.view];
     
     UpdateProfileViewController *updateView=[[UpdateProfileViewController alloc]init];
     [self.navigationController pushViewController:updateView animated:YES];
@@ -1766,9 +1867,9 @@
     // CGRect frameRect;
     NSString *str=textView.text;
     
-    //    NSUInteger count = 0,
+    //  NSUInteger count = 0,
     NSUInteger length = [str length];
-    
+//    CGSize labelSize=[AppGlobal   getTheExpectedSizeOfLabel:str andFontSize:14 labelWidth:txtframe.size.width];
     NSRange range1= [str rangeOfString:@"\n" options:NSBackwardsSearch];
     if((range1.length+range1.location==length)&&[text isEqualToString:@""]&& step>0)
     {
@@ -1777,13 +1878,29 @@
         step=step-1;
     }
     
+    float floatCheck=  [self doesFit:textView string:text range:range];
     if([text isEqualToString:@"\n"]&& step<2)
     {
         txtframe=CGRectMake(txtframe.origin.x, txtframe.origin.y-30, txtframe.size.width, txtframe.size.height+30);
         
         step=step+1;
         
+    }else if (!floatCheck && step<2)
+    {
+        txtframe=CGRectMake(txtframe.origin.x, txtframe.origin.y-30, txtframe.size.width, txtframe.size.height+30);
+        
+        step=step+1;
+        
+        
     }
+    else if (floatCheck==2 && step >0)
+    {
+        txtframe=CGRectMake(txtframe.origin.x, txtframe.origin.y+30, txtframe.size.width, txtframe.size.height-30);
+        
+        step=step-1;
+        
+    }
+    
     //    CGRect frame1 = frame;
     //    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
     
@@ -1791,6 +1908,41 @@
     
     
     return YES;
+    // Check if the text exceeds the size of the UITextView
+    
+    
+}
+- (float)doesFit:(UITextView*)textView string:(NSString *)myString range:(NSRange) range;
+{
+    // Get the textView frame
+    float viewHeight = textView.frame.size.height;
+    float width = textView.textContainer.size.width;
+    
+    NSMutableAttributedString *atrs = [[NSMutableAttributedString alloc] initWithAttributedString: textView.textStorage];
+    [atrs replaceCharactersInRange:range withString:myString];
+    
+    NSTextStorage *textStorage = [[NSTextStorage alloc] initWithAttributedString:atrs];
+    NSTextContainer *textContainer = [[NSTextContainer alloc] initWithSize: CGSizeMake(width, FLT_MAX)];
+    NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
+    
+    [layoutManager addTextContainer:textContainer];
+    [textStorage addLayoutManager:layoutManager];
+    float textHeight = [layoutManager
+                        usedRectForTextContainer:textContainer].size.height;
+    
+    if (textHeight >= viewHeight - 1) {
+        currentTextHeight=textHeight;
+        return NO;
+    } else if(currentTextHeight>textHeight)
+    {
+         currentTextHeight=textHeight;
+        return 2.0;
+        
+    }else{
+        
+        return YES;
+    }
+    return 0;
 }
 - (void)textViewDidChange:(UITextView *)textView{
     
@@ -1889,7 +2041,7 @@
 -(void)loginError:(NSError*)error{
     tblViewContent.tableHeaderView=nil;
     tblViewContent.tableFooterView=nil;
-
+    
     [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];
 }
 
@@ -2069,13 +2221,18 @@
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
+    NSLog(@"%d",[scrollView isKindOfClass:[UIScrollView class]]);
+    if(scrollView.tag==12 )
+    {
+       
+    
     if(tblViewContent.tableHeaderView!=nil ||tblViewContent.tableFooterView!=nil)
     {
         return ;
     }
     float cellMainHeightTotal=0.0;
     float cellCMTHeightTotal=0.0;
-   
+    
     for (id height in cellMainHeight) {
         cellMainHeightTotal=cellMainHeightTotal+[height floatValue];
     }
@@ -2088,10 +2245,10 @@
     NSLog(@"Offset=%f height=%f,tableCell height=%f",scrollView.contentOffset.y ,scrollView.frame.size.height,cellheight);
     
     BOOL endOfTable = (scrollView.contentOffset.y >= (cellheight- scrollView.frame.size.height)); // Here 40 is row height
-   // tblViewContent.tableFooterView = footerView;
- //    tblViewContent.tableHeaderView = footerView;
+    // tblViewContent.tableFooterView = footerView;
+    //    tblViewContent.tableHeaderView = footerView;
     [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
-
+    
     if (self.pendingRecord>0 && scrollView.contentOffset.y>0 && endOfTable && !scrollView.dragging && !scrollView.decelerating)
     {
         [self initFooterView];
@@ -2111,19 +2268,31 @@
         
     }
     else{
-       [footerView removeFromSuperview];
-//        tblViewContent.tableFooterView=nil;
-//        tblViewContent.tableHeaderView=nil;
-
+        [footerView removeFromSuperview];
+        //        tblViewContent.tableFooterView=nil;
+        //        tblViewContent.tableHeaderView=nil;
+        
     }
-    
+    }
 }
 - (void)showNetworkStatus:(NSString *)status newVisibility:(BOOL)newVisibility
 {
-   
+    
     _lblStatus.text=status;
     [_viewNetwork setHidden:newVisibility];
 }
-
-
+- (void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated {
+    // do nothing
+}
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
+    if([sender isKindOfClass:[UITextView class]])
+    {
+        if(sender.tag!=11)
+        {
+        CGPoint origin = [sender contentOffset];
+        [sender setContentOffset:CGPointMake(origin.x, +11.0)];
+        }
+    }
+}
 @end

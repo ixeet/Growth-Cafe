@@ -24,6 +24,7 @@
 @interface AppEngine : NSObject
 //User Login with credentials (user id and password)
 -(void)loginWithUserName:(NSString*)userName password:(NSString*)password rememberMe:(BOOL)rememberMe success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure;
+-(void)registerTheDeviceToken:(NSString*)deviceToken deviceType:(NSString *)deviceType success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure;
 #pragma mark - logout
 
 //User Logout

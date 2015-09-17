@@ -10,7 +10,7 @@
 
 @implementation AppSingleton
 
-@synthesize userDetail,isUserFBLoggedIn,isUserLoggedIn,isKeepMeloggedIn,updatedUpdate;
+@synthesize userDetail,isUserFBLoggedIn,isUserLoggedIn,isKeepMeloggedIn,updatedUpdate,deviceToken;
 
 + (AppSingleton *)sharedInstance {
     static dispatch_once_t once;

@@ -371,7 +371,7 @@
         if ([course.completedPercentStatus floatValue]==100.00) {
             cell.probarCourse.progressTintColor=[UIColor greenColor];
         }
-        
+       
         return cell;
     }else{
         static NSString *identifier = @"ModuleTableViewCell";
@@ -453,10 +453,11 @@
     [tableViewCourse beginUpdates];
     
     if (currentExpandedIndex == indexPath.row) {
+         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         [self collapseSubItemsAtIndex:currentExpandedIndex];
         currentExpandedIndex = -1;
     }
-else {
+    else {
     
     BOOL shouldCollapse = currentExpandedIndex > -1;
     
