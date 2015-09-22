@@ -125,6 +125,16 @@
     
     return date;
 }
+// trim the string
++(NSString *)getMonthTimed:(NSString*)monthName
+{
+    
+    if(monthName.length>3)
+    {
+        return  [monthName substringToIndex:4];;
+    }
+    return monthName;
+}
 //Manage Read And Write File
 +(NSMutableArray *)readFileData:(NSString *)strPath
 {
@@ -224,6 +234,7 @@
         case CLASS_DATA:
         case ROOM_DATA:
         case  COURSE_DATA:
+        case  SETTING_DATA:
         case TITLE_DATA:
         {
             filePath =  [[NSBundle mainBundle] pathForResource:[self getDropdownFileName:dropdownName] ofType:@"txt"];
@@ -268,6 +279,9 @@
             
         case TITLE_DATA:
             fileName = @"titleList";
+            break;
+        case SETTING_DATA:
+            fileName = @"settingList";
             break;
             
         case COURSE_DATA:
@@ -628,6 +642,7 @@
     [stream close];
     stream = nil;
 }
+
 +(NSData*)getImageAvailableAtLocal:(NSString*)imgName
 {
     NSArray *titleWords = [imgName componentsSeparatedByString:@"/"];

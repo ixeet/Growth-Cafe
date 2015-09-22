@@ -78,7 +78,7 @@ UIApplication* appp;
     
     // UIViewController *uvButton4 = [self.tabBarController.viewControllers objectAtIndex:3];
     viewController4.tabBarItem.title = @"Notifications" ;
-    [viewController4.tabBarItem setEnabled:NO];
+    //[viewController4.tabBarItem setEnabled:NO];
     viewController4.tabBarItem.image = [[UIImage imageNamed:@"icn_notification-defaultn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     viewController4.tabBarItem.selectedImage = [[UIImage imageNamed:@"icn_notification-selectedn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     

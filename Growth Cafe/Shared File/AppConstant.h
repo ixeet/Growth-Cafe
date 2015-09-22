@@ -25,7 +25,7 @@
 #define USER_LOGUT_URL [NSString stringWithFormat:@"%@/rest/user/logout",APP_URL]
 #define USER_FORGETPASSWORD_URL(username) [NSString stringWithFormat:@"%@/rest/user/forgetPwd/userId/%@",APP_URL,username]
 #define REGISTER_DEVICE [NSString stringWithFormat:@"%@/rest/notification/registerDevice",APP_URL]
-
+#define UPDATE_VIEW_STATUS(userId,feedId) [NSString stringWithFormat:@"%@/rest/common/updateNotificationStatus/userId/%@/feedId/%@/status/1",APP_URL,userId,feedId]
 
 
 //#define USER_REGISTER_URL [NSString stringWithFormat:@"%@/rest/user/register",APP_URL];
@@ -55,6 +55,9 @@
 
 //get Feed  List
 #define GET_UPDATE_URL [NSString stringWithFormat:@"%@/rest/common/getFeeds",APP_URL]
+#define GET_NOTIFICATION_URL [NSString stringWithFormat:@"%@/rest/common/getNotifications",APP_URL]
+
+
 //comment on feed
 ///rest/common/commentOnFeed
 //http://localhost:8080//rest/common/commentOnFeed
@@ -148,7 +151,7 @@
 #define COMMENT_PER_PAGE 5
 #define DEVICE_TOKEN @"devicetoken"
 #define DEVICE_TOKEN_REGISTER @"devicetokenregister"
-
+#define NOTIFICATION_PER_PAGE 10
 //Dropdown Enums
 typedef NS_ENUM(NSInteger, AppDropdownType){
     
@@ -156,7 +159,8 @@ typedef NS_ENUM(NSInteger, AppDropdownType){
     CLASS_DATA,
     ROOM_DATA,
     TITLE_DATA,
-    COURSE_DATA
+    COURSE_DATA,
+    SETTING_DATA
 };
 typedef enum ScrollDirection {
     ScrollDirectionNone,

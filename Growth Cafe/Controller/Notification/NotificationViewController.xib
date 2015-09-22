@@ -63,11 +63,10 @@
                         <constraint firstItem="l1W-EH-E34" firstAttribute="top" secondItem="yg0-tN-hVe" secondAttribute="top" constant="5" id="xod-QX-gOb"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hTi-C5-qjD" userLabel="tableView">
-                    <rect key="frame" x="0.0" y="73" width="600" height="476"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="71" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hTi-C5-qjD" userLabel="tableView">
+                    <rect key="frame" x="0.0" y="71" width="600" height="482"/>
                     <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <color key="sectionIndexBackgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="VAN-d2-V8D"/>
                         <outlet property="delegate" destination="-1" id="tMH-l3-92t"/>
@@ -108,12 +107,12 @@
                 <constraint firstItem="yg0-tN-hVe" firstAttribute="top" secondItem="46X-IW-Cud" secondAttribute="bottom" id="Lbo-np-9qA"/>
                 <constraint firstItem="SSE-US-INa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="THK-2b-j3x"/>
                 <constraint firstItem="rc6-ck-9hh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="bbW-xg-BUc"/>
-                <constraint firstAttribute="bottom" secondItem="hTi-C5-qjD" secondAttribute="bottom" constant="51" id="bez-V4-uKf"/>
+                <constraint firstAttribute="bottom" secondItem="hTi-C5-qjD" secondAttribute="bottom" constant="47" id="bez-V4-uKf"/>
                 <constraint firstItem="rc6-ck-9hh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="deT-kC-c0j"/>
                 <constraint firstItem="SSE-US-INa" firstAttribute="leading" secondItem="rc6-ck-9hh" secondAttribute="trailing" constant="12" id="hsq-kK-jnh"/>
                 <constraint firstItem="hTi-C5-qjD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="o2O-W8-KD0"/>
                 <constraint firstAttribute="trailing" secondItem="yg0-tN-hVe" secondAttribute="trailing" id="qzg-8K-Q1N"/>
-                <constraint firstItem="hTi-C5-qjD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="73" id="wcy-rl-fAv"/>
+                <constraint firstItem="hTi-C5-qjD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="wcy-rl-fAv"/>
                 <constraint firstAttribute="trailing" secondItem="hTi-C5-qjD" secondAttribute="trailing" id="xNt-xB-aGJ"/>
             </constraints>
             <point key="canvasLocation" x="285" y="111"/>

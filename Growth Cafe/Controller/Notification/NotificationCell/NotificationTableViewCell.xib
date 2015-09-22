@@ -25,9 +25,9 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <textView clipsSubviews="YES" tag="100" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Dp-fa-IPO">
-                        <rect key="frame" x="52" y="8" width="260" height="70"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <textView clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Dp-fa-IPO">
+                        <rect key="frame" x="52" y="8" width="260" height="79"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="textColor" red="0.078431372550000003" green="0.094117647060000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
@@ -37,7 +37,7 @@
                     <constraint firstItem="K3c-DX-qd2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="7PW-Ri-8AZ"/>
                     <constraint firstItem="3Dp-fa-IPO" firstAttribute="leading" secondItem="K3c-DX-qd2" secondAttribute="trailing" constant="4" id="8PM-SX-IMe"/>
                     <constraint firstItem="3Dp-fa-IPO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="NSn-Uh-1dN"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="3Dp-fa-IPO" secondAttribute="bottom" constant="1" id="U6l-z1-Qg3"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="3Dp-fa-IPO" secondAttribute="bottom" constant="-8" id="U6l-z1-Qg3"/>
                     <constraint firstItem="3Dp-fa-IPO" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="oTD-Te-sMq"/>
                     <constraint firstItem="K3c-DX-qd2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="zsB-PN-9uh"/>
                 </constraints>

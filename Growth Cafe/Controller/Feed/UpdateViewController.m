@@ -1334,7 +1334,7 @@
             //                cellCMTHeight=height+70;
             //            }
             
-            height=height+70;
+            height=height+74;
             //            if([cellCMTHeight count ]>indexPath.section)
             //            {
             [cellCMTHeight removeObjectAtIndex:indexPath.section];

@@ -631,7 +631,12 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
         return [arrayAllData count];
         
     }break;
+    case SETTING_DATA:
+    {
+        return [arrayAllData count];
         
+    }break;
+ 
         break;
     default:
         [NSException raise:NSGenericException format:@"Unexpected FormatType."];
@@ -689,7 +694,12 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
             return [responseDic objectForKey:@"Title"];
             break;
         }
-            
+        case SETTING_DATA:
+        {
+            NSDictionary *responseDic = [ arrayAllData objectAtIndex:row];
+            return [responseDic objectForKey:@"Title"];
+            break;
+        }
         default:
             [NSException raise:NSGenericException format:@"Unexpected FormatType."];
     }

@@ -23,6 +23,7 @@
 #import "UpdateProfileViewController.h"
 #import "UpdateDetailViewController.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "UpdateDetailViewController.h"
 
 #import <Social/Social.h>
 @interface NotificationViewController ()
@@ -59,7 +60,7 @@
     // Do any additional setup after loading the view from its nib.
     previousStatus=AFNetworkReachabilityStatusUnknown;
    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+    UILongPressGestureRecognizer *tap = [[UILongPressGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
     
@@ -181,7 +182,7 @@
         
         self.offsetRecord=0;
         ForNew=YES;
-        [self  getUpdate:@""];
+        [self  getNotification:@""];
     }else {
         if( [AppSingleton sharedInstance].updatedUpdate!=nil)
         {
@@ -200,6 +201,7 @@
                 [AppSingleton sharedInstance].updatedUpdate=nil;
             }
         }
+        [tblViewContent reloadData];
     }
     
 }
@@ -259,7 +261,7 @@
 }
 
 #pragma mark Update Private functions
--(void) getUpdate:(NSString *) txtSearch
+-(void) getNotification:(NSString *) txtSearch
 {
     
     NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId];
@@ -278,7 +280,7 @@
         [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
         
     }
-    [[appDelegate _engine] getUpdates:userid  AndTextSearch:txtSearch Offset:(int)self.offsetRecord  NoOfRecords:UPDATE_PER_PAGE  success:^(NSMutableDictionary *dicUpdates) {
+    [[appDelegate _engine] getNotification:userid  AndTextSearch:txtSearch Offset:(int)self.offsetRecord  NoOfRecords:NOTIFICATION_PER_PAGE  success:^(NSMutableDictionary *dicUpdates) {
         
         
         self.totalRecord=[[dicUpdates objectForKey:@"updatesCount"] integerValue] ;
@@ -309,14 +311,14 @@
             //
             //           }else{
             arrayUpdates=tempArray;
-            self.pendingRecord=self.totalRecord-(self.offsetRecord+UPDATE_PER_PAGE);
+            self.pendingRecord=self.totalRecord-(self.offsetRecord+NOTIFICATION_PER_PAGE);
             // }
             
             [appDelegate hideSpinner];
             
         }else{
             [arrayUpdates addObjectsFromArray: [dicUpdates objectForKey:@"updates"]]  ;
-            self.pendingRecord=self.totalRecord-(self.offsetRecord+UPDATE_PER_PAGE);
+            self.pendingRecord=self.totalRecord-(self.offsetRecord+NOTIFICATION_PER_PAGE);
             
         }
         [cellMainHeight removeAllObjects];
@@ -581,13 +583,21 @@
         // Set label text to attributed string
         NSString *str = [NSString stringWithFormat:@"%@ ago" ,scincetime];
         //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
-    
+    if(update.viewStatus ==1 )
+    {
+        cell.contentView.backgroundColor=[UIColor lightGrayColor];
+        
+    }else{
+        cell.contentView.backgroundColor=[UIColor clearColor];
+
+    }
      return cell;
 }
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{//    BOOL isChild =
+{
+//    BOOL isChild =
     //    currentExpandedIndex > -1
     //    && indexPath.row > currentExpandedIndex
     //    && indexPath.row <= currentExpandedIndex + [[moduleArray objectAtIndex:currentExpandedIndex] count];
@@ -619,7 +629,42 @@
     
     
     //    [tableViewCourse endUpdates];
-    
+     Update * objUpdate=arrayUpdates[indexPath.row];
+   
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    [[appDelegate _engine] getUpdatesDetail:objUpdate.updateId   success:^(Update *updates) {
+        
+        
+        if([updates.comments count]>=COMMENT_PER_PAGE){
+            NSUInteger location=COMMENT_PER_PAGE-1;
+            NSUInteger length=[updates.comments count]-COMMENT_PER_PAGE;
+            //  NSRange range = NSMakeRange(0, [string length]);
+            NSRange range= NSMakeRange(location,length);
+            
+            [updates.comments removeObjectsInRange:range] ;
+            self.totalRecord=[updates.commentCount integerValue];
+            self.pendingRecord= self.totalRecord-[updates.comments count];
+            self.offsetRecord=self.offsetRecord+COMMENT_PER_PAGE;
+            
+         // update the feed status
+            
+        }
+        objUpdate.viewStatus=1;
+        [self setUpdateStaus:updates];
+        
+        //Hide Indicator
+        
+     
+
+    }
+                                    failure:^(NSError *error) {
+                                        //Hide Indicator
+                                        [appDelegate hideSpinner];
+                                        NSLog(@"failure JsonData %@",[error description]);
+                                        [self loginError:error];
+                                        //                                         [self loginViewShowingLoggedOutUser:loginView];
+                                        
+                                    }];
 }
 
 
@@ -1005,7 +1050,7 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Cancel clicked");
     isSearching=NO;
-    [self  getUpdate:txtSearchBar.text];
+    [self  getNotification:txtSearchBar.text];
     [searchBar resignFirstResponder];
 }
 
@@ -1015,7 +1060,7 @@
     
     
     searchText=searchBar.text;
-    [self  getUpdate:txtSearchBar.text];
+    [self  getNotification:txtSearchBar.text];
     [searchBar resignFirstResponder];
     isSearching=NO;
 }
@@ -1035,6 +1080,25 @@
     [self.navigationController pushViewController:viewController animated:YES];
     
     [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];
+}
+-(void)setUpdateStaus:(Update*)update{
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    
+    [[appDelegate _engine] setUpdatesStatus:update.updateId success:^(BOOL logoutValue) {
+          update.viewStatus=1;
+        [appDelegate hideSpinner];
+        UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]init];
+        updateDetailView.objUpdate=update;
+        [self.navigationController pushViewController:updateDetailView animated:YES];
+    } failure:^(NSError *error) {
+        [appDelegate hideSpinner];
+        NSLog(@"failure JsonData %@",[error description]);
+      
+        //[self loginError:error];
+    }];
+    
+
 }
 -(void)fadeInAnimation:(UIView *)aView {
     
@@ -1203,54 +1267,54 @@
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     
-//    if(tblViewContent.tableHeaderView!=nil ||tblViewContent.tableFooterView!=nil)
-//    {
-//        return ;
-//    }
-//    float cellMainHeightTotal=0.0;
-//    float cellCMTHeightTotal=0.0;
-//    
-//    for (id height in cellMainHeight) {
-//        cellMainHeightTotal=cellMainHeightTotal+[height floatValue];
-//    }
-//    for (id height in cellCMTHeight) {
-//        cellCMTHeightTotal=cellCMTHeightTotal+[height floatValue];
-//    }
-//    
-//    float cellheight=cellMainHeightTotal+cellCMTHeightTotal;
-//    
-//    NSLog(@"Offset=%f height=%f,tableCell height=%f",scrollView.contentOffset.y ,scrollView.frame.size.height,cellheight);
-//    
-//    BOOL endOfTable = (scrollView.contentOffset.y >= (cellheight- scrollView.frame.size.height)); // Here 40 is row height
-//    // tblViewContent.tableFooterView = footerView;
-//    //    tblViewContent.tableHeaderView = footerView;
-//    [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
-//    
-//    if (self.pendingRecord>0 && scrollView.contentOffset.y>0 && endOfTable && !scrollView.dragging && !scrollView.decelerating)
-//    {
-//        [self initFooterView];
-//        tblViewContent.tableFooterView = footerView;
-//        
-//        [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
-//        [self getUpdate:@""];
-//    }else  if (scrollView.contentOffset.y<=0  && !scrollView.dragging && !scrollView.decelerating)
-//    {
-//        [self initFooterView];
-//        tblViewContent.tableHeaderView = footerView;
-//        
-//        [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
-//        self.offsetRecord=0;
-//        ForNew=YES;
-//        [self getUpdate:@""];
-//        
-//    }
-//    else{
-//        [footerView removeFromSuperview];
-//        //        tblViewContent.tableFooterView=nil;
-//        //        tblViewContent.tableHeaderView=nil;
-//        
-//    }
-//    
+    if(tblViewContent.tableHeaderView!=nil ||tblViewContent.tableFooterView!=nil)
+    {
+        return ;
+    }
+    float cellMainHeightTotal=0.0;
+    float cellCMTHeightTotal=0.0;
+    
+    for (id height in cellMainHeight) {
+        cellMainHeightTotal=cellMainHeightTotal+[height floatValue];
+    }
+    for (id height in cellCMTHeight) {
+        cellCMTHeightTotal=cellCMTHeightTotal+[height floatValue];
+    }
+    
+    float cellheight=cellMainHeightTotal+cellCMTHeightTotal;
+    
+    NSLog(@"Offset=%f height=%f,tableCell height=%f",scrollView.contentOffset.y ,scrollView.frame.size.height,cellheight);
+    
+    BOOL endOfTable = (scrollView.contentOffset.y >= (cellheight- scrollView.frame.size.height)); // Here 40 is row height
+    // tblViewContent.tableFooterView = footerView;
+    //    tblViewContent.tableHeaderView = footerView;
+    [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
+    
+    if (self.pendingRecord>0 && scrollView.contentOffset.y>0 && endOfTable && !scrollView.dragging && !scrollView.decelerating)
+    {
+        [self initFooterView];
+        tblViewContent.tableFooterView = footerView;
+        
+        [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
+        [self getNotification:@""];
+    }else  if (scrollView.contentOffset.y<=0  && !scrollView.dragging && !scrollView.decelerating)
+    {
+        [self initFooterView];
+        tblViewContent.tableHeaderView = footerView;
+        
+        [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
+        self.offsetRecord=0;
+        ForNew=YES;
+        [self getNotification:@""];
+        
+    }
+    else{
+        [footerView removeFromSuperview];
+         tblViewContent.tableFooterView=nil;
+         tblViewContent.tableHeaderView=nil;
+        
+    }
+    
 }
 - (void)showNetworkStatus:(NSString *)status newVisibility:(BOOL)newVisibility
 {

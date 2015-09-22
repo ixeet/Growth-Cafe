@@ -34,6 +34,8 @@
 
 //string date cinver to nsdate
 +(NSDate*)convertStringDateToNSDate:(NSString*)str_date;
+// trim the string
++(NSString *)getMonthTimed:(NSString*)monthName;
 
 
 //read the File Data

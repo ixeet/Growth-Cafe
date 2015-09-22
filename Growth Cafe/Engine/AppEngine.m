@@ -296,6 +296,30 @@
     }];
 
 }
+-(void)setUpdatesStatus:(NSString*)updateId success:(void (^)(BOOL logoutValue))success failure:(void (^)(NSError *error))failure{
+    FeedHandler *feed=[[FeedHandler alloc] init];
+    [feed setUpdatesStatus:updateId  success:^(BOOL logoutValue){
+        success(logoutValue);
+        
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+    
+
+}
+//get Notification Data
+-(void)getNotification:(NSString*)userid  AndTextSearch:(NSString*)txtSearch Offset:(int)offset NoOfRecords:(int)noOfRecords success:(void (^)(NSMutableDictionary *updates))success   failure:(void (^)(NSError *error))failure{
+
+    FeedHandler *feed=[[FeedHandler alloc] init];
+   
+    [feed getNotification: userid AndTextSearch:txtSearch Offset:offset NoOfRecords:noOfRecords success:^(NSMutableDictionary *updates){
+        success(updates);
+        
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+
+}
 //get more comments
 -(void)getMoreComment:(NSString*)updateId  Offset:(int)offset NoOfRecords:(int)noOfRecords success:(void (^)( NSMutableDictionary *comments))success   failure:(void (^)(NSError *error))failure
 {
@@ -346,6 +370,7 @@
     }];
 
 }
+
 #pragma Assignment Detail Functions
 //get my Assignment Data
 -(void)getMyAssignments:(NSString*)userid  AndTextSearch:(NSString*)txtSearch success:(void (^)(NSMutableArray *assignments))success   failure:(void (^)(NSError *error))failure

@@ -639,7 +639,13 @@
         return [arrayAllData count];
         
     }break;
+
+    case SETTING_DATA:
+    {
+        return [arrayAllData count];
         
+    }break;
+
         break;
     default:
         [NSException raise:NSGenericException format:@"Unexpected FormatType."];
@@ -722,6 +728,11 @@
             NSDictionary *responseDic = [ arrayAllData objectAtIndex:row];
             return [responseDic objectForKey:@"Title"];
             break;
+        } case SETTING_DATA:
+        {
+            NSDictionary *responseDic = [ arrayAllData objectAtIndex:row];
+            return [responseDic objectForKey:@"Title"];
+            break;
         }
             
         default:
@@ -797,7 +808,7 @@
             selectedTitle= [responseDic objectForKey:@"Title"];
             [btnTitle setTitle:selectedTitle forState:UIControlStateNormal];
             [btnTitle setTitleColor:[UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:1.0] forState: UIControlStateNormal ];
-            break;
+            break; 
         }
             
         default:

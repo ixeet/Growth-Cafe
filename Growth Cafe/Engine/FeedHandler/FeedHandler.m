@@ -624,4 +624,119 @@
     }];
     
 }
+//get Notification Data
+-(void)getNotification:(NSString*)userid  AndTextSearch:(NSString*)txtSearch Offset:(int)offset NoOfRecords:(int)noOfRecords success:(void (^)(NSMutableDictionary *updates))success   failure:(void (^)(NSError *error))failure{
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSDictionary *parameters = @{@"userId":userid,
+                                 @"searchText":txtSearch,@"offset":[NSString stringWithFormat:@"%d",offset],@"noOfRecords":[NSString stringWithFormat:@"%d",noOfRecords]
+                                 };
+   
+    [manager POST:GET_NOTIFICATION_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        
+        
+        NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+        
+        //        //Success Full Logout
+        //        if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+        //
+        
+        //call Block function
+        NSMutableArray *updateList= [[NSMutableArray alloc]init];
+        NSMutableDictionary *dicUpdate= [[NSMutableDictionary alloc]init];
+        NSString *totalRecords=[responseDic objectForKey:@"totalRecords"];
+        for (NSDictionary *dicContent in [responseDic objectForKey:@"feedList"]) {
+            Update *update= [[Update alloc]init];
+            if([dicContent objectForKey:@"likeCounts"]!=nil){
+                update.likeCount=[NSString stringWithFormat:@"%@",  [dicContent objectForKey:@"likeCounts"] ];
+            }
+            if([dicContent objectForKey:@"shareCounts"]!=nil){
+                update.shareCount=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"shareCounts"]];
+                
+            }
+            if([dicContent objectForKey:@"commentCounts"]!=nil){
+                
+                update.commentCount=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"commentCounts"]];
+            }
+            update.isLike=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"isLiked"]];
+            update.updatetime=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"feedOn"]];
+            
+            update.updateId=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"feedId"]];
+            update.updateTitle=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"feedText"]];
+            update.viewStatus=[[dicContent objectForKey:@"viewStatus"]integerValue];
+           update.updateTitleArray=[dicContent objectForKey:@"feedTextArray"];
+            
+            if([dicContent objectForKey:@"user"]!=nil)
+            {
+                NSDictionary *userdic=[dicContent objectForKey:@"user"];
+                UserDetails *user= [[UserDetails alloc]init];
+                user.userId=[userdic objectForKey:@"userId"];
+                user.userFBID=[userdic objectForKey:@"userFbId"];
+                user.username  =[userdic objectForKey:@"userName"];
+                user.userFirstName=[userdic objectForKey:@"firstName"];
+                user.userLastName=[userdic objectForKey:@"lastName"];
+                user.userEmail=[userdic objectForKey:@"emailId"];
+                user.title=[userdic objectForKey:@"title"];
+                user.userImage=[userdic objectForKey:@"profileImage"];
+                update.updateCreatedBy=[NSString stringWithFormat:@"%@ %@" ,user.userFirstName,user.userLastName];
+                update.user =user;
+                update.updateCreatedByImage=user.userImage;
+              
+                
+            }
+                       
+            [updateList addObject:update];
+        }
+        //call Block function
+        [dicUpdate setObject:updateList forKey:@"updates"];
+        [dicUpdate setObject:totalRecords forKey:@"updatesCount"];
+        success(dicUpdate);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+        
+    }];
+    
+}
+
+-(void)setUpdatesStatus:(NSString*)updateId success:(void (^)(BOOL logoutValue))success failure:(void (^)(NSError *error))failure{
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    
+    [manager GET:UPDATE_VIEW_STATUS([AppSingleton sharedInstance].userDetail.userId,updateId) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+        //Success Full Logout
+        if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+            
+            //call Block function
+            success(YES);
+        }
+        else {
+            //call Block function
+            failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+        }
+        
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+        
+    }];
+ 
+        
+        
+        
+}
+
 @end

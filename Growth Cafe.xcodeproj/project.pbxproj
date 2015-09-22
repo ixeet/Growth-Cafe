@@ -42,6 +42,17 @@
 		A8D73DDB1B7E0DF90022C1A0 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8D73DD91B7E0DF90022C1A0 /* logo@2x.png */; };
 		A8D73DDC1B7E0DF90022C1A0 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8D73DDA1B7E0DF90022C1A0 /* logo@3x.png */; };
 		A8D8E69A1B95C03300F32509 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A8D8E6991B95C03300F32509 /* Settings.bundle */; };
+		A8DDC50E1BAC383500799B68 /* icn_Instruction_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DDC50D1BAC383500799B68 /* icn_Instruction_more@2x.png */; };
+		A8DDC5101BAC398000799B68 /* icn_setting_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DDC50F1BAC398000799B68 /* icn_setting_more@2x.png */; };
+		A8DDC5141BAC3B7C00799B68 /* InstructionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DDC5121BAC3B7C00799B68 /* InstructionViewController.m */; };
+		A8DDC5151BAC3B7C00799B68 /* InstructionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8DDC5131BAC3B7C00799B68 /* InstructionViewController.xib */; };
+		A8DDC5191BAC461500799B68 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DDC5171BAC461500799B68 /* SettingViewController.m */; };
+		A8DDC51A1BAC461500799B68 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8DDC5181BAC461500799B68 /* SettingViewController.xib */; };
+		A8DDC51E1BAD413800799B68 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DDC51C1BAD413800799B68 /* FilterViewController.m */; };
+		A8DDC51F1BAD413800799B68 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8DDC51D1BAD413800799B68 /* FilterViewController.xib */; };
+		A8DDC5211BADAA3C00799B68 /* settingList.txt in Resources */ = {isa = PBXBuildFile; fileRef = A8DDC5201BADAA3C00799B68 /* settingList.txt */; };
+		A8DDC5251BADB10400799B68 /* FilterDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DDC5231BADB10400799B68 /* FilterDetailViewController.m */; };
+		A8DDC5261BADB10400799B68 /* FilterDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8DDC5241BADB10400799B68 /* FilterDetailViewController.xib */; };
 		A8DFB2B31B85A4FF0031C332 /* school_drop11@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DFB2B11B85A4FF0031C332 /* school_drop11@2x.png */; };
 		A8DFB2B41B85A4FF0031C332 /* school_drop11@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DFB2B21B85A4FF0031C332 /* school_drop11@3x.png */; };
 		A8DFB2B71B85A96E0031C332 /* school_drop3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DFB2B51B85A96E0031C332 /* school_drop3@2x.png */; };
@@ -338,6 +349,21 @@
 		A8D73DD91B7E0DF90022C1A0 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		A8D73DDA1B7E0DF90022C1A0 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		A8D8E6991B95C03300F32509 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		A8DDC50D1BAC383500799B68 /* icn_Instruction_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_Instruction_more@2x.png"; sourceTree = "<group>"; };
+		A8DDC50F1BAC398000799B68 /* icn_setting_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_setting_more@2x.png"; sourceTree = "<group>"; };
+		A8DDC5111BAC3B7C00799B68 /* InstructionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructionViewController.h; sourceTree = "<group>"; };
+		A8DDC5121BAC3B7C00799B68 /* InstructionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructionViewController.m; sourceTree = "<group>"; };
+		A8DDC5131BAC3B7C00799B68 /* InstructionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstructionViewController.xib; sourceTree = "<group>"; };
+		A8DDC5161BAC461500799B68 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		A8DDC5171BAC461500799B68 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		A8DDC5181BAC461500799B68 /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		A8DDC51B1BAD413800799B68 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		A8DDC51C1BAD413800799B68 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		A8DDC51D1BAD413800799B68 /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
+		A8DDC5201BADAA3C00799B68 /* settingList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = settingList.txt; sourceTree = "<group>"; };
+		A8DDC5221BADB10400799B68 /* FilterDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterDetailViewController.h; sourceTree = "<group>"; };
+		A8DDC5231BADB10400799B68 /* FilterDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterDetailViewController.m; sourceTree = "<group>"; };
+		A8DDC5241BADB10400799B68 /* FilterDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterDetailViewController.xib; sourceTree = "<group>"; };
 		A8DFB2B11B85A4FF0031C332 /* school_drop11@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "school_drop11@2x.png"; sourceTree = "<group>"; };
 		A8DFB2B21B85A4FF0031C332 /* school_drop11@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "school_drop11@3x.png"; sourceTree = "<group>"; };
 		A8DFB2B51B85A96E0031C332 /* school_drop3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "school_drop3@2x.png"; sourceTree = "<group>"; };
@@ -701,6 +727,15 @@
 			name = NotificationCell;
 			sourceTree = "<group>";
 		};
+		A8DDC50A1BAC377900799B68 /* more */ = {
+			isa = PBXGroup;
+			children = (
+				A8DDC50F1BAC398000799B68 /* icn_setting_more@2x.png */,
+				A8DDC50D1BAC383500799B68 /* icn_Instruction_more@2x.png */,
+			);
+			path = more;
+			sourceTree = "<group>";
+		};
 		A8DFD3AE1BAA9DFF001C3C10 /* html */ = {
 			isa = PBXGroup;
 			children = (
@@ -916,6 +951,7 @@
 				C9C264891B7B7BCB00EA4F38 /* NSString+JsonSupport.h */,
 				C9C2648A1B7B7BCB00EA4F38 /* NSString+JsonSupport.m */,
 				C9C264BA1B7B7DB400EA4F38 /* PrefixHeader.pch */,
+				A8DDC5201BADAA3C00799B68 /* settingList.txt */,
 				C9C2648C1B7B7BCB00EA4F38 /* titleList.txt */,
 				C9C264971B7B7C0900EA4F38 /* AppConstant.h */,
 			);
@@ -978,6 +1014,12 @@
 				A8D73DCF1B7E04E00022C1A0 /* AssestViewController.h */,
 				A8D73DD01B7E04E00022C1A0 /* AssestViewController.m */,
 				A8D73DD11B7E04E00022C1A0 /* AssestViewController.xib */,
+				A8DDC51B1BAD413800799B68 /* FilterViewController.h */,
+				A8DDC51C1BAD413800799B68 /* FilterViewController.m */,
+				A8DDC51D1BAD413800799B68 /* FilterViewController.xib */,
+				A8DDC5221BADB10400799B68 /* FilterDetailViewController.h */,
+				A8DDC5231BADB10400799B68 /* FilterDetailViewController.m */,
+				A8DDC5241BADB10400799B68 /* FilterDetailViewController.xib */,
 			);
 			path = Assignment;
 			sourceTree = "<group>";
@@ -1123,6 +1165,12 @@
 				C9C265181B7B803700EA4F38 /* MoreViewController.h */,
 				C9C265191B7B803700EA4F38 /* MoreViewController.m */,
 				C9C2651A1B7B803700EA4F38 /* MoreViewController.xib */,
+				A8DDC5111BAC3B7C00799B68 /* InstructionViewController.h */,
+				A8DDC5121BAC3B7C00799B68 /* InstructionViewController.m */,
+				A8DDC5131BAC3B7C00799B68 /* InstructionViewController.xib */,
+				A8DDC5161BAC461500799B68 /* SettingViewController.h */,
+				A8DDC5171BAC461500799B68 /* SettingViewController.m */,
+				A8DDC5181BAC461500799B68 /* SettingViewController.xib */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -1141,6 +1189,7 @@
 		C9C2654E1B7B819000EA4F38 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A8DDC50A1BAC377900799B68 /* more */,
 				C9C2654F1B7B819000EA4F38 /* Assignment */,
 				C9C2655F1B7B819000EA4F38 /* common */,
 				C9C265A41B7B819000EA4F38 /* Course */,
@@ -1432,6 +1481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9C266211B7B819100EA4F38 /* logo-lms@2x.png in Resources */,
+				A8DDC5261BADB10400799B68 /* FilterDetailViewController.xib in Resources */,
 				C9C2665E1B7B819100EA4F38 /* school_drop@3x.png in Resources */,
 				C9C2660E1B7B819100EA4F38 /* icn_pause1@3x.png in Resources */,
 				C9C2663E1B7B819100EA4F38 /* progress_vertica_greyl_line@2x.png in Resources */,
@@ -1444,6 +1494,7 @@
 				A8DFB2B71B85A96E0031C332 /* school_drop3@2x.png in Resources */,
 				A826DC681B8B37ED0037E94F /* profile_img@3x.png in Resources */,
 				A8D73DDB1B7E0DF90022C1A0 /* logo@2x.png in Resources */,
+				A8DDC5101BAC398000799B68 /* icn_setting_more@2x.png in Resources */,
 				C9C265FA1B7B819100EA4F38 /* icn_course-selectedn@3x.png in Resources */,
 				C9C266281B7B819100EA4F38 /* user-profile@3x.png in Resources */,
 				C9C265F41B7B819100EA4F38 /* icn_back-header@3x.png in Resources */,
@@ -1501,6 +1552,7 @@
 				C9C265E61B7B819100EA4F38 /* icn_new-assignment@3x.png in Resources */,
 				C9C2661C1B7B819100EA4F38 /* img_search-boxn@3x.png in Resources */,
 				C9C265321B7B803700EA4F38 /* CourseTableViewCell.xib in Resources */,
+				A8DDC51A1BAC461500799B68 /* SettingViewController.xib in Resources */,
 				C9C266531B7B819100EA4F38 /* first_nm@3x.png in Resources */,
 				C9C265261B7B803700EA4F38 /* ModuleDetailViewController.xib in Resources */,
 				C9C266371B7B819100EA4F38 /* profile-menu@2x.png in Resources */,
@@ -1508,6 +1560,7 @@
 				A8D8E69A1B95C03300F32509 /* Settings.bundle in Resources */,
 				C9C266581B7B819100EA4F38 /* mr@3x.png in Resources */,
 				C9C264901B7B7BCB00EA4F38 /* CourseList.txt in Resources */,
+				A8DDC5211BADAA3C00799B68 /* settingList.txt in Resources */,
 				C9C2661D1B7B819100EA4F38 /* img_search-boxn_6@2x.png in Resources */,
 				C9C2665B1B7B819100EA4F38 /* profile@2x.png in Resources */,
 				C9C265DD1B7B819100EA4F38 /* btn_radio-unselected@3x.png in Resources */,
@@ -1535,6 +1588,7 @@
 				C9C265E51B7B819100EA4F38 /* icn_new-assignment@2x.png in Resources */,
 				C9C264001B7B76AF00EA4F38 /* LaunchScreen.xib in Resources */,
 				A8D73DD31B7E04E00022C1A0 /* AssestViewController.xib in Resources */,
+				A8DDC50E1BAC383500799B68 /* icn_Instruction_more@2x.png in Resources */,
 				C9C2663C1B7B819100EA4F38 /* profile-meu@2x.png in Resources */,
 				C9C2661B1B7B819100EA4F38 /* img_search-boxn@2x.png in Resources */,
 				C9C2664D1B7B819100EA4F38 /* uncheckBox@2x.png in Resources */,
@@ -1544,6 +1598,7 @@
 				C9C266301B7B819100EA4F38 /* icn_arrow@3x.png in Resources */,
 				C9C266221B7B819100EA4F38 /* logo-lms@3x.png in Resources */,
 				C9C2660D1B7B819100EA4F38 /* icn_pause1@2x.png in Resources */,
+				A8DDC5151BAC3B7C00799B68 /* InstructionViewController.xib in Resources */,
 				A8DFEA9B1B87571A00B55D2E /* logo1@3x.png in Resources */,
 				C9C265E31B7B819100EA4F38 /* icn_grade@2x.png in Resources */,
 				C9C265F81B7B819100EA4F38 /* icn_course-defaultn@3x.png in Resources */,
@@ -1587,6 +1642,7 @@
 				A8AD43221B8AEAB300AAD7E8 /* UpdateProfileViewController.xib in Resources */,
 				A8DFB2B81B85A96E0031C332 /* school_drop3@3x.png in Resources */,
 				C9C265F91B7B819100EA4F38 /* icn_course-selectedn@2x.png in Resources */,
+				A8DDC51F1BAD413800799B68 /* FilterViewController.xib in Resources */,
 				C9C2664E1B7B819100EA4F38 /* splash@2x.png in Resources */,
 				C9C265E71B7B819100EA4F38 /* icn_pending-assignment@2x.png in Resources */,
 				C9C265F61B7B819100EA4F38 /* icn_comment@3x.png in Resources */,
@@ -1647,6 +1703,7 @@
 				C9C265251B7B803700EA4F38 /* ModuleDetailViewController.m in Sources */,
 				C9C2644B1B7B799700EA4F38 /* UIRefreshControl+AFNetworking.m in Sources */,
 				C9C264471B7B799700EA4F38 /* UIAlertView+AFNetworking.m in Sources */,
+				A8DDC5251BADB10400799B68 /* FilterDetailViewController.m in Sources */,
 				C9C265481B7B803700EA4F38 /* RegisterationViewController.m in Sources */,
 				C9C265281B7B803700EA4F38 /* NSArray+PureLayout.m in Sources */,
 				A8E361471B8881C000CA0514 /* SubmitAssignmentViewController.m in Sources */,
@@ -1657,6 +1714,7 @@
 				C9C2652F1B7B803700EA4F38 /* ContentCellTableViewCell.m in Sources */,
 				C9C263F21B7B76AF00EA4F38 /* AppDelegate.m in Sources */,
 				C9C265331B7B803700EA4F38 /* CustomContentView.m in Sources */,
+				A8DDC51E1BAD413800799B68 /* FilterViewController.m in Sources */,
 				C9C2653A1B7B803700EA4F38 /* UpdateTableViewCell.m in Sources */,
 				C9C264921B7B7BCB00EA4F38 /* NSData+AESCrypt.m in Sources */,
 				A8AC9D5D1B96E47900FCE284 /* UpdateDetailViewController.m in Sources */,
@@ -1690,6 +1748,7 @@
 				C9C264461B7B799700EA4F38 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				C9C263F81B7B76AF00EA4F38 /* ViewController.m in Sources */,
 				C9C264421B7B799700EA4F38 /* AFURLRequestSerialization.m in Sources */,
+				A8DDC5141BAC3B7C00799B68 /* InstructionViewController.m in Sources */,
 				C9C265211B7B803700EA4F38 /* AssignmentDetailTableViewCell.m in Sources */,
 				C9C2643E1B7B799700EA4F38 /* AFHTTPSessionManager.m in Sources */,
 				C9C264B81B7B7C4E00EA4F38 /* Update.m in Sources */,
@@ -1716,6 +1775,7 @@
 				C9C265361B7B803700EA4F38 /* ModuleTableViewCell.m in Sources */,
 				C9C264951B7B7BCB00EA4F38 /* NSString+JsonSupport.m in Sources */,
 				C9C265311B7B803700EA4F38 /* CourseTableViewCell.m in Sources */,
+				A8DDC5191BAC461500799B68 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
