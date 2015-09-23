@@ -11,20 +11,22 @@
 #import "AFHTTPRequestOperationManager.h"
 @interface FilterViewController ()
 {
-    NSMutableArray *arraySchools,*arrayClass,*arrayHome;
+    NSMutableArray *arraySchools,*arrayClass,*arrayHome,*arrayCourse,*arrayModule;
     AFNetworkReachabilityStatus previousStatus;
     AppDropdownType selectedDataSource;
 }
 @end
 
 @implementation FilterViewController
-@synthesize lblStatus,btnDepartment,btnGroup,btnOrganization,viewNetwork;
+@synthesize lblStatus,btnDepartment,btnGroup,btnOrganization,viewNetwork,btnCourse,btnModule;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    arraySchools=[AppGlobal getDropdownList:SCHOOL_DATA];
-  arrayClass=[[NSMutableArray alloc]init];
+    arraySchools=[AppGlobal getDropdownList:TEACHER_DATA];
+    arrayClass=[[NSMutableArray alloc]init];
     arrayHome=[[NSMutableArray alloc]init];
+    arrayCourse=[[NSMutableArray alloc]init];
+    arrayModule=[[NSMutableArray alloc]init];
 
     
     
@@ -114,11 +116,33 @@
              break;
         }
         case COURSE_DATA:
-        case SETTING_DATA:
+        {
+            
+            return [arrayCourse count];
+            break;
+            
+        }
+
+        case MODULE_DATA:
+        {
+           
+                return [arrayModule count];
+                break;
+           
+        }
 
         case TITLE_DATA:
         {
+            
             return 0;
+            break;
+        }
+            
+        case TEACHER_DATA:
+        {
+            
+            return 0;
+            break;
         }
        
         default:
@@ -158,7 +182,17 @@
             break;
         }
         case COURSE_DATA:
-        case SETTING_DATA:
+        {
+            dic = arrayCourse[indexPath.row];
+            cell.textLabel.text=[dic objectForKey:@"courseName"];
+            break;
+        }
+        case MODULE_DATA:
+        {
+            dic = arrayModule[indexPath.row];
+            cell.textLabel.text=[dic objectForKey:@"moduleName"];
+            break;
+        }
             
         case TITLE_DATA:
         {
@@ -203,26 +237,35 @@
                 
                 [responseDic removeObjectForKey:@"selected"];
 
-                
-                 [arrayClass removeAllObjects];
-                
-                for (NSDictionary*tempDic in arraySchools) {
-                   if( [tempDic objectForKey:@"selected"]!=nil)
-                   {
-                       
-                       [arrayClass addObjectsFromArray: [tempDic objectForKey:@"classList"]];
-                       for (NSMutableDictionary *dic in arrayClass) {
-                           NSMutableDictionary *tempDic=dic;
-                           [tempDic removeObjectForKey:@"selected"];
-                       }
-                       NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayClass];
-                       NSArray *arrayWithoutDuplicates = [orderedSet array];
-                       [arrayClass removeAllObjects];
-                       [arrayClass addObjectsFromArray:arrayWithoutDuplicates];
-
-                       
-                   }
+                for (NSMutableDictionary *dic in arrayClass) {
+                    NSMutableDictionary *tempDic=dic;
+                    [tempDic removeObjectForKey:@"selected"];
                 }
+
+                 [arrayClass removeAllObjects];
+                [arrayHome removeAllObjects];
+                [arrayCourse removeAllObjects];
+                [arrayModule removeAllObjects];
+                [arrayClass addObjectsFromArray:[responseDic objectForKey:@"classList"]];
+
+                
+//                for (NSDictionary*tempDic in arraySchools) {
+//                   if( [tempDic objectForKey:@"selected"]!=nil)
+//                   {
+//                       
+//                       [arrayClass addObjectsFromArray: [tempDic objectForKey:@"classList"]];
+//                       for (NSMutableDictionary *dic in arrayClass) {
+//                           NSMutableDictionary *tempDic=dic;
+//                           [tempDic removeObjectForKey:@"selected"];
+//                       }
+//                       NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayClass];
+//                       NSArray *arrayWithoutDuplicates = [orderedSet array];
+//                       [arrayClass removeAllObjects];
+//                       [arrayClass addObjectsFromArray:arrayWithoutDuplicates];
+//
+//                       
+//                   }
+//                }
               
                 
                 break;
@@ -232,23 +275,35 @@
                 NSMutableDictionary *responseDic = [ arrayClass objectAtIndex:indexPath.row];
                 [responseDic removeObjectForKey:@"selected"];
 
-                [arrayHome removeAllObjects];
-                for (NSDictionary*tempDic in arrayHome) {
-                    if( [tempDic objectForKey:@"selected"]!=nil)
-                    {
-                        [arrayHome addObjectsFromArray: [tempDic objectForKey:@"homeRoomList"]];
-                        for (NSMutableDictionary *dic in arrayHome) {
-                            NSMutableDictionary *tempDic=dic;
-                            [tempDic removeObjectForKey:@"selected"];
-                        }
-                        NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayHome];
-                        NSArray *arrayWithoutDuplicates = [orderedSet array];
-                        [arrayHome removeAllObjects];
-                        [arrayHome addObjectsFromArray:arrayWithoutDuplicates];
-                        
-                        
-                    }
+                for (NSMutableDictionary *dic in arrayHome) {
+                    NSMutableDictionary *tempDic=dic;
+                    [tempDic removeObjectForKey:@"selected"];
                 }
+                
+                [arrayHome removeAllObjects];
+             
+                [arrayCourse removeAllObjects];
+                [arrayModule removeAllObjects];
+                [arrayHome addObjectsFromArray:[responseDic objectForKey:@"homeRoomList"]];
+
+                
+                
+//                for (NSDictionary*tempDic in arrayHome) {
+//                    if( [tempDic objectForKey:@"selected"]!=nil)
+//                    {
+//                        [arrayHome addObjectsFromArray: [tempDic objectForKey:@"homeRoomList"]];
+//                        for (NSMutableDictionary *dic in arrayHome) {
+//                            NSMutableDictionary *tempDic=dic;
+//                            [tempDic removeObjectForKey:@"selected"];
+//                        }
+//                        NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayHome];
+//                        NSArray *arrayWithoutDuplicates = [orderedSet array];
+//                        [arrayHome removeAllObjects];
+//                        [arrayHome addObjectsFromArray:arrayWithoutDuplicates];
+//                        
+//                        
+//                    }
+//                }
                 
                 break;
             }
@@ -256,11 +311,75 @@
             {
                 NSMutableDictionary *responseDic = [ arrayHome objectAtIndex:indexPath.row];
                 [responseDic removeObjectForKey:@"selected"];
+                for (NSMutableDictionary *dic in arrayCourse) {
+                    NSMutableDictionary *tempDic=dic;
+                    [tempDic removeObjectForKey:@"selected"];
+                }
+                [arrayCourse removeAllObjects];
+                [arrayModule removeAllObjects];
+                [arrayCourse addObjectsFromArray:[responseDic objectForKey:@"courseList"]];
+              
+//                for (NSDictionary*tempDic in arrayCourse) {
+//                    if( [tempDic objectForKey:@"selected"]!=nil)
+//                    {
+//                        [arrayHome addObjectsFromArray: [tempDic objectForKey:@"homeRoomList"]];
+//                        for (NSMutableDictionary *dic in arrayCourse) {
+//                            NSMutableDictionary *tempDic=dic;
+//                            [tempDic removeObjectForKey:@"selected"];
+//                        }
+//                        NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayCourse];
+//                        NSArray *arrayWithoutDuplicates = [orderedSet array];
+//                        [arrayCourse removeAllObjects];
+//                        [arrayCourse addObjectsFromArray:arrayWithoutDuplicates];
+//                        
+//                        
+//                    }
+//                }
                 
                 break;
 
             }
-            case TITLE_DATA:
+            case COURSE_DATA:
+            {
+                NSMutableDictionary *responseDic = [ arrayCourse objectAtIndex:indexPath.row];
+                [responseDic removeObjectForKey:@"selected"];
+                for (NSMutableDictionary *dic in arrayModule) {
+                    NSMutableDictionary *tempDic=dic;
+                    [tempDic removeObjectForKey:@"selected"];
+                }
+                
+                [arrayModule removeAllObjects];
+                [arrayModule addObjectsFromArray:[responseDic objectForKey:@"moduleList"]];
+           
+//                for (NSDictionary*tempDic in arrayModule) {
+//                    if( [tempDic objectForKey:@"selected"]!=nil)
+//                    {
+//                        [arrayHome addObjectsFromArray: [tempDic objectForKey:@"homeRoomList"]];
+//                        for (NSMutableDictionary *dic in arrayModule) {
+//                            NSMutableDictionary *tempDic=dic;
+//                            [tempDic removeObjectForKey:@"selected"];
+//                        }
+//                        NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayModule];
+//                        NSArray *arrayWithoutDuplicates = [orderedSet array];
+//                        [arrayModule removeAllObjects];
+//                        [arrayModule addObjectsFromArray:arrayWithoutDuplicates];
+//                        
+//                        
+//                    }
+//                }
+                
+                break;
+            }
+            case MODULE_DATA:
+            {
+                NSMutableDictionary *responseDic = [ arrayCourse objectAtIndex:indexPath.row];
+                [responseDic removeObjectForKey:@"selected"];
+                
+                
+                break;
+
+                
+            }
            
                 
             default:
@@ -273,35 +392,45 @@
             case SCHOOL_DATA:
             {
                 NSDictionary *responseDic = [ arraySchools objectAtIndex:indexPath.row];
-                [responseDic setValue:@"1" forKey:@"selected"];
-               
-                for (NSMutableDictionary *dic in arrayClass) {
+                for (NSMutableDictionary *dic in arraySchools) {
                     NSMutableDictionary *tempDic=dic;
                     [tempDic removeObjectForKey:@"selected"];
                 }
+                [responseDic setValue:@"1" forKey:@"selected"];
+               [arrayClass removeAllObjects];
+//                for (NSMutableDictionary *dic in arrayClass) {
+//                    NSMutableDictionary *tempDic=dic;
+//                    [tempDic removeObjectForKey:@"selected"];
+//                }
                 [arrayClass addObjectsFromArray: [responseDic objectForKey:@"classList"]];
-                NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayClass];
-                NSArray *arrayWithoutDuplicates = [orderedSet array];
-                [arrayClass removeAllObjects];
-                [arrayClass addObjectsFromArray:arrayWithoutDuplicates];
+                  [tblContentView reloadData];
+//                NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayClass];
+//                NSArray *arrayWithoutDuplicates = [orderedSet array];
+//                [arrayClass removeAllObjects];
+//                [arrayClass addObjectsFromArray:arrayWithoutDuplicates];
                 break;
             }
             case CLASS_DATA:
             {
                 NSDictionary *responseDic = [ arrayClass objectAtIndex:indexPath.row];
-                [responseDic setValue:@"1" forKey:@"selected"];
-                for (NSMutableDictionary *dic in arrayHome) {
+                for (NSMutableDictionary *dic in arrayClass) {
                     NSMutableDictionary *tempDic=dic;
                     [tempDic removeObjectForKey:@"selected"];
                 }
+                [responseDic setValue:@"1" forKey:@"selected"];
+//                for (NSMutableDictionary *dic in arrayHome) {
+//                    NSMutableDictionary *tempDic=dic;
+//                    [tempDic removeObjectForKey:@"selected"];
+//                }
 
-                
+                [arrayHome removeAllObjects];
                 
                 [arrayHome addObjectsFromArray: [responseDic objectForKey:@"homeRoomList"]];
-                NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayHome];
-                NSArray *arrayWithoutDuplicates = [orderedSet array];
-                [arrayHome removeAllObjects];
-                [arrayHome addObjectsFromArray:arrayWithoutDuplicates];
+                  [tblContentView reloadData];
+//                NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayHome];
+//                NSArray *arrayWithoutDuplicates = [orderedSet array];
+//                [arrayHome removeAllObjects];
+//                [arrayHome addObjectsFromArray:arrayWithoutDuplicates];
 
                 
                 
@@ -310,7 +439,67 @@
             case ROOM_DATA:
             {
                 NSDictionary *responseDic = [ arrayHome objectAtIndex:indexPath.row];
+                for (NSMutableDictionary *dic in arrayHome) {
+                    NSMutableDictionary *tempDic=dic;
+                    [tempDic removeObjectForKey:@"selected"];
+                }
                 [responseDic setValue:@"1" forKey:@"selected"];
+//                for (NSMutableDictionary *dic in arrayCourse) {
+//                    NSMutableDictionary *tempDic=dic;
+//                    [tempDic removeObjectForKey:@"selected"];
+//                }
+                
+                 [arrayCourse removeAllObjects];
+                
+                [arrayCourse addObjectsFromArray: [responseDic objectForKey:@"courseList"]];
+                  [tblContentView reloadData];
+//                NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayCourse];
+//                NSArray *arrayWithoutDuplicates = [orderedSet array];
+//                [arrayCourse removeAllObjects];
+//                [arrayCourse addObjectsFromArray:arrayWithoutDuplicates];
+                
+                
+                
+                break;
+            }
+            case COURSE_DATA:
+            {
+                NSDictionary *responseDic = [ arrayCourse objectAtIndex:indexPath.row];
+                
+                for (NSMutableDictionary *dic in arrayCourse) {
+                    NSMutableDictionary *tempDic=dic;
+                    [tempDic removeObjectForKey:@"selected"];
+                }
+                [responseDic setValue:@"1" forKey:@"selected"];
+                 [arrayModule removeAllObjects];
+                
+//                for (NSMutableDictionary *dic in arrayModule) {
+//                    NSMutableDictionary *tempDic=dic;
+//                    [tempDic removeObjectForKey:@"selected"];
+//                }
+                
+                
+                
+                [arrayModule addObjectsFromArray: [responseDic objectForKey:@"moduleList"]];
+                  [tblContentView reloadData];
+//                NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayModule];
+//                NSArray *arrayWithoutDuplicates = [orderedSet array];
+//                [arrayModule removeAllObjects];
+//                [arrayModule addObjectsFromArray:arrayWithoutDuplicates];
+                
+                
+                
+                break;
+            }
+            case MODULE_DATA:
+            {
+                NSDictionary *responseDic = [ arrayModule objectAtIndex:indexPath.row];
+                for (NSMutableDictionary *dic in arrayModule) {
+                    NSMutableDictionary *tempDic=dic;
+                    [tempDic removeObjectForKey:@"selected"];
+                }
+                [responseDic setValue:@"1" forKey:@"selected"];
+                [tblContentView reloadData];
                  break;
             }
             case TITLE_DATA:
@@ -324,10 +513,33 @@
     
 }
 
+- (IBAction)btnModuleClick:(id)sender{
+    if([arrayModule count]==0)
+        return;
+    btnCourse.backgroundColor=[UIColor clearColor];
+    btnModule.backgroundColor=[UIColor whiteColor];
+    btnOrganization.backgroundColor=[UIColor clearColor];
+    btnDepartment.backgroundColor=[UIColor  clearColor];
+    btnGroup.backgroundColor=[UIColor clearColor];
+    selectedDataSource=MODULE_DATA;
+    [tblContentView reloadData];
+}
+- (IBAction)btnCourseClick:(id)sender{
+    if([arrayCourse count]==0)
+        return;
+    btnCourse.backgroundColor=[UIColor whiteColor];
+    btnModule.backgroundColor=[UIColor clearColor];
+    btnOrganization.backgroundColor=[UIColor clearColor];
+    btnDepartment.backgroundColor=[UIColor  clearColor];
+    btnGroup.backgroundColor=[UIColor clearColor];
+    selectedDataSource=COURSE_DATA;
+    [tblContentView reloadData];
+}
 - (IBAction)btnGroupClick:(id)sender {
     if([arrayHome count]==0)
         return;
-   
+    btnCourse.backgroundColor=[UIColor clearColor];
+    btnModule.backgroundColor=[UIColor clearColor];
     btnOrganization.backgroundColor=[UIColor clearColor];
     btnDepartment.backgroundColor=[UIColor  clearColor];
     btnGroup.backgroundColor=[UIColor whiteColor];
@@ -338,6 +550,8 @@
 - (IBAction)btnDepartmentClick:(id)sender {
     if([arrayClass count]==0)
         return;
+    btnCourse.backgroundColor=[UIColor clearColor];
+    btnModule.backgroundColor=[UIColor clearColor];
     btnDepartment.backgroundColor=[UIColor whiteColor];
     btnOrganization.backgroundColor=[UIColor clearColor];
     btnGroup.backgroundColor=[UIColor clearColor];
@@ -348,6 +562,8 @@
 }
 
 - (IBAction)btnOrganizationClick:(id)sender {
+    btnCourse.backgroundColor=[UIColor clearColor];
+    btnModule.backgroundColor=[UIColor clearColor];
     btnDepartment.backgroundColor=[UIColor clearColor];
     btnOrganization.backgroundColor=[UIColor whiteColor];
     btnGroup.backgroundColor=[UIColor clearColor];

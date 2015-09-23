@@ -631,13 +631,18 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
         return [arrayAllData count];
         
     }break;
-    case SETTING_DATA:
+    case TEACHER_DATA:
+    {
+        return [arrayAllData count];
+        
+    }break;
+    case MODULE_DATA:
     {
         return [arrayAllData count];
         
     }break;
  
-        break;
+        
     default:
         [NSException raise:NSGenericException format:@"Unexpected FormatType."];
         
@@ -694,12 +699,20 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
             return [responseDic objectForKey:@"Title"];
             break;
         }
-        case SETTING_DATA:
+        case TEACHER_DATA:
         {
             NSDictionary *responseDic = [ arrayAllData objectAtIndex:row];
             return [responseDic objectForKey:@"Title"];
             break;
         }
+
+        case MODULE_DATA:
+        {
+            NSDictionary *responseDic = [ arrayAllData objectAtIndex:row];
+            return [responseDic objectForKey:@"Title"];
+            break;
+        }
+
         default:
             [NSException raise:NSGenericException format:@"Unexpected FormatType."];
     }
@@ -831,10 +844,22 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
 }
 -(void)loginSucessFullWithFB:(NSString*)userid {
     // if FB Varification is done then navigate the main screen
-    
+    [self saveTeacherMasterData];
     [AppGlobal  setValueInDefault:userid value:key_FBUSERID];
     
 }
+-(void)saveTeacherMasterData{
+    // user type is  teacher call its master data
+    if([AppSingleton sharedInstance].userDetail.userRole ==2)
+    {
+        [[appDelegate _engine] getMasterDataForTeacher:^(BOOL success) {
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+}
+
 -(void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView{
     // self.lblLoginStatus.text = @"You are logged out";
     [FBSession.activeSession closeAndClearTokenInformation];

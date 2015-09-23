@@ -19,6 +19,8 @@
 #define kGROWTHURL(url) [NSString stringWithFormat:@"http://%@" ,url]
 
 #define MASTER_DATA_URL [NSString stringWithFormat:@"%@/rest/common/getMasterData", APP_URL]
+#define MASTER_DATA_FOR_TEACHER_URL(teacherid) [NSString stringWithFormat:@"%@/rest/common/getMasterData/teacherId/%@",APP_URL ,teacherid]
+
 
 #define USER_REGISTER_URL [NSString stringWithFormat:@"%@/rest/user/register", APP_URL]
 #define USER_LOGIN_URL [NSString stringWithFormat:@"%@/rest/user/login",APP_URL]
@@ -160,7 +162,8 @@ typedef NS_ENUM(NSInteger, AppDropdownType){
     ROOM_DATA,
     TITLE_DATA,
     COURSE_DATA,
-    SETTING_DATA
+    MODULE_DATA,
+    TEACHER_DATA
 };
 typedef enum ScrollDirection {
     ScrollDirectionNone,

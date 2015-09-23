@@ -20,6 +20,7 @@
 #import "SubmitContentViewController.h"
 #import "UpdateProfileViewController.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "FilterViewController.h"
 
 @interface AssignmentViewController ()
 {
@@ -38,7 +39,7 @@
 
 @implementation AssignmentViewController
 @synthesize txtSearchBar,tblViewContent;
-@synthesize step, moviePlayer,objCustom;
+@synthesize step, moviePlayer,objCustom,btnFiler;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,6 +49,18 @@
     }
      previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
     // Do any additional setup after loading the view from its nib.
+//    if([AppSingleton sharedInstance].userDetail.userRole==2)
+//    {
+//        btnFiler.hidden=NO;
+//      
+//        CGRect rect= tblViewContent.frame;
+//        if( rect.origin.y!=70){
+//        rect.size.height= rect.size.height+rect.origin.y-70;
+//        rect.origin.y=70;
+//            tblViewContent.frame=rect;
+//        }
+//        
+//    }
     if(  [AppSingleton sharedInstance].isUserLoggedIn!=YES)
     {
         [self.tabBarController.tabBar setHidden:YES];
@@ -146,9 +159,71 @@
 
     }
 }
+- (void)viewDidLayoutSubviews{
+        if([AppSingleton sharedInstance].userDetail.userRole!=2)
+        {
+            btnFiler.hidden=YES;
+            CGRect rect= tblViewContent.frame;
+            if( rect.origin.y!=70){
+            rect.size.height= rect.size.height+rect.origin.y-70;
+            rect.origin.y=70;
+            tblViewContent.frame=rect;
+    
+            }
+        }else{
+            btnFiler.hidden=NO;
+        }
+
+}
+- (void)viewWillLayoutSubviews{
+    if([AppSingleton sharedInstance].userDetail.userRole!=2)
+    {
+        btnFiler.hidden=YES;
+        CGRect rect= tblViewContent.frame;
+        if( rect.origin.y!=70){
+            rect.size.height= rect.size.height+rect.origin.y-70;
+            rect.origin.y=70;
+            tblViewContent.frame=rect;
+            
+        }
+    }else{
+        btnFiler.hidden=NO;
+        CGRect rect= tblViewContent.frame;
+
+        if( rect.origin.y==70){
+            rect.size.height= rect.size.height-(109-70);
+            rect.origin.y=109;
+            tblViewContent.frame=rect;
+            
+        }
+    }
+    
+}
 
 - (void)viewWillAppear:(BOOL)animated{
+    [self viewDidLayoutSubviews];
+        if([AppSingleton sharedInstance].userDetail.userRole!=2)
+        {
+            btnFiler.hidden=YES;
+            CGRect rect= tblViewContent.frame;
+            if( rect.origin.y!=70){
+            rect.size.height= rect.size.height+rect.origin.y-70;
+            rect.origin.y=70;
+            tblViewContent.frame=rect;
     
+            }
+        }else{
+            btnFiler.hidden=NO;
+            CGRect rect= tblViewContent.frame;
+            
+            if( rect.origin.y==70){
+                rect.size.height= rect.size.height-(109-70);
+                rect.origin.y=109;
+                tblViewContent.frame=rect;
+                
+            }
+        }
+
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
         if(status==AFNetworkReachabilityStatusNotReachable)
@@ -873,4 +948,8 @@
     [self showNetworkStatus:@"" newVisibility:YES];
 }
 
+- (IBAction)btnFilerClick:(id)sender {
+    FilterViewController *filerview=[[FilterViewController alloc]initWithNibName:@"FilterViewController" bundle:nil];
+    [self.navigationController pushViewController:filerview animated:YES];
+}
 @end

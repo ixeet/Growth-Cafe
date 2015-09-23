@@ -51,6 +51,8 @@
             userDetail.address=[responseDic objectForKey:@"address"];
             userDetail.userFBID=[responseDic objectForKey:@"userFbId"];
             userDetail.userImage=[responseDic objectForKey:@"profileImage"];
+            userDetail.userRole=[[responseDic objectForKey:@"userType"]integerValue];
+            
             //call Block function
             success(userDetail);
         }
@@ -152,6 +154,7 @@
             userDetail.adminEmailId=[responseDic objectForKey:@"adminEmail"];
             userDetail.userFBID=[responseDic objectForKey:@"userFbId"];
             userDetail.userImage=[responseDic objectForKey:@"profileImage"];
+            userDetail.userRole=[[responseDic objectForKey:@"userType"]integerValue];
             //call Block function
             success(userDetail);
         }
@@ -328,6 +331,7 @@
             userDetail.address=[responseDic objectForKey:@"address"];
             userDetail.adminEmailId=[responseDic objectForKey:@"adminEmail"];
             userDetail.userFBID=[responseDic objectForKey:@"userFbId"];
+            userDetail.userRole=[[responseDic objectForKey:@"userType"]integerValue];
             //call Block function
             success(userDetail);
         }
@@ -466,6 +470,46 @@
         failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
         
     }];}
+//get Master Data
+-(void)getMasterDataForTeacher:(void (^)(BOOL success))success  failure:(void (^)(NSError *error))failure{
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    
+    
+    [manager GET:MASTER_DATA_FOR_TEACHER_URL([AppSingleton sharedInstance].userDetail.userId) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+        
+        //Success Full Logout
+        if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+            
+            // set the drop down teacher master data;
+            [AppGlobal  setDropdownList:TEACHER_DATA andData:[responseDic objectForKey:@"schoolList"]];
+            //call Block function
+            success(YES);
+            
+            
+        }
+        else {
+            //call Block function
+            failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+        }
+        
+        
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+        
+    }];}
+
 //Update user Profile Image
 -(void)updateUserImage:(UIImage*)image success:(void (^)(BOOL successValue))success  failure:(void (^)(NSError *error))failure{
   

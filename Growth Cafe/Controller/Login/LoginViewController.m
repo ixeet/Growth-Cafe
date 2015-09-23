@@ -13,7 +13,6 @@
 #import "RegisterationViewController.h"
 #import "UpdateViewController.h"
 #import "AFHTTPRequestOperationManager.h"
-#import "FilterViewController.h"
 
 @interface LoginViewController() <CustomKeyboardDelegate>
 {
@@ -220,10 +219,13 @@
     // if FB Varification is done then navigate the main screen
    
     [AppGlobal  setValueInDefault:userid value:key_FBUSERID];
+    [self saveTeacherMasterData];
+
     [self dismissViewControllerAnimated:YES completion:^{}];
     [self.tabBarController.tabBar setHidden:NO];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
 -(void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView{
     // self.lblLoginStatus.text = @"You are logged out";
     [FBSession.activeSession closeAndClearTokenInformation];
@@ -276,10 +278,11 @@
                                              [AppSingleton sharedInstance].userDetail=userDetail;
                                              [AppSingleton sharedInstance].isUserLoggedIn=YES;
                                              [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
-                                             [self loginSucessFull];
+                                            
                                              
                                              //Hide Indicator
                                              [appDelegate hideSpinner];
+                                              [self loginSucessFull];
                                          }
                                          failure:^(NSError *error) {
                                              //Hide Indicator
@@ -295,10 +298,9 @@
 }
 
 - (IBAction)btnCreatAccount:(id)sender {
-//    RegisterationViewController *viewController= [[RegisterationViewController alloc]initWithNibName:@"RegisterationViewController" bundle:nil];
-//    [self.navigationController pushViewController:viewController animated:YES];
-    FilterViewController *filerview=[[FilterViewController alloc]initWithNibName:@"FilterViewController" bundle:nil];
-    [self.navigationController pushViewController:filerview animated:YES];
+    RegisterationViewController *viewController= [[RegisterationViewController alloc]initWithNibName:@"RegisterationViewController" bundle:nil];
+    [self.navigationController pushViewController:viewController animated:YES];
+    
 }
 
 - (IBAction)btnForgetpasswordClick:(id)sender {
@@ -325,12 +327,29 @@
       
     }];
     }
+    [self saveTeacherMasterData];
+   
+    
+
+
+
+
 
     [self dismissViewControllerAnimated:YES completion:^{}];
     [self.tabBarController.tabBar setHidden:NO];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
-
+-(void)saveTeacherMasterData{
+    // user type is  teacher call its master data
+    if([AppSingleton sharedInstance].userDetail.userRole ==2)
+    {
+        [[appDelegate _engine] getMasterDataForTeacher:^(BOOL success) {
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+}
 -(void)loginError:(NSError*)error{
     
     [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];

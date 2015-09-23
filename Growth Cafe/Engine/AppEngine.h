@@ -44,7 +44,8 @@
 -(void)SetFBloginWithUserID:(NSString*)username FBID:(NSString*)fbid success:(void (^)(bool status))success  failure:(void (^)(NSError *error))failure;
 //get Master Data
 -(void)getMasterData:(void (^)(BOOL success))success  failure:(void (^)(NSError *error))failure;
-
+//get Master Data for teacher
+-(void)getMasterDataForTeacher:(void (^)(BOOL success))success  failure:(void (^)(NSError *error))failure;
 #pragma Courses Functions
 //get my Course Data
 -(void)getMyCourse:(NSString*)userid  AndTextSearch:(NSString*)txtSearch success:(void (^)(NSMutableArray *courses))success  failure:(void (^)(NSError *error))failure;
@@ -93,6 +94,5 @@
 ////upload assignment
 -(void)uploadAssignment:(NSString*)videoTitle  AndVideoDesc:(NSString*)videoDesc AndVideoURL:(NSString*)videoURL AndVideoPath:(ALAsset*)videoPath andFileName:(NSString*)fileName AndAssignment:(NSString*)assignmentId success:(void (^)(BOOL logoutValue)) success  failure:(void (^)(NSError *error))failure;
 
-
-
+-(void)saveTeacherMasterData;
 @end

@@ -444,12 +444,24 @@
 
 -(void)loginSucessFullWithFB:(NSString*)userid {
     // if FB Varification is done then navigate the main screen
-    
+    [self saveTeacherMasterData];
     [AppGlobal  setValueInDefault:userid value:key_FBUSERID];
     [self dismissViewControllerAnimated:YES completion:^{}];
     [self.tabBarController.tabBar setHidden:NO];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+-(void)saveTeacherMasterData{
+    // user type is  teacher call its master data
+    if([AppSingleton sharedInstance].userDetail.userRole ==2)
+    {
+        [[appDelegate _engine] getMasterDataForTeacher:^(BOOL success) {
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+}
+
 -(void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView{
     // self.lblLoginStatus.text = @"You are logged out";
     [FBSession.activeSession closeAndClearTokenInformation];
@@ -639,8 +651,12 @@
         return [arrayAllData count];
         
     }break;
-
-    case SETTING_DATA:
+    case MODULE_DATA:
+    {
+        return [arrayAllData count];
+        
+    }break;
+    case TEACHER_DATA:
     {
         return [arrayAllData count];
         
@@ -728,7 +744,13 @@
             NSDictionary *responseDic = [ arrayAllData objectAtIndex:row];
             return [responseDic objectForKey:@"Title"];
             break;
-        } case SETTING_DATA:
+        } case TEACHER_DATA:
+        {
+            NSDictionary *responseDic = [ arrayAllData objectAtIndex:row];
+            return [responseDic objectForKey:@"Title"];
+            break;
+        }
+        case MODULE_DATA:
         {
             NSDictionary *responseDic = [ arrayAllData objectAtIndex:row];
             return [responseDic objectForKey:@"Title"];

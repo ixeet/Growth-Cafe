@@ -24,6 +24,8 @@
 - (IBAction)btnBackClick:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *btnBack;
 
+- (IBAction)btnFilerClick:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *btnFiler;
 - (IBAction)btnMenuClick:(id)sender;
 
 //- (IBAction)btnAssignmentClick:(id)sender;

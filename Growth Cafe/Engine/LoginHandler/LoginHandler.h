@@ -32,6 +32,8 @@
 -(void)SetFBloginWithUserID:(NSString*)username FBID:(NSString*)fbid success:(void (^)(bool status))success  failure:(void (^)(NSError *error))failure;
 //get all master data
 -(void)getMasterData:(void (^)(BOOL success))success  failure:(void (^)(NSError *error))failure;
+//get Master Data for teacher
+-(void)getMasterDataForTeacher:(void (^)(BOOL success))success  failure:(void (^)(NSError *error))failure;
 // get user Profile
 -(void)getUserDetail:(NSString* )userid success:(void (^)(UserDetails *usrDetail))success   failure:(void (^)(NSError *error))failure;
 

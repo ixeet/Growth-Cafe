@@ -231,10 +231,16 @@
             NSArray *arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
             filePath =  [NSString stringWithFormat:@"%@/%@.txt",[arr objectAtIndex:0],[self getDropdownFileName:dropdownName] ];
         }break;
+        case  TEACHER_DATA:{
+            
+            NSArray *arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            filePath =  [NSString stringWithFormat:@"%@/%@.txt",[arr objectAtIndex:0],[self getDropdownFileName:dropdownName] ];
+        }break;
+
         case CLASS_DATA:
         case ROOM_DATA:
         case  COURSE_DATA:
-        case  SETTING_DATA:
+       
         case TITLE_DATA:
         {
             filePath =  [[NSBundle mainBundle] pathForResource:[self getDropdownFileName:dropdownName] ofType:@"txt"];
@@ -280,8 +286,8 @@
         case TITLE_DATA:
             fileName = @"titleList";
             break;
-        case SETTING_DATA:
-            fileName = @"settingList";
+        case TEACHER_DATA:
+            fileName = @"teacherMaster";
             break;
             
         case COURSE_DATA:

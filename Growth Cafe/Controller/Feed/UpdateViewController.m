@@ -99,6 +99,8 @@
                                                  [self loginFail:error];
                                                  
                                              }];
+            [self saveTeacherMasterData];
+
         }
         
     }else if(  [AppSingleton sharedInstance].isUserLoggedIn!=YES)
@@ -438,6 +440,17 @@
                                     }];
     
     
+}
+-(void)saveTeacherMasterData{
+    // user type is  teacher call its master data
+    if([AppSingleton sharedInstance].userDetail.userRole ==2)
+    {
+        [[appDelegate _engine] getMasterDataForTeacher:^(BOOL success) {
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }
 }
 
 //- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{

@@ -16,6 +16,7 @@
 #import "LoginViewController.h"
 #import "UpdateProfileViewController.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "FilterViewController.h"
 @interface CourseViewController ()
 {
    
@@ -28,7 +29,7 @@
 @end
 
 @implementation CourseViewController
-@synthesize btnAssignment,btnCourses,btnMore,btnBack,btnNotification,btnUpdates,txtSearchBar,objCustom,coursesList,comeFromUpdate;
+@synthesize btnAssignment,btnCourses,btnMore,btnBack,btnNotification,btnUpdates,txtSearchBar,objCustom,coursesList,comeFromUpdate,btnFiler  ;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -95,6 +96,16 @@
   
     // Do any additional setup after loading the view from its nib.
     [self setSearchUI];
+//    if([AppSingleton sharedInstance].userDetail.userRole!=2)
+//    {
+//        btnFiler.hidden=YES;
+//        CGRect rect= tableViewCourse.frame;
+//         if( rect.origin.y!=70){
+//        rect.size.height= rect.size.height+rect.origin.y-70;
+//        rect.origin.y=70;
+//        tableViewCourse.frame=rect;
+//         }
+//    }
     objCustom = [[CustomProfileView alloc] init];
     NSLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
     objCustom.center = CGPointMake(200, 400);
@@ -106,7 +117,50 @@
     objCustom.view.frame=frame1;
        [objCustom.btnLogout  addTarget:self action:@selector(btnLogoutClick:) forControlEvents:UIControlEventTouchUpInside];
 }
+- (void)viewDidLayoutSubviews{
+    if([AppSingleton sharedInstance].userDetail.userRole!=2)
+    {
+        btnFiler.hidden=YES;
+        CGRect rect= tableViewCourse.frame;
+        if( rect.origin.y!=70){
+            rect.size.height= rect.size.height+rect.origin.y-70;
+            rect.origin.y=70;
+            tableViewCourse.frame=rect;
+        }
+    }else{
+        btnFiler.hidden=NO;
+        CGRect rect= tableViewCourse.frame;
+        
+        if( rect.origin.y==70){
+            rect.size.height= rect.size.height-(109-70);
+            rect.origin.y=109;
+            tableViewCourse.frame=rect;
+            
+        }
+    }
+}
 -(void)viewWillAppear:(BOOL)animated    {
+    if([AppSingleton sharedInstance].userDetail.userRole!=2)
+    {
+        btnFiler.hidden=YES;
+        CGRect rect= tableViewCourse.frame;
+        if( rect.origin.y!=70){
+            rect.size.height= rect.size.height+rect.origin.y-70;
+            rect.origin.y=70;
+            tableViewCourse.frame=rect;
+        }
+    }else{
+        btnFiler.hidden=NO;
+        CGRect rect= tableViewCourse.frame;
+        
+        if( rect.origin.y==70){
+            rect.size.height= rect.size.height-(109-70);
+            rect.origin.y=109;
+            tableViewCourse.frame=rect;
+            
+        }
+    }
+    
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
         if(status==AFNetworkReachabilityStatusNotReachable)
@@ -609,5 +663,9 @@
 
 - (IBAction)btnClose:(id)sender {
     [self showNetworkStatus:@"" newVisibility:YES];
+}
+- (IBAction)btnFilerClick:(id)sender {
+    FilterViewController *filerview=[[FilterViewController alloc]initWithNibName:@"FilterViewController" bundle:nil];
+    [self.navigationController pushViewController:filerview animated:YES];
 }
 @end

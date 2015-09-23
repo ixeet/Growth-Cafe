@@ -178,6 +178,28 @@
         failure(error);
     }];
 }
+//get Master Data for teacher
+-(void)getMasterDataForTeacher:(void (^)(BOOL success))success  failure:(void (^)(NSError *error))failure{
+    LoginHandler *login=[[LoginHandler alloc] init];
+    [login getMasterDataForTeacher:^(BOOL successValue){
+        success(successValue);
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+}
+-(void)saveTeacherMasterData
+{
+    // user type is  teacher call its master data
+    if([AppSingleton sharedInstance].userDetail.userRole ==2)
+    {
+        [[appDelegate _engine] getMasterDataForTeacher:^(BOOL success) {
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+}
+
 
 #pragma Courses Functions
 //get my Course Data
