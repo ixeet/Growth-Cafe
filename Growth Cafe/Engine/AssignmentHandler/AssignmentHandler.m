@@ -275,5 +275,46 @@
     
     
 }
-
+//set Assignment rating
+-(void)setAssignmentRating:(NSDictionary*)selectedParam  success:(void (^)(BOOL responseValue))success   failure:(void (^)(NSError *error))failure{
+    {
+        
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        
+        NSDictionary *parameters = @{@"userId":[AppSingleton sharedInstance].userDetail.userId,
+                                     };
+        [manager POST:GET_ASSIGNMENT_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            
+            NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+            
+            //Success Full Logout
+            if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+                
+                // set the drop down teacher master data;
+                [AppGlobal  setDropdownList:TEACHER_DATA andData:[responseDic objectForKey:@"schoolList"]];
+                //call Block function
+                success(YES);
+                
+                
+            }
+            else {
+                //call Block function
+                failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+            }
+            
+            
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+            
+        }];
+    }
+}
 @end

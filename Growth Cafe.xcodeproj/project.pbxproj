@@ -21,6 +21,11 @@
 		A86A0DEB1B7CCFA70039E45B /* appLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A86A0DE91B7CCFA70039E45B /* appLogo@3x.png */; };
 		A881C9AE1B7F9FC70016F049 /* SubCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A881C9AC1B7F9FC70016F049 /* SubCommentTableViewCell.m */; };
 		A881C9AF1B7F9FC70016F049 /* SubCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A881C9AD1B7F9FC70016F049 /* SubCommentTableViewCell.xib */; };
+		A89923021BB3C641009BA42C /* AssignmentReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A89923001BB3C641009BA42C /* AssignmentReviewViewController.m */; };
+		A89923031BB3C641009BA42C /* AssignmentReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A89923011BB3C641009BA42C /* AssignmentReviewViewController.xib */; };
+		A89923061BB3D30E009BA42C /* AssignmentRating.m in Sources */ = {isa = PBXBuildFile; fileRef = A89923051BB3D30E009BA42C /* AssignmentRating.m */; };
+		A899230A1BB3D5D7009BA42C /* AssignmentRatingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A89923081BB3D5D7009BA42C /* AssignmentRatingTableViewCell.m */; };
+		A899230B1BB3D5D7009BA42C /* AssignmentRatingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A89923091BB3D5D7009BA42C /* AssignmentRatingTableViewCell.xib */; };
 		A8A520B51BA822B400C470AA /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A520B31BA822B400C470AA /* NotificationTableViewCell.m */; };
 		A8A520B61BA822B400C470AA /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8A520B41BA822B400C470AA /* NotificationTableViewCell.xib */; };
 		A8AC9D591B95D17500FCE284 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8AC9D581B95D17500FCE284 /* CrashReporter.framework */; };
@@ -323,6 +328,14 @@
 		A881C9AB1B7F9FC70016F049 /* SubCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCommentTableViewCell.h; sourceTree = "<group>"; };
 		A881C9AC1B7F9FC70016F049 /* SubCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCommentTableViewCell.m; sourceTree = "<group>"; };
 		A881C9AD1B7F9FC70016F049 /* SubCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubCommentTableViewCell.xib; sourceTree = "<group>"; };
+		A89922FF1BB3C641009BA42C /* AssignmentReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentReviewViewController.h; sourceTree = "<group>"; };
+		A89923001BB3C641009BA42C /* AssignmentReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentReviewViewController.m; sourceTree = "<group>"; };
+		A89923011BB3C641009BA42C /* AssignmentReviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssignmentReviewViewController.xib; sourceTree = "<group>"; };
+		A89923041BB3D30E009BA42C /* AssignmentRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentRating.h; sourceTree = "<group>"; };
+		A89923051BB3D30E009BA42C /* AssignmentRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentRating.m; sourceTree = "<group>"; };
+		A89923071BB3D5D7009BA42C /* AssignmentRatingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentRatingTableViewCell.h; sourceTree = "<group>"; };
+		A89923081BB3D5D7009BA42C /* AssignmentRatingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentRatingTableViewCell.m; sourceTree = "<group>"; };
+		A89923091BB3D5D7009BA42C /* AssignmentRatingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssignmentRatingTableViewCell.xib; sourceTree = "<group>"; };
 		A8A520B21BA822B400C470AA /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationTableViewCell.h; path = NotificationCell/NotificationTableViewCell.h; sourceTree = "<group>"; };
 		A8A520B31BA822B400C470AA /* NotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationTableViewCell.m; path = NotificationCell/NotificationTableViewCell.m; sourceTree = "<group>"; };
 		A8A520B41BA822B400C470AA /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NotificationTableViewCell.xib; path = NotificationCell/NotificationTableViewCell.xib; sourceTree = "<group>"; };
@@ -983,6 +996,8 @@
 				C9C264AC1B7B7C4E00EA4F38 /* Update.m */,
 				C9C264AD1B7B7C4E00EA4F38 /* UserDetail.h */,
 				C9C264AE1B7B7C4E00EA4F38 /* UserDetail.m */,
+				A89923041BB3D30E009BA42C /* AssignmentRating.h */,
+				A89923051BB3D30E009BA42C /* AssignmentRating.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1020,6 +1035,9 @@
 				A8DDC5221BADB10400799B68 /* FilterDetailViewController.h */,
 				A8DDC5231BADB10400799B68 /* FilterDetailViewController.m */,
 				A8DDC5241BADB10400799B68 /* FilterDetailViewController.xib */,
+				A89922FF1BB3C641009BA42C /* AssignmentReviewViewController.h */,
+				A89923001BB3C641009BA42C /* AssignmentReviewViewController.m */,
+				A89923011BB3C641009BA42C /* AssignmentReviewViewController.xib */,
 			);
 			path = Assignment;
 			sourceTree = "<group>";
@@ -1033,6 +1051,9 @@
 				A8D73DD41B7E06D30022C1A0 /* AssestTableViewCell.h */,
 				A8D73DD51B7E06D30022C1A0 /* AssestTableViewCell.m */,
 				A8D73DD61B7E06D30022C1A0 /* AssestTableViewCell.xib */,
+				A89923071BB3D5D7009BA42C /* AssignmentRatingTableViewCell.h */,
+				A89923081BB3D5D7009BA42C /* AssignmentRatingTableViewCell.m */,
+				A89923091BB3D5D7009BA42C /* AssignmentRatingTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1485,6 +1506,7 @@
 				C9C2665E1B7B819100EA4F38 /* school_drop@3x.png in Resources */,
 				C9C2660E1B7B819100EA4F38 /* icn_pause1@3x.png in Resources */,
 				C9C2663E1B7B819100EA4F38 /* progress_vertica_greyl_line@2x.png in Resources */,
+				A899230B1BB3D5D7009BA42C /* AssignmentRatingTableViewCell.xib in Resources */,
 				C9C266131B7B819100EA4F38 /* icn_share@2x.png in Resources */,
 				A8CAA0801B849DD70066C893 /* profile-menunn@2x.png in Resources */,
 				A8DFD3A31BAA9387001C3C10 /* loader@2x.png in Resources */,
@@ -1661,6 +1683,7 @@
 				C9C2665C1B7B819100EA4F38 /* profile@3x.png in Resources */,
 				C9C266381B7B819100EA4F38 /* profile-menu@3x.png in Resources */,
 				C9C266181B7B819100EA4F38 /* icn_updates-selectedn@3x.png in Resources */,
+				A89923031BB3C641009BA42C /* AssignmentReviewViewController.xib in Resources */,
 				C9C265221B7B803700EA4F38 /* AssignmentDetailTableViewCell.xib in Resources */,
 				C9C265301B7B803700EA4F38 /* ContentCellTableViewCell.xib in Resources */,
 				C9C265371B7B803700EA4F38 /* ModuleTableViewCell.xib in Resources */,
@@ -1717,6 +1740,7 @@
 				A8DDC51E1BAD413800799B68 /* FilterViewController.m in Sources */,
 				C9C2653A1B7B803700EA4F38 /* UpdateTableViewCell.m in Sources */,
 				C9C264921B7B7BCB00EA4F38 /* NSData+AESCrypt.m in Sources */,
+				A89923061BB3D30E009BA42C /* AssignmentRating.m in Sources */,
 				A8AC9D5D1B96E47900FCE284 /* UpdateDetailViewController.m in Sources */,
 				C9C264401B7B799700EA4F38 /* AFSecurityPolicy.m in Sources */,
 				C9C2654A1B7B803700EA4F38 /* MoreViewController.m in Sources */,
@@ -1724,6 +1748,7 @@
 				C9C263EF1B7B76AF00EA4F38 /* main.m in Sources */,
 				C9C265291B7B803700EA4F38 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				C9C2643D1B7B799700EA4F38 /* AFHTTPRequestOperationManager.m in Sources */,
+				A899230A1BB3D5D7009BA42C /* AssignmentRatingTableViewCell.m in Sources */,
 				C9C265421B7B803700EA4F38 /* ForgetPasswordViewController.m in Sources */,
 				C9C264411B7B799700EA4F38 /* AFURLConnectionOperation.m in Sources */,
 				A8D73DD21B7E04E00022C1A0 /* AssestViewController.m in Sources */,
@@ -1750,6 +1775,7 @@
 				C9C264421B7B799700EA4F38 /* AFURLRequestSerialization.m in Sources */,
 				A8DDC5141BAC3B7C00799B68 /* InstructionViewController.m in Sources */,
 				C9C265211B7B803700EA4F38 /* AssignmentDetailTableViewCell.m in Sources */,
+				A89923021BB3C641009BA42C /* AssignmentReviewViewController.m in Sources */,
 				C9C2643E1B7B799700EA4F38 /* AFHTTPSessionManager.m in Sources */,
 				C9C264B81B7B7C4E00EA4F38 /* Update.m in Sources */,
 				C9C2654C1B7B803700EA4F38 /* NotificationViewController.m in Sources */,

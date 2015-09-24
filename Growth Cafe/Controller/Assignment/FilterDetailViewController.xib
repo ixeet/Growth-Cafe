@@ -23,7 +23,7 @@
                     <rect key="frame" x="0.0" y="-1" width="600" height="800"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TYz-RS-hE7" userLabel="imgHeader">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TYz-RS-hE7" userLabel="imgHeader">
                     <rect key="frame" x="0.0" y="-1" width="600" height="72"/>
                     <color key="backgroundColor" red="0.72941176470000002" green="0.0" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -40,7 +40,7 @@
                         </mask>
                     </variation>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7k-hV-tQl" userLabel="btnDone">
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7k-hV-tQl" userLabel="btnDone">
                     <rect key="frame" x="530" y="22" width="62" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="3zI-Rb-x2L">
@@ -71,7 +71,7 @@
                         <action selector="btnDoneClick:" destination="-1" eventType="touchUpInside" id="txD-0p-VyE"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6DJ-Ko-3ee">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Filter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6DJ-Ko-3ee">
                     <rect key="frame" x="148" y="18" width="246" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="tpV-6g-Q6U">
@@ -92,17 +92,17 @@
                         </mask>
                     </variation>
                 </label>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="93S-7n-eTC" userLabel="tblView">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="93S-7n-eTC" userLabel="tblView">
                     <rect key="frame" x="0.0" y="70" width="600" height="533"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="533" id="Gm5-RU-oRq"/>
                     </constraints>
                 </tableView>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tew-Ir-Q3G" userLabel="viewNetwork">
+                <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tew-Ir-Q3G" userLabel="viewNetwork">
                     <rect key="frame" x="0.0" y="70" width="601" height="40"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wA-6r-pIZ" userLabel="btnClose">
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wA-6r-pIZ" userLabel="btnClose">
                             <rect key="frame" x="563" y="4" width="30" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <state key="normal" image="close_icon.png">
@@ -112,7 +112,7 @@
                                 <action selector="btnClose:" destination="-1" eventType="touchUpInside" id="sa2-gq-u1k"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sya-lH-cDn" userLabel="lblStatus">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sya-lH-cDn" userLabel="lblStatus">
                             <rect key="frame" x="285" y="8" width="32" height="16"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -128,7 +128,7 @@
                         <constraint firstAttribute="trailing" secondItem="6wA-6r-pIZ" secondAttribute="trailing" constant="8" id="rhM-wh-qQk"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ed-0V-KAb" userLabel="btnBack">
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ed-0V-KAb" userLabel="btnBack">
                     <rect key="frame" x="8" y="18" width="22" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="BEm-lo-mZ0">
@@ -145,14 +145,14 @@
                     </state>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="E3p-d2-yLz"/>
                             <exclude reference="BEm-lo-mZ0"/>
+                            <exclude reference="E3p-d2-yLz"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
                         <mask key="constraints">
-                            <include reference="E3p-d2-yLz"/>
                             <include reference="BEm-lo-mZ0"/>
+                            <include reference="E3p-d2-yLz"/>
                         </mask>
                     </variation>
                     <connections>

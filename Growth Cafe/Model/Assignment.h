@@ -10,6 +10,7 @@
 #import"Resourse.h"
 #import"Courses.h"
 #import"Module.h"
+#import "AssignmentRating.h"
 @interface Assignment : NSObject
 
 @property (nonatomic,strong) NSString* assignmentId;
@@ -24,4 +25,6 @@
 @property (nonatomic,strong) Courses    *course;
 @property (nonatomic,strong) Module    *module;
 @property (nonatomic,assign) BOOL isExpend;
+@property (nonatomic,strong) NSMutableArray *ratingParam;
+
 @end

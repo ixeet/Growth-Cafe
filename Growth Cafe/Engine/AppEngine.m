@@ -408,7 +408,17 @@
     }];
     
 }
+//set Assignment rating
+-(void)setAssignmentRating:(NSDictionary*)selectedParam  success:(void (^)(BOOL responseValue))success   failure:(void (^)(NSError *error))failure{
+    AssignmentHandler *assign=[[AssignmentHandler alloc] init];
+    [assign setAssignmentRating:selectedParam success:^(BOOL responseValue) {
+        success(responseValue);
+    } failure:^(NSError *error) {
+        failure(error);
+        
+    }];
 
+}
 
 
 //upload assignment

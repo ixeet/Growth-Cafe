@@ -251,6 +251,10 @@
                     <exclude reference="piO-tb-w9C"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="Ga2-34-4zW"/>
+                    <exclude reference="nys-Tu-yFT"/>
+                    <exclude reference="l6K-Y6-igA"/>
+                    <exclude reference="lfJ-jy-TBN"/>
                     <exclude reference="9ff-as-Z9u"/>
                     <exclude reference="F6I-p2-c8d"/>
                     <exclude reference="Rng-Kn-JSg"/>
@@ -258,20 +262,16 @@
                     <exclude reference="3Ud-61-zkO"/>
                     <exclude reference="IeB-Ru-fsB"/>
                     <exclude reference="V7t-WI-mho"/>
-                    <exclude reference="l6K-Y6-igA"/>
-                    <exclude reference="lfJ-jy-TBN"/>
+                    <exclude reference="76R-21-mZC"/>
+                    <exclude reference="tR5-vI-4C6"/>
+                    <exclude reference="tsB-qT-2c6"/>
                     <exclude reference="3xq-8Q-jM3"/>
                     <exclude reference="92W-0U-nJV"/>
                     <exclude reference="d3B-Zo-shq"/>
-                    <exclude reference="Ga2-34-4zW"/>
-                    <exclude reference="nys-Tu-yFT"/>
                     <exclude reference="KbE-Vb-IWS"/>
                     <exclude reference="ajo-3X-QAp"/>
                     <exclude reference="f0h-hE-8CU"/>
                     <exclude reference="nBM-O5-IIe"/>
-                    <exclude reference="76R-21-mZC"/>
-                    <exclude reference="tR5-vI-4C6"/>
-                    <exclude reference="tsB-qT-2c6"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -285,6 +285,10 @@
                     <include reference="piO-tb-w9C"/>
                 </mask>
                 <mask key="constraints">
+                    <include reference="Ga2-34-4zW"/>
+                    <include reference="nys-Tu-yFT"/>
+                    <include reference="l6K-Y6-igA"/>
+                    <include reference="lfJ-jy-TBN"/>
                     <include reference="9ff-as-Z9u"/>
                     <include reference="F6I-p2-c8d"/>
                     <include reference="Rng-Kn-JSg"/>
@@ -292,20 +296,16 @@
                     <include reference="3Ud-61-zkO"/>
                     <include reference="IeB-Ru-fsB"/>
                     <include reference="V7t-WI-mho"/>
-                    <include reference="l6K-Y6-igA"/>
-                    <include reference="lfJ-jy-TBN"/>
+                    <include reference="76R-21-mZC"/>
+                    <include reference="tR5-vI-4C6"/>
+                    <include reference="tsB-qT-2c6"/>
                     <include reference="3xq-8Q-jM3"/>
                     <include reference="92W-0U-nJV"/>
                     <include reference="d3B-Zo-shq"/>
-                    <include reference="Ga2-34-4zW"/>
-                    <include reference="nys-Tu-yFT"/>
                     <include reference="KbE-Vb-IWS"/>
                     <include reference="ajo-3X-QAp"/>
                     <include reference="f0h-hE-8CU"/>
                     <include reference="nBM-O5-IIe"/>
-                    <include reference="76R-21-mZC"/>
-                    <include reference="tR5-vI-4C6"/>
-                    <include reference="tsB-qT-2c6"/>
                 </mask>
             </variation>
         </view>

@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="3749" id="KGk-i7-Jjw" customClass="AssignmentDetailTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="3928" id="KGk-i7-Jjw" customClass="AssignmentDetailTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -248,21 +248,27 @@
                         <exclude reference="zL9-SB-wPE"/>
                     </mask>
                     <mask key="constraints">
-                        <exclude reference="owC-eg-QPn"/>
-                        <exclude reference="tfO-Z2-ONM"/>
-                        <exclude reference="UOa-XP-xdi"/>
-                        <exclude reference="dX6-lA-fam"/>
-                        <exclude reference="2EC-BQ-Xgv"/>
-                        <exclude reference="bia-Mr-OwN"/>
-                        <exclude reference="f2h-mV-I3i"/>
-                        <exclude reference="sfq-7n-4wa"/>
+                        <exclude reference="75j-5o-HPJ"/>
+                        <exclude reference="ZWQ-BX-Z7v"/>
+                        <exclude reference="vcu-89-NEV"/>
                         <exclude reference="1Ru-y2-GUR"/>
                         <exclude reference="i1H-Wi-q0U"/>
                         <exclude reference="xg8-Ve-bil"/>
+                        <exclude reference="UOa-XP-xdi"/>
+                        <exclude reference="dX6-lA-fam"/>
                         <exclude reference="ETf-gf-ggT"/>
                         <exclude reference="Umh-q0-elq"/>
                         <exclude reference="W6A-6u-ogB"/>
                         <exclude reference="uay-6O-tEv"/>
+                        <exclude reference="28x-TQ-hfY"/>
+                        <exclude reference="4az-bV-I3B"/>
+                        <exclude reference="XU4-Zf-Rx5"/>
+                        <exclude reference="2EC-BQ-Xgv"/>
+                        <exclude reference="bia-Mr-OwN"/>
+                        <exclude reference="f2h-mV-I3i"/>
+                        <exclude reference="sfq-7n-4wa"/>
+                        <exclude reference="owC-eg-QPn"/>
+                        <exclude reference="tfO-Z2-ONM"/>
                         <exclude reference="7Lj-rV-Yzl"/>
                         <exclude reference="fQm-6X-Qir"/>
                         <exclude reference="pwZ-Ry-ons"/>
@@ -270,12 +276,6 @@
                         <exclude reference="xgO-x9-IgM"/>
                         <exclude reference="y8l-hF-HJf"/>
                         <exclude reference="zdM-DA-5IC"/>
-                        <exclude reference="28x-TQ-hfY"/>
-                        <exclude reference="4az-bV-I3B"/>
-                        <exclude reference="XU4-Zf-Rx5"/>
-                        <exclude reference="75j-5o-HPJ"/>
-                        <exclude reference="ZWQ-BX-Z7v"/>
-                        <exclude reference="vcu-89-NEV"/>
                         <exclude reference="CgB-Xy-3Hi"/>
                         <exclude reference="D5L-p3-5ae"/>
                         <exclude reference="Gv8-QG-u1H"/>
@@ -296,21 +296,27 @@
                         <include reference="zL9-SB-wPE"/>
                     </mask>
                     <mask key="constraints">
-                        <include reference="owC-eg-QPn"/>
-                        <include reference="tfO-Z2-ONM"/>
-                        <include reference="UOa-XP-xdi"/>
-                        <include reference="dX6-lA-fam"/>
-                        <include reference="2EC-BQ-Xgv"/>
-                        <include reference="bia-Mr-OwN"/>
-                        <include reference="f2h-mV-I3i"/>
-                        <exclude reference="sfq-7n-4wa"/>
+                        <include reference="75j-5o-HPJ"/>
+                        <include reference="ZWQ-BX-Z7v"/>
+                        <include reference="vcu-89-NEV"/>
                         <include reference="1Ru-y2-GUR"/>
                         <include reference="i1H-Wi-q0U"/>
                         <include reference="xg8-Ve-bil"/>
+                        <include reference="UOa-XP-xdi"/>
+                        <include reference="dX6-lA-fam"/>
                         <include reference="ETf-gf-ggT"/>
                         <include reference="Umh-q0-elq"/>
                         <include reference="W6A-6u-ogB"/>
                         <include reference="uay-6O-tEv"/>
+                        <include reference="28x-TQ-hfY"/>
+                        <include reference="4az-bV-I3B"/>
+                        <include reference="XU4-Zf-Rx5"/>
+                        <include reference="2EC-BQ-Xgv"/>
+                        <include reference="bia-Mr-OwN"/>
+                        <include reference="f2h-mV-I3i"/>
+                        <exclude reference="sfq-7n-4wa"/>
+                        <include reference="owC-eg-QPn"/>
+                        <include reference="tfO-Z2-ONM"/>
                         <include reference="7Lj-rV-Yzl"/>
                         <include reference="fQm-6X-Qir"/>
                         <include reference="pwZ-Ry-ons"/>
@@ -318,12 +324,6 @@
                         <include reference="xgO-x9-IgM"/>
                         <include reference="y8l-hF-HJf"/>
                         <include reference="zdM-DA-5IC"/>
-                        <include reference="28x-TQ-hfY"/>
-                        <include reference="4az-bV-I3B"/>
-                        <include reference="XU4-Zf-Rx5"/>
-                        <include reference="75j-5o-HPJ"/>
-                        <include reference="ZWQ-BX-Z7v"/>
-                        <include reference="vcu-89-NEV"/>
                         <include reference="CgB-Xy-3Hi"/>
                         <include reference="D5L-p3-5ae"/>
                         <include reference="Gv8-QG-u1H"/>
@@ -343,7 +343,7 @@
                 <outlet property="lblDateAssignment" destination="OeN-E0-EZR" id="isU-hu-wtg"/>
                 <outlet property="lblUploadedDate" destination="zL9-SB-wPE" id="SeO-jN-Zaa"/>
             </connections>
-            <point key="canvasLocation" x="92" y="840.5"/>
+            <point key="canvasLocation" x="92" y="929.5"/>
         </tableViewCell>
     </objects>
     <resources>

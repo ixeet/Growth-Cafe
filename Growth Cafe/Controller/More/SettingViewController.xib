@@ -24,6 +24,7 @@
                     <color key="backgroundColor" red="0.72941176470000002" green="0.0" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="72" id="53w-6N-2Hx"/>
+                        <constraint firstAttribute="height" constant="72" id="GLS-La-gVt"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -42,6 +43,7 @@
                         <constraint firstAttribute="height" constant="21" id="HJx-tu-jZ7">
                             <variation key="heightClass=regular-widthClass=compact" constant="44"/>
                         </constraint>
+                        <constraint firstAttribute="height" constant="44" id="Pxv-fk-sXq"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,12 +62,14 @@
                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ph-xq-xCs" userLabel="btnBack">
                     <rect key="frame" x="8" y="21" width="22" height="44"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="44" id="3J1-l5-bSO"/>
                         <constraint firstAttribute="width" constant="73" id="4eq-BW-0Ld">
                             <variation key="heightClass=regular-widthClass=compact" constant="22"/>
                         </constraint>
                         <constraint firstAttribute="height" constant="27" id="Uc2-6a-7E9">
                             <variation key="heightClass=regular-widthClass=compact" constant="44"/>
                         </constraint>
+                        <constraint firstAttribute="width" constant="22" id="xIp-fF-Dwb"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <state key="normal" title=" " image="icn_back-header.png">
@@ -74,14 +78,14 @@
                     </state>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="Uc2-6a-7E9"/>
                             <exclude reference="4eq-BW-0Ld"/>
+                            <exclude reference="Uc2-6a-7E9"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
                         <mask key="constraints">
-                            <include reference="Uc2-6a-7E9"/>
                             <include reference="4eq-BW-0Ld"/>
+                            <include reference="Uc2-6a-7E9"/>
                         </mask>
                     </variation>
                 </button>

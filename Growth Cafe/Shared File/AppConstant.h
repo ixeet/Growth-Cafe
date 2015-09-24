@@ -97,6 +97,8 @@
 #define key_Custom_DateFormate @"yyyy-MM-dd HH:mm:ss.S"
 #define key_loginId @"LoginId"
 #define key_loginPassword @"LoginPassword"
+#define key_Select_Rating @"Select" 
+#define key_Select_Massage(ParamName) [NSString stringWithFormat:@"%@ is not selected", ParamName]
 //#define key_rememberMe @"rememberMe"
 //#define key_UserId @"UserId"
 //#define key_UserName @"UserName"
