@@ -13,9 +13,11 @@
 @end
 
 @implementation MoreViewController
+@synthesize lblName,imgUser,btnInstructions,btnSetting;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUserProfile];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -35,4 +37,51 @@
 */
 
 
+- (IBAction)btnInstructionsClick:(id)sender {
+}
+
+- (IBAction)btnSettingClick:(id)sender {
+}
+-(void)setUserProfile {
+    // UserDetails *user=[AppGlobal readUserDetail];
+   UserDetails *user=[AppSingleton sharedInstance].userDetail;
+    
+    
+    lblName.text=[NSString stringWithFormat:@"%@ %@",user.userFirstName,user.userLastName];
+    if(user.userImage!=nil){
+        
+        //check image available at local
+        //get image name from URL
+        if([AppGlobal checkImageAvailableAtLocal:user.userImage])
+        {
+            user.userImageData=[AppGlobal getImageAvailableAtLocal:user.userImage];
+            UIImage *img=[UIImage imageWithData:user.userImageData];
+            [imgUser setImage:img];
+            imgUser.layer.cornerRadius = imgUser.frame.size.width/6;
+            imgUser.clipsToBounds = YES;
+            NSLog(@"%@",@"yes");
+        }else{
+            NSURL *imageURL = [NSURL URLWithString:user.userImage];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                user.userImageData  = [NSData dataWithContentsOfURL:imageURL];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Update the UI
+                    UIImage *img=[UIImage imageWithData:user.userImageData];
+                    [AppGlobal setImageAvailableAtLocal:user.userImage AndImageData:user.userImageData];
+                    if(img!=nil)
+                    {
+                        [imgUser setImage:img];
+                        imgUser.layer.cornerRadius = imgUser.frame.size.width / 2;
+                        imgUser.clipsToBounds = YES;
+                        
+                        
+                    }
+                });
+            });
+        }
+       
+    }
+      
+    
+}
 @end

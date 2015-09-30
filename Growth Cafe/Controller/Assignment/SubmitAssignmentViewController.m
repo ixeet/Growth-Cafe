@@ -338,7 +338,8 @@
          if (exportSession.status == AVAssetExportSessionStatusCompleted)
          {
              printf("completed\n");
-             NSData *data= [NSData dataWithContentsOfURL:outputURL];
+//             NSData *data= [NSData dataWithContentsOfURL:outputURL];
+            [NSData dataWithContentsOfURL:outputURL];
          }
          else
          {

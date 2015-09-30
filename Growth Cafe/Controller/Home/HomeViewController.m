@@ -55,6 +55,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+      [super viewWillAppear:animated];
     btnFacebook.delegate=self;
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
@@ -77,6 +78,7 @@
 
 }
 -(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     btnFacebook.delegate=nil;
 }
 -(void)changeFrameAndBackgroundImg
@@ -362,7 +364,7 @@
 }
 
 -(void)SendCrashLogToServer{
-    NSString *strHumanReadableCrashLog = [self handleCrashReport];
+  //  NSString *strHumanReadableCrashLog = [self handleCrashReport];
 //    NSString *deviceName = [[UIDevice currentDevice] machine];
 //    NSLog(@"%@", deviceName);
 //    [INTNetworkManager getInstance].postString = [NSString stringWithFormat:@"crashdata=%@&devicetype=IPHONE&userid=%@&guid=%@&devicemodel=%@", strHumanReadableCrashLog, @"", [NPUserData sharedNPUserData].guid, deviceName];

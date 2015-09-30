@@ -14,6 +14,9 @@
 #import "Assignment.h"
 
 @interface CourseHandler : NSObject
+-(void)getCourse:(NSString*)userid AndFilter:(NSMutableDictionary*)dicfilter success:(void (^)(NSMutableArray *courses))success   failure:(void (^)(NSError *error))failure;
+
+
 //get my Course Data
 -(void)getMyCourse:(NSString*)userid  AndTextSearch:(NSString*)txtSearch success:(void (^)(NSMutableArray *courses))success   failure:(void (^)(NSError *error))failure;
 

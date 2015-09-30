@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface AssignmentRating : NSObject
-@property (nonatomic,strong) NSString   *ratingParam;
+@property (nonatomic,strong) NSDictionary   *ratingParam;
 @property (nonatomic,strong) NSMutableArray   *ratingParamValues;
 @property (nonatomic,strong) NSMutableArray   *ratingColorValues;
 @end

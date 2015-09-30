@@ -38,6 +38,7 @@
 #define USER_VALIDATE_FB_URL(fbId) [NSString stringWithFormat:@"%@/rest/user/getByFBId/userFbId/%@",APP_URL,fbId]
 
 #define USER_COURSE_URL [NSString stringWithFormat:@"%@/rest/course/getCourses",APP_URL]
+#define TEACHER_COURSE_URL [NSString stringWithFormat:@"%@/rest/course/getCourses/teacher",APP_URL]
 #define USER_MODULE_DETAIL_URL [NSString stringWithFormat:@"%@/rest/course/getModuleDetail",APP_URL]
 //Key For UserDefault
 //Comment and like URL
@@ -91,8 +92,11 @@
 
 //Assignment url
 //http://192.168.0.14:8080//rest/course/getAssignments
+#define GET_TEACHER_ASSIGNMENT_URL [NSString stringWithFormat:@"%@/rest/course/getTeacherAssignments", APP_URL]
 #define GET_ASSIGNMENT_URL [NSString stringWithFormat:@"%@/rest/course/getAssignments", APP_URL]
+
 #define POST_ASSIGNMENT_URL [NSString stringWithFormat:@"%@/rest/course/uploadResourceDetail", APP_URL]
+#define SET_ASSIGNMENT_RATING_URL [NSString stringWithFormat:@"%@/rest/course/rateAssignment", APP_URL]
 
 #define key_Custom_DateFormate @"yyyy-MM-dd HH:mm:ss.S"
 #define key_loginId @"LoginId"
@@ -165,7 +169,8 @@ typedef NS_ENUM(NSInteger, AppDropdownType){
     TITLE_DATA,
     COURSE_DATA,
     MODULE_DATA,
-    TEACHER_DATA
+    TEACHER_DATA,
+    REVIEW_STATUS_DATA
 };
 typedef enum ScrollDirection {
     ScrollDirectionNone,

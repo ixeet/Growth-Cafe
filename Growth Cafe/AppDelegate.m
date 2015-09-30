@@ -84,7 +84,7 @@ UIApplication* appp;
     
     // UIViewController *uvButton5 = [self.tabBarController.viewControllers objectAtIndex:4];
     viewController5.tabBarItem.title = @"More" ;
-    [viewController5.tabBarItem setEnabled:NO];
+   // [viewController5.tabBarItem setEnabled:NO];
     viewController5.tabBarItem.image = [[UIImage imageNamed:@"icn_more-defaultn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     viewController5.tabBarItem.selectedImage = [[UIImage imageNamed:@"icn_more-selectedn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
@@ -200,7 +200,8 @@ UIApplication* appp;
  */
 - (void)pushDisabled
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Push is Disabled" delegate:nil  cancelButtonTitle:@"OK" otherButtonTitles: nil];
+  //  UIAlertView *alert =
+    [[UIAlertView alloc] initWithTitle:nil message:@"Push is Disabled" delegate:nil  cancelButtonTitle:@"OK" otherButtonTitles: nil];
     
 }
 
@@ -208,7 +209,8 @@ UIApplication* appp;
  */
 - (void)pushEnabled
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Push" message:@"Push Enabled" delegate:nil  cancelButtonTitle:@"OK" otherButtonTitles: nil];
+   // UIAlertView *alert =
+    [[UIAlertView alloc] initWithTitle:@"Push" message:@"Push Enabled" delegate:nil  cancelButtonTitle:@"OK" otherButtonTitles: nil];
     
    
 }
@@ -295,13 +297,14 @@ UIApplication* appp;
 {
     //    NSLog(@"login status = %@", [NPUserData sharedNPUserData].isLoggedIn ? @"YES" : @"NO");
     
-    NSString *message;
+   // NSString *message;
     
     //    NSLog(@"Push dictionary = %@", userInfo);
     
     NSString *aps = [userInfo valueForKey:@"aps"];
     
-    message = [aps valueForKey:@"alert"];
+   // message =
+    [aps valueForKey:@"alert"];
     
     //message = [userInfo valueForKey:@"alert"];
     

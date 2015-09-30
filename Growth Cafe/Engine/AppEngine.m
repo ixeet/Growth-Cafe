@@ -212,7 +212,16 @@
         failure(error);
     }];
 }
-
+//get my Course Data
+-(void)getCourse:(NSString*)userid AndFilter:(NSMutableDictionary*)dicfilter success:(void (^)(NSMutableArray *courses))success   failure:(void (^)(NSError *error))failure
+{
+    CourseHandler *course=[[ CourseHandler alloc] init];
+    [course getCourse:userid  AndFilter:dicfilter success:^(NSMutableArray *courseList){
+        success(courseList);
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+}
 #pragma Module Detail Functions
 //get my module detail Data
 -(void)getModuleDetail:(NSString*)userid  AndTextSearch:(NSString*)txtSearch AndSelectModule:(Module*)module AndSelectCourse:(Courses*)selectedcourse success:(void (^)(NSDictionary *moduleDetail))success  failure:(void (^)(NSError *error))failure
@@ -408,10 +417,24 @@
     }];
     
 }
-//set Assignment rating
--(void)setAssignmentRating:(NSDictionary*)selectedParam  success:(void (^)(BOOL responseValue))success   failure:(void (^)(NSError *error))failure{
+
+-(void)getTeacherAssignment:(NSString*)userid  AndTextSearch:(NSString*)txtSearch AndFilterDic:(NSMutableDictionary*)filterDic success:(void (^)(NSMutableArray *assignments))success   failure:(void (^)(NSError *error))failure
+{
     AssignmentHandler *assign=[[AssignmentHandler alloc] init];
-    [assign setAssignmentRating:selectedParam success:^(BOOL responseValue) {
+    [assign getTeacherAssignment:userid AndTextSearch:txtSearch AndFilterDic:filterDic  success:^(NSMutableArray *moduleDetail) {
+        
+        
+        success(moduleDetail);
+        
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+    
+}
+//set Assignment rating
+-(void)setAssignmentRating:(NSDictionary*)selectedParamValue AndParam:(NSArray*)selectedParam AndAssignmentResourceTxnId:(NSString*)assignmentResourceTxnId success:(void (^)(BOOL responseValue))success   failure:(void (^)(NSError *error))failure{
+    AssignmentHandler *assign=[[AssignmentHandler alloc] init];
+    [assign setAssignmentRating:selectedParamValue AndParam:selectedParam AndAssignmentResourceTxnId:assignmentResourceTxnId success:^(BOOL responseValue) {
         success(responseValue);
     } failure:^(NSError *error) {
         failure(error);

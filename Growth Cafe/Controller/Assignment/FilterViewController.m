@@ -11,24 +11,54 @@
 #import "AFHTTPRequestOperationManager.h"
 @interface FilterViewController ()
 {
-    NSMutableArray *arraySchools,*arrayClass,*arrayHome,*arrayCourse,*arrayModule;
+    NSMutableArray *arraySchools,*arrayClass,*arrayHome,*arrayCourse,*arrayModule,*arrayStatus;
     AFNetworkReachabilityStatus previousStatus;
     AppDropdownType selectedDataSource;
+    NSMutableDictionary *filterDic;
+    NSMutableDictionary *dicSchools,*dicClass,*dicHome,*dicCourse,*dicModule;
+
 }
 @end
 
 @implementation FilterViewController
-@synthesize lblStatus,btnDepartment,btnGroup,btnOrganization,viewNetwork,btnCourse,btnModule;
+@synthesize lblStatus,btnDepartment,btnGroup,btnOrganization,viewNetwork,btnCourse,btnModule,mDelegate,btnStatus,strComeFrom;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     arraySchools=[AppGlobal getDropdownList:TEACHER_DATA];
+        //
+    dicSchools=[[NSMutableDictionary alloc]init];
+    [dicSchools setObject:@"0" forKey:@"schoolId"];
+    [dicSchools setObject:@"All" forKey:@"schoolName"];
+   
+    [arraySchools insertObject:dicSchools atIndex:0];
+
+    
+  
+    dicClass=[[NSMutableDictionary alloc]init];
+    [dicClass setObject:@"0" forKey:@"classId"];
+    [dicClass setObject:@"All" forKey:@"className"];
+    
+    dicHome=[[NSMutableDictionary alloc]init];
+    [dicHome setObject:@"0" forKey:@"homeRoomId"];
+    [dicHome setObject:@"All" forKey:@"homeRoomName"];
+
+    dicCourse=[[NSMutableDictionary alloc]init];
+    [dicCourse setObject:@"0" forKey:@"courseId"];
+    [dicCourse setObject:@"All" forKey:@"courseName"];
+
+    dicModule=[[NSMutableDictionary alloc]init];
+    [dicModule setObject:@"0" forKey:@"moduleId"];
+    [dicModule setObject:@"All" forKey:@"moduleName"];
+    
+   
+    
     arrayClass=[[NSMutableArray alloc]init];
     arrayHome=[[NSMutableArray alloc]init];
     arrayCourse=[[NSMutableArray alloc]init];
     arrayModule=[[NSMutableArray alloc]init];
 
-    
+    filterDic=[[NSMutableDictionary alloc]init];
     
     
 }
@@ -39,6 +69,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
         if(status==AFNetworkReachabilityStatusNotReachable)
@@ -52,7 +83,11 @@
     }];
     selectedDataSource  =SCHOOL_DATA;
     btnOrganization.backgroundColor=[UIColor whiteColor];
-    
+    if([strComeFrom isEqualToString:@"c"]){
+        btnModule.hidden=YES;
+        btnStatus.hidden=YES;
+        
+    }
 }
 
 /*
@@ -66,10 +101,30 @@
  */
 
 - (IBAction)btnDoneClick:(id)sender {
+   if(  [filterDic valueForKey:@"schoolId"]==nil)
+    [filterDic setValue:@"0"forKey:@"schoolId"];
+
+    if(  [filterDic valueForKey:@"classId"]==nil)
+        [filterDic setValue:@"0"forKey:@"classId"];
+    
+    if(  [filterDic valueForKey:@"homeRoomId"]==nil)
+        [filterDic setValue:@"0"forKey:@"homeRoomId"];
+    
+    if(  [filterDic valueForKey:@"courseId"]==nil)
+        [filterDic setValue:@"0"forKey:@"courseId"];
+    if(  [filterDic valueForKey:@"moduleId"]==nil)
+        [filterDic setValue:@"0"forKey:@"moduleId"];
+    if(  [filterDic valueForKey:@"status"]==nil)
+        [filterDic setValue:@"0"forKey:@"status"];
+
+
+    [mDelegate DidSelectFilter:filterDic andSender:self];
+   
 }
 
 - (IBAction)btnBackClick:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+     [mDelegate DidNoSelectFilter:self];
+   // [self.navigationController popToRootViewControllerAnimated:YES];
 }
 - (IBAction)btnClose:(id)sender {
     [self showNetworkStatus:@"" newVisibility:YES];
@@ -130,6 +185,14 @@
                 break;
            
         }
+        case REVIEW_STATUS_DATA:
+        {
+            
+            return [arrayStatus count];
+            break;
+            
+        }
+            
 
         case TITLE_DATA:
         {
@@ -172,25 +235,51 @@
         case CLASS_DATA:
         {
             dic = arrayClass[indexPath.row];
+          if([arrayClass count]==1)
+          {
+              [dic setValue:@"1" forKey:@"selected"];
+
+          }
             cell.textLabel.text=[dic objectForKey:@"className"];
             break;
         }
         case ROOM_DATA:
         {
             dic = arrayHome[indexPath.row];
+            if([arrayHome count]==1)
+            {
+                [dic setValue:@"1" forKey:@"selected"];
+                
+            }
             cell.textLabel.text=[dic objectForKey:@"homeRoomName"];
             break;
         }
         case COURSE_DATA:
         {
             dic = arrayCourse[indexPath.row];
+            if([arrayCourse count]==1)
+            {
+                [dic setValue:@"1" forKey:@"selected"];
+                
+            }
             cell.textLabel.text=[dic objectForKey:@"courseName"];
             break;
         }
         case MODULE_DATA:
         {
             dic = arrayModule[indexPath.row];
+            if([arrayModule count]==1)
+            {
+                [dic setValue:@"1" forKey:@"selected"];
+                
+            }
             cell.textLabel.text=[dic objectForKey:@"moduleName"];
+            break;
+        }
+        case REVIEW_STATUS_DATA:
+        {
+            dic = arrayStatus[indexPath.row];
+            cell.textLabel.text=[dic objectForKey:@"Title"];
             break;
         }
             
@@ -202,7 +291,7 @@
         default:
             [NSException raise:NSGenericException format:@"Unexpected FormatType."];
     }
-    
+   
     if([dic objectForKey:@"selected"]!=nil)
     {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -241,7 +330,8 @@
                     NSMutableDictionary *tempDic=dic;
                     [tempDic removeObjectForKey:@"selected"];
                 }
-
+                [filterDic removeObjectForKey:@"schoolId"];
+                
                  [arrayClass removeAllObjects];
                 [arrayHome removeAllObjects];
                 [arrayCourse removeAllObjects];
@@ -279,14 +369,15 @@
                     NSMutableDictionary *tempDic=dic;
                     [tempDic removeObjectForKey:@"selected"];
                 }
+                [filterDic removeObjectForKey:@"classId"];
                 
+             
                 [arrayHome removeAllObjects];
              
                 [arrayCourse removeAllObjects];
                 [arrayModule removeAllObjects];
                 [arrayHome addObjectsFromArray:[responseDic objectForKey:@"homeRoomList"]];
 
-                
                 
 //                for (NSDictionary*tempDic in arrayHome) {
 //                    if( [tempDic objectForKey:@"selected"]!=nil)
@@ -315,6 +406,9 @@
                     NSMutableDictionary *tempDic=dic;
                     [tempDic removeObjectForKey:@"selected"];
                 }
+                [filterDic removeObjectForKey:@"homeRoomId"];
+                
+               
                 [arrayCourse removeAllObjects];
                 [arrayModule removeAllObjects];
                 [arrayCourse addObjectsFromArray:[responseDic objectForKey:@"courseList"]];
@@ -351,6 +445,10 @@
                 [arrayModule removeAllObjects];
                 [arrayModule addObjectsFromArray:[responseDic objectForKey:@"moduleList"]];
            
+                [filterDic removeObjectForKey:@"courseId"];
+                
+               
+                
 //                for (NSDictionary*tempDic in arrayModule) {
 //                    if( [tempDic objectForKey:@"selected"]!=nil)
 //                    {
@@ -375,12 +473,23 @@
                 NSMutableDictionary *responseDic = [ arrayCourse objectAtIndex:indexPath.row];
                 [responseDic removeObjectForKey:@"selected"];
                 
-                
+                  [filterDic removeObjectForKey:@"moduleId"];
                 break;
 
                 
             }
-           
+
+            case REVIEW_STATUS_DATA:
+            {
+                NSMutableDictionary *responseDic = [ arrayStatus objectAtIndex:indexPath.row];
+                [responseDic removeObjectForKey:@"selected"];
+                
+                [filterDic removeObjectForKey:@"status"];
+                break;
+                
+                
+            }
+
                 
             default:
                 [NSException raise:NSGenericException format:@"Unexpected FormatType."];
@@ -396,8 +505,14 @@
                     NSMutableDictionary *tempDic=dic;
                     [tempDic removeObjectForKey:@"selected"];
                 }
+                
                 [responseDic setValue:@"1" forKey:@"selected"];
+                [filterDic setValue:[responseDic objectForKey:@"schoolId"] forKey:@"schoolId"];
+                
+                //{"userId":1,"searchText":" ","schoolId":1,"classId":1,"hrmId":0,"courseId":0,"moduleId":0,"status":2}
                [arrayClass removeAllObjects];
+                [arrayClass insertObject:dicClass atIndex:0];
+
 //                for (NSMutableDictionary *dic in arrayClass) {
 //                    NSMutableDictionary *tempDic=dic;
 //                    [tempDic removeObjectForKey:@"selected"];
@@ -418,13 +533,15 @@
                     [tempDic removeObjectForKey:@"selected"];
                 }
                 [responseDic setValue:@"1" forKey:@"selected"];
+                [filterDic setValue:[responseDic objectForKey:@"classId"] forKey:@"classId"];
+
 //                for (NSMutableDictionary *dic in arrayHome) {
 //                    NSMutableDictionary *tempDic=dic;
 //                    [tempDic removeObjectForKey:@"selected"];
 //                }
 
                 [arrayHome removeAllObjects];
-                
+                [arrayHome insertObject:dicHome atIndex:0];
                 [arrayHome addObjectsFromArray: [responseDic objectForKey:@"homeRoomList"]];
                   [tblContentView reloadData];
 //                NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayHome];
@@ -444,13 +561,14 @@
                     [tempDic removeObjectForKey:@"selected"];
                 }
                 [responseDic setValue:@"1" forKey:@"selected"];
+                 [filterDic setValue:[responseDic objectForKey:@"homeRoomId"] forKey:@"homeRoomId"];
 //                for (NSMutableDictionary *dic in arrayCourse) {
 //                    NSMutableDictionary *tempDic=dic;
 //                    [tempDic removeObjectForKey:@"selected"];
 //                }
                 
                  [arrayCourse removeAllObjects];
-                
+                [arrayCourse insertObject:dicCourse atIndex:0];
                 [arrayCourse addObjectsFromArray: [responseDic objectForKey:@"courseList"]];
                   [tblContentView reloadData];
 //                NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayCourse];
@@ -472,7 +590,9 @@
                 }
                 [responseDic setValue:@"1" forKey:@"selected"];
                  [arrayModule removeAllObjects];
-                
+                [arrayModule insertObject:dicModule atIndex:0];
+
+                  [filterDic setValue:[responseDic objectForKey:@"courseId"] forKey:@"courseId"];
 //                for (NSMutableDictionary *dic in arrayModule) {
 //                    NSMutableDictionary *tempDic=dic;
 //                    [tempDic removeObjectForKey:@"selected"];
@@ -499,8 +619,22 @@
                     [tempDic removeObjectForKey:@"selected"];
                 }
                 [responseDic setValue:@"1" forKey:@"selected"];
+                [filterDic setValue:[responseDic objectForKey:@"moduleId"] forKey:@"moduleId"];
                 [tblContentView reloadData];
                  break;
+            }
+            case REVIEW_STATUS_DATA:
+            {
+                NSDictionary *responseDic = [ arrayStatus objectAtIndex:indexPath.row];
+                for (NSMutableDictionary *dic in arrayStatus) {
+                    NSMutableDictionary *tempDic=dic;
+                    [tempDic removeObjectForKey:@"selected"];
+                }
+                [responseDic setValue:@"1" forKey:@"selected"];
+                [filterDic setValue:[responseDic objectForKey:@"Id"] forKey:@"status"];
+                [tblContentView reloadData];
+                break;
+                
             }
             case TITLE_DATA:
                 
@@ -521,6 +655,7 @@
     btnOrganization.backgroundColor=[UIColor clearColor];
     btnDepartment.backgroundColor=[UIColor  clearColor];
     btnGroup.backgroundColor=[UIColor clearColor];
+    btnStatus.backgroundColor=[UIColor clearColor];
     selectedDataSource=MODULE_DATA;
     [tblContentView reloadData];
 }
@@ -532,6 +667,7 @@
     btnOrganization.backgroundColor=[UIColor clearColor];
     btnDepartment.backgroundColor=[UIColor  clearColor];
     btnGroup.backgroundColor=[UIColor clearColor];
+    btnStatus.backgroundColor=[UIColor clearColor];
     selectedDataSource=COURSE_DATA;
     [tblContentView reloadData];
 }
@@ -543,6 +679,7 @@
     btnOrganization.backgroundColor=[UIColor clearColor];
     btnDepartment.backgroundColor=[UIColor  clearColor];
     btnGroup.backgroundColor=[UIColor whiteColor];
+    btnStatus.backgroundColor=[UIColor clearColor];
     selectedDataSource=ROOM_DATA;
     [tblContentView reloadData];
 }
@@ -555,6 +692,7 @@
     btnDepartment.backgroundColor=[UIColor whiteColor];
     btnOrganization.backgroundColor=[UIColor clearColor];
     btnGroup.backgroundColor=[UIColor clearColor];
+    btnStatus.backgroundColor=[UIColor clearColor];
     selectedDataSource=CLASS_DATA;
   [tblContentView reloadData];
 
@@ -567,11 +705,28 @@
     btnDepartment.backgroundColor=[UIColor clearColor];
     btnOrganization.backgroundColor=[UIColor whiteColor];
     btnGroup.backgroundColor=[UIColor clearColor];
+     btnStatus.backgroundColor=[UIColor clearColor];
     selectedDataSource=SCHOOL_DATA;
     [tblContentView reloadData];
     
   }
 
 
+- (IBAction)btnStatusClick:(id)sender{
+    btnCourse.backgroundColor=[UIColor clearColor];
+    btnModule.backgroundColor=[UIColor clearColor];
+    btnDepartment.backgroundColor=[UIColor clearColor];
+    btnOrganization.backgroundColor=[UIColor clearColor];
+    
+    btnStatus.backgroundColor=[UIColor whiteColor];
+    btnGroup.backgroundColor=[UIColor clearColor];
+    selectedDataSource=REVIEW_STATUS_DATA;
+    
+    
+    arrayStatus =[AppGlobal getDropdownList:REVIEW_STATUS_DATA];
+    [tblContentView reloadData];
+
+
+}
 @end
 //

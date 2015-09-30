@@ -19,7 +19,7 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="TzM-cs-mtD" userLabel="imgResorces">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <color key="backgroundColor" red="0.20784313730000001" green="0.60784313729999995" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
-                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                        <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                             <rect key="frame" x="61" y="51" width="238" height="113"/>
                         </variation>
                     </imageView>
@@ -41,7 +41,6 @@
                         <state key="selected">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
-                        <state key="highlighted" image="icn_assignment-submitted.png"/>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="aMn-P5-k1a"/>
@@ -60,7 +59,7 @@
                         <state key="normal" image="icn_play1.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
-                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                        <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                             <rect key="frame" x="158" y="82" width="45" height="45"/>
                         </variation>
                     </button>
@@ -75,7 +74,7 @@
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                         <color key="textColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
-                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                        <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                             <rect key="frame" x="62" y="163" width="237" height="19"/>
                         </variation>
                     </label>
@@ -348,7 +347,6 @@
     </objects>
     <resources>
         <image name="icn_arrow.png" width="8" height="12"/>
-        <image name="icn_assignment-submitted.png" width="37" height="37"/>
         <image name="icn_pending-assignment.png" width="37" height="37"/>
         <image name="icn_play1.png" width="45" height="45"/>
     </resources>

@@ -74,6 +74,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+     [super viewWillAppear:animated ];
     btnFacebook.delegate=self;
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
@@ -95,6 +96,7 @@
  [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 }
 -(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated ];
     btnFacebook.delegate=nil;
 }
 
@@ -661,8 +663,11 @@
         return [arrayAllData count];
         
     }break;
-
-        break;
+    case REVIEW_STATUS_DATA:
+    {
+        return 0;
+        
+    }break;
     default:
         [NSException raise:NSGenericException format:@"Unexpected FormatType."];
         
@@ -756,6 +761,11 @@
             return [responseDic objectForKey:@"Title"];
             break;
         }
+        case REVIEW_STATUS_DATA:
+        {
+            return 0;
+            
+        }break;
             
         default:
             [NSException raise:NSGenericException format:@"Unexpected FormatType."];

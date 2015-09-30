@@ -21,6 +21,7 @@
 #import "UpdateProfileViewController.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "FilterViewController.h"
+#import "AssignmentReviewViewController.h"
 
 @interface AssignmentViewController ()
 {
@@ -34,12 +35,13 @@
     AFNetworkReachabilityStatus previousStatus;
     CGFloat screenHeight;
     CGFloat screenWidth;
+    NSMutableDictionary *filterDic;
 }
 @end
 
 @implementation AssignmentViewController
 @synthesize txtSearchBar,tblViewContent;
-@synthesize step, moviePlayer,objCustom,btnFiler;
+@synthesize step, moviePlayer,objCustom,btnFiler,viewFilter;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -101,9 +103,15 @@
    
     
     
+    filterDic =[[NSMutableDictionary alloc]init];
+   [filterDic setValue:@"0"forKey:@"schoolId"];
+     [filterDic setValue:@"0"forKey:@"classId"];
+    [filterDic setValue:@"0"forKey:@"homeRoomId"];
+    [filterDic setValue:@"0"forKey:@"courseId"];
+      [filterDic setValue:@"0"forKey:@"moduleId"];
     
-  
-    
+    [filterDic setValue:@"2"forKey:@"status"];
+      //{"userId":1,"searchText":" ","schoolId":1,"classId":1,"hrmId":0,"courseId":0,"moduleId":0,"status":2}
 }
 
 
@@ -163,6 +171,7 @@
         if([AppSingleton sharedInstance].userDetail.userRole!=2)
         {
             btnFiler.hidden=YES;
+            viewFilter.hidden=YES;
             CGRect rect= tblViewContent.frame;
             if( rect.origin.y!=70){
             rect.size.height= rect.size.height+rect.origin.y-70;
@@ -172,6 +181,7 @@
             }
         }else{
             btnFiler.hidden=NO;
+            viewFilter.hidden=NO;
         }
 
 }
@@ -179,6 +189,7 @@
     if([AppSingleton sharedInstance].userDetail.userRole!=2)
     {
         btnFiler.hidden=YES;
+         viewFilter.hidden=YES;
         CGRect rect= tblViewContent.frame;
         if( rect.origin.y!=70){
             rect.size.height= rect.size.height+rect.origin.y-70;
@@ -188,11 +199,12 @@
         }
     }else{
         btnFiler.hidden=NO;
+         viewFilter.hidden=NO;
         CGRect rect= tblViewContent.frame;
 
         if( rect.origin.y==70){
-            rect.size.height= rect.size.height-(109-70);
-            rect.origin.y=109;
+            rect.size.height= rect.size.height-(120-70);
+            rect.origin.y=120;
             tblViewContent.frame=rect;
             
         }
@@ -202,9 +214,13 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [self viewDidLayoutSubviews];
+    [super viewWillAppear:animated ];
+    
+    
         if([AppSingleton sharedInstance].userDetail.userRole!=2)
         {
             btnFiler.hidden=YES;
+             viewFilter.hidden=YES;
             CGRect rect= tblViewContent.frame;
             if( rect.origin.y!=70){
             rect.size.height= rect.size.height+rect.origin.y-70;
@@ -214,11 +230,12 @@
             }
         }else{
             btnFiler.hidden=NO;
+             viewFilter.hidden=NO;
             CGRect rect= tblViewContent.frame;
             
             if( rect.origin.y==70){
-                rect.size.height= rect.size.height-(109-70);
-                rect.origin.y=109;
+                rect.size.height= rect.size.height-(120-70);
+                rect.origin.y=120;
                 tblViewContent.frame=rect;
                 
             }
@@ -268,6 +285,7 @@
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated ];
     /* remove for keyboard */
     [[NSNotificationCenter defaultCenter] removeObserver:self   name:UIKeyboardWillShowNotification object:nil];
     
@@ -304,6 +322,16 @@
     NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId];
     if([userid isEqualToString:@"(null)"])
         return ;
+  if([AppSingleton sharedInstance].userDetail.userRole==2)
+  {
+      
+      [self getTeacherAssignment:userid AndTextSearch:txtSearch];
+
+  }else{
+       [self getStudentAssignment:userid AndTextSearch:txtSearch];
+  }
+}
+-(void)getStudentAssignment:(NSString *)userid AndTextSearch:(NSString*)txtSearch{
     //Show Indicator
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
@@ -317,16 +345,48 @@
         //Hide Indicator
         [appDelegate hideSpinner];
     }
-                              failure:^(NSError *error) {
-                                  //Hide Indicator
-                                  [appDelegate hideSpinner];
-                                  NSLog(@"failure JsonData %@",[error description]);
-                                  [self loginError:error];
-                                  //                                         [self loginViewShowingLoggedOutUser:loginView];
-                                  
-                              }];
+                                    failure:^(NSError *error) {
+                                        //Hide Indicator
+                                        [appDelegate hideSpinner];
+                                        NSLog(@"failure JsonData %@",[error description]);
+                                        [self loginError:error];
+                                        //                                         [self loginViewShowingLoggedOutUser:loginView];
+                                        
+                                    }];
+}
+-(void)getTeacherAssignment:(NSString *)userid AndTextSearch:(NSString*)txtSearch{
+    //Show Indicator
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
-    
+    [[appDelegate _engine] getTeacherAssignment:userid  AndTextSearch:txtSearch AndFilterDic:filterDic success:^(NSMutableArray *assignments) {
+        arrayAssignment=assignments;
+        
+        
+        [tblViewContent reloadData];
+        // [self loginSucessFullWithFB];
+        
+        //Hide Indicator
+        [appDelegate hideSpinner];
+    }
+                                    failure:^(NSError *error) {
+                                        //Hide Indicator
+                                        [appDelegate hideSpinner];
+                                        NSLog(@"failure JsonData %@",[error description]);
+                                        [self loginError:error];
+                                        //                                         [self loginViewShowingLoggedOutUser:loginView];
+                                        
+                                    }];
+}
+-(void)DidSelectFilter:(NSMutableDictionary * )dicfilter andSender:(id)sender
+{
+    filterDic=dicfilter;
+    [self getAssignment:txtSearchBar.text];
+     [sender dismissViewControllerAnimated:YES completion:nil];
+
+}
+-(void)DidNoSelectFilter:(id)sender
+{
+     [sender dismissViewControllerAnimated:YES completion:nil];
 }
 //- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
 //    UIViewController *vc = tabBarController.selectedViewController;
@@ -415,7 +475,7 @@
    [cell.imgResource setHidden:YES];
     [cell.btnPlay setHidden:YES];
     [cell.lblAssignementDetail  setHidden:YES];
-    [cell.lblUploadedDate setHidden:YES];
+  //  [cell.lblUploadedDate setHidden:YES];
    // [cell.btnSubmit setHidden:YES];
    
     // Set label text to attributed string
@@ -460,7 +520,7 @@
         cell.lblDateAssignment.text=[NSString stringWithFormat:@"%@ %ld",[monthName substringToIndex:3],(long)components.day];
     }
   //  cell.lblDateAssignment.text=assignment.assignmentSubmittedDate;
-    
+    cell.btnAssignmentStatus.tag =indexPath.row;
     if([assignment.assignmentStatus isEqualToString:@"1"])
     {
         NSDate *today10am =[NSDate date];
@@ -498,8 +558,8 @@
       //  cell.lblDateAssignment.textColor =[UIColor blackColor];
         
         [cell.btnAssignmentStatus setBackgroundColor:[UIColor clearColor]];
-         if(assignment.isExpend)
-        [cell.lblUploadedDate setHidden:NO];
+//         if(assignment.isExpend)
+//        [cell.lblUploadedDate setHidden:NO];
      
         NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.attachedResource.uploadedDate];
         if(submittedDate!=nil){
@@ -509,17 +569,22 @@
             
             NSDateFormatter *df = [[NSDateFormatter alloc] init];
             NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-            cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",[monthName substringToIndex:3],(long)components.day];
+            cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ldby %@",[monthName substringToIndex:3],(long)components.day, assignment.assignmentSubmittedBy];
+        }
+        
+        if([AppSingleton sharedInstance].userDetail.userRole==2)
+        {
+         [cell.btnAssignmentStatus  addTarget:self action:@selector(btnViewSubmittedAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     else if([assignment.assignmentStatus isEqualToString:@"3"])
     {
-        cell.btnAssignmentStatus.highlighted =YES;
+       // cell.btnAssignmentStatus.highlighted =YES;
      //   cell.lblDateAssignment.textColor =[UIColor whiteColor];
         
      //   [cell.btnAssignmentStatus setBackgroundColor:[UIColor greenColor]];
-        if(assignment.isExpend)
-            [cell.lblUploadedDate setHidden:NO];
+//        if(assignment.isExpend)
+//            [cell.lblUploadedDate setHidden:NO];
        
         NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.attachedResource.uploadedDate];
         if(submittedDate!=nil){
@@ -529,8 +594,9 @@
             
             NSDateFormatter *df = [[NSDateFormatter alloc] init];
             NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-            cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",[monthName substringToIndex:3],(long)components.day];
+            cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld by %@",[monthName substringToIndex:3],(long)components.day, assignment.assignmentSubmittedBy];
         }
+          [cell.btnAssignmentStatus  addTarget:self action:@selector(btnViewSubmittedAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     if(assignment.isExpend){
         
@@ -704,6 +770,21 @@
 //    SubmitContentViewController *submitViewController=[[SubmitContentViewController alloc]init];
 //      submitViewController.assignment=assignment;
 //    [self.navigationController pushViewController:submitViewController animated:YES];
+}
+- (IBAction)btnViewSubmittedAssignmentClick:(id)sender {
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        return;
+    }
+    
+    UIButton *btn=(UIButton *)sender;
+    Assignment *assignment=[arrayAssignment objectAtIndex:btn.tag];
+    AssignmentReviewViewController *submitViewController=[[AssignmentReviewViewController alloc]init];
+    submitViewController.selectedAssignment=assignment;
+    [self.navigationController pushViewController:submitViewController animated:YES];
+   
 }
 
 #pragma mark - Comment and like on Assignment
@@ -950,6 +1031,8 @@
 
 - (IBAction)btnFilerClick:(id)sender {
     FilterViewController *filerview=[[FilterViewController alloc]initWithNibName:@"FilterViewController" bundle:nil];
-    [self.navigationController pushViewController:filerview animated:YES];
+    filerview.strComeFrom=@"a";
+    filerview.mDelegate=self;
+      [self presentViewController:filerview animated:YES  completion:nil];
 }
 @end

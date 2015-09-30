@@ -12,6 +12,109 @@
 
 @implementation AssignmentHandler
 #pragma Assignment Detail Functions
+-(void)getTeacherAssignment:(NSString*)userid  AndTextSearch:(NSString*)txtSearch AndFilterDic:(NSMutableDictionary*)filterDic success:(void (^)(NSMutableArray *assignments))success   failure:(void (^)(NSError *error))failure{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSDictionary *parameters = @{@"userId":userid,
+                                 @"searchText":txtSearch,
+                               @"schoolId":[filterDic objectForKey:@"schoolId"],@"classId":[filterDic objectForKey:@"classId"],@"hrmId":[filterDic objectForKey:@"homeRoomId"],@"courseId":[filterDic objectForKey:@"courseId"],@"moduleId":[filterDic objectForKey:@"moduleId"],@"status":[filterDic objectForKey:@"status"]
+                                 };
+    [manager POST:GET_TEACHER_ASSIGNMENT_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+        
+        //Success Full Logout
+        if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+            
+            
+            //call Block function
+            NSMutableArray *assignmentList= [[NSMutableArray alloc]init];
+            
+            for (NSDictionary *dicassignment in [responseDic objectForKey:@"assignmentList"]) {
+                Assignment *assignment= [[Assignment alloc]init];
+                assignment.assignmentId=[dicassignment objectForKey:@"assignmentId"];
+                 assignment.assignmentResourceTxnId=[dicassignment objectForKey:@"assignmentResourceTxnId"];
+                assignment.assignmentName=[dicassignment objectForKey:@"assignmentName"];
+                assignment.assignmentStatus=[dicassignment objectForKey:@"assignmentStatus"];
+                assignment.assignmentSubmittedDate=[dicassignment objectForKey:@"assignmentSubmittedDate"];
+                assignment.assignmentSubmittedBy=[dicassignment objectForKey:@"assignmentSubmittedBy"];
+                assignment.assignmentSubmittedById=[dicassignment objectForKey:@"assignmentSubmittedById"];
+                assignment.assignmentDueDate=[dicassignment objectForKey:@"assignmentDueDate"];
+                
+                assignment.assignmentDesc=[dicassignment objectForKey:@"assignmentDesc"];
+                
+                Courses *course=[[Courses alloc]init];
+                course.courseId =[dicassignment objectForKey:@"courseId"];
+                course.courseName =[dicassignment objectForKey:@"courseName"];
+                Module *module=[[Module alloc]init];
+                module.moduleId=[dicassignment objectForKey:@"moduleId"];
+                module.moduleName=[dicassignment objectForKey:@"moduleName"];
+                assignment.course=course;
+                assignment.module=module;
+                NSMutableArray *ratingParam=[[NSMutableArray alloc]init];
+               
+                //get Rating parameter
+                for (NSMutableDictionary *dicTempRatingParam in [dicassignment objectForKey:@"ratingParameters"]) {
+                    AssignmentRating *rating=[[AssignmentRating alloc]init];
+                    
+                    NSMutableDictionary *dicRatingParam=[[NSMutableDictionary alloc]init];
+                    NSString *value=[dicTempRatingParam valueForKey:@"value" ];
+                    [dicRatingParam setValue:value forKey:@"value"];
+                    value=[dicTempRatingParam valueForKey:@"key" ];
+                    [dicRatingParam setValue:value forKey:@"key"];
+                    NSMutableArray *ratingValue=[[NSMutableArray alloc]init];
+                    for (NSMutableDictionary *dicTempRatingValue in [dicTempRatingParam objectForKey:@"childs"])
+                    {
+                        NSMutableDictionary *dicRatingValues=[[NSMutableDictionary alloc]init];
+                         value=[dicTempRatingValue valueForKey:@"key" ];
+                        [dicRatingValues setValue:value forKey:@"key"];
+                         value=[dicTempRatingValue valueForKey:@"value" ];
+                        [dicRatingValues setValue:value forKey:@"value"];
+                        [ratingValue addObject:dicRatingValues];
+                        
+                    }
+                    rating.ratingParam=dicRatingParam;
+                    rating.ratingParamValues=ratingValue;
+                    [ratingParam addObject:rating];
+                }
+                assignment.ratingParam=ratingParam;
+                
+                Resourse *resource= [[Resourse alloc]init];
+                for (NSDictionary *dicRelatedResource in [dicassignment objectForKey:@"attachedResources"]) {
+                    resource.resourceId=[dicRelatedResource objectForKey:@"resourceId"];
+                    resource.resourceDesc=[dicRelatedResource objectForKey:@"resourceDesc"];
+                    resource.resourceImageUrl=[dicRelatedResource objectForKey:@"thumbImg"];
+                    resource.uploadedDate=[dicRelatedResource objectForKey:@"uploadedDate"];
+                    resource.resourceTitle=[dicRelatedResource objectForKey:@"resourceName"];
+                    resource.resourceUrl=[dicRelatedResource objectForKey:@"resourceUrl"];
+                    resource.authorImage=[dicRelatedResource objectForKey:@"authorImg"];
+                    resource.authorName=[dicRelatedResource objectForKey:@"authorName"];
+                    
+                }
+                assignment.isExpend=NO;
+                if(resource.resourceImageUrl==nil)
+                    resource=nil;
+                assignment.attachedResource=resource;
+                [assignmentList addObject:assignment];
+            }
+            success(assignmentList);
+            
+            
+        }
+        else {
+            //call Block function
+            failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+        
+    }];
+    
+}
 //get my Assignment Data
 -(void)getMyAssignments:(NSString*)userid  AndTextSearch:(NSString*)txtSearch success:(void (^)(NSMutableArray *assignments))success   failure:(void (^)(NSError *error))failure
 {
@@ -36,11 +139,14 @@
         for (NSDictionary *dicassignment in [responseDic objectForKey:@"assignmentList"]) {
             Assignment *assignment= [[Assignment alloc]init];
             assignment.assignmentId=[dicassignment objectForKey:@"assignmentId"];
+            
+             assignment.assignmentResourceTxnId=[dicassignment objectForKey:@"assignmentResourceTxnId"];
             assignment.assignmentName=[dicassignment objectForKey:@"assignmentName"];
             assignment.assignmentStatus=[dicassignment objectForKey:@"assignmentStatus"];
             assignment.assignmentSubmittedDate=[dicassignment objectForKey:@"assignmentSubmittedDate"];
             assignment.assignmentDueDate=[dicassignment objectForKey:@"assignmentDueDate"];
-            
+            assignment.assignmentSubmittedBy=[dicassignment objectForKey:@"assignmentSubmittedBy"];
+            assignment.assignmentSubmittedById=[dicassignment objectForKey:@"assignmentSubmittedById"];
             assignment.assignmentDesc=[dicassignment objectForKey:@"assignmentDesc"];
             
             Courses *course=[[Courses alloc]init];
@@ -51,7 +157,34 @@
             module.moduleName=[dicassignment objectForKey:@"moduleName"];
             assignment.course=course;
             assignment.module=module;
-           
+            NSMutableArray *ratingParam=[[NSMutableArray alloc]init];
+            
+            //get Rating parameter
+            for (NSMutableDictionary *dicTempRatingParam in [dicassignment objectForKey:@"ratingParameters"]) {
+                AssignmentRating *rating=[[AssignmentRating alloc]init];
+                
+                NSMutableDictionary *dicRatingParam=[[NSMutableDictionary alloc]init];
+                NSString *value=[dicTempRatingParam valueForKey:@"value" ];
+                [dicRatingParam setValue:value forKey:@"value"];
+                value=[dicTempRatingParam valueForKey:@"key" ];
+                [dicRatingParam setValue:value forKey:@"key"];
+                NSMutableArray *ratingValue=[[NSMutableArray alloc]init];
+                for (NSMutableDictionary *dicTempRatingValue in [dicTempRatingParam objectForKey:@"childs"])
+                {
+                    NSMutableDictionary *dicRatingValues=[[NSMutableDictionary alloc]init];
+                    value=[dicTempRatingValue valueForKey:@"key" ];
+                    [dicRatingValues setValue:value forKey:@"key"];
+                    value=[dicTempRatingValue valueForKey:@"value" ];
+                    [dicRatingValues setValue:value forKey:@"value"];
+                    [ratingValue addObject:dicRatingValues];
+                    
+                }
+                rating.ratingParam=dicRatingParam;
+                rating.ratingParamValues=ratingValue;
+                [ratingParam addObject:rating];
+            }
+            assignment.ratingParam=ratingParam;
+
   
             Resourse *resource= [[Resourse alloc]init];
             for (NSDictionary *dicRelatedResource in [dicassignment objectForKey:@"attachedResources"]) {
@@ -276,7 +409,7 @@
     
 }
 //set Assignment rating
--(void)setAssignmentRating:(NSDictionary*)selectedParam  success:(void (^)(BOOL responseValue))success   failure:(void (^)(NSError *error))failure{
+-(void)setAssignmentRating:(NSDictionary*)selectedParamValue AndParam:(NSArray*)selectedParam  AndAssignmentResourceTxnId:(NSString*)assignmentResourceTxnId success:(void (^)(BOOL responseValue))success   failure:(void (^)(NSError *error))failure{
     {
         
         
@@ -284,9 +417,22 @@
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         
-        NSDictionary *parameters = @{@"userId":[AppSingleton sharedInstance].userDetail.userId,
+        NSMutableArray *ratingParameters=[[NSMutableArray alloc]init];
+        for (AssignmentRating *rating in selectedParam) {
+            if([selectedParamValue objectForKey:rating.ratingParam]!=nil)
+            {
+                NSDictionary *tempDic=[selectedParamValue objectForKey:rating.ratingParam];
+                NSMutableDictionary *tempDicM=[[NSMutableDictionary alloc]init];
+                [tempDicM setObject:[rating.ratingParam objectForKey:@"key"] forKey:@"key"];
+                [tempDicM setObject:[tempDic objectForKey:@"key"] forKey:@"value"];
+                [ratingParameters addObject:tempDicM];
+            }
+        }
+        NSDictionary *parameters = @{@"userId":[AppSingleton sharedInstance].userDetail.userId,@"assignmentResourceTxnId":assignmentResourceTxnId,@"ratingParameters":ratingParameters
                                      };
-        [manager POST:GET_ASSIGNMENT_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+           
+    [manager POST:SET_ASSIGNMENT_RATING_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             
             NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
@@ -295,7 +441,6 @@
             if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
                 
                 // set the drop down teacher master data;
-                [AppGlobal  setDropdownList:TEACHER_DATA andData:[responseDic objectForKey:@"schoolList"]];
                 //call Block function
                 success(YES);
                 

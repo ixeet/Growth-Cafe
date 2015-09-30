@@ -142,10 +142,10 @@
     
     [objCustom.btnLogout  addTarget:self action:@selector(btnLogoutClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    CGRect cmtFrame = self.cmtview.frame;
-    cmtFrame=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
-    txtframe=cmtFrame;
-    self.cmtview.frame=cmtFrame;
+   // CGRect cmtFrame = self.cmtview.frame;
+    txtframe=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+  //  txtframe=cmtFrame;
+    self.cmtview.frame=txtframe;
     [self.view addSubview:self.cmtview];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillEnterFullscreenNotification:) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillExitFullscreenNotification:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
@@ -209,7 +209,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     
-    // [super viewWillAppear:animated];
+     [super viewWillAppear:animated];
     /* Listen for keyboard */
     
     //  NSInteger numberOfViewControllers = self.navigationController.viewControllers.count;
@@ -279,6 +279,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated
 {
+     [super viewDidDisappear:animated];
     /* remove for keyboard */
     [[NSNotificationCenter defaultCenter] removeObserver:self   name:UIKeyboardWillShowNotification object:nil];
     
@@ -1245,7 +1246,7 @@
                 [btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 
                 [btnAction.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:13.0]];
-                textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
+              //  textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
                 textSize=[AppGlobal getTheExpectedSizeOfLabel:strtrim];
                 
                 strikeWidth = textSize.width;
@@ -1668,8 +1669,8 @@
     for (NSString *strtemp in titleWords) {
         if([update.updateTitleArray count]<=textIndex)
             break ;
-        NSString* tempstr=[update.updateTitleArray
-                           objectAtIndex:textIndex];
+//        NSString* tempstr=[update.updateTitleArray
+//                           objectAtIndex:textIndex];
         NSDictionary *dictext= update.updateTitleArray[textIndex];
         if(![strtemp isEqualToString:@""])
         {
@@ -1772,9 +1773,9 @@
         //[AppGlobal showAlertWithMessage:MISSING_COMMENT title:@""];
         step=0;
         txtViewCMT.text=@"";
-        CGRect frame1 = self.cmtview.frame;
-        frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
-        txtframe=frame1;
+        //CGRect frame1 = self.cmtview.frame;
+       txtframe =CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+        //txtframe=frame1;
         return;
     }
     
@@ -1818,18 +1819,18 @@
         
     }
     txtViewCMT.text=@"";
-    CGRect frame1 = self.cmtview.frame;
-    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
-    txtframe=frame1;
+    //CGRect frame1 = self.cmtview.frame;
+    txtframe=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+    //txtframe=frame1;
     
 }
 
 - (IBAction)btnCommentCancle:(id)sender {
     [txtViewCMT resignFirstResponder];
     txtViewCMT.text=@"";
-    CGRect frame1 = self.cmtview.frame;
-    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
-    txtframe=frame1;
+   // CGRect frame1 = self.cmtview.frame;
+    txtframe=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+    //txtframe=frame1;
     
     step=0;
 }
@@ -2002,10 +2003,10 @@
     //    [UIView setAnimationDuration:0.3];
     if(!isSearching)
     {
-        CGRect frame1 = self.cmtview.frame;
-        frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
-        self.cmtview.frame = frame1;
-        txtframe=frame1;
+       // CGRect frame1 = self.cmtview.frame;
+        txtframe=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+        self.cmtview.frame = txtframe;
+       // txtframe=frame1;
     }
     //
     //    [UIView commitAnimations];

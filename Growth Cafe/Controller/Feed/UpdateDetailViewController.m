@@ -79,8 +79,7 @@
     
     [objCustom.btnLogout  addTarget:self action:@selector(btnLogoutClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    CGRect cmtFrame = self.cmtview.frame;
-    cmtFrame=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+    CGRect cmtFrame = CGRectMake(0, self.view.frame.size.height+30, 320, 40);
     txtframe=cmtFrame;
     self.cmtview.frame=cmtFrame;
     [self.view addSubview:self.cmtview];
@@ -143,7 +142,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    
+    [super viewWillAppear:animated];
     // [super viewWillAppear:animated];
     /* Listen for keyboard */
     startIndex=0;
@@ -186,6 +185,7 @@
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     /* remove for keyboard */
     [[NSNotificationCenter defaultCenter] removeObserver:self   name:UIKeyboardWillShowNotification object:nil];
     
@@ -1329,7 +1329,7 @@
         
         return;
     }
-    UIButton *btn=(UIButton *)sender;
+  //  UIButton *btn=(UIButton *)sender;
     //  NSInteger currentpage=  self.pageControl.currentPage;
     // get the current Content
 //    Update *update=[arrayUpdates objectAtIndex:btn.tag];
@@ -1350,7 +1350,7 @@
         return;
     }
     // call the service
-    UIButton *btn=(UIButton *)sender;
+    //UIButton *btn=(UIButton *)sender;
     // get the current Content
     //Update *update=[arrayUpdates objectAtIndex:btn.tag];
     
@@ -1436,8 +1436,8 @@
     for (NSString *strtemp in titleWords) {
         if([update.updateTitleArray count]<=textIndex)
             break ;
-        NSString* tempstr=[update.updateTitleArray
-                           objectAtIndex:textIndex];
+//        NSString* tempstr=[update.updateTitleArray
+//                           objectAtIndex:textIndex];
         NSDictionary *dictext= update.updateTitleArray[textIndex];
         if(![strtemp isEqualToString:@""])
         {
@@ -1557,8 +1557,7 @@
         //[AppGlobal showAlertWithMessage:MISSING_COMMENT title:@""];
         step=0;
         txtViewCMT.text=@"";
-        CGRect frame1 = self.cmtview.frame;
-        frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+        CGRect frame1 =CGRectMake(0, self.view.frame.size.height+30, 320, 40);
         txtframe=frame1;
         return;
     }
@@ -1611,8 +1610,7 @@
         
     }
     txtViewCMT.text=@"";
-    CGRect frame1 = self.cmtview.frame;
-    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+    CGRect frame1  =CGRectMake(0, self.view.frame.size.height+30, 320, 40);
     txtframe=frame1;
     
 }
@@ -1620,9 +1618,8 @@
 - (IBAction)btnCommentCancle:(id)sender {
     [txtViewCMT resignFirstResponder];
     txtViewCMT.text=@"";
-    CGRect frame1 = self.cmtview.frame;
-    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
-    txtframe=frame1;
+    txtframe =CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+  
     
     step=0;
 }
@@ -1797,8 +1794,7 @@
     //    [UIView setAnimationDuration:0.3];
     if(!isSearching)
     {
-        CGRect frame1 = self.cmtview.frame;
-        frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+        CGRect frame1 =CGRectMake(0, self.view.frame.size.height+30, 320, 40);
         self.cmtview.frame = frame1;
         txtframe=frame1;
     }

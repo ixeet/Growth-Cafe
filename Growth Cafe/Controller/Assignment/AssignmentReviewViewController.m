@@ -41,7 +41,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)viewWillAppear:(BOOL)animated{
-   
+    [super viewWillAppear:animated];
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
         if(status==AFNetworkReachabilityStatusNotReachable)
@@ -66,7 +66,10 @@
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     dicSelectedParam=[[NSMutableDictionary alloc]init];
     
-    
+    if([selectedAssignment.assignmentStatus isEqualToString:@"3"])
+    {
+        btnSubmit.hidden=YES;
+    }
 }
 
 /*
@@ -83,7 +86,7 @@
     // check validate for all value for each param
     
     for (AssignmentRating *rating in selectedAssignment.ratingParam) {
-         if([dicSelectedParam objectForKey:rating.ratingParam]==nil)
+        if([dicSelectedParam objectForKey:rating.ratingParam]==nil)
          {
              // show alert for select the rating for each param
              [AppGlobal showAlertWithMessage:key_Select_Massage(rating.ratingParam) title:@""];
@@ -92,7 +95,7 @@
     }
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
-    [[appDelegate _engine] setAssignmentRating:dicSelectedParam success:^(BOOL logoutValue) {
+    [[appDelegate _engine] setAssignmentRating:dicSelectedParam AndParam:selectedAssignment.ratingParam AndAssignmentResourceTxnId:selectedAssignment.assignmentResourceTxnId success:^(BOOL logoutValue) {
      [appDelegate hideSpinner];
     }
                                     failure:^(NSError *error) {
@@ -130,11 +133,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   
+    NSLog(@"You are in: %s", __FUNCTION__);
+
+    NSLog(@"no of row: %ld",[selectedAssignment.ratingParam count]);
     return [selectedAssignment.ratingParam count]+1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"You are in: %s", __FUNCTION__);
+
     if(indexPath.row==0)
     {
     static NSString *identifier = @"AssignmentDetailTableViewCell";
@@ -156,10 +163,6 @@
     cell.btnExpend.hidden=YES;
    
   
-    [cell.imgResource setHidden:YES];
-    [cell.btnPlay setHidden:YES];
-    [cell.lblAssignementDetail  setHidden:YES];
-    [cell.lblUploadedDate setHidden:YES];
     // [cell.btnSubmit setHidden:YES];
     
     // Set label text to attributed string
@@ -187,7 +190,7 @@
         cell.lblDateAssignment.text=[NSString stringWithFormat:@"%@ %ld",[monthName substringToIndex:3],(long)components.day];
     }
     //  cell.lblDateAssignment.text=assignment.assignmentSubmittedDate;
-    
+   
     if([assignment.assignmentStatus isEqualToString:@"1"])
     {
         NSDate *today10am =[NSDate date];
@@ -225,8 +228,6 @@
         //  cell.lblDateAssignment.textColor =[UIColor blackColor];
         
         [cell.btnAssignmentStatus setBackgroundColor:[UIColor clearColor]];
-        if(assignment.isExpend)
-            [cell.lblUploadedDate setHidden:NO];
         
         NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.attachedResource.uploadedDate];
         if(submittedDate!=nil){
@@ -236,17 +237,17 @@
             
             NSDateFormatter *df = [[NSDateFormatter alloc] init];
             NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-            cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",[monthName substringToIndex:3],(long)components.day];
+            cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld by %@",[monthName substringToIndex:3],(long)components.day, assignment.assignmentSubmittedBy];
         }
     }
     else if([assignment.assignmentStatus isEqualToString:@"3"])
     {
-        cell.btnAssignmentStatus.highlighted =YES;
+       // cell.btnAssignmentStatus.highlighted =YES;
         //   cell.lblDateAssignment.textColor =[UIColor whiteColor];
         
         //   [cell.btnAssignmentStatus setBackgroundColor:[UIColor greenColor]];
-        if(assignment.isExpend)
-            [cell.lblUploadedDate setHidden:NO];
+//        if(assignment.isExpend)
+//            [cell.lblUploadedDate setHidden:NO];
         
         NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.attachedResource.uploadedDate];
         if(submittedDate!=nil){
@@ -256,7 +257,7 @@
             
             NSDateFormatter *df = [[NSDateFormatter alloc] init];
             NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-            cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",[monthName substringToIndex:3],(long)components.day];
+            cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld by %@",[monthName substringToIndex:3],(long)components.day,assignment.assignmentSubmittedBy];
         }
     }
     
@@ -337,20 +338,29 @@
         if([AppSingleton sharedInstance].userDetail.userRole!=2)
         {
             
-            cell.lblAssignParam.text=rating.ratingParam;
-            [cell.btnParamValue setTitle:rating.ratingParamValues[0] forState:UIControlStateNormal];
+            cell.lblAssignParam.text=[[rating.ratingParam objectForKey:@"value" ] uppercaseString];
+            [cell.btnParamValue setTitle:[rating.ratingParamValues[0] objectForKey:@"value" ]  forState:UIControlStateNormal];
             cell.lblDots.hidden=YES;
             
         }else{
-            cell.lblAssignParam.text=rating.ratingParam;
+            cell.lblAssignParam.text=[[rating.ratingParam objectForKey:@"value" ]  uppercaseString];
             cell.btnParamValue.tag  =indexPath.row-1;
+            if([rating.ratingParamValues  count]==1)
+            {
+                NSLog(@"%@",[rating.ratingParamValues[0] objectForKey:@"value" ] );
+                [cell.btnParamValue setTitle:[rating.ratingParamValues[0] objectForKey:@"value" ]  forState:UIControlStateNormal];
+
+            }else{
            [cell.btnParamValue addTarget:self action:@selector(btnParamValueClick:) forControlEvents:UIControlEventTouchUpInside];
             if ([dicSelectedParam objectForKey:rating.ratingParam]!=nil) {
                 
             
-            [cell.btnParamValue setTitle:[dicSelectedParam objectForKey:rating.ratingParam] forState:UIControlStateNormal];
+            [cell.btnParamValue setTitle:[[dicSelectedParam objectForKey:rating.ratingParam] valueForKey: @"value"] forState:UIControlStateNormal];
+               
+               // [cell.btnParamValue setTitle:rating.ratingParamValues[0] forState:UIControlStateNormal];
             }else{
              [cell.btnParamValue setTitle:key_Select_Rating forState:UIControlStateNormal];
+            }
             }
         // set color code
             
@@ -378,6 +388,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"You are in: %s", __FUNCTION__);
+
     Assignment *assignment=selectedAssignment;
     if(indexPath.row==0)
     {
@@ -566,6 +578,10 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)componen
 {
+ if([selectedAssignment.assignmentStatus isEqualToString:@"3"])
+ {
+     return 0;
+ }
     AssignmentRating *rating=selectedAssignment.ratingParam[selectParam];
     return [rating.ratingParamValues count];
 }
@@ -583,8 +599,9 @@
     
     AssignmentRating *rating=selectedAssignment.ratingParam[selectParam];
   
-    //NSDictionary *responseDic = [ rating.ratingParamValues objectAtIndex:row];
-    return [ rating.ratingParamValues objectAtIndex:row];
+    NSDictionary *responseDic = [ rating.ratingParamValues objectAtIndex:row];
+    
+    return [ responseDic objectForKey:@"value"];
     
 }
 - (IBAction)mBtnCancelPicker:(id)sender {
@@ -596,8 +613,9 @@
     
     [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:NO];
     AssignmentRating *rating=selectedAssignment.ratingParam[selectParam];
-    [ rating.ratingParamValues objectAtIndex:mIntRow];
-    [dicSelectedParam setObject: [ rating.ratingParamValues objectAtIndex:mIntRow] forKey:rating.ratingParam];
+    NSDictionary *responseDic = [ rating.ratingParamValues objectAtIndex:mIntRow];
+    
+    [dicSelectedParam setObject:responseDic forKey:rating.ratingParam];
     [tableViewAssignmentrating reloadData];
 }
 

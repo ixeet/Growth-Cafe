@@ -79,6 +79,7 @@
  */
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
         if(status==AFNetworkReachabilityStatusNotReachable)
@@ -641,7 +642,11 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
         return [arrayAllData count];
         
     }break;
- 
+    case REVIEW_STATUS_DATA:
+    {
+        return 0;
+        
+    }break;
         
     default:
         [NSException raise:NSGenericException format:@"Unexpected FormatType."];
@@ -712,7 +717,11 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
             return [responseDic objectForKey:@"Title"];
             break;
         }
-
+        case REVIEW_STATUS_DATA:
+        {
+            return 0;
+            
+        }break;
         default:
             [NSException raise:NSGenericException format:@"Unexpected FormatType."];
     }
@@ -812,7 +821,7 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
     //    [self changeFrameAndBackgroundImg];
 }
 -(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
-    NSLog(@"%@", user);
+  //  NSLog(@"%@", user);
     //if user is already sign in Then validate with server.
     
     // get user id

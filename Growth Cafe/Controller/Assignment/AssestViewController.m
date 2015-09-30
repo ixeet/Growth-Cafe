@@ -30,6 +30,7 @@
 - (void) viewWillAppear:(BOOL)animated  {
     
     // collect the photos
+    [super viewWillAppear:animated];
     NSMutableArray *collector = [[NSMutableArray alloc] initWithCapacity:0];
     ALAssetsLibrary *al = [AssestViewController defaultAssetsLibrary];
     
@@ -62,11 +63,11 @@
     UIButton *btn=(UIButton *)sender;
     ALAsset *asset = [self.photos objectAtIndex:btn.tag];
     
-    NSMutableDictionary   *dic = [[NSMutableDictionary alloc] init];
+ //   NSMutableDictionary   *dic = [[NSMutableDictionary alloc] init];
     ALAssetRepresentation *defaultRepresentation = [asset defaultRepresentation];
     NSString *uti = [defaultRepresentation UTI];
     NSURL  *videoURL = [[asset valueForProperty:ALAssetPropertyURLs] valueForKey:uti];
-    NSString *title = [NSString stringWithFormat:@"video %d", arc4random()%100];
+  //  NSString *title = [NSString stringWithFormat:@"video %d", arc4random()%100];
     //                     UIImage *image = [self imageFromVideoURL:videoURL];
 
     [self PlayTheVideo:videoURL];
@@ -231,7 +232,7 @@
     ALAsset *asset = [self.photos objectAtIndex:indexPath.row];
     
    // NSMutableDictionary   *dic = [[NSMutableDictionary alloc] init];
-                         ALAssetRepresentation *defaultRepresentation = [asset defaultRepresentation];
+//                         ALAssetRepresentation *defaultRepresentation = [asset defaultRepresentation];
                          //NSString *uti = [defaultRepresentation UTI];
 //                         NSURL  *videoURL = [[asset valueForProperty:ALAssetPropertyURLs] valueForKey:uti];
                          NSString *title = [NSString stringWithFormat:@"video %d", arc4random()%100];

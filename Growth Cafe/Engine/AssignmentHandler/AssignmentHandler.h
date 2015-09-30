@@ -14,10 +14,12 @@
 //get my Assignment Data
 -(void)getMyAssignments:(NSString*)userid  AndTextSearch:(NSString*)txtSearch success:(void (^)(NSMutableArray *assignments))success   failure:(void (^)(NSError *error))failure;
 
-//set Assignment rating
--(void)setAssignmentRating:(NSDictionary*)selectedParam  success:(void (^)(BOOL responseValue))success   failure:(void (^)(NSError *error))failure;
-//upload assignment
+-(void)getTeacherAssignment:(NSString*)userid  AndTextSearch:(NSString*)txtSearch AndFilterDic:(NSMutableDictionary*)filterDic success:(void (^)(NSMutableArray *assignments))success   failure:(void (^)(NSError *error))failure;
 
+//set Assignment rating
+-(void)setAssignmentRating:(NSDictionary*)selectedParamValue AndParam:(NSArray*)selectedParam AndAssignmentResourceTxnId:(NSString*)assignmentResourceTxnId success:(void (^)(BOOL responseValue))success   failure:(void (^)(NSError *error))failure;
+
+//upload assignment
 -(void)uploadAssignment:(NSString*)videoTitle  AndVideoDesc:(NSString*)videoDesc AndVideoURL:(NSString*)videoURL AndVideoPath:(ALAsset*)videoPath andFileName:(NSString *)fileName AndAssignment:(NSString*)assignmentId
                 success:(void (^)(BOOL logoutValue))success   failure:(void (^)(NSError *error))failure;
 

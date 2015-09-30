@@ -25,11 +25,12 @@
     
     AFNetworkReachabilityStatus previousStatus;
     int currentExpandedIndex;
+    NSMutableDictionary *filterDic;
 }
 @end
 
 @implementation CourseViewController
-@synthesize btnAssignment,btnCourses,btnMore,btnBack,btnNotification,btnUpdates,txtSearchBar,objCustom,coursesList,comeFromUpdate,btnFiler  ;
+@synthesize btnAssignment,btnCourses,btnMore,btnBack,btnNotification,btnUpdates,txtSearchBar,objCustom,coursesList,comeFromUpdate,btnFiler,viewFilter  ;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -78,7 +79,14 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     
+    filterDic =[[NSMutableDictionary alloc]init];
+    [filterDic setValue:@"0"forKey:@"schoolId"];
+    [filterDic setValue:@"0"forKey:@"classId"];
+    [filterDic setValue:@"0"forKey:@"homeRoomId"];
+    [filterDic setValue:@"0"forKey:@"courseId"];
+    [filterDic setValue:@"0"forKey:@"moduleId"];
     
+    [filterDic setValue:@"2"forKey:@"status"];
      previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
     [self setSearchUI];
     btnCourses.selected=YES;
@@ -121,6 +129,7 @@
     if([AppSingleton sharedInstance].userDetail.userRole!=2)
     {
         btnFiler.hidden=YES;
+        viewFilter.hidden=YES;
         CGRect rect= tableViewCourse.frame;
         if( rect.origin.y!=70){
             rect.size.height= rect.size.height+rect.origin.y-70;
@@ -129,11 +138,12 @@
         }
     }else{
         btnFiler.hidden=NO;
+        viewFilter.hidden=NO;
         CGRect rect= tableViewCourse.frame;
         
         if( rect.origin.y==70){
-            rect.size.height= rect.size.height-(109-70);
-            rect.origin.y=109;
+            rect.size.height= rect.size.height-(130-70);
+            rect.origin.y=130;
             tableViewCourse.frame=rect;
             
         }
@@ -143,6 +153,7 @@
     if([AppSingleton sharedInstance].userDetail.userRole!=2)
     {
         btnFiler.hidden=YES;
+        viewFilter.hidden=YES;
         CGRect rect= tableViewCourse.frame;
         if( rect.origin.y!=70){
             rect.size.height= rect.size.height+rect.origin.y-70;
@@ -151,11 +162,12 @@
         }
     }else{
         btnFiler.hidden=NO;
+        viewFilter.hidden=NO;
         CGRect rect= tableViewCourse.frame;
         
         if( rect.origin.y==70){
-            rect.size.height= rect.size.height-(109-70);
-            rect.origin.y=109;
+            rect.size.height= rect.size.height-(130-70);
+            rect.origin.y=130;
             tableViewCourse.frame=rect;
             
         }
@@ -312,7 +324,17 @@
     [self getCourses:searchBar.text];
    // [self searchTableList];
 }
-
+-(void)DidSelectFilter:(NSMutableDictionary * )dicfilter andSender:(id)sender
+{
+    filterDic=dicfilter;
+    [self getCourses:txtSearchBar.text];
+    [sender dismissViewControllerAnimated:YES completion:nil];
+    
+}
+-(void)DidNoSelectFilter:(id)sender
+{
+    [sender dismissViewControllerAnimated:YES completion:nil];
+}
 #pragma mark Course Private functions
 -(void) getCourses:(NSString *) txtSearch
 {
@@ -323,7 +345,21 @@
     }
 
    NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId];
+    if([AppSingleton sharedInstance].userDetail.userRole==2)
+    {
+        
+        [self getTeacherCourses:userid];
+        
+    }else{
+        [self getStudentCourses:userid AndTextSearch:txtSearch];
+    }
     
+    
+    
+
+}
+-(void)getStudentCourses:(NSString *)userid AndTextSearch:(NSString *)txtSearch
+{
     //Show Indicator
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
@@ -334,23 +370,49 @@
         for (Courses *course in coursesList) {
             [moduleArray addObject:course.moduleList];
         }
-
+        
         [tableViewCourse reloadData];
-              // [self loginSucessFullWithFB];
+        // [self loginSucessFullWithFB];
         
         //Hide Indicator
         [appDelegate hideSpinner];
     }
-                                     failure:^(NSError *error) {
-                                         //Hide Indicator
-                                         [appDelegate hideSpinner];
-                                         NSLog(@"failure JsonData %@",[error description]);
-                                         [self loginError:error];
-//                                         [self loginViewShowingLoggedOutUser:loginView];
-                                         
-                                     }];
+                               failure:^(NSError *error) {
+                                   //Hide Indicator
+                                   [appDelegate hideSpinner];
+                                   NSLog(@"failure JsonData %@",[error description]);
+                                   [self loginError:error];
+                                   //                                         [self loginViewShowingLoggedOutUser:loginView];
+                                   
+                               }];
+}
+-(void)getTeacherCourses:(NSString *)userid
+{
+    //Show Indicator
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
-
+    [[appDelegate _engine] getCourse:userid  AndFilter:filterDic success:^(NSMutableArray *courses) {
+        coursesList=courses;
+        moduleArray     = [NSMutableArray new];
+        currentExpandedIndex = -1;
+        for (Courses *course in coursesList) {
+            [moduleArray addObject:course.moduleList];
+        }
+        
+        [tableViewCourse reloadData];
+        // [self loginSucessFullWithFB];
+        
+        //Hide Indicator
+        [appDelegate hideSpinner];
+    }
+                               failure:^(NSError *error) {
+                                   //Hide Indicator
+                                   [appDelegate hideSpinner];
+                                   NSLog(@"failure JsonData %@",[error description]);
+                                   [self loginError:error];
+                                   //                                         [self loginViewShowingLoggedOutUser:loginView];
+                                   
+                               }];
 }
 -(void)loginError:(NSError*)error{
     
@@ -666,6 +728,8 @@
 }
 - (IBAction)btnFilerClick:(id)sender {
     FilterViewController *filerview=[[FilterViewController alloc]initWithNibName:@"FilterViewController" bundle:nil];
-    [self.navigationController pushViewController:filerview animated:YES];
+    filerview.strComeFrom=@"c";
+    filerview.mDelegate=self;
+    [self presentViewController:filerview animated:YES  completion:nil];
 }
 @end

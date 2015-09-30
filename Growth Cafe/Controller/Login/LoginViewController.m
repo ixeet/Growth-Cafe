@@ -13,6 +13,7 @@
 #import "RegisterationViewController.h"
 #import "UpdateViewController.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "FilterViewController.h"
 
 @interface LoginViewController() <CustomKeyboardDelegate>
 {
@@ -70,6 +71,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     btnFacebook.delegate=self;
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
@@ -91,6 +93,7 @@
  [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 }
 -(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     btnFacebook.delegate=nil;
 }
 
@@ -298,8 +301,11 @@
 }
 
 - (IBAction)btnCreatAccount:(id)sender {
-    RegisterationViewController *viewController= [[RegisterationViewController alloc]initWithNibName:@"RegisterationViewController" bundle:nil];
-    [self.navigationController pushViewController:viewController animated:YES];
+//    RegisterationViewController *viewController= [[RegisterationViewController alloc]initWithNibName:@"RegisterationViewController" bundle:nil];
+//    [self.navigationController pushViewController:viewController animated:NO];
+    
+    FilterViewController *viewController= [[FilterViewController alloc]initWithNibName:@"FilterViewController" bundle:nil];
+    [self.navigationController pushViewController:viewController animated:NO];
     
 }
 
@@ -319,9 +325,15 @@
     [defaults setObject:txtPassword.text  forKey:@"Password"];
     [txtUsername setText:@""];
     [txtPassword setText:@""];
+    NSString *token = [AppSingleton   sharedInstance].deviceToken;
+    
+    if (token == nil)
+    {
+        token = @"simulator";
+    }
     if(![AppGlobal getValueInDefault:DEVICE_TOKEN_REGISTER]){
     NSString *deviceName = [[UIDevice currentDevice] name];
-    [[appDelegate _engine] registerTheDeviceToken: [AppSingleton   sharedInstance].deviceToken deviceType: deviceName success:^(BOOL logoutValue){
+    [[appDelegate _engine] registerTheDeviceToken:token deviceType: deviceName success:^(BOOL logoutValue){
         [AppGlobal setValueInDefault:DEVICE_TOKEN_REGISTER value:@"1"];
     }failure:^(NSError *error){
       

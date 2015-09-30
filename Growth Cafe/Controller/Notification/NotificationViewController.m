@@ -139,7 +139,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     
-    // [super viewWillAppear:animated];
+     [super viewWillAppear:animated];
     /* Listen for keyboard */
     
     //  NSInteger numberOfViewControllers = self.navigationController.viewControllers.count;
@@ -208,6 +208,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     /* remove for keyboard */
     [[NSNotificationCenter defaultCenter] removeObserver:self   name:UIKeyboardWillShowNotification object:nil];
     
@@ -236,7 +237,7 @@
 {
     NSDictionary* keyboardInfo = [notification userInfo];
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
-    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+   // CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
     //    CGRect frame1 = self.cmtview.frame;
     //    frame1=CGRectMake(0, 400, 320, 40);
     //
@@ -581,7 +582,7 @@
         scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
                                                            withString:@""];
         // Set label text to attributed string
-        NSString *str = [NSString stringWithFormat:@"%@ ago" ,scincetime];
+       // NSString *str = [NSString stringWithFormat:@"%@ ago" ,scincetime];
         //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
     if(update.viewStatus ==1 )
     {
@@ -713,7 +714,7 @@
                 [btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 
                 [btnAction.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:13.0]];
-                textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
+               // textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
                 textSize=[AppGlobal getTheExpectedSizeOfLabel:strtrim];
                 
                 strikeWidth = textSize.width;
@@ -898,8 +899,8 @@
     for (NSString *strtemp in titleWords) {
         if([update.updateTitleArray count]<=textIndex)
             break ;
-        NSString* tempstr=[update.updateTitleArray
-                           objectAtIndex:textIndex];
+//        NSString* tempstr=[update.updateTitleArray
+//                           objectAtIndex:textIndex];
         NSDictionary *dictext= update.updateTitleArray[textIndex];
         if(![strtemp isEqualToString:@""])
         {

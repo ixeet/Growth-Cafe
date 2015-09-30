@@ -39,9 +39,11 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     btnFacebook.delegate=self;
 }
 -(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     btnFacebook.delegate=nil;
 }
 /*

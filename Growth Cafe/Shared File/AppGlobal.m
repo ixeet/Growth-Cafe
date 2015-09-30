@@ -248,6 +248,13 @@
 //            filePath =  [NSString stringWithFormat:@"%@/%@.txt",[arr objectAtIndex:0],[self getDropdownFileName:dropdownName] ];
             
         }break;
+        case REVIEW_STATUS_DATA:
+        {
+            filePath =  [[NSBundle mainBundle] pathForResource:[self getDropdownFileName:dropdownName] ofType:@"txt"];
+            //            NSArray *arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            //            filePath =  [NSString stringWithFormat:@"%@/%@.txt",[arr objectAtIndex:0],[self getDropdownFileName:dropdownName] ];
+            
+        }break;
         default:
             break;
     }
@@ -292,6 +299,9 @@
             
         case COURSE_DATA:
             fileName = @"CourseList";
+            break;
+        case REVIEW_STATUS_DATA:
+            fileName = @"ReviewStatus";
             break;
         
 
@@ -544,7 +554,7 @@
     // or specifc Timezone: with name
     NSDateFormatter *format = [[NSDateFormatter alloc]init];
     [format setDateFormat:key_Custom_DateFormate];
-    NSTimeZone* localTimeZone = [NSTimeZone localTimeZone];
+    //NSTimeZone* localTimeZone = [NSTimeZone localTimeZone];
      NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
    format.timeZone=timeZone;
     NSDate *date=[format dateFromString:localDateString];
@@ -582,7 +592,6 @@
 // this method is used to get the server's url from settings bundle
 + (NSString*)getServerURL
 {
-    NSString* settingsUrl = [[NSUserDefaults standardUserDefaults] valueForKey:@"url_preference"];
     
     NSString *bPath = [[NSBundle mainBundle] bundlePath];
     NSString *settingsBundlePath = [bPath stringByAppendingPathComponent:@"Settings.bundle"];
@@ -606,7 +615,7 @@
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    settingsUrl = [[NSUserDefaults standardUserDefaults] valueForKey:@"url_preference"];
+    NSString *settingsUrl = [[NSUserDefaults standardUserDefaults] valueForKey:@"url_preference"];
     
     if(settingsUrl == nil){
         settingsUrl = kProdURL;

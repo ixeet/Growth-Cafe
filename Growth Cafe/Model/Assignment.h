@@ -12,7 +12,7 @@
 #import"Module.h"
 #import "AssignmentRating.h"
 @interface Assignment : NSObject
-
+@property (nonatomic,strong) NSString* assignmentResourceTxnId;
 @property (nonatomic,strong) NSString* assignmentId;
 @property (nonatomic,strong) NSString* assignmentName;
 @property (nonatomic,strong) NSString* assignmentDesc;
@@ -20,6 +20,7 @@
 @property (nonatomic,strong) NSString* assignmentSubmittedDate;
 @property (nonatomic,strong) NSString* assignmentDueDate;
 @property (nonatomic,strong) NSString* assignmentSubmittedBy;
+@property (nonatomic,strong) NSString* assignmentSubmittedById;
 @property (nonatomic,strong) Resourse* attachedResource;
 @property (nonatomic,strong) NSString* resourceId;
 @property (nonatomic,strong) Courses    *course;

@@ -89,10 +89,9 @@ AFNetworkReachabilityStatus previousStatus;
    // self.scrollView.contentInset.bottom=200.0f;
 
    //  self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, -5, 0);
-    CGRect frame1 = self.cmtview.frame;
-    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
-     txtframe=frame1;
-    self.cmtview.frame=frame1;
+   txtframe =CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+    
+    self.cmtview.frame=txtframe;
     [self.view addSubview:self.cmtview];
     btnCourses.selected=YES;
     
@@ -129,6 +128,8 @@ AFNetworkReachabilityStatus previousStatus;
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated ];
+
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
         if(status==AFNetworkReachabilityStatusNotReachable)
@@ -182,6 +183,8 @@ AFNetworkReachabilityStatus previousStatus;
 
 -(void)viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated ];
+
     /* remove for keyboard */
     [[NSNotificationCenter defaultCenter] removeObserver:self   name:UIKeyboardWillShowNotification object:nil];
    
@@ -465,8 +468,8 @@ AFNetworkReachabilityStatus previousStatus;
         SLComposeViewController * fbSheetOBJ = [SLComposeViewController
                                                 composeViewControllerForServiceType:SLServiceTypeFacebook];
         
-        NSString *strText = [NSString
-                             stringWithFormat:@"%@",selectedResource.resourceDesc];
+//        NSString *strText = [NSString
+//                             stringWithFormat:@"%@",selectedResource.resourceDesc];
         //      NSString *strText = [NSString stringWithFormat:@"%@\n%@",[self updateTitle:update],update.resource.resourceDesc];
         [fbSheetOBJ  setInitialText:selectedResource.resourceDesc];
         
@@ -581,9 +584,9 @@ AFNetworkReachabilityStatus previousStatus;
     {
       //  [AppGlobal showAlertWithMessage:MISSING_COMMENT title:@""];
         txtViewCMT.text=@"";
-        CGRect frame1 = self.cmtview.frame;
-        frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
-        txtframe=frame1;
+       // CGRect frame1 = self.cmtview.frame;
+        txtframe=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+        //txtframe=frame1;
          step=0;
     }
    
@@ -649,9 +652,9 @@ AFNetworkReachabilityStatus previousStatus;
 - (IBAction)btnCommentCancle:(id)sender {
      [txtViewCMT resignFirstResponder];
     txtViewCMT.text=@"";
-    CGRect frame1 = self.cmtview.frame;
-    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
-    txtframe=frame1;
+    //CGRect frame1 = self.cmtview.frame;
+    txtframe=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+    //txtframe=frame1;
 
     step=0;
 }
@@ -795,7 +798,7 @@ AFNetworkReachabilityStatus previousStatus;
         NSInteger pageCount = [contentList count];
         
         // Set up the page control
-         NSInteger page = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + self.scrollView.frame.size.width) / (self.scrollView.frame.size.width * 2.0f));
+//         NSInteger page = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + self.scrollView.frame.size.width) / (self.scrollView.frame.size.width * 2.0f));
          
 
         // Set up the content size of the scroll view
@@ -1208,7 +1211,7 @@ AFNetworkReachabilityStatus previousStatus;
         if( scrollView.tag==20){
             if (scrollView.contentOffset.y >2)
             {
-                scrollDirection = ScrollDirectionDown;
+                //scrollDirection = ScrollDirectionDown;
                 
                 
                 self.lastContentOffset = scrollView.contentOffset.y;
@@ -1243,7 +1246,7 @@ AFNetworkReachabilityStatus previousStatus;
         }else if( scrollView.tag==10){
             if (scrollView.contentOffset.y<-2)
             {
-                scrollDirection = ScrollDirectionDown;
+               // scrollDirection = ScrollDirectionDown;
                 
                 
                 self.lastContentOffsetOfTable = scrollView.contentOffset.y;
@@ -2303,10 +2306,10 @@ AFNetworkReachabilityStatus previousStatus;
     //    [UIView setAnimationDuration:0.3];
     if(!isSearching)
     {
-        CGRect frame1 = self.cmtview.frame;
-        frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
-        self.cmtview.frame = frame1;
-     txtframe=frame1;
+       // txtframe = self.cmtview.frame;
+        txtframe=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+        self.cmtview.frame = txtframe;
+       
     }
     //
     //    [UIView commitAnimations];
