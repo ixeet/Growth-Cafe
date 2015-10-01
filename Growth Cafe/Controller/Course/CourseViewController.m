@@ -521,7 +521,7 @@
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-        
+        monthName=[AppGlobal getMonthTimed:monthName];
        
         [cell.lblDate setText: [NSString stringWithFormat:@"%@ %ld",monthName,components.day]];
         }

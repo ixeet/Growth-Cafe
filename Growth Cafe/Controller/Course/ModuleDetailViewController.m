@@ -89,7 +89,7 @@ AFNetworkReachabilityStatus previousStatus;
    // self.scrollView.contentInset.bottom=200.0f;
 
    //  self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, -5, 0);
-   txtframe =CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+   txtframe =CGRectMake(0, 1300, self.view.frame.size.width, 40);
     
     self.cmtview.frame=txtframe;
     [self.view addSubview:self.cmtview];
@@ -2135,14 +2135,15 @@ AFNetworkReachabilityStatus previousStatus;
             width=270;
         }
         CGSize labelSize=[AppGlobal   getTheExpectedSizeOfLabel:comment.commentTxt andFontSize:13 labelWidth:width];
-        if(labelSize.height>17)
-                return   height=height+80+labelSize.height-17.0;
+        
+                if(labelSize.height>17)
+               return   height=height+80+labelSize.height-17.0;
             else
                 return  height=height+80;
     }
     else if(indexPath.section==2 )
     {
-        float height=73.0f;
+        float height=78.0f;   ///////////////////change the height from 73 to 78 by raj
         static NSString *identifier = @"AssignmentTableViewCell";
         AssignmentTableViewCell *cell = (AssignmentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
         NSLog(@"%f",cell.lblContentName.frame.size.width);
@@ -2176,18 +2177,46 @@ AFNetworkReachabilityStatus previousStatus;
         }
         CGSize labelSize=[AppGlobal   getTheExpectedSizeOfLabel:realtedResource.resourceTitle andFontSize:14 labelWidth:width];
         
-       if(labelSize.height>17){
-             return  height=height+labelSize.height-17;
-        }
-        else if([realtedResource.resourceTitle length]>34 &&  (screenHeight > 480 && screenHeight < 667 ))
-        {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)  /////////////////   check for device by raj
             
-            return  height=height+labelSize.height;
-        }else if([realtedResource.resourceTitle length]>42 &&  screenHeight < 480)
-        {
+                            {
             
-            return  height=height+labelSize.height;
-        }
+                                if(labelSize.height>17){
+                                    return  height=height+labelSize.height-17;
+                                }
+                                
+                                
+                                else if([realtedResource.resourceTitle length]>34 &&  (screenHeight > 480 && screenHeight < 667 ))
+                                {
+                                    
+                                    return  height=height+labelSize.height;
+                                }else if([realtedResource.resourceTitle length]>42 &&  screenHeight < 480)
+                                {
+                                    
+                                    return  height=height+labelSize.height;
+                                }
+            
+                           }
+ 
+    
+
+            
+            
+      
+//       if(labelSize.height>17){
+//             return  height=height+labelSize.height-17;
+//        }
+//        
+//        
+//        else if([realtedResource.resourceTitle length]>34 &&  (screenHeight > 480 && screenHeight < 667 ))
+//        {
+//            
+//            return  height=height+labelSize.height;
+//        }else if([realtedResource.resourceTitle length]>42 &&  screenHeight < 480)
+//        {
+//            
+//            return  height=height+labelSize.height;
+//        }
         
         return height;
 //        else

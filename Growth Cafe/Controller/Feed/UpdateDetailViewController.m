@@ -79,7 +79,8 @@
     
     [objCustom.btnLogout  addTarget:self action:@selector(btnLogoutClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    CGRect cmtFrame = CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+    CGRect cmtFrame = self.cmtview.frame;
+    cmtFrame=CGRectMake(0, 1200,self.view.frame.size.width, 40);
     txtframe=cmtFrame;
     self.cmtview.frame=cmtFrame;
     [self.view addSubview:self.cmtview];
@@ -988,8 +989,19 @@
         if(objUpdate.resource!=nil)
         {
             
-            height=163.0f;
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            {
+                height=200.0f;
+            }
+            
+            
+            else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            {
+                height=300.0f;
+            }
         }
+
+       
         
         NSString *titleString =objUpdate.updateTitle;
         NSArray *titleWords = [titleString componentsSeparatedByString:@"$"];
