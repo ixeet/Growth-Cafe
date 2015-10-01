@@ -467,6 +467,9 @@
         
         // create custom view for title
         cell.lblAssignmentTitle.text =assignment.assignmentName;
+    cell.lblAssignementDetail.textColor = [UIColor colorWithRed:(20/255.f) green:(24/255.f) blue:(35/255.f) alpha:1];/////////////////////////////////////////////////////////////////////////////done by raj
+    
+    
    
                //  cell.viewDetail.frame=CGRectMake(0, 0, x, 60);
     cell.btnExpend.tag=indexPath.row;
@@ -474,7 +477,12 @@
     [cell.btnExpend setImage:[UIImage imageNamed:@"icn_arrow.png"] forState:UIControlStateNormal];
    [cell.imgResource setHidden:YES];
     [cell.btnPlay setHidden:YES];
-    [cell.lblAssignementDetail  setHidden:YES];
+    
+    
+     [cell.lblCourse  setHidden:YES];
+    [cell.lblUploadedDate setHidden:YES];
+    
+  //  [cell.lblAssignementDetail  setHidden:YES];
   //  [cell.lblUploadedDate setHidden:YES];
    // [cell.btnSubmit setHidden:YES];
    
@@ -606,7 +614,8 @@
         
         [cell.imgResource.superview addConstraints:@[ backdropViewHeight]];
 
-        
+        [cell.lblCourse setHidden:NO];/////////////////////////////////////////////// done by raj
+        [cell.lblCourse setAttributedText:attributedString];
         [cell.btnExpend setImage:[UIImage imageNamed:@"icn_arrow-expand.png"] forState:UIControlStateNormal];
         if(assignment.assignmentDesc!=nil)
         {
@@ -625,6 +634,7 @@
             if(assignment.attachedResource.resourceImageUrl!=nil){
                 cell.btnPlay.tag=indexPath.row;
                 [cell.btnPlay setHidden:NO];
+                [cell.lblUploadedDate setHidden:NO];
                 [cell.imgResource setHidden:NO];
                 [cell.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
                 if([AppGlobal checkImageAvailableAtLocal:assignment.attachedResource.resourceImageUrl])
@@ -659,10 +669,11 @@
             }
         }
        
-    }          //set action for comment and like on resource
+    }  else {        //set action for comment and like on resource
     
-        return cell;
-   
+       [cell.lblAssignementDetail setAttributedText:attributedString];////////////////////////////////////////////////////////////////////////////////  done by raj
+    }
+     return cell;
 }
 
 
@@ -688,14 +699,22 @@
     Assignment *assignment=arrayAssignment[indexPath.row];
     if(assignment.isExpend==NO)
     {
-        return 90.0f;
-        
+        return 70.0f;  //   height change from 90 to 80 by raj  start
     }else{
-        float height=90.0f;
+        float height=70.0f;
+
         if(assignment.attachedResource!=nil)
         {
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            {
+               height=height+163.0f;          }
             
-            height=height+163.0f;
+            
+            else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            {
+               height=height+250.0f;
+            }
+            //height change from 90 to 80 by raj end
         }
         float width=200;
         if( screenHeight <740 && screenHeight >667 )
