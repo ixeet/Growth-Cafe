@@ -7,6 +7,7 @@
 //
 
 #import "MoreViewController.h"
+#import "SettingViewController.h"
 
 @interface MoreViewController ()
 
@@ -41,6 +42,8 @@
 }
 
 - (IBAction)btnSettingClick:(id)sender {
+    SettingViewController *viewSetting=[[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
+    [self.navigationController pushViewController:viewSetting animated:YES];
 }
 -(void)setUserProfile {
     // UserDetails *user=[AppGlobal readUserDetail];

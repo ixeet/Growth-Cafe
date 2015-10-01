@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface SettingViewController : UIViewController
-
+{
+    IBOutlet UITableView *tblSetting;
+    
+}
+- (IBAction)btnBackclick:(id)sender;
 @end
