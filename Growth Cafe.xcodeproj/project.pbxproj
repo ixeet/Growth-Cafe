@@ -423,6 +423,12 @@
 		A89BFF531BBD0ADE001ABDBB /* unfollowed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unfollowed@3x.png"; sourceTree = "<group>"; };
 		A89BFF671BBD3AA0001ABDBB /* SettingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingHandler.h; path = SettingHandler/SettingHandler.h; sourceTree = "<group>"; };
 		A89BFF681BBD3AA0001ABDBB /* SettingHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingHandler.m; path = SettingHandler/SettingHandler.m; sourceTree = "<group>"; };
+		A89BFF6B1BBFC43F001ABDBB /* FollowListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowListViewController.h; sourceTree = "<group>"; };
+		A89BFF6C1BBFC43F001ABDBB /* FollowListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowListViewController.m; sourceTree = "<group>"; };
+		A89BFF6D1BBFC43F001ABDBB /* FollowListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowListViewController.xib; sourceTree = "<group>"; };
+		A89BFF701BBFC473001ABDBB /* UserCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCollectionViewCell.h; sourceTree = "<group>"; };
+		A89BFF711BBFC473001ABDBB /* UserCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCollectionViewCell.m; sourceTree = "<group>"; };
+		A89BFF721BBFC473001ABDBB /* UserCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCollectionViewCell.xib; sourceTree = "<group>"; };
 		A8A520B21BA822B400C470AA /* NotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationTableViewCell.h; path = NotificationCell/NotificationTableViewCell.h; sourceTree = "<group>"; };
 		A8A520B31BA822B400C470AA /* NotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationTableViewCell.m; path = NotificationCell/NotificationTableViewCell.m; sourceTree = "<group>"; };
 		A8A520B41BA822B400C470AA /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NotificationTableViewCell.xib; path = NotificationCell/NotificationTableViewCell.xib; sourceTree = "<group>"; };
@@ -1687,11 +1693,8 @@
 				A8E419741B8F0074004A7338 /* img_search-boxn111@3x.png in Resources */,
 				C9C266111B7B819100EA4F38 /* icn_search@2x.png in Resources */,
 				A89923111BB54568009BA42C /* SearchViewController.xib in Resources */,
-<<<<<<< Updated upstream
-				A89BFF5A1BBD0ADE001ABDBB /* hide_user@2x.png in Resources */,
-=======
-				03E1CB3C1BBC1C5E007F1AF6 /* CourseViewController.xib in Resources */,
->>>>>>> Stashed changes
+
+
 				C9C2662B1B7B819100EA4F38 /* validate-facebook@2x.png in Resources */,
 				C9C265E01B7B819100EA4F38 /* icn_grade-aplus@3X.png in Resources */,
 				03E1CB581BBC1D9B007F1AF6 /* ForgetPasswordViewController.xib in Resources */,
@@ -1709,12 +1712,6 @@
 				03E1CB5A1BBC1DA5007F1AF6 /* LoginViewController.xib in Resources */,
 				C9C265EA1B7B819100EA4F38 /* bg_home@3x.png in Resources */,
 				C9C264961B7B7BCB00EA4F38 /* titleList.txt in Resources */,
-<<<<<<< Updated upstream
-				A89BFF5B1BBD0ADE001ABDBB /* hide_user@3x.png in Resources */,
-				A8D73DD81B7E06D30022C1A0 /* AssestTableViewCell.xib in Resources */,
-=======
-				03E1CB501BBC1D52007F1AF6 /* UpdateViewController.xib in Resources */,
->>>>>>> Stashed changes
 				C9C265F21B7B819100EA4F38 /* icn_assignment-selectedn@3x.png in Resources */,
 				C9C2662A1B7B819100EA4F38 /* user_dummy@3x.png in Resources */,
 				A89BFF651BBD0ADE001ABDBB /* unfollowed@3x.png in Resources */,
@@ -1734,19 +1731,7 @@
 				A89BFF561BBD0ADE001ABDBB /* districts@2x.png in Resources */,
 				C9C265E61B7B819100EA4F38 /* icn_new-assignment@3x.png in Resources */,
 				C9C2661C1B7B819100EA4F38 /* img_search-boxn@3x.png in Resources */,
-<<<<<<< Updated upstream
-				C9C265321B7B803700EA4F38 /* CourseTableViewCell.xib in Resources */,
-				A89BFF5D1BBD0ADE001ABDBB /* notificationtick@3x.png in Resources */,
-=======
->>>>>>> Stashed changes
-				A8DDC51A1BAC461500799B68 /* SettingViewController.xib in Resources */,
-				C9C266531B7B819100EA4F38 /* first_nm@3x.png in Resources */,
-				C9C266371B7B819100EA4F38 /* profile-menu@2x.png in Resources */,
-<<<<<<< Updated upstream
-				A89BFF5C1BBD0ADE001ABDBB /* notificationtick@2x.png in Resources */,
-				C9C2652C1B7B803700EA4F38 /* AssignmentTableViewCell.xib in Resources */,
-=======
->>>>>>> Stashed changes
+
 				A8D8E69A1B95C03300F32509 /* Settings.bundle in Resources */,
 				C9C266581B7B819100EA4F38 /* mr@3x.png in Resources */,
 				A89BFF341BBBEE67001ABDBB /* filter_bg_icn@3x.png in Resources */,
@@ -1779,11 +1764,7 @@
 				C9C266121B7B819100EA4F38 /* icn_search@3x.png in Resources */,
 				C9C265F11B7B819100EA4F38 /* icn_assignment-selectedn@2x.png in Resources */,
 				C9C266031B7B819100EA4F38 /* icn_more-defaultn@2x.png in Resources */,
-<<<<<<< Updated upstream
-				A89BFF541BBD0ADE001ABDBB /* departments@2x.png in Resources */,
-=======
-				03E1CB481BBC1CE3007F1AF6 /* CustomContentView.xib in Resources */,
->>>>>>> Stashed changes
+
 				C9C266591B7B819100EA4F38 /* profile-list-bg@2x.png in Resources */,
 				A89BFF641BBD0ADE001ABDBB /* unfollowed@2x.png in Resources */,
 				C9C265E51B7B819100EA4F38 /* icn_new-assignment@2x.png in Resources */,
@@ -1809,12 +1790,8 @@
 				03E1CB461BBC1CCF007F1AF6 /* CourseTableViewCell.xib in Resources */,
 				A826DC741B8C4B8F0037E94F /* validatefb@3x.png in Resources */,
 				C9C266051B7B819100EA4F38 /* icn_more-selectedn@2x.png in Resources */,
-<<<<<<< Updated upstream
-				A89BFF601BBD0ADE001ABDBB /* organizations@2x.png in Resources */,
-				A89BFF5F1BBD0ADE001ABDBB /* notificationticked@3x.png in Resources */,
-				C9C265411B7B803700EA4F38 /* CustomProfileView.xib in Resources */,
-=======
->>>>>>> Stashed changes
+
+
 				C9C2663A1B7B819100EA4F38 /* profile-menun@3x.png in Resources */,
 				C9C266541B7B819100EA4F38 /* icn_droparrow@2x.png in Resources */,
 				C9C263FD1B7B76AF00EA4F38 /* Images.xcassets in Resources */,
@@ -1838,15 +1815,12 @@
 				A8E419781B8F3B63004A7338 /* logouta@2x.png in Resources */,
 				C9C265FF1B7B819100EA4F38 /* icn_like_c@2x.png in Resources */,
 				A86A0DE71B7CAF470039E45B /* icn_assignment-submitted@2x.png in Resources */,
-<<<<<<< Updated upstream
-				C9C2653F1B7B803700EA4F38 /* HomeViewController.xib in Resources */,
-				A89BFF401BBD0A29001ABDBB /* SettingTableViewCell.xib in Resources */,
-=======
->>>>>>> Stashed changes
+
 				C9C266311B7B819100EA4F38 /* img_search-boxn@2x.png in Resources */,
 				C9C266421B7B819100EA4F38 /* checkBox.png in Resources */,
 				C9C265DC1B7B819100EA4F38 /* btn_radio-unselected@2x.png in Resources */,
 				C9C2664A1B7B819100EA4F38 /* login_white@2x.png in Resources */,
+				A89BFF741BBFC473001ABDBB /* UserCollectionViewCell.xib in Resources */,
 				C9C266401B7B819100EA4F38 /* progress_vertical_line@2x.png in Resources */,
 				A8DFB2B81B85A96E0031C332 /* school_drop3@3x.png in Resources */,
 				C9C265F91B7B819100EA4F38 /* icn_course-selectedn@2x.png in Resources */,
@@ -1857,6 +1831,7 @@
 				A826DC731B8C4B8F0037E94F /* validatefb@2x.png in Resources */,
 				A89BFF551BBD0ADE001ABDBB /* departments@3x.png in Resources */,
 				A8E419761B8F01CA004A7338 /* img_search-boxn_6Small@3x.png in Resources */,
+				A89BFF6F1BBFC43F001ABDBB /* FollowListViewController.xib in Resources */,
 				C9C265F01B7B819100EA4F38 /* icn_assignment-defaultn@3x.png in Resources */,
 				03E1CB381BBC1BEA007F1AF6 /* AssestTableViewCell.xib in Resources */,
 				A86A0DE51B7C9A820039E45B /* login_red1@3x.png in Resources */,
@@ -1958,6 +1933,8 @@
 				C9C264751B7B7B2600EA4F38 /* FeedHandler.m in Sources */,
 				C9C264941B7B7BCB00EA4F38 /* NSString+AESCrypt.m in Sources */,
 				C9C2653C1B7B803700EA4F38 /* UpdateViewController.m in Sources */,
+				A8D4DFA51BC27081008AED5E /* CVCell.m in Sources */,
+				A89BFF6E1BBFC43F001ABDBB /* FollowListViewController.m in Sources */,
 				C9C264461B7B799700EA4F38 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				C9C263F81B7B76AF00EA4F38 /* ViewController.m in Sources */,
 				A89BFF691BBD3AA0001ABDBB /* SettingHandler.m in Sources */,
@@ -1973,6 +1950,7 @@
 				A881C9AE1B7F9FC70016F049 /* SubCommentTableViewCell.m in Sources */,
 				C9C264B51B7B7C4E00EA4F38 /* Resourse.m in Sources */,
 				C9C264B91B7B7C4E00EA4F38 /* UserDetail.m in Sources */,
+				A89BFF731BBFC473001ABDBB /* UserCollectionViewCell.m in Sources */,
 				C9C264721B7B7B2600EA4F38 /* AppEngine.m in Sources */,
 				A89BFF3F1BBD0A29001ABDBB /* SettingTableViewCell.m in Sources */,
 				C9C2643F1B7B799700EA4F38 /* AFNetworkReachabilityManager.m in Sources */,
