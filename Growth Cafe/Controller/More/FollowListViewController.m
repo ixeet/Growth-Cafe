@@ -166,6 +166,7 @@
                 });
             });
         }else{
+            
             UIImage *img=[UIImage imageWithData:userDetail.userImageData];
             [cell.imgview setImage:img];
             
