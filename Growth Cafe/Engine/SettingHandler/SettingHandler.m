@@ -11,15 +11,12 @@
 #import <AVFoundation/AVFoundation.h>
 @implementation SettingHandler
 //getMySetting
--(void)getMySetting:(NSString*)userid AndSettingId:(NSString*)settingId success:(void (^)(NSMutableArray *courses))success   failure:(void (^)(NSError *error))failure{
+-(void)getMySetting:(NSString*)userid success:(void (^)(NSDictionary *setting))success   failure:(void (^)(NSError *error))failure{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    NSDictionary *parameters = @{@"userId":userid,
-                                 
-                                 };
-    [manager POST:TEACHER_COURSE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       [manager GET:GET_FEED_ACCESSTYPE(userid) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         
@@ -31,9 +28,15 @@
             
             
             //call Block function
-            NSMutableArray *courseList= [[NSMutableArray alloc]init];
+            NSMutableDictionary *dicSetting= [[NSMutableDictionary alloc]init];
+            int selectValue=[[responseDic objectForKey:@"userAccessTypeId"]intValue];
+            if(selectValue==0)
+            {
+                selectValue=4;
+            }
+            [dicSetting setValue:[NSString stringWithFormat:@"%d",selectValue] forKey:@"selected"];
             
-            success(courseList);
+            success(dicSetting);
             
             
         }
@@ -52,15 +55,13 @@
 
 
 //setMySetting
--(void)setMySetting:(NSString*)userid AndSettingId:(NSString*)settingId success:(void (^)(NSMutableArray *courses))success   failure:(void (^)(NSError *error))failure{
+-(void)setMySetting:(NSString*)userid AndSettingId:(NSString*)settingId success:(void (^)(BOOL successValue))success   failure:(void (^)(NSError *error))failure{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    NSDictionary *parameters = @{@"userId":userid,
-                                 
-                                 };
-    [manager POST:TEACHER_COURSE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+    [manager GET:SET_FEED_ACCESSTYPE(userid,settingId) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         
@@ -71,10 +72,8 @@
         if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
             
             
-            //call Block function
-            NSMutableArray *courseList= [[NSMutableArray alloc]init];
-            
-            success(courseList);
+                        
+            success(YES);
             
             
         }
@@ -96,10 +95,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    NSDictionary *parameters = @{@"userId":userid,
-                                 
-                                 };
-    [manager POST:TEACHER_COURSE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager GET:GET_FEED_USERS(userid) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         
@@ -111,9 +107,17 @@
             
             
             //call Block function
-            NSMutableArray *courseList= [[NSMutableArray alloc]init];
+            NSMutableArray *userList= [[NSMutableArray alloc]init];
+            for (NSDictionary *dicUser  in [responseDic objectForKey:@"usersList"]) {
             
-            success(courseList);
+                UserDetails  *userDetail= [[UserDetails alloc]init];
+                userDetail.userId= [dicUser objectForKey:@"userId"];
+                userDetail.userImage=[dicUser objectForKey:@"profileImage"];
+                userDetail.username=[dicUser objectForKey:@"userName"];
+                userDetail.isFollowUpAllowed=[dicUser objectForKey:@"isFollowUpAllowed"];
+                [userList addObject:userDetail];
+            }
+            success(userList);
             
             
         }
@@ -131,15 +135,24 @@
 
 
 //setUnFollowUserList
--(void)setUnFollowUserList:(NSString*)userid AndUserList:(NSMutableArray*)userList success:(void (^)(NSMutableArray *courses))success   failure:(void (^)(NSError *error))failure{
+-(void)setUnFollowUserList:(NSString*)userid AndUserList:(NSMutableArray*)userList success:(void (^)(BOOL successValue))success   failure:(void (^)(NSError *error))failure{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    NSDictionary *parameters = @{@"userId":userid,
-                                 
-                                 };
-    [manager POST:TEACHER_COURSE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSMutableArray *userFollowList=[[NSMutableArray alloc]init];
+    for (UserDetails *user in userList) {
+        NSMutableDictionary *tempDicM=[[NSMutableDictionary alloc]init];
+            [tempDicM setObject:user.userId forKey:@"userid"];
+            [tempDicM setObject:[NSString stringWithFormat:@"%@", user.isFollowUpAllowed] forKey:@"isFollowUpAllowed"];
+            [userFollowList addObject:tempDicM];
+ 
+    }
+    NSDictionary *parameters = @{@"userid":userid,@"usersList":userFollowList                                 };
+    
+    //{"userid":"22","usersList":[{"userid":"1","isFollowUpAllowed":"0"},{"userid":"2","isFollowUpAllowed":"1"},{"userid":"3","isFollowUpAllowed":"0"}]}
+    
+    [manager POST:SET_USER_FOLLOW_STATUS_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         
@@ -151,9 +164,8 @@
             
             
             //call Block function
-            NSMutableArray *courseList= [[NSMutableArray alloc]init];
             
-            success(courseList);
+            success(YES );
             
             
         }

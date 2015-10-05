@@ -10,16 +10,16 @@
 
 @interface SettingHandler : NSObject
 //getMySetting
--(void)getMySetting:(NSString*)userid AndSettingId:(NSString*)settingId success:(void (^)(NSMutableArray *courses))success   failure:(void (^)(NSError *error))failure;
+-(void)getMySetting:(NSString*)userid  success:(void (^)(NSDictionary *setting))success   failure:(void (^)(NSError *error))failure;
 
 
 //setMySetting
--(void)setMySetting:(NSString*)userid AndSettingId:(NSString*)settingId success:(void (^)(NSMutableArray *courses))success   failure:(void (^)(NSError *error))failure;
+-(void)setMySetting:(NSString*)userid AndSettingId:(NSString*)settingId success:(void (^)(BOOL successValue))success   failure:(void (^)(NSError *error))failure;
 
 //getUserFollowList
 -(void)getUserFollowList:(NSString*)userid  success:(void (^)(NSMutableArray *courses))success   failure:(void (^)(NSError *error))failure;
 
 
 //setUnFollowUserList
--(void)setUnFollowUserList:(NSString*)userid AndUserList:(NSMutableArray*)userList success:(void (^)(NSMutableArray *courses))success   failure:(void (^)(NSError *error))failure;
+-(void)setUnFollowUserList:(NSString*)userid AndUserList:(NSMutableArray*)userList success:(void (^)(BOOL successValue))success   failure:(void (^)(NSError *error))failure;
 @end

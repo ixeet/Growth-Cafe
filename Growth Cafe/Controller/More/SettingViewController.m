@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import "SettingTableViewCell.h"
+#import "FollowListViewController.h"
 @interface SettingViewController ()
 {
     NSMutableArray *arraySettingList;
@@ -37,6 +38,66 @@
     [arraySettingImageList addObject:@"hide_user.png"];
     tblSetting.layer.cornerRadius = 5.0f;
     [tblSetting setClipsToBounds:YES];
+    [self getMySetting];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+
+}
+-(void)getMySetting{
+    
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    NSString *userId=[NSString stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId ];
+    [[appDelegate _engine] getMySetting:userId success:^(NSDictionary *setting) {
+        
+        if([setting valueForKey:@"selected"]!=nil)
+        {
+            selectedRow=(int)[[setting valueForKey:@"selected"] integerValue]-1;
+        }
+        
+        //Hide Indicator
+        [appDelegate hideSpinner];
+        [tblSetting reloadData];
+      
+        
+    }
+                                failure:^(NSError *error) {
+                                    //Hide Indicator
+                                    [appDelegate hideSpinner];
+                                    NSLog(@"failure Json Data %@",[error description]);
+                                    [self settingError:error];
+                                    
+                                }];
+
+}
+-(void)setMySetting{
+    
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    NSString *userId=[NSString stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId ];
+     NSString *settingId=[NSString stringWithFormat:@"%d",selectedRow+1 ];
+    [[appDelegate _engine] setMySetting:userId AndSettingId:settingId success:^(BOOL successValue) {
+        
+         //Hide Indicator
+        [appDelegate hideSpinner];
+        [tblSetting reloadData];
+        
+    }
+                                failure:^(NSError *error) {
+                                    //Hide Indicator
+                                    [appDelegate hideSpinner];
+                                    NSLog(@"failure Json Data %@",[error description]);
+                                    [self settingError:error];
+                                    
+                                }];
+    
+}
+
+-(void)settingError:(NSError*)error{
+    
+    [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -130,9 +191,14 @@
   if(indexPath.section==0)
   {
       selectedRow=(int)indexPath.row ;
-      [tblSetting reloadData];
+      [self setMySetting];
+     
+      
   }else{
   //move to next screen;
+      FollowListViewController *viewController= [[FollowListViewController alloc]initWithNibName:@"FollowListViewController" bundle:nil];
+      [self.navigationController pushViewController:viewController animated:NO];
+
   }
       
 }
@@ -223,5 +289,7 @@ else
     return headerView;
 }
 - (IBAction)btnBackclick:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 @end

@@ -13,8 +13,7 @@
 #import "RegisterationViewController.h"
 #import "UpdateViewController.h"
 #import "AFHTTPRequestOperationManager.h"
-#import "FilterViewController.h"
-
+//#import "FollowListViewController.h"
 @interface LoginViewController() <CustomKeyboardDelegate>
 {
     //keyboard
@@ -301,11 +300,9 @@
 }
 
 - (IBAction)btnCreatAccount:(id)sender {
-//    RegisterationViewController *viewController= [[RegisterationViewController alloc]initWithNibName:@"RegisterationViewController" bundle:nil];
-//    [self.navigationController pushViewController:viewController animated:NO];
-    
-    FilterViewController *viewController= [[FilterViewController alloc]initWithNibName:@"FilterViewController" bundle:nil];
+    RegisterationViewController *viewController= [[RegisterationViewController alloc]initWithNibName:@"RegisterationViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:NO];
+    
     
 }
 

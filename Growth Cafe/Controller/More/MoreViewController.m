@@ -60,7 +60,7 @@
             user.userImageData=[AppGlobal getImageAvailableAtLocal:user.userImage];
             UIImage *img=[UIImage imageWithData:user.userImageData];
             [imgUser setImage:img];
-            imgUser.layer.cornerRadius = imgUser.frame.size.width/6;
+            imgUser.layer.cornerRadius = imgUser.frame.size.width/2;
             imgUser.clipsToBounds = YES;
             NSLog(@"%@",@"yes");
         }else{
@@ -85,6 +85,7 @@
        
     }
       
-    
+    [[imgUser layer] setBorderWidth:3.0f];
+    [[imgUser layer] setBorderColor:[UIColor colorWithRed:186.0/255.0 green:0.0/255.0 blue:50.0/255.0 alpha:1].CGColor];
 }
 @end

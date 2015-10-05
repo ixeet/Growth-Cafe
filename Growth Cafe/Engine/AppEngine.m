@@ -13,6 +13,7 @@
 #import "CourseHandler.h"
 #import "FeedHandler.h"
 #import "AssignmentHandler.h"
+#import "SettingHandler.h"
 #import "AFHTTPRequestOperationManager.h"
 
 @implementation AppEngine
@@ -457,6 +458,60 @@
 
     }];
     
+}
+
+//getMySetting
+-(void)getMySetting:(NSString*)userid success:(void (^)(NSDictionary *setting))success   failure:(void (^)(NSError *error))failure
+{
+    SettingHandler *setting=[[SettingHandler alloc] init];
+    
+    [setting getMySetting:userid success:^(NSDictionary *setting) {
+        success(setting);
+    } failure:^(NSError *error) {
+        failure(error);
+        
+    }];
+}
+
+
+//setMySetting
+-(void)setMySetting:(NSString*)userid AndSettingId:(NSString*)settingId success:(void (^)(BOOL successValue))success   failure:(void (^)(NSError *error))failure{
+
+    SettingHandler *setting=[[SettingHandler alloc] init];
+    
+    [setting setMySetting:userid AndSettingId:settingId success:^(BOOL successValue) {
+        success(successValue);
+    } failure:^(NSError *error) {
+        failure(error);
+        
+    }];
+}
+
+//getUserFollowList
+-(void)getUserFollowList:(NSString*)userid  success:(void (^)(NSMutableArray *userlist))success   failure:(void (^)(NSError *error))failure
+{
+    SettingHandler *setting=[[SettingHandler alloc] init];
+    
+    [setting getUserFollowList:userid success:^(NSMutableArray *setting) {
+        success(setting);
+    } failure:^(NSError *error) {
+        failure(error);
+        
+    }];
+}
+
+
+//setUnFollowUserList
+-(void)setUnFollowUserList:(NSString*)userid AndUserList:(NSMutableArray*)userList success:(void (^)(BOOL successValue))success   failure:(void (^)(NSError *error))failure{
+    
+    SettingHandler *setting=[[SettingHandler alloc] init];
+    
+    [setting setUnFollowUserList:userid AndUserList:userList  success:^(BOOL successValue) {
+        success(successValue);
+    } failure:^(NSError *error) {
+        failure(error);
+        
+    }];
 }
 
 @end

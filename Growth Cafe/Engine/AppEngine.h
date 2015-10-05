@@ -100,4 +100,20 @@
 
 -(void)saveTeacherMasterData;
 -(void)getCourse:(NSString*)userid AndFilter:(NSMutableDictionary*)dicfilter success:(void (^)(NSMutableArray *courses))success   failure:(void (^)(NSError *error))failure;
+
+
+
+//getMySetting
+-(void)getMySetting:(NSString*)userid  success:(void (^)(NSDictionary *setting))success   failure:(void (^)(NSError *error))failure;
+
+
+//setMySetting
+-(void)setMySetting:(NSString*)userid AndSettingId:(NSString*)settingId success:(void (^)(BOOL successValue))success   failure:(void (^)(NSError *error))failure;
+
+//getUserFollowList
+-(void)getUserFollowList:(NSString*)userid  success:(void (^)(NSMutableArray *courses))success   failure:(void (^)(NSError *error))failure;
+
+
+//setUnFollowUserList
+-(void)setUnFollowUserList:(NSString*)userid AndUserList:(NSMutableArray*)userList success:(void (^)(BOOL successValue))success   failure:(void (^)(NSError *error))failure;
 @end

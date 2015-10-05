@@ -9,7 +9,7 @@
 #import "UserDetail.h"
 
 @implementation UserDetails
-@synthesize userId,username,userFirstName,userLastName,userRole,userEmail,userFBID,userPassword,schoolId,schoolName,className,classId,homeRoomId,homeRoomName,address,adminEmailId,title,userImage,userImageData;
+@synthesize userId,username,userFirstName,userLastName,userRole,userEmail,userFBID,userPassword,schoolId,schoolName,className,classId,homeRoomId,homeRoomName,address,adminEmailId,title,userImage,userImageData,isFollowUpAllowed;
 
 
 @end

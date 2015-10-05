@@ -26,6 +26,7 @@
 @property (nonatomic,strong) NSString* adminEmailId;
 @property (nonatomic,strong) NSString* homeRoomId;
 @property (nonatomic,strong) NSString* homeRoomName;
+@property (nonatomic,strong) NSNumber* isFollowUpAllowed;
 
 @property (nonatomic,strong) NSString* userImage;
 @property (nonatomic,strong) NSData* userImageData;
