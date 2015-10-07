@@ -453,39 +453,39 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-        static NSString *identifier = @"AssignmentDetailTableViewCell";
-        AssignmentDetailTableViewCell *cell = (AssignmentDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (cell == nil) {
-            // Load the top-level objects from the custom cell XIB.
-            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil];
-            
-            // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
-            cell = [topLevelObjects objectAtIndex:0];
-            [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-        }
-        Assignment *assignment=[arrayAssignment objectAtIndex:indexPath.row];
+    static NSString *identifier = @"AssignmentDetailTableViewCell";
+    AssignmentDetailTableViewCell *cell = (AssignmentDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+    if (cell == nil) {
+        // Load the top-level objects from the custom cell XIB.
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil];
         
-        // create custom view for title
-        cell.lblAssignmentTitle.text =assignment.assignmentName;
+        // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+        cell = [topLevelObjects objectAtIndex:0];
+        [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    }
+    Assignment *assignment=[arrayAssignment objectAtIndex:indexPath.row];
+    
+    // create custom view for title
+    cell.lblAssignmentTitle.text =assignment.assignmentName;
     cell.lblAssignementDetail.textColor = [UIColor colorWithRed:(20/255.f) green:(24/255.f) blue:(35/255.f) alpha:1];/////////////////////////////////////////////////////////////////////////////done by raj
     
     
-   
-               //  cell.viewDetail.frame=CGRectMake(0, 0, x, 60);
+    
+    //  cell.viewDetail.frame=CGRectMake(0, 0, x, 60);
     cell.btnExpend.tag=indexPath.row;
     [cell.btnExpend  addTarget:self action:@selector(btnExpendClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.btnExpend setImage:[UIImage imageNamed:@"icn_arrow.png"] forState:UIControlStateNormal];
-   [cell.imgResource setHidden:YES];
+    [cell.imgResource setHidden:YES];
     [cell.btnPlay setHidden:YES];
     
     
-     [cell.lblCourse  setHidden:YES];
+    [cell.lblCourse  setHidden:YES];
     [cell.lblUploadedDate setHidden:YES];
     
-  //  [cell.lblAssignementDetail  setHidden:YES];
-  //  [cell.lblUploadedDate setHidden:YES];
-   // [cell.btnSubmit setHidden:YES];
-   
+    //  [cell.lblAssignementDetail  setHidden:YES];
+    //  [cell.lblUploadedDate setHidden:YES];
+    // [cell.btnSubmit setHidden:YES];
+    
     // Set label text to attributed string
     NSString *str = [NSString stringWithFormat:@"%@ > %@" ,assignment.course.courseName,assignment.module.moduleName];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
@@ -494,25 +494,25 @@
     UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
     [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [assignment.course.courseName length])];
     
-//    // Set foreground color for entire range
-//    [attributedString addAttribute:NSForegroundColorAttributeName
-//                             value:[UIColor colorWithRed:0.989 green:0.822 blue:0.220 alpha:1.000]
-//                             range:NSMakeRange(0, [attributedString length])];
-//    
-//    // Define Shadow object
-//    NSShadow *shadow = [[NSShadow alloc] init];
-//    [shadow setShadowColor:[UIColor colorWithRed:0.053 green:0.088 blue:0.205 alpha:1.000]];
-//    [shadow setShadowBlurRadius:4.0];
-//    [shadow setShadowOffset:CGSizeMake(2, 2)];
+    //    // Set foreground color for entire range
+    //    [attributedString addAttribute:NSForegroundColorAttributeName
+    //                             value:[UIColor colorWithRed:0.989 green:0.822 blue:0.220 alpha:1.000]
+    //                             range:NSMakeRange(0, [attributedString length])];
+    //
+    //    // Define Shadow object
+    //    NSShadow *shadow = [[NSShadow alloc] init];
+    //    [shadow setShadowColor:[UIColor colorWithRed:0.053 green:0.088 blue:0.205 alpha:1.000]];
+    //    [shadow setShadowBlurRadius:4.0];
+    //    [shadow setShadowOffset:CGSizeMake(2, 2)];
     
-//    [attributedString addAttribute:NSShadowAttributeName
-//                             value:shadow
-//                             range:NSMakeRange(0, [attributedString length])];
- 
+    //    [attributedString addAttribute:NSShadowAttributeName
+    //                             value:shadow
+    //                             range:NSMakeRange(0, [attributedString length])];
+    
     
     [cell.lblCourse setAttributedText:attributedString];
-//    cell.lblCourse.text=assignment.course.courseName;
-//    cell.lblModule.text=assignment.module.moduleName;
+    //    cell.lblCourse.text=assignment.course.courseName;
+    //    cell.lblModule.text=assignment.module.moduleName;
     cell.btnSubmit.tag =indexPath.row;
     CGRect imgFrame=cell.imgResource.frame;
     imgFrame=CGRectMake(imgFrame.origin.x, imgFrame.origin.y, imgFrame.size.width, 0);
@@ -527,48 +527,48 @@
         NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
         cell.lblDateAssignment.text=[NSString stringWithFormat:@"%@ %ld",[monthName substringToIndex:3],(long)components.day];
     }
-  //  cell.lblDateAssignment.text=assignment.assignmentSubmittedDate;
+    //  cell.lblDateAssignment.text=assignment.assignmentSubmittedDate;
     cell.btnAssignmentStatus.tag =indexPath.row;
     if([assignment.assignmentStatus isEqualToString:@"1"])
     {
         NSDate *today10am =[NSDate date];
-      
+        
         if ([dueDate compare:today10am] == NSOrderedDescending)
         {
-       // cell.btnAssignmentStatus.selected=YES;
-        [cell.btnAssignmentStatus setImage:[UIImage imageNamed:@"icn_new-assignment.png"] forState:UIControlStateNormal];
-         
+            // cell.btnAssignmentStatus.selected=YES;
+            [cell.btnAssignmentStatus setImage:[UIImage imageNamed:@"icn_new-assignment.png"] forState:UIControlStateNormal];
             
-           
-        [cell.btnAssignmentStatus setBackgroundColor:[UIColor clearColor]];
-        [cell.btnAssignmentStatus  addTarget:self action:@selector(btnSubmitAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
-       // lblDateAssignment.text
-        
-      
-       // cell.lblDateAssignment.textColor =[UIColor blackColor];
+            
+            
+            [cell.btnAssignmentStatus setBackgroundColor:[UIColor clearColor]];
+            [cell.btnAssignmentStatus  addTarget:self action:@selector(btnSubmitAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
+            // lblDateAssignment.text
+            
+            
+            // cell.lblDateAssignment.textColor =[UIColor blackColor];
         }else{
             
-          //  cell.btnAssignmentStatus.selected=NO;
+            //  cell.btnAssignmentStatus.selected=NO;
             [cell.btnAssignmentStatus setImage:[UIImage imageNamed:@"icn_pending-assignment.png"] forState:UIControlStateNormal];
             [cell.btnAssignmentStatus  addTarget:self action:@selector(btnSubmitAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
-           // cell.lblDateAssignment.text=assignment.assignmentSubmittedDate;
-           // cell.lblDateAssignment.textColor =[UIColor b];
-        
+            // cell.lblDateAssignment.text=assignment.assignmentSubmittedDate;
+            // cell.lblDateAssignment.textColor =[UIColor b];
+            
         }
-//        if(assignment.isExpend)
-//         // [cell.btnSubmit setHidden:NO];
+        //        if(assignment.isExpend)
+        //         // [cell.btnSubmit setHidden:NO];
         
     }
     
     else if([assignment.assignmentStatus isEqualToString:@"2"])
     {
-          [cell.btnAssignmentStatus setImage:[UIImage imageNamed:@"icn_assignment-submitted.png"] forState:UIControlStateNormal];
-      //  cell.lblDateAssignment.textColor =[UIColor blackColor];
+        [cell.btnAssignmentStatus setImage:[UIImage imageNamed:@"icn_assignment-submitted.png"] forState:UIControlStateNormal];
+        //  cell.lblDateAssignment.textColor =[UIColor blackColor];
         
         [cell.btnAssignmentStatus setBackgroundColor:[UIColor clearColor]];
-//         if(assignment.isExpend)
-//        [cell.lblUploadedDate setHidden:NO];
-     
+        //         if(assignment.isExpend)
+        //        [cell.lblUploadedDate setHidden:NO];
+        
         NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.attachedResource.uploadedDate];
         if(submittedDate!=nil){
             NSCalendar* calendar = [NSCalendar currentCalendar];
@@ -582,18 +582,18 @@
         
         if([AppSingleton sharedInstance].userDetail.userRole==2)
         {
-         [cell.btnAssignmentStatus  addTarget:self action:@selector(btnViewSubmittedAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.btnAssignmentStatus  addTarget:self action:@selector(btnViewSubmittedAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     else if([assignment.assignmentStatus isEqualToString:@"3"])
     {
-       // cell.btnAssignmentStatus.highlighted =YES;
-     //   cell.lblDateAssignment.textColor =[UIColor whiteColor];
+        // cell.btnAssignmentStatus.highlighted =YES;
+        //   cell.lblDateAssignment.textColor =[UIColor whiteColor];
         
-     //   [cell.btnAssignmentStatus setBackgroundColor:[UIColor greenColor]];
-//        if(assignment.isExpend)
-//            [cell.lblUploadedDate setHidden:NO];
-       
+        //   [cell.btnAssignmentStatus setBackgroundColor:[UIColor greenColor]];
+        //        if(assignment.isExpend)
+        //            [cell.lblUploadedDate setHidden:NO];
+        
         NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.attachedResource.uploadedDate];
         if(submittedDate!=nil){
             NSCalendar* calendar = [NSCalendar currentCalendar];
@@ -604,16 +604,16 @@
             NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
             cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld by %@",[monthName substringToIndex:3],(long)components.day, assignment.assignmentSubmittedBy];
         }
-          [cell.btnAssignmentStatus  addTarget:self action:@selector(btnViewSubmittedAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btnAssignmentStatus  addTarget:self action:@selector(btnViewSubmittedAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     if(assignment.isExpend){
         
         NSLayoutConstraint *backdropViewHeight = [NSLayoutConstraint constraintWithItem:cell.imgResource attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:cell.imgResource attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
-//        NSLayoutConstraint *backdropViewCenterX = [NSLayoutConstraint constraintWithItem:cell.imgResource attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:cell.imgResource.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-//        NSLayoutConstraint *backdropViewCenterY = [NSLayoutConstraint constraintWithItem:cell.imgResource   attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:cell.imgResource.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+        //        NSLayoutConstraint *backdropViewCenterX = [NSLayoutConstraint constraintWithItem:cell.imgResource attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:cell.imgResource.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+        //        NSLayoutConstraint *backdropViewCenterY = [NSLayoutConstraint constraintWithItem:cell.imgResource   attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:cell.imgResource.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
         
         [cell.imgResource.superview addConstraints:@[ backdropViewHeight]];
-
+        
         [cell.lblCourse setHidden:NO];/////////////////////////////////////////////// done by raj
         [cell.lblCourse setAttributedText:attributedString];
         [cell.btnExpend setImage:[UIImage imageNamed:@"icn_arrow-expand.png"] forState:UIControlStateNormal];
@@ -628,7 +628,7 @@
             [cell.lblAssignementDetail  setHidden:NO];
         }
         CGRect imgFrame=cell.imgResource.frame;
-
+        
         if (assignment.attachedResource!=nil) {
             
             if(assignment.attachedResource.resourceImageUrl!=nil){
@@ -654,13 +654,13 @@
                                 [cell.imgResource setImage:img];
                                 
                                 [cell.imgResource setBackgroundColor:[UIColor clearColor]];
-                                 cell.imgResource.frame = imgFrame;
+                                cell.imgResource.frame = imgFrame;
                             }
                         });
                     });
                 }else{
                     UIImage *img=[UIImage imageWithData:assignment.attachedResource.resourceImageData];
-                   
+                    
                     [cell.imgResource setImage:img];
                     
                     [cell.imgResource setBackgroundColor:[UIColor clearColor]];
@@ -668,12 +668,12 @@
                 }
             }
         }
-       
+        
     }  else {        //set action for comment and like on resource
-    
-       [cell.lblAssignementDetail setAttributedText:attributedString];////////////////////////////////////////////////////////////////////////////////  done by raj
+        
+        [cell.lblAssignementDetail setAttributedText:attributedString];////////////////////////////////////////////////////////////////////////////////  done by raj
     }
-     return cell;
+    return cell;
 }
 
 
@@ -699,22 +699,24 @@
     Assignment *assignment=arrayAssignment[indexPath.row];
     if(assignment.isExpend==NO)
     {
-        return 70.0f;  //   height change from 90 to 80 by raj  start
+        return 70.0f;//height change from 90 to 70 by raj  start
+
+        
     }else{
         float height=70.0f;
-
         if(assignment.attachedResource!=nil)
         {
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
             {
-               height=height+163.0f;          }
+                height=height+163.0f;          }
             
             
             else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
             {
-               height=height+250.0f;
+                height=height+220.0f;
             }
-            //height change from 90 to 80 by raj end
+
+           
         }
         float width=200;
         if( screenHeight <740 && screenHeight >667 )

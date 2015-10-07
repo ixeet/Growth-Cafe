@@ -521,7 +521,7 @@
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-        monthName=[AppGlobal getMonthTimed:monthName];
+         monthName=[AppGlobal getMonthTimed:monthName];
        
         [cell.lblDate setText: [NSString stringWithFormat:@"%@ %ld",monthName,components.day]];
         }
@@ -620,7 +620,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44.0f;
+    
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
+    
+        return 44.0f;
+
+    }else{
+    
+    
+    return 55.0f;
+}
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

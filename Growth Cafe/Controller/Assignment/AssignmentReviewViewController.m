@@ -393,22 +393,11 @@
     Assignment *assignment=selectedAssignment;
     if(indexPath.row==0)
     {
-        float height=80.0f;    // change height 90 t0 80
+        float height=90.0f;
         if(assignment.attachedResource!=nil)
         {
-            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-            {
-                height=height+163.0f;
-           }
             
-            
-            else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-            {
-                height=height+250.0f;
-
-            }
-
-           
+            height=height+163.0f;
         }
         float width=200;
         if( screenHeight <740 && screenHeight >667 )

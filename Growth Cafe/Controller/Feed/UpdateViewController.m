@@ -143,7 +143,7 @@
     [objCustom.btnLogout  addTarget:self action:@selector(btnLogoutClick:) forControlEvents:UIControlEventTouchUpInside];
     
    // CGRect cmtFrame = self.cmtview.frame;
-    txtframe=CGRectMake(0, 1300, self.view.frame.size.width, 40);
+    txtframe=CGRectMake(0,1200, self.view.frame.size.width, 40);
   //  txtframe=cmtFrame;
     self.cmtview.frame=txtframe;
     [self.view addSubview:self.cmtview];
@@ -1331,18 +1331,21 @@
         float height=0.0f;
         if(update.resource!=nil)
         {
+            
+            // code starts for checking the iphone or ipad device
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
             {
-                height=200.0f;            }
+                height=163.0f;            }
             
             
             else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
             {
-                height=250.0f;
+                height=220.0f;
             }
-        }
-
       
+        // code end for checking the iphone or ipad device
+        
+        }
         
         NSString *titleString =update.updateTitle;
         NSArray *titleWords = [titleString componentsSeparatedByString:@"$"];

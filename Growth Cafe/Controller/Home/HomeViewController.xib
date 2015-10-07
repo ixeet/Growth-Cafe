@@ -23,8 +23,8 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo1.png" translatesAutoresizingMaskIntoConstraints="NO" id="V32-rY-VEx">
-                    <rect key="frame" x="225" y="82" width="150" height="150"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logo1.png" translatesAutoresizingMaskIntoConstraints="NO" id="V32-rY-VEx">
+                    <rect key="frame" x="225" y="221" width="150" height="150"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOy-9L-Rsr" userLabel="btnRegister">
                     <rect key="frame" x="300" y="498" width="301" height="50"/>
@@ -148,11 +148,12 @@
                 <constraint firstItem="6V2-yA-dAX" firstAttribute="width" secondItem="SOy-9L-Rsr" secondAttribute="width" constant="-2" id="47p-VT-Rbp"/>
                 <constraint firstItem="6V2-yA-dAX" firstAttribute="height" secondItem="SOy-9L-Rsr" secondAttribute="height" id="7pN-YU-Euc"/>
                 <constraint firstItem="6V2-yA-dAX" firstAttribute="width" secondItem="SOy-9L-Rsr" secondAttribute="width" constant="-2" id="Cwr-7W-V2L"/>
-                <constraint firstAttribute="centerX" secondItem="V32-rY-VEx" secondAttribute="centerX" id="D6n-Ch-n3p"/>
+                <constraint firstItem="V32-rY-VEx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="169" id="Gl4-jl-nVr"/>
                 <constraint firstItem="6V2-yA-dAX" firstAttribute="width" secondItem="SOy-9L-Rsr" secondAttribute="width" constant="-2" id="PaQ-72-T2o"/>
                 <constraint firstItem="B3e-8s-orZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-8" id="Ve7-44-Jt1"/>
-                <constraint firstItem="V32-rY-VEx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="82" id="a9J-69-fNe"/>
+                <constraint firstItem="V32-rY-VEx" firstAttribute="centerX" secondItem="Ku6-N9-oQP" secondAttribute="centerX" id="W5M-0l-IWr"/>
                 <constraint firstItem="l8H-TU-bWE" firstAttribute="top" secondItem="6V2-yA-dAX" secondAttribute="bottom" constant="1" id="alS-UP-rV5"/>
+                <constraint firstItem="V32-rY-VEx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aqG-Qc-H4j"/>
                 <constraint firstItem="l8H-TU-bWE" firstAttribute="top" secondItem="SOy-9L-Rsr" secondAttribute="bottom" constant="1" id="bTt-v7-Cqg"/>
                 <constraint firstAttribute="bottom" secondItem="l8H-TU-bWE" secondAttribute="bottom" constant="1" id="bql-ke-uVT"/>
                 <constraint firstAttribute="trailing" secondItem="Ku6-N9-oQP" secondAttribute="trailing" id="cVD-7c-z6g"/>

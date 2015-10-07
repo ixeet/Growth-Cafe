@@ -24,14 +24,14 @@
                     <color key="backgroundColor" red="0.72941176470000002" green="0.0" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-profile.png" translatesAutoresizingMaskIntoConstraints="NO" id="LLi-xb-5De" userLabel="imgUser">
-                    <rect key="frame" x="230" y="111" width="140" height="140"/>
+                    <rect key="frame" x="230" y="90" width="142" height="153"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="140" id="AZE-R9-JY3"/>
-                        <constraint firstAttribute="width" constant="140" id="lFy-B4-gvO"/>
+                        <constraint firstAttribute="height" constant="153" id="AZE-R9-JY3"/>
+                        <constraint firstAttribute="width" constant="142" id="lFy-B4-gvO"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcF-r6-jep" userLabel="lblFirstName">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcF-r6-jep" userLabel="lblFirstName">
                     <rect key="frame" x="8" y="261" width="584" height="24"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -65,12 +65,12 @@
                 <constraint firstItem="zzf-bp-NV0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="K5J-xd-gpY"/>
                 <constraint firstAttribute="trailing" secondItem="Q20-go-DS1" secondAttribute="trailing" id="L7j-Td-O8D"/>
                 <constraint firstItem="Q20-go-DS1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="T1h-eF-zai"/>
-                <constraint firstItem="LLi-xb-5De" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="111" id="XOM-qr-bNr"/>
+                <constraint firstItem="LLi-xb-5De" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="90" id="XOM-qr-bNr"/>
                 <constraint firstAttribute="trailing" secondItem="fbG-tK-Jor" secondAttribute="trailing" id="cpm-pN-UlZ"/>
-                <constraint firstAttribute="centerX" secondItem="LLi-xb-5De" secondAttribute="centerX" id="haV-9S-10c"/>
+                <constraint firstAttribute="centerX" secondItem="LLi-xb-5De" secondAttribute="centerX" constant="-0.5" id="haV-9S-10c"/>
                 <constraint firstAttribute="trailing" secondItem="AcF-r6-jep" secondAttribute="trailing" constant="8" id="jfz-yV-mpK"/>
                 <constraint firstAttribute="trailing" secondItem="zzf-bp-NV0" secondAttribute="trailing" id="jqK-Qc-e7d"/>
-                <constraint firstItem="AcF-r6-jep" firstAttribute="top" secondItem="LLi-xb-5De" secondAttribute="bottom" constant="10" id="lw0-CM-1GY"/>
+                <constraint firstItem="AcF-r6-jep" firstAttribute="top" secondItem="LLi-xb-5De" secondAttribute="bottom" constant="18" id="lw0-CM-1GY"/>
                 <constraint firstItem="Q20-go-DS1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nlu-e6-0hX"/>
                 <constraint firstAttribute="bottom" secondItem="Q20-go-DS1" secondAttribute="bottom" id="wph-fZ-vut"/>
             </constraints>

@@ -12,7 +12,7 @@
 @interface SettingViewController ()
 {
     NSMutableArray *arraySettingList;
-     NSMutableArray *arraySettingImageList;
+    NSMutableArray *arraySettingImageList;
     int selectedRow;
 }
 @end
@@ -24,11 +24,11 @@
     // Do any additional setup after loading the view from its nib.
     arraySettingList=[[NSMutableArray alloc]init];
     [arraySettingList addObject:@"Organizations"];
-     [arraySettingList addObject:@"Districts"];
-     [arraySettingList addObject:@"Departments"];
-     [arraySettingList addObject:@"Groups"];
-     [arraySettingList addObject:@"Unfollow people to hide their updates"];
-   
+    [arraySettingList addObject:@"Districts"];
+    [arraySettingList addObject:@"Departments"];
+    [arraySettingList addObject:@"Groups"];
+    [arraySettingList addObject:@"Unfollow people to hide their updates"];
+    
     
     arraySettingImageList=[[NSMutableArray alloc]init];
     [arraySettingImageList addObject:@"organizations.png"];
@@ -43,7 +43,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     
-
+    
 }
 -(void)getMySetting{
     
@@ -60,7 +60,7 @@
         //Hide Indicator
         [appDelegate hideSpinner];
         [tblSetting reloadData];
-      
+        
         
     }
                                 failure:^(NSError *error) {
@@ -70,17 +70,17 @@
                                     [self settingError:error];
                                     
                                 }];
-
+    
 }
 -(void)setMySetting{
     
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
     NSString *userId=[NSString stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId ];
-     NSString *settingId=[NSString stringWithFormat:@"%d",selectedRow+1 ];
+    NSString *settingId=[NSString stringWithFormat:@"%d",selectedRow+1 ];
     [[appDelegate _engine] setMySetting:userId AndSettingId:settingId success:^(BOOL successValue) {
         
-         //Hide Indicator
+        //Hide Indicator
         [appDelegate hideSpinner];
         [tblSetting reloadData];
         
@@ -106,14 +106,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 #pragma mark - Table view data source
 
 //- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
@@ -171,14 +171,14 @@
     CGRect frame = cell.backgroundView.frame;
     //cell.backgroundView = [[BackgroundView alloc] initWithFrame:frame];
     
-//    CGFloat corner = 20.0f;
-//    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:cell.backgroundView.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(corner, corner)];
-//    CAShapeLayer  *shapeLayer = (CAShapeLayer *)cell.backgroundView.layer;
-//    shapeLayer.path = path.CGPath;
-//    shapeLayer.fillColor = cell.textLabel.backgroundColor.CGColor;
-//    shapeLayer.strokeColor = [UIColor lightGrayColor].CGColor;
-//    shapeLayer.lineWidth = 1.0f;
-
+    //    CGFloat corner = 20.0f;
+    //    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:cell.backgroundView.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(corner, corner)];
+    //    CAShapeLayer  *shapeLayer = (CAShapeLayer *)cell.backgroundView.layer;
+    //    shapeLayer.path = path.CGPath;
+    //    shapeLayer.fillColor = cell.textLabel.backgroundColor.CGColor;
+    //    shapeLayer.strokeColor = [UIColor lightGrayColor].CGColor;
+    //    shapeLayer.lineWidth = 1.0f;
+    
     return cell;
     
 }
@@ -188,19 +188,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if(indexPath.section==0)
-  {
-      selectedRow=(int)indexPath.row ;
-      [self setMySetting];
-     
-      
-  }else{
-  //move to next screen;
-      FollowListViewController *viewController= [[FollowListViewController alloc]initWithNibName:@"FollowListViewController" bundle:nil];
-      [self.navigationController pushViewController:viewController animated:NO];
-
-  }
-      
+    if(indexPath.section==0)
+    {
+        selectedRow=(int)indexPath.row ;
+        [self setMySetting];
+        
+        
+    }else{
+        //move to next screen;
+        FollowListViewController *viewController= [[FollowListViewController alloc]initWithNibName:@"FollowListViewController" bundle:nil];
+        [self.navigationController pushViewController:viewController animated:NO];
+        
+    }
+    
 }
 
 
@@ -214,16 +214,16 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if(section==0)
-    return @"WHO CAN SEE MY UPDATES?";
+        return @"WHO CAN SEE MY UPDATES?";
     else
-    return @"HIDE POST ON MY TIMELINE";
+        return @"HIDE POST ON MY TIMELINE";
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([cell respondsToSelector:@selector(tintColor)]) {
         if (tableView == tblSetting) {    // self.tableview
             CGFloat cornerRadius = 5.f;
-          //  cell.backgroundColor = UIColor.clearColor;
+            //  cell.backgroundColor = UIColor.clearColor;
             CAShapeLayer *layer = [[CAShapeLayer alloc] init];
             CGMutablePathRef pathRef = CGPathCreateMutable();
             CGRect bounds = CGRectInset(cell.bounds, 5, 0);
@@ -253,12 +253,12 @@
                 CALayer *lineLayer = [[CALayer alloc] init];
                 CGFloat lineHeight = (1.f / [UIScreen mainScreen].scale);
                 lineLayer.frame = CGRectMake(CGRectGetMinX(bounds)+5, bounds.size.height-lineHeight, bounds.size.width-5, lineHeight);
-              //  lineLayer.backgroundColor = tableView.separatorColor.CGColor;
+                //  lineLayer.backgroundColor = tableView.separatorColor.CGColor;
                 [layer addSublayer:lineLayer];
             }
             UIView *testView = [[UIView alloc] initWithFrame:bounds];
             [testView.layer insertSublayer:layer atIndex:0];
-           // testView.backgroundColor = UIColor.clearColor;
+            // testView.backgroundColor = UIColor.clearColor;
             cell.backgroundView = testView;
         }
     }
@@ -267,17 +267,17 @@
 {
     UIView *footerview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 10)];
     footerview.backgroundColor=[UIColor whiteColor];
-//    footerview.layer.cornerRadius = 5.0f;
-//    [footerview setClipsToBounds:YES];
+    //    footerview.layer.cornerRadius = 5.0f;
+    //    [footerview setClipsToBounds:YES];
     return footerview;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UILabel *myLabel = [[UILabel alloc] init];
-   if(section==0)
-    myLabel.frame = CGRectMake(14, 20, 320, 20);
-else
-    myLabel.frame = CGRectMake(14, 10, 320, 20);
+    if(section==0)
+        myLabel.frame = CGRectMake(14, 20, 320, 20);
+    else
+        myLabel.frame = CGRectMake(14, 10, 320, 20);
     
     myLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16.0];
     myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
@@ -290,6 +290,6 @@ else
 }
 - (IBAction)btnBackclick:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-
+    
 }
 @end

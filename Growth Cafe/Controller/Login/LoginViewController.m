@@ -13,7 +13,8 @@
 #import "RegisterationViewController.h"
 #import "UpdateViewController.h"
 #import "AFHTTPRequestOperationManager.h"
-//#import "FollowListViewController.h"
+#import "FilterViewController.h"
+
 @interface LoginViewController() <CustomKeyboardDelegate>
 {
     //keyboard
@@ -303,7 +304,9 @@
     RegisterationViewController *viewController= [[RegisterationViewController alloc]initWithNibName:@"RegisterationViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:NO];
     
-    
+//    FilterViewController *viewController= [[FilterViewController alloc]initWithNibName:@"FilterViewController" bundle:nil];
+//    [self.navigationController pushViewController:viewController animated:NO];
+//    
 }
 
 - (IBAction)btnForgetpasswordClick:(id)sender {

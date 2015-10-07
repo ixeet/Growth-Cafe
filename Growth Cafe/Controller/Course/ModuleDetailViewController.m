@@ -888,12 +888,14 @@ AFNetworkReachabilityStatus previousStatus;
         {
          components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateSatrtedOn]; // Get necessary date components
         monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+             monthName=[AppGlobal getMonthTimed:monthName];
         resource.startedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
        
         }
         if(dateCompletedOn!=nil){
             components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateCompletedOn]; // Get necessary date components
             monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+             monthName=[AppGlobal getMonthTimed:monthName];
             resource.completedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
         }
         customView.lblStartedon.text=resource.startedOn;
@@ -1832,6 +1834,7 @@ AFNetworkReachabilityStatus previousStatus;
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+             monthName=[AppGlobal getMonthTimed:monthName];
         cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Uploaded on %@ %ld",monthName,(long)components.day ];
         }
       cell.btnPlay.tag= indexPath.row;
@@ -1962,6 +1965,7 @@ AFNetworkReachabilityStatus previousStatus;
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+            monthName=[AppGlobal getMonthTimed:monthName];
     
            cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",monthName,(long)components.day ];
        }
@@ -2135,15 +2139,120 @@ AFNetworkReachabilityStatus previousStatus;
             width=270;
         }
         CGSize labelSize=[AppGlobal   getTheExpectedSizeOfLabel:comment.commentTxt andFontSize:13 labelWidth:width];
-        
-                if(labelSize.height>17)
-               return   height=height+80+labelSize.height-17.0;
+        if(labelSize.height>17)
+                return   height=height+80+labelSize.height-17.0;
             else
                 return  height=height+80;
     }
     else if(indexPath.section==2 )
     {
-        float height=78.0f;   ///////////////////change the height from 73 to 78 by raj
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+                            {
+                                float height=73.0f;///////////////////change the height from 73 to 78 by raj
+                                static NSString *identifier = @"AssignmentTableViewCell";
+                                AssignmentTableViewCell *cell = (AssignmentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+                                NSLog(@"%f",cell.lblContentName.frame.size.width);
+                                if(([selectedResource.relatedResources count]<3) && (indexPath.row==[selectedResource.relatedResources count]-1))
+                                {
+                                    height=height+50.0f;
+                                    
+                                    
+                                    
+                                }
+                                else if([selectedResource.relatedResources count]>=3)
+                                {
+                                    if(IsRelatedConentExpended && (indexPath.row==[selectedResource.relatedResources count]-1))
+                                    {
+                                        height=height+60.0f;
+                                    }else if(indexPath.row==2 && !IsRelatedConentExpended){
+                                        height=height+66.0f;
+                                    }
+                                    
+                                }
+                                
+                                Resourse *realtedResource=selectedResource.relatedResources[indexPath.row];
+                                float width=200;
+                                if( screenHeight <740 && screenHeight >667 )
+                                {
+                                    width=298;
+                                    
+                                }else if  (screenHeight > 568 && screenHeight <= 667 )
+                                {
+                                    width=270;
+                                }
+                                CGSize labelSize=[AppGlobal   getTheExpectedSizeOfLabel:realtedResource.resourceTitle andFontSize:14 labelWidth:width];
+                                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+                                    if(labelSize.height>17){
+                                        return  height=height+labelSize.height-17;
+                                    }
+                                    else if([realtedResource.resourceTitle length]>34 &&  (screenHeight > 480 && screenHeight < 667 ))
+                                    {
+                                        
+                                        return  height=height+labelSize.height;
+                                    }else if([realtedResource.resourceTitle length]>42 &&  screenHeight < 480)
+                                    {
+                                        
+                                        return  height=height+labelSize.height;
+                                    }
+                                }
+                                
+                                return height;                            }
+            
+            
+                            else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+                            {
+                                float height=83.0f;///////////////////change the height from 73 to 78 by raj
+                                static NSString *identifier = @"AssignmentTableViewCell";
+                                AssignmentTableViewCell *cell = (AssignmentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+                                NSLog(@"%f",cell.lblContentName.frame.size.width);
+                                if(([selectedResource.relatedResources count]<3) && (indexPath.row==[selectedResource.relatedResources count]-1))
+                                {
+                                    height=height+50.0f;
+                                    
+                                    
+                                    
+                                }
+                                else if([selectedResource.relatedResources count]>=3)
+                                {
+                                    if(IsRelatedConentExpended && (indexPath.row==[selectedResource.relatedResources count]-1))
+                                    {
+                                        height=height+60.0f;
+                                    }else if(indexPath.row==2 && !IsRelatedConentExpended){
+                                        height=height+66.0f;
+                                    }
+                                    
+                                }
+                                
+                                Resourse *realtedResource=selectedResource.relatedResources[indexPath.row];
+                                float width=200;
+                                if( screenHeight <740 && screenHeight >667 )
+                                {
+                                    width=298;
+                                    
+                                }else if  (screenHeight > 568 && screenHeight <= 667 )
+                                {
+                                    width=270;
+                                }
+                                CGSize labelSize=[AppGlobal   getTheExpectedSizeOfLabel:realtedResource.resourceTitle andFontSize:14 labelWidth:width];
+                                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+                                    if(labelSize.height>17){
+                                        return  height=height+labelSize.height-17;
+                                    }
+                                    else if([realtedResource.resourceTitle length]>34 &&  (screenHeight > 480 && screenHeight < 667 ))
+                                    {
+                                        
+                                        return  height=height+labelSize.height;
+                                    }else if([realtedResource.resourceTitle length]>42 &&  screenHeight < 480)
+                                    {
+                                        
+                                        return  height=height+labelSize.height;
+                                    }
+                                }
+                                
+                                return height;
+
+                            }
+        float height=73.0f;///////////////////change the height from 73 to 78 by raj
         static NSString *identifier = @"AssignmentTableViewCell";
         AssignmentTableViewCell *cell = (AssignmentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
         NSLog(@"%f",cell.lblContentName.frame.size.width);
@@ -2176,47 +2285,20 @@ AFNetworkReachabilityStatus previousStatus;
             width=270;
         }
         CGSize labelSize=[AppGlobal   getTheExpectedSizeOfLabel:realtedResource.resourceTitle andFontSize:14 labelWidth:width];
-        
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)  /////////////////   check for device by raj
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+       if(labelSize.height>17){
+             return  height=height+labelSize.height-17;
+        }
+        else if([realtedResource.resourceTitle length]>34 &&  (screenHeight > 480 && screenHeight < 667 ))
+        {
             
-                            {
+            return  height=height+labelSize.height;
+        }else if([realtedResource.resourceTitle length]>42 &&  screenHeight < 480)
+        {
             
-                                if(labelSize.height>17){
-                                    return  height=height+labelSize.height-17;
-                                }
-                                
-                                
-                                else if([realtedResource.resourceTitle length]>34 &&  (screenHeight > 480 && screenHeight < 667 ))
-                                {
-                                    
-                                    return  height=height+labelSize.height;
-                                }else if([realtedResource.resourceTitle length]>42 &&  screenHeight < 480)
-                                {
-                                    
-                                    return  height=height+labelSize.height;
-                                }
-            
-                           }
- 
-    
-
-            
-            
-      
-//       if(labelSize.height>17){
-//             return  height=height+labelSize.height-17;
-//        }
-//        
-//        
-//        else if([realtedResource.resourceTitle length]>34 &&  (screenHeight > 480 && screenHeight < 667 ))
-//        {
-//            
-//            return  height=height+labelSize.height;
-//        }else if([realtedResource.resourceTitle length]>42 &&  screenHeight < 480)
-//        {
-//            
-//            return  height=height+labelSize.height;
-//        }
+            return  height=height+labelSize.height;
+        }
+        }
         
         return height;
 //        else

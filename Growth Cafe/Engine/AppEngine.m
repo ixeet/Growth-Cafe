@@ -13,8 +13,8 @@
 #import "CourseHandler.h"
 #import "FeedHandler.h"
 #import "AssignmentHandler.h"
-#import "SettingHandler.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "SettingHandler.h"
 
 @implementation AppEngine
 
@@ -460,6 +460,7 @@
     
 }
 
+
 //getMySetting
 -(void)getMySetting:(NSString*)userid success:(void (^)(NSDictionary *setting))success   failure:(void (^)(NSError *error))failure
 {
@@ -476,7 +477,7 @@
 
 //setMySetting
 -(void)setMySetting:(NSString*)userid AndSettingId:(NSString*)settingId success:(void (^)(BOOL successValue))success   failure:(void (^)(NSError *error))failure{
-
+    
     SettingHandler *setting=[[SettingHandler alloc] init];
     
     [setting setMySetting:userid AndSettingId:settingId success:^(BOOL successValue) {
@@ -513,5 +514,4 @@
         
     }];
 }
-
 @end

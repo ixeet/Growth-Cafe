@@ -16,7 +16,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-       [manager GET:GET_FEED_ACCESSTYPE(userid) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:GET_FEED_ACCESSTYPE(userid) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         
@@ -50,7 +50,7 @@
         failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
         
     }];
-
+    
 }
 
 
@@ -60,7 +60,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-
+    
     [manager GET:SET_FEED_ACCESSTYPE(userid,settingId) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
@@ -72,7 +72,7 @@
         if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
             
             
-                        
+            
             success(YES);
             
             
@@ -95,7 +95,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-        [manager GET:GET_FEED_USERS(userid) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:GET_FEED_USERS(userid) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         
@@ -109,7 +109,7 @@
             //call Block function
             NSMutableArray *userList= [[NSMutableArray alloc]init];
             for (NSDictionary *dicUser  in [responseDic objectForKey:@"usersList"]) {
-            
+                
                 UserDetails  *userDetail= [[UserDetails alloc]init];
                 userDetail.userId= [dicUser objectForKey:@"userId"];
                 userDetail.userImage=[dicUser objectForKey:@"profileImage"];
@@ -143,10 +143,10 @@
     NSMutableArray *userFollowList=[[NSMutableArray alloc]init];
     for (UserDetails *user in userList) {
         NSMutableDictionary *tempDicM=[[NSMutableDictionary alloc]init];
-            [tempDicM setObject:user.userId forKey:@"userid"];
-            [tempDicM setObject:[NSString stringWithFormat:@"%@", user.isFollowUpAllowed] forKey:@"isFollowUpAllowed"];
-            [userFollowList addObject:tempDicM];
- 
+        [tempDicM setObject:user.userId forKey:@"userid"];
+        [tempDicM setObject:[NSString stringWithFormat:@"%@", user.isFollowUpAllowed] forKey:@"isFollowUpAllowed"];
+        [userFollowList addObject:tempDicM];
+        
     }
     NSDictionary *parameters = @{@"userid":userid,@"usersList":userFollowList                                 };
     

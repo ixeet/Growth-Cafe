@@ -59,12 +59,12 @@
 //get Feed  List
 #define GET_UPDATE_URL [NSString stringWithFormat:@"%@/rest/common/getFeeds",APP_URL]
 #define GET_NOTIFICATION_URL [NSString stringWithFormat:@"%@/rest/common/getNotifications",APP_URL]
-
 //setting services
 //http://191.239.57.54:8081/SLMS/rest/user/getFeedUsers/userId/22
 #define GET_FEED_USERS(userid) [NSString stringWithFormat:@"%@/rest/user/getFeedUsers/userId/%@",APP_URL,userid]
 #define GET_FEED_ACCESSTYPE(userid) [NSString stringWithFormat:@"%@/rest/user/getFeedAccessType/userId/%@",APP_URL,userid]
 #define SET_FEED_ACCESSTYPE(userid,accesstypeid) [NSString stringWithFormat:@"%@/rest/user/setFeedAccessType/userId/%@/accessTypeId/%@",APP_URL,userid,accesstypeid]
+#define SET_USER_FOLLOW_STATUS_URL [NSString stringWithFormat:@"%@/rest/user/updateFollowersStatus", APP_URL]
 
 //comment on feed
 ///rest/common/commentOnFeed
@@ -102,11 +102,6 @@
 
 #define POST_ASSIGNMENT_URL [NSString stringWithFormat:@"%@/rest/course/uploadResourceDetail", APP_URL]
 #define SET_ASSIGNMENT_RATING_URL [NSString stringWithFormat:@"%@/rest/course/rateAssignment", APP_URL]
-
-#define SET_USER_FOLLOW_STATUS_URL [NSString stringWithFormat:@"%@/rest/user/updateFollowersStatus", APP_URL]
-
-
-
 
 #define key_Custom_DateFormate @"yyyy-MM-dd HH:mm:ss.S"
 #define key_loginId @"LoginId"

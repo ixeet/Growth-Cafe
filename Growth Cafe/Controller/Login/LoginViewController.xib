@@ -39,7 +39,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="puS-ah-mcY"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                             <state key="normal" title="LOGIN">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -78,9 +78,9 @@
                                 <constraint firstAttribute="height" constant="1" id="laW-5x-eNw"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6t-4K-YkS" userLabel="btnForgetPassword">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6t-4K-YkS" userLabel="btnForgetPassword">
                             <rect key="frame" x="65" y="190" width="470" height="42"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                             <state key="normal" title="Forgot Password?">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -127,7 +127,7 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                             </variation>
                         </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GCE-8d-jz5" userLabel="FBButtonView" customClass="FBLoginView">
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GCE-8d-jz5" userLabel="FBButtonView" customClass="FBLoginView">
                             <rect key="frame" x="65" y="234" width="470" height="50"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -235,12 +235,12 @@
                         <constraint firstItem="OhH-OT-hmM" firstAttribute="leading" secondItem="8Wf-Iv-zFo" secondAttribute="leading" constant="76" id="tLA-dP-TnE"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2LO-NX-APt" userLabel="btnCREATEACCOUNT">
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2LO-NX-APt" userLabel="btnCREATEACCOUNT">
                     <rect key="frame" x="189" y="534" width="223" height="42"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="Xqc-5g-5Rh"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                     <state key="normal" title="CREATE ACCOUNT">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -249,7 +249,7 @@
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                     </variation>
                     <connections>
-                        <action selector="btnCreatAccount:" destination="-1" eventType="touchUpInside" id="l42-eV-XdL"/>
+                        <action selector="btnCreatAccount:" destination="-1" eventType="touchUpInside" id="Xxg-A0-INJ"/>
                     </connections>
                 </button>
             </subviews>

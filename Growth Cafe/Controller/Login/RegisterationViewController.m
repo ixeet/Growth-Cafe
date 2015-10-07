@@ -37,8 +37,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //    btnSchool.layer.cornerRadius = 5; // this value vary as per your desire
-    //    btnSchool.clipsToBounds = YES;
+//  self.txtFirstName.textAlignment=NSTextAlignmentCenter-20;
+    
+    
+    
+     //    btnSchool.clipsToBounds = YES;
     //    btnSchool.layer.borderColor=(__bridge CGColorRef)([UIColor blackColor]);
     //    btnSchool.layer.borderWidth=2.0f;
     // Do any additional setup after loading the view from its nib.

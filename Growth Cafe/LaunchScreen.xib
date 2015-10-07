@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,41 +11,19 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="mqO-fY-2Dy">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="x1J-XE-R2I">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="mqO-fY-2Dy" secondAttribute="bottom" id="8qK-V4-XLf"/>
-                <constraint firstAttribute="trailing" secondItem="mqO-fY-2Dy" secondAttribute="trailing" id="R9L-gt-OfF"/>
-                <constraint firstItem="mqO-fY-2Dy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YZ4-W4-cdi"/>
-                <constraint firstItem="mqO-fY-2Dy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="a6n-Co-kc9"/>
+                <constraint firstAttribute="trailing" secondItem="x1J-XE-R2I" secondAttribute="trailing" id="Nyu-Y4-C0Z"/>
+                <constraint firstItem="x1J-XE-R2I" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QXT-Bo-9HP"/>
+                <constraint firstAttribute="bottom" secondItem="x1J-XE-R2I" secondAttribute="bottom" id="fwN-6S-U0S"/>
+                <constraint firstItem="x1J-XE-R2I" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="wbk-1R-c4F"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="subviews">
-                    <exclude reference="mqO-fY-2Dy"/>
-                </mask>
-                <mask key="constraints">
-                    <exclude reference="8qK-V4-XLf"/>
-                    <exclude reference="R9L-gt-OfF"/>
-                    <exclude reference="YZ4-W4-cdi"/>
-                    <exclude reference="a6n-Co-kc9"/>
-                </mask>
-            </variation>
-            <variation key="heightClass=regular-widthClass=compact">
-                <mask key="subviews">
-                    <include reference="mqO-fY-2Dy"/>
-                </mask>
-                <mask key="constraints">
-                    <include reference="8qK-V4-XLf"/>
-                    <include reference="R9L-gt-OfF"/>
-                    <include reference="YZ4-W4-cdi"/>
-                    <include reference="a6n-Co-kc9"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="548" y="455"/>
         </view>
     </objects>

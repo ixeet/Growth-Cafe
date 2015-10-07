@@ -28,14 +28,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 
 - (IBAction)btnInstructionsClick:(id)sender {
@@ -47,7 +47,7 @@
 }
 -(void)setUserProfile {
     // UserDetails *user=[AppGlobal readUserDetail];
-   UserDetails *user=[AppSingleton sharedInstance].userDetail;
+    UserDetails *user=[AppSingleton sharedInstance].userDetail;
     
     
     lblName.text=[NSString stringWithFormat:@"%@ %@",user.userFirstName,user.userLastName];
@@ -82,9 +82,9 @@
                 });
             });
         }
-       
+        
     }
-      
+    
     [[imgUser layer] setBorderWidth:3.0f];
     [[imgUser layer] setBorderColor:[UIColor colorWithRed:186.0/255.0 green:0.0/255.0 blue:50.0/255.0 alpha:1].CGColor];
 }

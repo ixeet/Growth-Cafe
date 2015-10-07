@@ -66,7 +66,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ec6-yl-ETk">
-                    <rect key="frame" x="15" y="23" width="20" height="35"/>
+                    <rect key="frame" x="15" y="23" width="30" height="35"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                     <state key="normal" image="icn_back-header.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -140,7 +140,7 @@
                 <constraint firstItem="ec6-yl-ETk" firstAttribute="leading" secondItem="acd-wH-5ir" secondAttribute="leading" constant="15" id="pz2-zD-5I4"/>
                 <constraint firstAttribute="bottom" secondItem="Bak-en-drd" secondAttribute="bottom" constant="54" id="rNp-KZ-MpE"/>
                 <constraint firstItem="Dpx-rw-Fyf" firstAttribute="leading" secondItem="acd-wH-5ir" secondAttribute="leading" id="t5T-xb-hCC"/>
-                <constraint firstItem="fat-we-cWt" firstAttribute="leading" secondItem="ec6-yl-ETk" secondAttribute="trailing" constant="23" id="tHj-HC-YwZ"/>
+                <constraint firstItem="fat-we-cWt" firstAttribute="leading" secondItem="ec6-yl-ETk" secondAttribute="trailing" constant="13" id="tHj-HC-YwZ"/>
                 <constraint firstItem="rVw-Cq-gRY" firstAttribute="leading" secondItem="fat-we-cWt" secondAttribute="trailing" constant="24" id="tYn-Kh-Hhp"/>
                 <constraint firstItem="Bak-en-drd" firstAttribute="leading" secondItem="acd-wH-5ir" secondAttribute="leading" id="vsq-w1-ohk"/>
                 <constraint firstItem="Dpx-rw-Fyf" firstAttribute="top" secondItem="acd-wH-5ir" secondAttribute="top" id="xIp-hg-ftA"/>

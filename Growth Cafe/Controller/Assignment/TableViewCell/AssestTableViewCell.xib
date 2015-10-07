@@ -24,7 +24,7 @@
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDc-3a-2j5" userLabel="btnPlay">
                         <rect key="frame" x="37" y="31" width="45" height="45"/>
-                        <state key="normal" image="9F04D9A3-8984-41E8-BD1F-04E7A14F6E38">
+                        <state key="normal" image="F77C99FC-8E15-4C65-814C-09EDEBCCEF55">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -59,7 +59,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="9F04D9A3-8984-41E8-BD1F-04E7A14F6E38" width="45" height="45">
+        <image name="F77C99FC-8E15-4C65-814C-09EDEBCCEF55" width="45" height="45">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

@@ -101,8 +101,6 @@
 -(void)saveTeacherMasterData;
 -(void)getCourse:(NSString*)userid AndFilter:(NSMutableDictionary*)dicfilter success:(void (^)(NSMutableArray *courses))success   failure:(void (^)(NSError *error))failure;
 
-
-
 //getMySetting
 -(void)getMySetting:(NSString*)userid  success:(void (^)(NSDictionary *setting))success   failure:(void (^)(NSError *error))failure;
 

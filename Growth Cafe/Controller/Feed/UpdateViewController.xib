@@ -41,6 +41,9 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1pc-w9-lLY" userLabel="tableView">
                     <rect key="frame" x="0.0" y="71" width="600" height="485"/>
                     <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="485" id="LnG-4g-SGW"/>
+                    </constraints>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <color key="sectionIndexBackgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -132,25 +135,42 @@
             <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="TjJ-yD-dal" firstAttribute="leading" secondItem="JaX-5B-j5q" secondAttribute="trailing" constant="24" id="19u-rJ-kal"/>
-                <constraint firstItem="1pc-w9-lLY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3FV-LL-kPw"/>
+                <constraint firstItem="1pc-w9-lLY" firstAttribute="trailing" secondItem="Cv1-n2-noY" secondAttribute="trailing" id="7AI-hH-Fh3"/>
                 <constraint firstItem="yrx-wp-1Kb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7f6-KC-ZcX"/>
                 <constraint firstItem="JaX-5B-j5q" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="9Fh-c2-aIw"/>
-                <constraint firstAttribute="trailing" secondItem="1pc-w9-lLY" secondAttribute="trailing" id="F1B-q5-g0k"/>
+                <constraint firstAttribute="trailing" secondItem="1pc-w9-lLY" secondAttribute="trailing" constant="80" id="LV0-a2-Nyh"/>
                 <constraint firstItem="Cv1-n2-noY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="PAW-cN-WdP"/>
+                <constraint firstItem="1pc-w9-lLY" firstAttribute="leading" secondItem="Cv1-n2-noY" secondAttribute="leading" id="Pgl-TS-yzT"/>
                 <constraint firstAttribute="bottom" secondItem="yrx-wp-1Kb" secondAttribute="bottom" id="Pvz-5o-0uR"/>
                 <constraint firstAttribute="trailing" secondItem="rmO-uq-EDI" secondAttribute="trailing" id="QjB-iL-6jd"/>
+                <constraint firstItem="1pc-w9-lLY" firstAttribute="trailing" secondItem="Cv1-n2-noY" secondAttribute="trailing" id="REi-Cv-TOG"/>
                 <constraint firstItem="rmO-uq-EDI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Xq6-Xb-y3M"/>
                 <constraint firstItem="Cv1-n2-noY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Y2o-bJ-vtt"/>
-                <constraint firstAttribute="bottom" secondItem="1pc-w9-lLY" secondAttribute="bottom" constant="44" id="aWh-xV-uUD"/>
+                <constraint firstAttribute="bottom" secondItem="1pc-w9-lLY" secondAttribute="bottom" constant="44" id="eI8-Jm-uWB"/>
+                <constraint firstItem="1pc-w9-lLY" firstAttribute="trailing" secondItem="rmO-uq-EDI" secondAttribute="trailing" id="ePg-0G-1Sz"/>
                 <constraint firstItem="TjJ-yD-dal" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="23" id="eza-Y9-Aps"/>
+                <constraint firstItem="1pc-w9-lLY" firstAttribute="leading" secondItem="rmO-uq-EDI" secondAttribute="leading" id="f8G-TV-nsa"/>
                 <constraint firstAttribute="trailing" secondItem="Cv1-n2-noY" secondAttribute="trailing" id="hWl-Jz-XOO"/>
                 <constraint firstAttribute="trailing" secondItem="yrx-wp-1Kb" secondAttribute="trailing" id="hwO-2q-yC0"/>
                 <constraint firstItem="rmO-uq-EDI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lGb-sx-dYh"/>
+                <constraint firstItem="1pc-w9-lLY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="80" id="nM9-pv-Tnt"/>
                 <constraint firstAttribute="trailing" secondItem="TjJ-yD-dal" secondAttribute="trailing" constant="15" id="ppf-or-Gul"/>
+                <constraint firstItem="1pc-w9-lLY" firstAttribute="top" secondItem="rmO-uq-EDI" secondAttribute="bottom" constant="1" id="qln-M7-hMm"/>
+                <constraint firstItem="1pc-w9-lLY" firstAttribute="leading" secondItem="Cv1-n2-noY" secondAttribute="leading" id="u8A-6W-KgU"/>
                 <constraint firstItem="yrx-wp-1Kb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="w6e-1z-1yC"/>
-                <constraint firstItem="1pc-w9-lLY" firstAttribute="top" secondItem="rmO-uq-EDI" secondAttribute="bottom" constant="1" id="wvp-QM-Hik"/>
                 <constraint firstItem="JaX-5B-j5q" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="yfu-C5-6Em"/>
+                <constraint firstItem="1pc-w9-lLY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="yuz-dF-Ndr"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="7AI-hH-Fh3"/>
+                    <exclude reference="LV0-a2-Nyh"/>
+                    <exclude reference="nM9-pv-Tnt"/>
+                    <exclude reference="u8A-6W-KgU"/>
+                    <exclude reference="Y2o-bJ-vtt"/>
+                    <exclude reference="hWl-Jz-XOO"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="106" y="-3043"/>
         </view>
         <view contentMode="scaleToFill" id="6ab-va-IKY" userLabel="commentView">
