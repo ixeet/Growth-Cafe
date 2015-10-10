@@ -165,7 +165,26 @@
         [txfSearchField setBorderStyle:UITextBorderStyleNone];
         [txfSearchField setTextColor:[UIColor whiteColor]];
 
+    }else{
+        
+        [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn.png"]];
+        
+        //@2x~ipad
+        
+        [txtSearchBar setBackgroundColor:[UIColor clearColor]];
+        
+        UITextField *txfSearchField = [txtSearchBar valueForKey:@"_searchField"];
+        
+        [txfSearchField setBackgroundColor:[UIColor clearColor]];
+        
+        //[txfSearchField setLeftView:UITextFieldViewModeNever];
+        
+        [txfSearchField setBorderStyle:UITextBorderStyleNone];
+        
+        [txfSearchField setTextColor:[UIColor whiteColor]];
+        
     }
+
 }
 - (void)viewDidLayoutSubviews{
         if([AppSingleton sharedInstance].userDetail.userRole!=2)
@@ -715,7 +734,7 @@
             {
                 height=height+220.0f;
             }
-
+      //  height=height+163.0f;
            
         }
         float width=200;

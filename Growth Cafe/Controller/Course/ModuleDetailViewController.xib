@@ -34,11 +34,20 @@
                         <constraint firstAttribute="height" constant="70" id="Cei-7s-7yJ"/>
                     </constraints>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJ0-r1-9gO" customClass="ScrollViewContainer">
+                <tableView hidden="YES" clipsSubviews="YES" tag="10" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Bak-en-drd" userLabel="tblViewContent">
                     <rect key="frame" x="0.0" y="71" width="600" height="475"/>
+                    <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="sectionIndexBackgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="haf-v3-8bB"/>
+                        <outlet property="delegate" destination="-1" id="mSS-k1-xCj"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJ0-r1-9gO" customClass="ScrollViewContainer">
+                    <rect key="frame" x="0.0" y="70" width="600" height="480"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="20" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="usY-df-ARF">
-                            <rect key="frame" x="20" y="0.0" width="560" height="475"/>
+                            <rect key="frame" x="100" y="0.0" width="400" height="475"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="sOG-uI-Fbm"/>
@@ -47,24 +56,16 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="usY-df-ARF" secondAttribute="bottom" id="EF7-qI-J3l"/>
-                        <constraint firstItem="usY-df-ARF" firstAttribute="leading" secondItem="RJ0-r1-9gO" secondAttribute="leading" constant="20" id="IIV-Zc-ojy"/>
+                        <constraint firstAttribute="bottom" secondItem="usY-df-ARF" secondAttribute="bottom" constant="5" id="EF7-qI-J3l"/>
+                        <constraint firstItem="usY-df-ARF" firstAttribute="leading" secondItem="RJ0-r1-9gO" secondAttribute="leading" constant="100" id="IIV-Zc-ojy">
+                            <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                        </constraint>
                         <constraint firstItem="usY-df-ARF" firstAttribute="top" secondItem="RJ0-r1-9gO" secondAttribute="top" id="OdC-fG-PmO"/>
-                        <constraint firstAttribute="trailing" secondItem="usY-df-ARF" secondAttribute="trailing" constant="20" id="f4X-L2-oF0"/>
+                        <constraint firstAttribute="trailing" secondItem="usY-df-ARF" secondAttribute="trailing" constant="100" id="f4X-L2-oF0">
+                            <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                        </constraint>
                     </constraints>
                 </view>
-                <tableView hidden="YES" clipsSubviews="YES" tag="10" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Bak-en-drd" userLabel="tblViewContent">
-                    <rect key="frame" x="0.0" y="71" width="600" height="475"/>
-                    <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="haf-v3-8bB"/>
-                        <outlet property="delegate" destination="-1" id="mSS-k1-xCj"/>
-                    </connections>
-                </tableView>
-                <searchBar contentMode="redraw" misplaced="YES" placeholder="Search" backgroundImage="img_search-boxn_Small.png" translatesAutoresizingMaskIntoConstraints="NO" id="fat-we-cWt">
-                    <rect key="frame" x="58" y="19" width="468" height="44"/>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ec6-yl-ETk">
                     <rect key="frame" x="15" y="23" width="30" height="35"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
@@ -116,12 +117,18 @@
                         <action selector="btnProfileClick:" destination="-1" eventType="touchUpInside" id="qVk-dK-q10"/>
                     </connections>
                 </button>
+                <searchBar contentMode="redraw" misplaced="YES" placeholder="Search" backgroundImage="img_search-boxn_Small.png" translatesAutoresizingMaskIntoConstraints="NO" id="fat-we-cWt">
+                    <rect key="frame" x="58" y="19" width="460" height="44"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="rVw-Cq-gRY" firstAttribute="top" secondItem="acd-wH-5ir" secondAttribute="top" constant="23" id="AJN-Dt-smZ"/>
                 <constraint firstItem="JmB-1n-4ov" firstAttribute="leading" secondItem="acd-wH-5ir" secondAttribute="leading" id="Art-Xw-1Rr"/>
-                <constraint firstAttribute="trailing" secondItem="Bak-en-drd" secondAttribute="trailing" id="EI9-8i-YMC"/>
+                <constraint firstAttribute="trailing" secondItem="Bak-en-drd" secondAttribute="trailing" id="EI9-8i-YMC">
+                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                </constraint>
                 <constraint firstItem="ec6-yl-ETk" firstAttribute="top" secondItem="acd-wH-5ir" secondAttribute="top" constant="23" id="I6D-As-p37"/>
                 <constraint firstAttribute="bottom" secondItem="JmB-1n-4ov" secondAttribute="bottom" id="QaI-Rk-62R"/>
                 <constraint firstAttribute="trailing" secondItem="rVw-Cq-gRY" secondAttribute="trailing" constant="15" id="Rn0-NS-vQf"/>
@@ -129,8 +136,8 @@
                 <constraint firstItem="Bak-en-drd" firstAttribute="top" secondItem="acd-wH-5ir" secondAttribute="top" constant="71" id="UGh-0d-6fS"/>
                 <constraint firstAttribute="trailing" secondItem="D6j-9W-BJZ" secondAttribute="trailing" id="UcH-TZ-Xll"/>
                 <constraint firstItem="JmB-1n-4ov" firstAttribute="top" secondItem="acd-wH-5ir" secondAttribute="top" id="YfO-1k-C2X"/>
-                <constraint firstAttribute="bottom" secondItem="RJ0-r1-9gO" secondAttribute="bottom" constant="54" id="a98-Lz-KCg"/>
-                <constraint firstItem="RJ0-r1-9gO" firstAttribute="top" secondItem="acd-wH-5ir" secondAttribute="top" constant="71" id="cm4-Kj-e3L"/>
+                <constraint firstAttribute="bottom" secondItem="RJ0-r1-9gO" secondAttribute="bottom" constant="50" id="a98-Lz-KCg"/>
+                <constraint firstItem="RJ0-r1-9gO" firstAttribute="top" secondItem="acd-wH-5ir" secondAttribute="top" constant="70" id="cm4-Kj-e3L"/>
                 <constraint firstItem="ec6-yl-ETk" firstAttribute="centerY" secondItem="fat-we-cWt" secondAttribute="centerY" id="eCh-z3-sWs"/>
                 <constraint firstItem="D6j-9W-BJZ" firstAttribute="leading" secondItem="acd-wH-5ir" secondAttribute="leading" id="el3-FZ-37C"/>
                 <constraint firstItem="RJ0-r1-9gO" firstAttribute="leading" secondItem="acd-wH-5ir" secondAttribute="leading" id="k2u-XD-4gg"/>
@@ -141,8 +148,10 @@
                 <constraint firstAttribute="bottom" secondItem="Bak-en-drd" secondAttribute="bottom" constant="54" id="rNp-KZ-MpE"/>
                 <constraint firstItem="Dpx-rw-Fyf" firstAttribute="leading" secondItem="acd-wH-5ir" secondAttribute="leading" id="t5T-xb-hCC"/>
                 <constraint firstItem="fat-we-cWt" firstAttribute="leading" secondItem="ec6-yl-ETk" secondAttribute="trailing" constant="13" id="tHj-HC-YwZ"/>
-                <constraint firstItem="rVw-Cq-gRY" firstAttribute="leading" secondItem="fat-we-cWt" secondAttribute="trailing" constant="24" id="tYn-Kh-Hhp"/>
-                <constraint firstItem="Bak-en-drd" firstAttribute="leading" secondItem="acd-wH-5ir" secondAttribute="leading" id="vsq-w1-ohk"/>
+                <constraint firstItem="rVw-Cq-gRY" firstAttribute="leading" secondItem="fat-we-cWt" secondAttribute="trailing" constant="32" id="tYn-Kh-Hhp"/>
+                <constraint firstItem="Bak-en-drd" firstAttribute="leading" secondItem="acd-wH-5ir" secondAttribute="leading" id="vsq-w1-ohk">
+                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                </constraint>
                 <constraint firstItem="Dpx-rw-Fyf" firstAttribute="top" secondItem="acd-wH-5ir" secondAttribute="top" id="xIp-hg-ftA"/>
                 <constraint firstAttribute="trailing" secondItem="Dpx-rw-Fyf" secondAttribute="trailing" id="zLE-uI-J0t"/>
             </constraints>

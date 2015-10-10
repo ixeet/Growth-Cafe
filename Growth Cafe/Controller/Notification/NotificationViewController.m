@@ -134,7 +134,26 @@
         //[txfSearchField setLeftView:UITextFieldViewModeNever];
         [txfSearchField setBorderStyle:UITextBorderStyleNone];
         [txfSearchField setTextColor:[UIColor whiteColor]];
+    }else{
+        
+        [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn.png"]];
+        
+        //@2x~ipad
+        
+        [txtSearchBar setBackgroundColor:[UIColor clearColor]];
+        
+        UITextField *txfSearchField = [txtSearchBar valueForKey:@"_searchField"];
+        
+        [txfSearchField setBackgroundColor:[UIColor clearColor]];
+        
+        //[txfSearchField setLeftView:UITextFieldViewModeNever];
+        
+        [txfSearchField setBorderStyle:UITextBorderStyleNone];
+        
+        [txfSearchField setTextColor:[UIColor whiteColor]];
+        
     }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -403,7 +422,7 @@
             [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         }
         Update *update=[arrayUpdates objectAtIndex:indexPath.row];
-        
+       // cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         // create custom view for title
         NSString *titleString =update.updateTitle;
         NSArray *titleWords = [titleString componentsSeparatedByString:@"$"];
@@ -422,8 +441,64 @@
                 break ;
             if([strtemp isEqualToString:@""])
             {
+                
+                if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
+                
+                
+                
+                    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+                    
+                    NSDictionary *dictext= update.updateTitleArray[textIndex];
+                    if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"User" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                        
+                    }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Course" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                    }
+                    else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Module" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                        
+                        
+                    }
+                    
+                    else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Resource" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                    }
+                    
+                    
+
+                
+                
+                } else
+                {
+                
+                
                 //  NSString* tempstr=[update.updateTitleArray objectAtIndex:textIndex];
-                UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+                UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:17];
                 
                 NSDictionary *dictext= update.updateTitleArray[textIndex];
                 if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
@@ -466,9 +541,13 @@
                     [attributedString appendAttributedString:attributedStringtemp];
                 }
                 
-                
+                }
                 
             }else {
+                 if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+                
+                 {
+                
                 
                 
                 UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:14];
@@ -477,10 +556,27 @@
                 
                 [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[strtemp length] )];
                 [attributedString appendAttributedString:attributedStringtemp];
+                 }else {
+                 
+                 
+                 
+                 
+                 
+                     UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:17];
+                     
+                     NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:strtemp ];
+                     
+                     [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[strtemp length] )];
+                     [attributedString appendAttributedString:attributedStringtemp];
+                 
+                 
+                 }
+               
                 
+              if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+              {
                 UIFont *Boldfont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
-                
-                NSDictionary *dictext= update.updateTitleArray[textIndex];
+                                NSDictionary *dictext= update.updateTitleArray[textIndex];
                 if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
                 {
                     NSString* tempstr=[dictext objectForKey:@"value"];
@@ -518,7 +614,60 @@
                     [attributedString appendAttributedString:attributedStringtemp];
                 }
                 
-                
+              }  else {
+              
+                  {
+                      UIFont *Boldfont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:17];
+                      
+                      
+                      
+                      
+                      
+                      NSDictionary *dictext= update.updateTitleArray[textIndex];
+                      if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
+                      {
+                          NSString* tempstr=[dictext objectForKey:@"value"];
+                          
+                          NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"User" : @(YES) }];
+                          
+                          [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
+                          [attributedString appendAttributedString:attributedStringtemp];
+                          
+                      }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
+                      {
+                          NSString* tempstr=[dictext objectForKey:@"value"];
+                          
+                          NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Course" : @(YES) }];
+                          
+                          [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
+                          [attributedString appendAttributedString:attributedStringtemp];
+                      }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
+                      {
+                          NSString* tempstr=[dictext objectForKey:@"value"];
+                          
+                          NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Module" : @(YES) }];
+                          
+                          [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
+                          [attributedString appendAttributedString:attributedStringtemp];
+                          
+                      }
+                      else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
+                      {
+                          NSString* tempstr=[dictext objectForKey:@"value"];
+                          
+                          NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Resource" : @(YES) }];
+                          
+                          [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
+                          [attributedString appendAttributedString:attributedStringtemp];
+                      }
+                      
+                  }
+              
+              
+              
+              
+              
+              }
             }
             
             textIndex=textIndex+1;
@@ -529,7 +678,7 @@
         //   cell.txtView.tag=indexPath.row;
         
         
-        [cell.txtView setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
+     //   [cell.txtView setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
         
         [cell.txtView setAttributedText:attributedString ];
         
@@ -586,19 +735,26 @@
         //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
     if(update.viewStatus ==1 )
     {
-        cell.contentView.backgroundColor=[UIColor lightGrayColor];
+       cell.view.backgroundColor=[UIColor clearColor];
         
     }else{
-        cell.contentView.backgroundColor=[UIColor clearColor];
-
+        
+ cell.view.backgroundColor=[UIColor colorWithRed:(222.0/255.0) green:(222.0/255.0) blue:(222.0/255.0) alpha:1.0];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
      return cell;
 }
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    BOOL isChild =
+    static NSString *identifier = @"NotificationTableViewCell";
+    NotificationTableViewCell *cell = (NotificationTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+    
+       cell.backgroundColor = [UIColor redColor];
+   
+
+    //    BOOL isChild =
     //    currentExpandedIndex > -1
     //    && indexPath.row > currentExpandedIndex
     //    && indexPath.row <= currentExpandedIndex + [[moduleArray objectAtIndex:currentExpandedIndex] count];
@@ -650,7 +806,16 @@
          // update the feed status
             
         }
-        objUpdate.viewStatus=1;
+        objUpdate.viewStatus=1 ;  //   notification  viewed
+      
+        
+       //          Update *update=arrayUpdates[indexPath.row];
+//        UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]init];
+//       updateDetailView.objUpdate= update;
+//        [self.navigationController pushViewController:updateDetailView animated:YES];
+//
+      
+        
         [self setUpdateStaus:updates];
         
         //Hide Indicator
@@ -686,7 +851,8 @@
         int textIndex=0;
         for (NSString *strtemp in titleWords) {
             UILabel *lbltitle=[[UILabel alloc]init];
-            [lbltitle setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];                NSString *strtrim = [strtemp stringByTrimmingCharactersInSet:
+            [lbltitle setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
+            NSString *strtrim = [strtemp stringByTrimmingCharactersInSet:
                                                                                                                                                        [NSCharacterSet whitespaceCharacterSet]];
             lbltitle.text=strtrim;
             [lbltitle setFont:[UIFont fontWithName:@"Helvetica Neue" size:12.0]];
@@ -711,7 +877,7 @@
                                      [NSCharacterSet whitespaceCharacterSet]];
                 
                 [btnAction setTitle:strtrim forState:UIControlStateNormal];
-                [btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+               [btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 
                 [btnAction.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:13.0]];
                // textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
@@ -754,8 +920,13 @@
         //        {
         //            cellMainHeight=height+97;
         //        }
-       
-         height=height+70;
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+    {
+        height=height+70;
+
+    }else {
+         height=height+92;
+    }
         // [cellMainHeight insertObject:[NSString stringWithFormat:@"%f",height] atIndex:indexPath.section];
         NSLog(@"%@",[cellMainHeight objectAtIndex:indexPath.row]);
         [cellMainHeight removeObjectAtIndex:indexPath.row];
@@ -1256,7 +1427,7 @@
     
     actInd.tag = 10;
     
-    actInd.frame = CGRectMake((screenWidth-20)/2, 5.0, 20.0, 20.0);
+    actInd.frame = CGRectMake(self.view.frame.size.width/2, 5.0, 20.0, 20.0);
     
     actInd.hidesWhenStopped = YES;
     

@@ -136,8 +136,8 @@
 
     UserDetails *userDetail=[users objectAtIndex:indexPath.row] ;
     
-    userDetail.userImage=[AppSingleton   sharedInstance].userDetail.userImage;
-    userDetail.userImageData=[AppSingleton   sharedInstance].userDetail.userImageData;
+//    userDetail.userImage=[AppSingleton   sharedInstance].userDetail.userImage;
+//    userDetail.userImageData=[AppSingleton   sharedInstance].userDetail.userImageData;
     if(userDetail.userImage!=nil){
         
         //check image available at local

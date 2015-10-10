@@ -33,15 +33,15 @@
                     </constraints>
                 </imageView>
                 <searchBar contentMode="redraw" misplaced="YES" placeholder="Search" backgroundImage="img_search-boxn.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xzj-RL-Xdw">
-                    <rect key="frame" x="41" y="19" width="506" height="44"/>
+                    <rect key="frame" x="58" y="19" width="460" height="44"/>
                     <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="uBv-v1-yWO"/>
                     </connections>
                 </searchBar>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xBh-n0-A3a" userLabel="tableView">
-                    <rect key="frame" x="80" y="71" width="440" height="485"/>
+                <tableView clipsSubviews="YES" tag="12" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xBh-n0-A3a" userLabel="tableView">
+                    <rect key="frame" x="0.0" y="71" width="600" height="485"/>
                     <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -116,7 +116,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="xBh-n0-A3a" secondAttribute="bottom" constant="44" id="0B0-hb-mVi"/>
                 <constraint firstItem="l37-D0-KKh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="62N-YI-7dB"/>
@@ -124,26 +124,29 @@
                 <constraint firstAttribute="trailing" secondItem="l37-D0-KKh" secondAttribute="trailing" id="HsC-CK-pLM"/>
                 <constraint firstItem="hWU-ye-EHP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Iyz-Np-AyL"/>
                 <constraint firstAttribute="bottom" secondItem="hWU-ye-EHP" secondAttribute="bottom" id="KCL-zd-Na2"/>
-                <constraint firstItem="014-uW-ktB" firstAttribute="leading" secondItem="Xzj-RL-Xdw" secondAttribute="trailing" constant="3" id="OoK-FQ-yh7"/>
+                <constraint firstItem="014-uW-ktB" firstAttribute="leading" secondItem="Xzj-RL-Xdw" secondAttribute="trailing" constant="32" id="OoK-FQ-yh7"/>
                 <constraint firstItem="hWU-ye-EHP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="R19-gm-8n8"/>
                 <constraint firstAttribute="trailing" secondItem="hWU-ye-EHP" secondAttribute="trailing" id="Snk-y6-0RJ"/>
-                <constraint firstItem="xBh-n0-A3a" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="80" id="Syc-wM-8Qw">
+                <constraint firstItem="xBh-n0-A3a" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Syc-wM-8Qw">
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>
                 <constraint firstItem="014-uW-ktB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="23" id="Xhn-9R-baa"/>
                 <constraint firstItem="3QM-U6-3qF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="bKi-qg-u2r"/>
                 <constraint firstItem="Xzj-RL-Xdw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="cvU-e1-Iaj"/>
                 <constraint firstItem="E8G-Si-qtZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dLV-xi-diZ"/>
-                <constraint firstItem="Xzj-RL-Xdw" firstAttribute="leading" secondItem="3QM-U6-3qF" secondAttribute="trailing" constant="-4" id="eBF-7J-5Mq"/>
+                <constraint firstItem="Xzj-RL-Xdw" firstAttribute="leading" secondItem="3QM-U6-3qF" secondAttribute="trailing" constant="13" id="eBF-7J-5Mq"/>
                 <constraint firstItem="l37-D0-KKh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="in6-tz-MRb"/>
                 <constraint firstAttribute="trailing" secondItem="E8G-Si-qtZ" secondAttribute="trailing" id="jJ6-c5-cAa"/>
                 <constraint firstItem="3QM-U6-3qF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="23" id="knr-Gq-6Gg"/>
                 <constraint firstAttribute="trailing" secondItem="014-uW-ktB" secondAttribute="trailing" constant="15" id="l2c-g5-FaQ"/>
-                <constraint firstAttribute="trailing" secondItem="xBh-n0-A3a" secondAttribute="trailing" constant="80" id="ld2-mK-eY1"/>
+                <constraint firstAttribute="trailing" secondItem="xBh-n0-A3a" secondAttribute="trailing" id="ld2-mK-eY1">
+                    <variation key="heightClass=compact-widthClass=compact" constant="0.0"/>
+                </constraint>
+                <constraint firstItem="Xzj-RL-Xdw" firstAttribute="centerY" secondItem="3QM-U6-3qF" secondAttribute="centerY" id="ozs-sf-QQz"/>
                 <constraint firstItem="xBh-n0-A3a" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="sDV-PV-VaR"/>
                 <constraint firstItem="E8G-Si-qtZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wsR-zo-fX8"/>
             </constraints>
-            <point key="canvasLocation" x="554" y="-90"/>
+            <point key="canvasLocation" x="368" y="-132"/>
         </view>
         <view contentMode="scaleToFill" id="eHg-1K-rJK" userLabel="commentView">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>

@@ -79,7 +79,7 @@
     
     [objCustom.btnLogout  addTarget:self action:@selector(btnLogoutClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    CGRect cmtFrame = CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+    CGRect cmtFrame = CGRectMake(0,1200, self.view.frame.size.width, 40);
     txtframe=cmtFrame;
     self.cmtview.frame=cmtFrame;
     [self.view addSubview:self.cmtview];
@@ -138,6 +138,20 @@
         //[txfSearchField setLeftView:UITextFieldViewModeNever];
         [txfSearchField setBorderStyle:UITextBorderStyleNone];
         [txfSearchField setTextColor:[UIColor whiteColor]];
+    }else{
+     
+         [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn1.png"]];
+    
+        [txtSearchBar setBackgroundColor:[UIColor clearColor]];
+        UITextField *txfSearchField = [txtSearchBar valueForKey:@"_searchField"];
+        [txfSearchField setBackgroundColor:[UIColor clearColor]];
+        //[txfSearchField setLeftView:UITextFieldViewModeNever];
+        [txfSearchField setBorderStyle:UITextBorderStyleNone];
+        [txfSearchField setTextColor:[UIColor whiteColor]];
+
+    
+    
+    
     }
 }
 
@@ -405,8 +419,15 @@
                 break ;
             if([strtemp isEqualToString:@""])
             {
+                
+                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+                    
+                     UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+                
+                
+               
                 //  NSString* tempstr=[update.updateTitleArray objectAtIndex:textIndex];
-                UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+               // UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
                 
                 NSDictionary *dictext= objUpdate.updateTitleArray[textIndex];
                 if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
@@ -449,18 +470,75 @@
                     [attributedString appendAttributedString:attributedStringtemp];
                 }
                 
+                }else {
+                    
+                      UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+                    
+                    NSDictionary *dictext= objUpdate.updateTitleArray[textIndex];
+                    if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"User" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                        
+                    }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Course" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                    }
+                    else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Module" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                        
+                        
+                    }
+                    
+                    else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Resource" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                    }
+                }
                 
+            }
+                        else {
+                            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+                            
+                             UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:14];
+                                NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:strtemp ];
+                                
+                                [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[strtemp length] )];
+                                [attributedString appendAttributedString:attributedStringtemp];
+                            
+                            }else{
+                            
+                                
+                                UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:16];
+                                NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:strtemp ];
+                                
+                                [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[strtemp length] )];
+                                [attributedString appendAttributedString:attributedStringtemp];
+                            }
+               
                 
-            }else {
-                
-                
-                UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:14];
-                
-                NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:strtemp ];
-                
-                [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[strtemp length] )];
-                [attributedString appendAttributedString:attributedStringtemp];
-                
+                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+                {
                 UIFont *Boldfont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
                 
                 NSDictionary *dictext= objUpdate.updateTitleArray[textIndex];
@@ -502,8 +580,63 @@
                 }
                 
                 
-            }
-            
+                }else{
+                    
+                    
+                    
+                    
+                    UIFont *Boldfont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+                    
+                    NSDictionary *dictext= objUpdate.updateTitleArray[textIndex];
+                    if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"User" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                        
+                    }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Course" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                    }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Module" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                        
+                    }
+                    else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Resource" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+
+                        
+                        
+                        }
             textIndex=textIndex+1;
         }
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textTapped:)];

@@ -24,12 +24,12 @@
 #import "UpdateProfileViewController.h"
 #import "UpdateDetailViewController.h"
 #import "AFHTTPRequestOperationManager.h"
-
+#import "SearchViewController.h"
 #import <Social/Social.h>
 @interface UpdateViewController ()
 {
     NSMutableArray *arrayUpdates;
-    BOOL isSearching;
+    //BOOL isSearching;
     CGRect txtframe;
     NSString    *searchText;
     NSString *selectedCommentId,*selectedUpdateId;
@@ -169,7 +169,7 @@
 -(void)dismissKeyboard {
     [txtSearchBar resignFirstResponder];
     [txtViewCMT resignFirstResponder];
-    isSearching=NO;
+    //isSearching=NO;
     txtViewCMT.text=@"";
     step=0;
     
@@ -204,6 +204,24 @@
         //[txfSearchField setLeftView:UITextFieldViewModeNever];
         [txfSearchField setBorderStyle:UITextBorderStyleNone];
         [txfSearchField setTextColor:[UIColor whiteColor]];
+    }else{
+        
+        [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn.png"]];
+        
+        //@2x~ipad
+        
+        [txtSearchBar setBackgroundColor:[UIColor clearColor]];
+        
+        UITextField *txfSearchField = [txtSearchBar valueForKey:@"_searchField"];
+        
+        [txfSearchField setBackgroundColor:[UIColor clearColor]];
+        
+        //[txfSearchField setLeftView:UITextFieldViewModeNever];
+        
+        [txfSearchField setBorderStyle:UITextBorderStyleNone];
+        
+        [txfSearchField setTextColor:[UIColor whiteColor]];
+        
     }
 }
 
@@ -230,7 +248,7 @@
         //
         //       }
     }];
-    
+    [self dismissKeyboard];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     objCustom.btnFacebook.delegate=objCustom;
@@ -692,7 +710,7 @@
                 /////////////////////////////////////////////////////////////////////change the font  color for ipod and iphone by raj
                 else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
                 {
-                    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:22];
+                    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
                     
                     NSDictionary *dictext= update.updateTitleArray[textIndex];
                     if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
@@ -762,7 +780,7 @@
                     
                 {/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     /////////////////////////////////////////////////////////////////////change the font  color for ipod and iphone by raj
-                    UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:22];
+                    UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:16];
                     
                     NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:strtemp ];
                     
@@ -829,7 +847,7 @@
                 else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
                 {
                     
-                    UIFont *Boldfont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:22];
+                    UIFont *Boldfont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
                     NSDictionary *dictext= update.updateTitleArray[textIndex];
                     if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
                     {
@@ -881,6 +899,10 @@
         
         [cell.txtView setAttributedText:attributedString ];
         [cell.txtView setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
+        CGPoint origin = [cell.txtView contentOffset];
+        [cell.txtView setContentOffset:CGPointMake(origin.x, +11.0)];
+        cell.txtView.delegate=self;
+
         if(update.updateDesc!=nil)
         {
             cell.txtviewDetail.text=update.updateDesc;
@@ -1140,8 +1162,7 @@
                     {
                         cell.btnMore.hidden=YES;
                         cell.imgHalfDevider.hidden=YES;
-                        
-                    }
+                                      }
                     
                     
                 }
@@ -1340,7 +1361,7 @@
             
             else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
             {
-                height=220.0f;
+                height=200.0f;
             }
       
         // code end for checking the iphone or ipad device
@@ -1489,7 +1510,7 @@
             //            if([cellCMTHeight count ]>indexPath.section)
             //            {
             [cellCMTHeight removeObjectAtIndex:indexPath.section];
-            [cellCMTHeight insertObject:[NSString stringWithFormat:@"%f",height] atIndex:indexPath.section];
+            [cellCMTHeight insertObject:[NSString stringWithFormat:@"%f",500.0f] atIndex:indexPath.section];
             //            }else{
             //                [cellCMTHeight addObject:[NSString stringWithFormat:@"%f",height]];
             //            }
@@ -2116,8 +2137,8 @@
     /* Move the toolbar to above the keyboard */
     //    [UIView beginAnimations:nil context:NULL];
     //    [UIView setAnimationDuration:0.0];
-    if(!isSearching)
-    {
+//    if(!isSearching)
+//    {
         CGRect frame1 = self.cmtview.frame;
         frame1.size.width=keyboardFrameBeginRect.size.width;
         frame1.origin.y = self.view.frame.size.height- (keyboardFrameBeginRect.size.height+39);
@@ -2127,7 +2148,7 @@
         txtframe=frame1;
         [self.view bringSubviewToFront: self.cmtview];
         //271-
-    }
+    //}
     //  [UIView commitAnimations];
     
 }
@@ -2138,13 +2159,13 @@
     /* Move the toolbar back to bottom of the screen */
     //    [UIView beginAnimations:nil context:NULL];
     //    [UIView setAnimationDuration:0.3];
-    if(!isSearching)
-    {
+//    if(!isSearching)
+//    {
        // CGRect frame1 = self.cmtview.frame;
         txtframe=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
         self.cmtview.frame = txtframe;
        // txtframe=frame1;
-    }
+    //}
     //
     //    [UIView commitAnimations];
 }
@@ -2152,8 +2173,10 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     
-    [txtViewCMT resignFirstResponder];
-    isSearching = YES;
+    SearchViewController *viewController= [[SearchViewController alloc]initWithNibName:@"SearchViewController" bundle:nil];
+    [self.navigationController pushViewController:viewController animated:NO];
+    [searchBar resignFirstResponder];
+
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -2173,21 +2196,21 @@
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"Cancel clicked");
-    isSearching=NO;
-    [self  getUpdate:txtSearchBar.text];
-    [searchBar resignFirstResponder];
+//    NSLog(@"Cancel clicked");
+//    isSearching=NO;
+//    [self  getUpdate:txtSearchBar.text];
+//    [searchBar resignFirstResponder];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"Search Clicked");
-    self.offsetRecord=0;
-    
-    
-    searchText=searchBar.text;
-    [self  getUpdate:txtSearchBar.text];
-    [searchBar resignFirstResponder];
-    isSearching=NO;
+//    NSLog(@"Search Clicked");
+//    self.offsetRecord=0;
+//    
+//    
+//    searchText=searchBar.text;
+//    [self  getUpdate:txtSearchBar.text];
+//    [searchBar resignFirstResponder];
+//    isSearching=NO;
 }
 -(void)loginError:(NSError*)error{
     tblViewContent.tableHeaderView=nil;
@@ -2361,7 +2384,7 @@
     
     actInd.tag = 10;
     
-    actInd.frame = CGRectMake((screenWidth-20)/2, 5.0, 20.0, 20.0);
+    actInd.frame = CGRectMake((self.view.frame.size.width-20)/2, 5.0, 20.0, 20.0);
     
     actInd.hidesWhenStopped = YES;
     

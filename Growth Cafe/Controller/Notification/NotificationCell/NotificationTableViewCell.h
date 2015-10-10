@@ -11,5 +11,6 @@
 @interface NotificationTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UITextView *txtView;
+@property (weak, nonatomic) IBOutlet UIView *view;
 @property (strong, nonatomic) IBOutlet UIButton *btnUpdatedBy;
 @end

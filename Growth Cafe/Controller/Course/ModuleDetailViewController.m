@@ -120,10 +120,9 @@ AFNetworkReachabilityStatus previousStatus;
     }
     
     
-    
-    
-
-    
+   // [scollViewContainer setBackgroundColor:[UIColor clearColor]];
+   // scollViewContainer.backgroundColor = "red";
+ 
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -221,7 +220,26 @@ AFNetworkReachabilityStatus previousStatus;
         //[txfSearchField setLeftView:UITextFieldViewModeNever];
         [txfSearchField setBorderStyle:UITextBorderStyleNone];
          [txfSearchField setTextColor:[UIColor whiteColor]];
+    }else{
+        
+        [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn1.png"]];
+        
+        //@2x~ipad
+        
+        [txtSearchBar setBackgroundColor:[UIColor clearColor]];
+        
+        UITextField *txfSearchField = [txtSearchBar valueForKey:@"_searchField"];
+        
+        [txfSearchField setBackgroundColor:[UIColor clearColor]];
+        
+        //[txfSearchField setLeftView:UITextFieldViewModeNever];
+        
+        [txfSearchField setBorderStyle:UITextBorderStyleNone];
+        
+        [txfSearchField setTextColor:[UIColor whiteColor]];
+        
     }
+
 }
 /*
 #pragma mark - Navigation
@@ -748,6 +766,8 @@ AFNetworkReachabilityStatus previousStatus;
             }
             CGSize pagesScrollViewSize = self.scrollView.frame.size;
             self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * [contentList count], pagesScrollViewSize.height+10);
+           // [scollViewContainer setBackgroundColor:[UIColor redColor]];
+
             
             // Load the initial set of pages that are on screen
             [self loadVisiblePages];
@@ -1087,7 +1107,9 @@ AFNetworkReachabilityStatus previousStatus;
     
     int yDirectionOffset = startPoint.y - endPoint.y;
     if(yDirectionOffset > 0)
+        
         yDirection = eScrollTop;
+    
     else
         yDirection = eScrollBottom;
     
@@ -1097,17 +1119,19 @@ AFNetworkReachabilityStatus previousStatus;
         direction = yDirection;
     
     return direction;
+    
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     mPreviousTouchPoint = scrollView.contentOffset;
+  
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender
 {
     CGPoint offset = self.scrollView.contentOffset;
-    
+   
     //Cool... Restricting diagonal scrolling
      mSwipeDirection = [self getScrollDirection:mPreviousTouchPoint endPoint:self.scrollView.contentOffset];
     switch (mSwipeDirection) {
@@ -1206,6 +1230,10 @@ AFNetworkReachabilityStatus previousStatus;
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
+    [scollViewContainer setBackgroundColor:[UIColor clearColor]];///////////////////////////////////////// done by raj
+
+    
+    
     if(decelerate==YES)
     {
         NSLog(@"running");
@@ -1246,10 +1274,12 @@ AFNetworkReachabilityStatus previousStatus;
                 
             }
         }else if( scrollView.tag==10){
+            
             if (scrollView.contentOffset.y<-2)
             {
                // scrollDirection = ScrollDirectionDown;
                 
+                [scollViewContainer setBackgroundColor:[UIColor blackColor]];///////////////////////////////////////// done by raj
                 
                 self.lastContentOffsetOfTable = scrollView.contentOffset.y;
                 
@@ -1769,6 +1799,7 @@ AFNetworkReachabilityStatus previousStatus;
                 cell.lblRelatedVideo.hidden=YES;
             }
 [tableViewCellsArray addObject:cell];
+             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         
@@ -2201,7 +2232,7 @@ AFNetworkReachabilityStatus previousStatus;
             
                             else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
                             {
-                                float height=83.0f;///////////////////change the height from 73 to 78 by raj
+                                float height=90.0f;///////////////////change the height from 73 to 78 by raj
                                 static NSString *identifier = @"AssignmentTableViewCell";
                                 AssignmentTableViewCell *cell = (AssignmentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
                                 NSLog(@"%f",cell.lblContentName.frame.size.width);

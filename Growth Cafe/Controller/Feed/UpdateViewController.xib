@@ -38,7 +38,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="72"/>
                     </variation>
                 </imageView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1pc-w9-lLY" userLabel="tableView">
+                <tableView clipsSubviews="YES" tag="12" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1pc-w9-lLY" userLabel="tableView">
                     <rect key="frame" x="0.0" y="71" width="600" height="485"/>
                     <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -56,7 +56,7 @@
                     </connections>
                 </tableView>
                 <searchBar contentMode="redraw" misplaced="YES" placeholder="Search" backgroundImage="img_search-boxn.png" translatesAutoresizingMaskIntoConstraints="NO" id="JaX-5B-j5q">
-                    <rect key="frame" x="20" y="19" width="506" height="44"/>
+                    <rect key="frame" x="35" y="19" width="506" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="VSo-kY-x9V"/>
                     </constraints>
@@ -134,11 +134,9 @@
             </subviews>
             <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="TjJ-yD-dal" firstAttribute="leading" secondItem="JaX-5B-j5q" secondAttribute="trailing" constant="24" id="19u-rJ-kal"/>
-                <constraint firstItem="1pc-w9-lLY" firstAttribute="trailing" secondItem="Cv1-n2-noY" secondAttribute="trailing" id="7AI-hH-Fh3"/>
+                <constraint firstItem="TjJ-yD-dal" firstAttribute="leading" secondItem="JaX-5B-j5q" secondAttribute="trailing" constant="9" id="19u-rJ-kal"/>
                 <constraint firstItem="yrx-wp-1Kb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7f6-KC-ZcX"/>
                 <constraint firstItem="JaX-5B-j5q" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="9Fh-c2-aIw"/>
-                <constraint firstAttribute="trailing" secondItem="1pc-w9-lLY" secondAttribute="trailing" constant="80" id="LV0-a2-Nyh"/>
                 <constraint firstItem="Cv1-n2-noY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="PAW-cN-WdP"/>
                 <constraint firstItem="1pc-w9-lLY" firstAttribute="leading" secondItem="Cv1-n2-noY" secondAttribute="leading" id="Pgl-TS-yzT"/>
                 <constraint firstAttribute="bottom" secondItem="yrx-wp-1Kb" secondAttribute="bottom" id="Pvz-5o-0uR"/>
@@ -153,25 +151,23 @@
                 <constraint firstAttribute="trailing" secondItem="Cv1-n2-noY" secondAttribute="trailing" id="hWl-Jz-XOO"/>
                 <constraint firstAttribute="trailing" secondItem="yrx-wp-1Kb" secondAttribute="trailing" id="hwO-2q-yC0"/>
                 <constraint firstItem="rmO-uq-EDI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lGb-sx-dYh"/>
-                <constraint firstItem="1pc-w9-lLY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="80" id="nM9-pv-Tnt"/>
+                <constraint firstItem="1pc-w9-lLY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mSS-iO-9zM"/>
                 <constraint firstAttribute="trailing" secondItem="TjJ-yD-dal" secondAttribute="trailing" constant="15" id="ppf-or-Gul"/>
                 <constraint firstItem="1pc-w9-lLY" firstAttribute="top" secondItem="rmO-uq-EDI" secondAttribute="bottom" constant="1" id="qln-M7-hMm"/>
-                <constraint firstItem="1pc-w9-lLY" firstAttribute="leading" secondItem="Cv1-n2-noY" secondAttribute="leading" id="u8A-6W-KgU"/>
+                <constraint firstAttribute="trailing" secondItem="1pc-w9-lLY" secondAttribute="trailing" id="uvp-hk-JmG">
+                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                </constraint>
                 <constraint firstItem="yrx-wp-1Kb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="w6e-1z-1yC"/>
-                <constraint firstItem="JaX-5B-j5q" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="yfu-C5-6Em"/>
+                <constraint firstItem="JaX-5B-j5q" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="yfu-C5-6Em"/>
                 <constraint firstItem="1pc-w9-lLY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="yuz-dF-Ndr"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="7AI-hH-Fh3"/>
-                    <exclude reference="LV0-a2-Nyh"/>
-                    <exclude reference="nM9-pv-Tnt"/>
-                    <exclude reference="u8A-6W-KgU"/>
                     <exclude reference="Y2o-bJ-vtt"/>
                     <exclude reference="hWl-Jz-XOO"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="106" y="-3043"/>
+            <point key="canvasLocation" x="176" y="-3064"/>
         </view>
         <view contentMode="scaleToFill" id="6ab-va-IKY" userLabel="commentView">
             <rect key="frame" x="0.0" y="-5" width="600" height="600"/>

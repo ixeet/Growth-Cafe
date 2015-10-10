@@ -114,4 +114,6 @@
 
 //setUnFollowUserList
 -(void)setUnFollowUserList:(NSString*)userid AndUserList:(NSMutableArray*)userList success:(void (^)(BOOL successValue))success   failure:(void (^)(NSError *error))failure;
+//Find the Search Relative Content
+-(void)getSearchResult:(NSString*)userid AndSearchText:(NSString*)txtSearch AndCatId:(NSString*)catid AndCount:(NSString*)count success:(void (^)(NSDictionary *searchResult))success     failure:(void (^)(NSError *error))failure;
 @end

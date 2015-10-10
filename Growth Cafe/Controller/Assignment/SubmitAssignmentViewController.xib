@@ -39,7 +39,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="m6i-82-LRv"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                             <nil key="highlightedColor"/>
                             <variation key="heightClass=regular-widthClass=compact">
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
@@ -65,7 +65,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="qZg-6g-Ego"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                             <nil key="highlightedColor"/>
                             <variation key="heightClass=regular-widthClass=compact">
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
@@ -91,7 +91,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="9As-7V-5iU"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                             <nil key="highlightedColor"/>
                             <variation key="heightClass=regular-widthClass=compact">
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
@@ -117,7 +117,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="PEl-mh-UVe"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <nil key="highlightedColor"/>
                             <variation key="heightClass=regular-widthClass=compact">
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
@@ -129,7 +129,7 @@
                                 <constraint firstAttribute="width" constant="112" id="njg-BO-3oq"/>
                                 <constraint firstAttribute="height" constant="40" id="xit-lu-W7W"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                             <state key="normal" title="Browse" backgroundImage="browse.png">
                                 <color key="titleColor" red="0.72941176470000002" green="0.0" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -218,19 +218,19 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="lNI-Gh-UmZ"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                     <variation key="heightClass=regular-widthClass=compact">
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                     </variation>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8of-WI-GBn" userLabel="btnSubmit">
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8of-WI-GBn" userLabel="btnSubmit">
                     <rect key="frame" x="505" y="28" width="80" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="srQ-uR-lJw"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                     <state key="normal" title="Submit">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -243,7 +243,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="n5E-il-UNR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7dl-Zg-mtJ"/>
                 <constraint firstItem="uu3-Qa-Bbo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="28" id="Bi8-vV-ZZb"/>

@@ -66,6 +66,10 @@
 #define SET_FEED_ACCESSTYPE(userid,accesstypeid) [NSString stringWithFormat:@"%@/rest/user/setFeedAccessType/userId/%@/accessTypeId/%@",APP_URL,userid,accesstypeid]
 #define SET_USER_FOLLOW_STATUS_URL [NSString stringWithFormat:@"%@/rest/user/updateFollowersStatus", APP_URL]
 
+#define SEARCH_URL [NSString stringWithFormat:@"%@/rest/common/search", APP_URL]
+#define SEARCH_CAT_URL(categoryid) [NSString stringWithFormat:@"%@/rest/common/search/%@", APP_URL,categoryid]
+
+
 //comment on feed
 ///rest/common/commentOnFeed
 //http://localhost:8080//rest/common/commentOnFeed
@@ -162,6 +166,7 @@
 #define DATA_LOADING_MSG @"Please wait..."
 #define UPDATE_PER_PAGE 3
 #define COMMENT_PER_PAGE 5
+#define SEARCH_PER_PAGE 3
 #define DEVICE_TOKEN @"devicetoken"
 #define DEVICE_TOKEN_REGISTER @"devicetokenregister"
 #define NOTIFICATION_PER_PAGE 10

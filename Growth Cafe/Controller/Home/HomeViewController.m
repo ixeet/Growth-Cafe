@@ -91,7 +91,28 @@
         if ([loginObject isKindOfClass:[UIButton class]])
         {
             UIButton * loginButton =  loginObject;
-        UIImage *loginImage = [UIImage imageNamed:@"login_red1.png"];
+            
+            
+            
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+                  UIImage *loginImage = [UIImage imageNamed:@"login_red1.png"];
+                [loginButton setBackgroundColor:[UIColor colorWithRed:186.0 green:0.0 blue:50.0 alpha:0.0]];
+                [loginButton setBackgroundImage:nil forState:UIControlStateSelected];
+                [loginButton setBackgroundImage:nil forState:UIControlStateHighlighted];
+                [loginButton setBackgroundImage:loginImage forState:UIControlStateNormal];
+            }
+
+            
+            
+     //  UIImage *loginImage = [UIImage imageNamed:@"login_red1.png"];
+            
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            {
+            
+            
+            UIImage *loginImage = [UIImage imageNamed:@"login_red1@2x~ipad.png"];
+            
+            
            // loginButton.alpha = 0.7;
           [loginButton setBackgroundColor:[UIColor colorWithRed:186.0 green:0.0 blue:50.0 alpha:0.0]];
             [loginButton setBackgroundImage:nil forState:UIControlStateSelected];
@@ -100,6 +121,7 @@
             //CGSize constraint = CGSizeMake(400, 220);
           // [loginButton sizeThatFits:constraint];
              //[loginButton sizeToFit];
+        }
         }
         if ([loginObject isKindOfClass:[UILabel class]])
         {
@@ -245,7 +267,6 @@
 - (IBAction)btnRegisterClick:(id)sender {
     RegisterationViewController *viewController= [[RegisterationViewController alloc]initWithNibName:@"RegisterationViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
-
 }
 -(void)ShowCrashLogAlert{
     //    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Mazda Crash Log Agreement" message:@"Crash Log" delegate:self cancelButtonTitle:@"Decline" otherButtonTitles:@"Agree", nil];

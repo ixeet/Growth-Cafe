@@ -70,7 +70,26 @@
         [txfSearchField setBorderStyle:UITextBorderStyleNone];
         [txfSearchField setTextColor:[UIColor whiteColor]];
 
+    }else{
+        
+        [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn.png"]];
+        
+        //@2x~ipad
+        
+        [txtSearchBar setBackgroundColor:[UIColor clearColor]];
+        
+        UITextField *txfSearchField = [txtSearchBar valueForKey:@"_searchField"];
+        
+        [txfSearchField setBackgroundColor:[UIColor clearColor]];
+        
+        //[txfSearchField setLeftView:UITextFieldViewModeNever];
+        
+        [txfSearchField setBorderStyle:UITextBorderStyleNone];
+        
+        [txfSearchField setTextColor:[UIColor whiteColor]];
+        
     }
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -644,6 +663,9 @@
 //    {
 //        cell.backgroundColor = [UIColor blackColor];
 //    }
+
+ cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
 }
 
 #pragma mark UIGestureRecognizerDelegate methods

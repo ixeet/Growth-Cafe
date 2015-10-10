@@ -20,7 +20,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="M21-cD-ewb"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -48,7 +48,7 @@
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmu-ln-rJn" userLabel="lblCmtby">
                         <rect key="frame" x="96" y="8" width="206" height="13"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" red="0.078431372549019607" green="0.094117647058823528" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -57,7 +57,7 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4FX-kX-NGz">
                         <rect key="frame" x="8" y="114" width="304" height="25"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <state key="normal" title="+5 More">
                             <color key="titleColor" red="0.50588235294117645" green="0.51764705882352935" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -73,8 +73,8 @@
                             <constraint firstAttribute="height" constant="1" id="jeu-3j-bjy"/>
                         </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EjL-cO-ePl" userLabel="btnCommentedBy">
-                        <rect key="frame" x="48" y="8" width="40" height="40"/>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EjL-cO-ePl" userLabel="btnCommentedBy">
+                        <rect key="frame" x="129" y="8" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="MBv-rm-Dvm"/>
                             <constraint firstAttribute="height" constant="40" id="rKk-C1-WEW"/>
@@ -87,7 +87,7 @@
                         <rect key="frame" x="96" y="22" width="206" height="70"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <string key="text">LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel</string>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" red="0.078431372550000003" green="0.094117647060000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -97,28 +97,50 @@
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstItem="4FX-kX-NGz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="51J-jn-TUh"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="rAV-9M-vsI" secondAttribute="trailing" constant="-12" id="66d-P8-NVE"/>
-                    <constraint firstItem="4FX-kX-NGz" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="9fM-CX-jWW"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="lZ8-Ho-Wln" secondAttribute="trailing" constant="-11" id="B8i-oh-w6h"/>
-                    <constraint firstItem="LHc-DG-pP7" firstAttribute="leading" secondItem="EjL-cO-ePl" secondAttribute="trailing" constant="8" id="BK2-5O-erh"/>
-                    <constraint firstItem="EjL-cO-ePl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="40" id="GmF-WV-D8A"/>
+                    <constraint firstItem="4FX-kX-NGz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="51J-jn-TUh">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
+                    <constraint firstAttribute="trailingMargin" secondItem="rAV-9M-vsI" secondAttribute="trailing" constant="80" id="66d-P8-NVE">
+                        <variation key="heightClass=regular-widthClass=compact" constant="-12"/>
+                    </constraint>
+                    <constraint firstItem="4FX-kX-NGz" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="80" id="9fM-CX-jWW">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
+                    <constraint firstAttribute="trailingMargin" secondItem="lZ8-Ho-Wln" secondAttribute="trailing" constant="80" id="B8i-oh-w6h">
+                        <variation key="heightClass=regular-widthClass=compact" constant="-11"/>
+                    </constraint>
+                    <constraint firstItem="LHc-DG-pP7" firstAttribute="leading" secondItem="EjL-cO-ePl" secondAttribute="trailing" constant="8" id="BK2-5O-erh">
+                        <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                    </constraint>
+                    <constraint firstItem="EjL-cO-ePl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="120" id="GmF-WV-D8A">
+                        <variation key="heightClass=regular-widthClass=compact" constant="40"/>
+                    </constraint>
                     <constraint firstItem="EjL-cO-ePl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="I0B-CU-dmG"/>
                     <constraint firstItem="LHc-DG-pP7" firstAttribute="top" secondItem="hmu-ln-rJn" secondAttribute="bottom" constant="1" id="Oop-be-3wF"/>
                     <constraint firstItem="rAV-9M-vsI" firstAttribute="top" secondItem="4FX-kX-NGz" secondAttribute="bottom" constant="1" id="Q97-4e-QfK"/>
                     <constraint firstItem="qYY-RC-OrA" firstAttribute="top" secondItem="LHc-DG-pP7" secondAttribute="bottom" constant="1" id="QLu-U5-58M"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="qYY-RC-OrA" secondAttribute="trailing" constant="10" id="UUR-bP-90c"/>
-                    <constraint firstItem="rAV-9M-vsI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="Ur6-XS-Q3G"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="qYY-RC-OrA" secondAttribute="trailing" constant="90" id="UUR-bP-90c">
+                        <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                    </constraint>
+                    <constraint firstItem="rAV-9M-vsI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="Ur6-XS-Q3G">
+                        <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
+                    </constraint>
                     <constraint firstItem="lZ8-Ho-Wln" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="88" id="XG4-v1-mXy"/>
                     <constraint firstItem="4FX-kX-NGz" firstAttribute="top" secondItem="lZ8-Ho-Wln" secondAttribute="bottom" constant="2" id="Y2A-u9-INg"/>
                     <constraint firstItem="hmu-ln-rJn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="eYO-eK-YDR"/>
                     <constraint firstItem="lZ8-Ho-Wln" firstAttribute="top" secondItem="qYY-RC-OrA" secondAttribute="bottom" constant="2" id="eYi-LT-wNt"/>
-                    <constraint firstItem="KCm-qB-Mrw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="kpk-ef-vwi"/>
+                    <constraint firstItem="KCm-qB-Mrw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="kpk-ef-vwi">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="hmu-ln-rJn" secondAttribute="trailing" constant="10" id="kuZ-3q-maN"/>
                     <constraint firstAttribute="trailingMargin" secondItem="KCm-qB-Mrw" secondAttribute="trailing" constant="140" id="nA1-jY-Fhf"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="LHc-DG-pP7" secondAttribute="trailing" constant="10" id="p7j-TK-g3R"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="LHc-DG-pP7" secondAttribute="trailing" constant="80" id="p7j-TK-g3R">
+                        <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                    </constraint>
                     <constraint firstItem="KCm-qB-Mrw" firstAttribute="top" secondItem="rAV-9M-vsI" secondAttribute="bottom" constant="5" id="tBH-g5-SZV"/>
-                    <constraint firstItem="hmu-ln-rJn" firstAttribute="leading" secondItem="EjL-cO-ePl" secondAttribute="trailing" constant="8" id="tcc-TX-RIM"/>
+                    <constraint firstItem="hmu-ln-rJn" firstAttribute="leading" secondItem="EjL-cO-ePl" secondAttribute="trailing" constant="8" id="tcc-TX-RIM">
+                        <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                    </constraint>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>

@@ -15,6 +15,7 @@
 #import "AssignmentHandler.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "SettingHandler.h"
+#import "SearchHandler.h"
 
 @implementation AppEngine
 
@@ -509,6 +510,19 @@
     
     [setting setUnFollowUserList:userid AndUserList:userList  success:^(BOOL successValue) {
         success(successValue);
+    } failure:^(NSError *error) {
+        failure(error);
+        
+    }];
+}
+//Find the Search Relative Content
+-(void)getSearchResult:(NSString*)userid AndSearchText:(NSString*)txtSearch AndCatId:(NSString*)catid AndCount:(NSString*)count success:(void (^)(NSDictionary *searchResult))success     failure:(void (^)(NSError *error))failure
+{
+    
+    SearchHandler *setting=[[SearchHandler alloc] init];
+    
+    [setting getSearchResult:userid AndSearchText:txtSearch AndCatId:catid AndCount:count  success:^(NSDictionary *searchResult) {
+        success(searchResult);
     } failure:^(NSError *error) {
         failure(error);
         

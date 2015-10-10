@@ -45,13 +45,6 @@
                         <action selector="btnMenuClick:" destination="-1" eventType="touchUpInside" id="6U0-8d-zsl"/>
                     </connections>
                 </button>
-                <searchBar contentMode="redraw" misplaced="YES" placeholder="Search" backgroundImage="img_search-boxn.png" translatesAutoresizingMaskIntoConstraints="NO" id="LGR-Xz-lGF">
-                    <rect key="frame" x="40" y="19" width="498" height="44"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="5Bs-Jc-Y4O"/>
-                    </connections>
-                </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="pQ8-Qf-Nj1">
                     <rect key="frame" x="0.0" y="71" width="600" height="485"/>
                     <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -63,7 +56,7 @@
                     </connections>
                 </tableView>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9r-NE-sSw">
-                    <rect key="frame" x="15" y="23" width="30" height="35"/>
+                    <rect key="frame" x="15" y="23" width="20" height="35"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                     <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" image="icn_back-header.png">
@@ -106,26 +99,38 @@
                         <constraint firstAttribute="height" constant="44" id="sBl-5A-qae"/>
                     </constraints>
                 </view>
+                <searchBar contentMode="redraw" misplaced="YES" placeholder="Search" backgroundImage="img_search-boxn.png" translatesAutoresizingMaskIntoConstraints="NO" id="LGR-Xz-lGF">
+                    <rect key="frame" x="35" y="19" width="506" height="44"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="5Bs-Jc-Y4O"/>
+                    </connections>
+                </searchBar>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="dGA-EI-Iim" firstAttribute="leading" secondItem="LGR-Xz-lGF" secondAttribute="trailing" constant="12" id="3cx-im-zax"/>
+                <constraint firstItem="dGA-EI-Iim" firstAttribute="leading" secondItem="LGR-Xz-lGF" secondAttribute="trailing" constant="9" id="3cx-im-zax"/>
                 <constraint firstItem="Lmn-es-DeY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="4SD-6i-1Zn"/>
-                <constraint firstItem="LGR-Xz-lGF" firstAttribute="leading" secondItem="J9r-NE-sSw" secondAttribute="trailing" constant="-5" id="8wK-62-4lP"/>
+                <constraint firstItem="LGR-Xz-lGF" firstAttribute="leading" secondItem="J9r-NE-sSw" secondAttribute="trailing" id="5oK-aY-2uq"/>
                 <constraint firstAttribute="trailing" secondItem="VvD-9i-Hsu" secondAttribute="trailing" id="Buq-0w-5gu"/>
                 <constraint firstAttribute="bottom" secondItem="VvD-9i-Hsu" secondAttribute="bottom" id="DkT-cr-Z8j"/>
                 <constraint firstItem="VTZ-6E-7Uf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FOF-6H-918"/>
                 <constraint firstItem="VTZ-6E-7Uf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="GfC-Kq-zpg"/>
-                <constraint firstAttribute="trailing" secondItem="pQ8-Qf-Nj1" secondAttribute="trailing" id="JN7-B3-9By"/>
+                <constraint firstAttribute="trailing" secondItem="pQ8-Qf-Nj1" secondAttribute="trailing" id="JN7-B3-9By">
+                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                </constraint>
                 <constraint firstItem="LGR-Xz-lGF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="Jr7-Fu-Ewt"/>
-                <constraint firstItem="pQ8-Qf-Nj1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Kiz-79-rDG"/>
+                <constraint firstItem="pQ8-Qf-Nj1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Kiz-79-rDG">
+                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                </constraint>
                 <constraint firstItem="VvD-9i-Hsu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Uk7-PL-Y0W"/>
+                <constraint firstItem="LGR-Xz-lGF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="V2V-TO-RoC"/>
                 <constraint firstItem="Lmn-es-DeY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VRh-oy-331"/>
                 <constraint firstItem="J9r-NE-sSw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="23" id="XNs-Gu-Crl"/>
-                <constraint firstItem="dGA-EI-Iim" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="23" id="aON-uu-3dT"/>
                 <constraint firstAttribute="trailing" secondItem="VTZ-6E-7Uf" secondAttribute="trailing" id="bq6-Gp-mub"/>
                 <constraint firstAttribute="trailing" secondItem="Lmn-es-DeY" secondAttribute="trailing" id="nbY-Kf-8d3"/>
                 <constraint firstItem="J9r-NE-sSw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="qtS-Fe-O8o"/>
+                <constraint firstItem="dGA-EI-Iim" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="23" id="rdw-ku-fsf"/>
                 <constraint firstItem="VvD-9i-Hsu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uaR-Il-duq"/>
                 <constraint firstItem="pQ8-Qf-Nj1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="x86-5m-5Do"/>
                 <constraint firstAttribute="bottom" secondItem="pQ8-Qf-Nj1" secondAttribute="bottom" constant="44" id="zWz-Cj-9ih"/>
