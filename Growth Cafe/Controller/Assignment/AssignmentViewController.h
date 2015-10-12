@@ -28,5 +28,5 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblStatus;
 - (IBAction)btnFilerClick:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *btnFiler;
-
+@property (strong, nonatomic) NSMutableArray *selectedAssignment;
 @end

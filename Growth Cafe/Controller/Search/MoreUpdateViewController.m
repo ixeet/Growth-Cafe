@@ -18,7 +18,7 @@
     int selectedRow;
     AFNetworkReachabilityStatus previousStatus;
     CGFloat screenHeight;
-CGFloat screenWidth;
+    CGFloat screenWidth;
 }
 @end
 
@@ -447,6 +447,23 @@ CGFloat screenWidth;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    
+        
+        Update *update=[arrayUpdates objectAtIndex:indexPath.row];
+        update.isExpend=YES;
+        
+        if([update.comments count]>=COMMENT_PER_PAGE){
+            NSUInteger location=COMMENT_PER_PAGE;
+            NSUInteger length=[update.comments count]-COMMENT_PER_PAGE;
+            //  NSRange range = NSMakeRange(0, [string length]);
+            NSRange range= NSMakeRange(location,length);
+            
+            [update.comments removeObjectsInRange:range] ;
+        }
+        UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]init];
+        updateDetailView.objUpdate=update;
+        [self.navigationController pushViewController:updateDetailView animated:YES];
+        
     
 }
 

@@ -15,6 +15,8 @@
 -(void)getMyAssignments:(NSString*)userid  AndTextSearch:(NSString*)txtSearch success:(void (^)(NSMutableArray *assignments))success   failure:(void (^)(NSError *error))failure;
 
 -(void)getTeacherAssignment:(NSString*)userid  AndTextSearch:(NSString*)txtSearch AndFilterDic:(NSMutableDictionary*)filterDic success:(void (^)(NSMutableArray *assignments))success   failure:(void (^)(NSError *error))failure;
+//get Assignment
+-(void)getAssignmentsById:(NSString*)userid AndAssignment:(NSString*)assignmentid   success:(void (^)(NSMutableArray *assignments))success   failure:(void (^)(NSError *error))failure;
 
 //set Assignment rating
 -(void)setAssignmentRating:(NSDictionary*)selectedParamValue AndParam:(NSArray*)selectedParam AndAssignmentResourceTxnId:(NSString*)assignmentResourceTxnId success:(void (^)(BOOL responseValue))success   failure:(void (^)(NSError *error))failure;

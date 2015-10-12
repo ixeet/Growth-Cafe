@@ -30,6 +30,8 @@
 //get Module Detail
 -(void)getModuleDetailByFeed:(NSString* )feedId success:(void (^)(NSDictionary *moduleDetail)) success   failure:(void (^)(NSError *error))failure;
 
+//get Course Detail by Course Id
+-(void)getCourseDetailById:(NSString* )courseId success:(void (^)(NSMutableArray *courseList))success   failure:(void (^)(NSError *error))failure;
 #pragma Comment and Like on Resource
 //Comment and Like on Resource
 -(void)setCommentOnResource:(NSString*)resourceId  AndCommentText:(NSString*)txtComment success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure;

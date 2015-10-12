@@ -88,6 +88,9 @@
 // get course detail for feed
 //rest/course/getCourse/feedId/{feedId}
 #define COURSE_DETAIL_URL(feedId) [NSString stringWithFormat:@"%@/rest/course/getCourse/feedId/%@",APP_URL,feedId]
+#define COURSE_DETAILBY_ID_URL(courseId) [NSString stringWithFormat:@"%@/rest/course/getCourse/courseId/%@",APP_URL,courseId]
+
+//Sample Request - http://localhost:8080/SLMS/rest/course/getCourse/courseId/1
 // get module detail for feed
 //rest/course/getModule/feedId/{feedId}
 #define MODULE_DETAIL_URL(feedId) [NSString stringWithFormat:@"%@/rest/course/getModule/feedId/%@",APP_URL,feedId]
@@ -103,6 +106,8 @@
 //http://192.168.0.14:8080//rest/course/getAssignments
 #define GET_TEACHER_ASSIGNMENT_URL [NSString stringWithFormat:@"%@/rest/course/getTeacherAssignments", APP_URL]
 #define GET_ASSIGNMENT_URL [NSString stringWithFormat:@"%@/rest/course/getAssignments", APP_URL]
+#define GET_ASSIGNMENT_BYID_URL(userid,assignmentId) [NSString stringWithFormat:@"%@/rest/course/getAssignmentDetail/assignmentId/%@/userId/%@", APP_URL,assignmentId,userid]
+//http://localhost:8080/SLMS/rest/course/getAssignmentDetail/assignmentId/{assignmentId}/userId/{userId}
 
 #define POST_ASSIGNMENT_URL [NSString stringWithFormat:@"%@/rest/course/uploadResourceDetail", APP_URL]
 #define SET_ASSIGNMENT_RATING_URL [NSString stringWithFormat:@"%@/rest/course/rateAssignment", APP_URL]

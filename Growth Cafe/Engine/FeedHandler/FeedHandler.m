@@ -227,7 +227,7 @@
     //                                 @"searchText":txtSearch,@"offset":[NSString stringWithFormat:@"%d",offset],@"noOfRecords":[NSString stringWithFormat:@"%d",noOfRecords]
     //                                 };
     
-    [manager GET:GET_UPDATE_DETAIL_URL([AppSingleton sharedInstance].userDetail.userId,updateId) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:GET_UPDATE_DETAIL_URL(@"22",updateId) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         

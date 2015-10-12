@@ -14,6 +14,7 @@
 #import "UpdateViewController.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "FilterViewController.h"
+#import "UpdateDetailViewController.h"
 
 @interface LoginViewController() <CustomKeyboardDelegate>
 {
@@ -301,12 +302,40 @@
 }
 
 - (IBAction)btnCreatAccount:(id)sender {
-    RegisterationViewController *viewController= [[RegisterationViewController alloc]initWithNibName:@"RegisterationViewController" bundle:nil];
-    [self.navigationController pushViewController:viewController animated:NO];
+//    RegisterationViewController *viewController= [[RegisterationViewController alloc]initWithNibName:@"RegisterationViewController" bundle:nil];
+//    [self.navigationController pushViewController:viewController animated:NO];
     
 //    FilterViewController *viewController= [[FilterViewController alloc]initWithNibName:@"FilterViewController" bundle:nil];
 //    [self.navigationController pushViewController:viewController animated:NO];
-//    
+//
+    
+   
+    //Show Indicator
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    [[appDelegate _engine] getUpdatesDetail:@"98"   success:^(Update *updates) {
+        
+        
+        
+        
+        //Hide Indicator
+        [appDelegate hideSpinner];
+        //[AppSingleton sharedInstance].updatedUpdate=updates;
+        UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]initWithNibName:@"UpdateDetailViewController" bundle:nil];
+        updateDetailView.objUpdate  =updates;
+        [self.navigationController pushViewController:updateDetailView animated:YES];
+        // [self loginSucessFullWithFB];
+        
+        
+    }
+                                    failure:^(NSError *error) {
+                                        //Hide Indicator
+                                        [appDelegate hideSpinner];
+                                        NSLog(@"failure JsonData %@",[error description]);
+                                        [self loginError:error];
+                                        //                                         [self loginViewShowingLoggedOutUser:loginView];
+                                        
+                                    }];
 }
 
 - (IBAction)btnForgetpasswordClick:(id)sender {

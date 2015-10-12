@@ -15,6 +15,9 @@
 #import "MoreCourseViewController.h"
 #import "MoreUpdateViewController.h"
 #import "MoreUsersViewController.h"
+#import "ProfileViewController.h"
+#import "CourseViewController.h"
+#import "AssignmentViewController.h"
 @interface SearchViewController ()
 {
     NSMutableArray *arrayUpdates,*arrayUsers,*arrayCourses,*arrayAsignemnts;
@@ -64,15 +67,18 @@
     [self setSearchUI];
 //    tblViewContent.layer.cornerRadius = 5.0f;
 //    [tblViewContent setClipsToBounds:YES];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
-    
+    UILongPressGestureRecognizer *tap = [[UILongPressGestureRecognizer alloc]
+                                         initWithTarget:self action:@selector(dismissKeyboard)];
+    tap.minimumPressDuration = 0.2; //seconds
     [self.view addGestureRecognizer:tap];
    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+//    arrayUpdates=[[NSMutableArray alloc]init];
+//    arrayUsers=[[NSMutableArray alloc]init];
+//    arrayCourses=[[NSMutableArray alloc]init];
+//    arrayAsignemnts=[[NSMutableArray alloc]init];
     //  NSInteger numberOfViewControllers = self.navigationController.viewControllers.count;
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
@@ -436,6 +442,8 @@
                 cell.contentView.backgroundColor=[UIColor clearColor];
                 
             }
+            cell.imgSeprator.hidden=YES;
+             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
             break;
@@ -454,10 +462,10 @@
             }
             Courses *course=[arrayCourses objectAtIndex:indexPath.row];
             cell.lblCourseName.text=course.courseName;
-            
+             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             // cal calculate the time
-            return cell;
+                        return cell;
 
         }
             break;
@@ -476,8 +484,7 @@
             }
             Assignment *assignment=[arrayAsignemnts objectAtIndex:indexPath.row];
             cell.lblCourseName.text=assignment.assignmentName;
-            
-            
+             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             // cal calculate the time
             return cell;
 
@@ -539,6 +546,7 @@
             }
          
             // cal calculate the time
+             cell.selectionStyle = UITableViewCellSelectionStyleNone;
                        return cell;
         }
             break;
@@ -559,21 +567,112 @@
     switch (indexPath.section) {
         case 0:{
             //show Update Detail
-            UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]init];
-            updateDetailView.objUpdate=[arrayUpdates objectAtIndex:indexPath.row];;
-            [self.navigationController pushViewController:updateDetailView animated:YES];
+           
+             Update *objUpdate=[arrayUpdates objectAtIndex:indexPath.row];;
+            //Show Indicator
+            [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+            
+            [[appDelegate _engine] getUpdatesDetail:objUpdate.updateId   success:^(Update *updates) {
+              
+                
+               
+                
+                //Hide Indicator
+                [appDelegate hideSpinner];
+                //[AppSingleton sharedInstance].updatedUpdate=updates;
+                 UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]initWithNibName:@"UpdateDetailViewController" bundle:nil];
+                updateDetailView.objUpdate  =updates;
+                [self.navigationController pushViewController:updateDetailView animated:YES];
+                // [self loginSucessFullWithFB];
+                
+               
+            }
+                                            failure:^(NSError *error) {
+                                                //Hide Indicator
+                                                [appDelegate hideSpinner];
+                                                NSLog(@"failure JsonData %@",[error description]);
+                                                [self loginError:error];
+                                                //                                         [self loginViewShowingLoggedOutUser:loginView];
+                                                
+                                            }];
+          
         }
             break;
         case 1:
             //show Course Detail
+        {
+            // call the Course Detail Service
+            if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+            {
+                [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+                return;
+            }
+            Courses *course=[arrayCourses objectAtIndex:indexPath.row];
+            [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+            
+            
+            [[appDelegate _engine] getCourseDetailById:course.courseId success:^(NSMutableArray *courseList) {
+                
+                //Hide Indicator
+                CourseViewController *courseView=[[CourseViewController alloc]init];
+                courseView.coursesList=courseList;
+                courseView.comeFromUpdate=YES;
+                [self.navigationController pushViewController:courseView animated:YES];
+                [appDelegate hideSpinner];
+                
+            }
+                                           failure:^(NSError *error) {
+                                               //Hide Indicator
+                                               [appDelegate hideSpinner];
+                                               NSLog(@"failure JsonData %@",[error description]);
+                                               
+                                               
+                                           }];
+            
+        }
             break;
         case 2:
+        {
              //show Assignment Detail
+            Assignment *assignment=[arrayAsignemnts objectAtIndex:indexPath.row];
+            [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+            
+            NSString *assignmentid=[NSString stringWithFormat:@"%@",assignment.assignmentId];
+            NSString *userId=[NSString stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId ];
+            
+            [[appDelegate _engine] getAssignmentsById:userId AndAssignment:assignmentid success:^(NSMutableArray *assignmentList) {
+                [appDelegate hideSpinner];
+                //Hide Indicator
+                AssignmentViewController *assignment=[[AssignmentViewController alloc]init];
+                assignment.selectedAssignment=assignmentList;
+               
+                [self.navigationController pushViewController:assignment animated:YES];
+                
+                
+            }
+                                               failure:^(NSError *error) {
+                                                   //Hide Indicator
+                                                   [appDelegate hideSpinner];
+                                                   NSLog(@"failure JsonData %@",[error description]);
+                                                   
+                                                   
+                                               }];
+        }
             break;
         case 3:
+        {
             //show full Profile
-
-            break;
+            
+            // call the user profi{le service user profile
+            UserDetails *usrDetail=[arrayUsers objectAtIndex:indexPath.row];
+            ProfileViewController *profileView=[[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
+            profileView.user=usrDetail;
+            [self.navigationController pushViewController:profileView animated:YES];
+             break;
+        }
+            
+           
+           
         default:
             break;
     }
@@ -742,9 +841,9 @@
     
     UILabel *myLabel = [[UILabel alloc] init];
     if(section==0)
-        myLabel.frame = CGRectMake(14, 8,320,25);
+        myLabel.frame = CGRectMake(14, 5,320,25);
     else
-        myLabel.frame = CGRectMake(14, 8, 320, 25);
+        myLabel.frame = CGRectMake(14, 5, 320, 25);
     
     myLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16.0];
     myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
@@ -754,6 +853,10 @@
     [headerView addSubview:myLabel];
     NSLog(@"header section=%ld frame x=%f,y=%f,Width=%f Height=%f",(long)section,headerView.frame.origin.x,headerView.frame.origin.y,headerView.frame.size.width,headerView.frame.size.height);
     return headerView;
+}
+-(void)loginError:(NSError*)error{
+   
+    [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];
 }
 - (IBAction)btnBackclick:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -790,6 +893,10 @@
     MoreUsersViewController *moreViewController=[[MoreUsersViewController alloc]initWithNibName:@"MoreUsersViewController" bundle:nil];
     moreViewController.txtSearch=txtSearchBar.text;
     [self.navigationController pushViewController:moreViewController animated:YES];
+}
+- (IBAction)btnCancelClick:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:NO];
 }
 #pragma mark - UISearchBar Delegate Method
 
@@ -829,5 +936,6 @@
     [txtSearchBar resignFirstResponder];
     
 }
+
 @end
 

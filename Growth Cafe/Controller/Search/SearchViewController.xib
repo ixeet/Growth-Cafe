@@ -36,13 +36,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="72"/>
                     </variation>
                 </imageView>
-                <tableView clipsSubviews="YES" tag="12" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="40" sectionFooterHeight="20" translatesAutoresizingMaskIntoConstraints="NO" id="nro-Lo-eon" userLabel="tableView">
+                <tableView clipsSubviews="YES" tag="12" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="36" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="nro-Lo-eon" userLabel="tableView">
                     <rect key="frame" x="0.0" y="70" width="600" height="549"/>
-                    <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="549" id="BSH-TF-AUn"/>
                     </constraints>
-                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <color key="sectionIndexBackgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                     <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
@@ -112,7 +112,7 @@
                         <rect key="frame" x="341" y="19" width="49" height="44"/>
                     </variation>
                     <connections>
-                        <action selector="btnProfileClick:" destination="-1" eventType="touchUpInside" id="NvR-FN-mgp"/>
+                        <action selector="btnCancelClick:" destination="-1" eventType="touchUpInside" id="yaw-VX-l3j"/>
                     </connections>
                 </button>
                 <searchBar contentMode="redraw" placeholder="Search" backgroundImage="img_search-boxn.png" translatesAutoresizingMaskIntoConstraints="NO" id="WHn-RL-UbD">

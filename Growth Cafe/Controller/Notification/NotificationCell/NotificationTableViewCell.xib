@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -16,17 +16,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGs-j1-SbW">
-                        <rect key="frame" x="88" y="0.0" width="147" height="81"/>
+                        <rect key="frame" x="80" y="0.0" width="155" height="81"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oLs-i3-KCS">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oLs-i3-KCS" userLabel="imgSeprator">
                                 <rect key="frame" x="0.0" y="80" width="147" height="2"/>
-                                <color key="backgroundColor" red="0.72941176470000002" green="0.0" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="d4r-N6-8F3"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K3c-DX-qd2" userLabel="btnCommentedBy">
-                                <rect key="frame" x="5" y="8" width="40" height="40"/>
+                                <rect key="frame" x="0.0" y="8" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Opw-1l-vKj"/>
                                     <constraint firstAttribute="width" constant="40" id="q5f-Fh-ky1"/>
@@ -36,24 +36,24 @@
                                 </state>
                             </button>
                             <textView clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Dp-fa-IPO">
-                                <rect key="frame" x="48" y="8" width="99" height="69"/>
+                                <rect key="frame" x="45" y="4" width="102" height="69"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.078431372550000003" green="0.094117647060000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="3Dp-fa-IPO" secondAttribute="trailing" id="0pG-zq-ifc"/>
+                            <constraint firstAttribute="trailing" secondItem="3Dp-fa-IPO" secondAttribute="trailing" constant="8" id="0pG-zq-ifc"/>
                             <constraint firstItem="K3c-DX-qd2" firstAttribute="top" secondItem="TGs-j1-SbW" secondAttribute="top" constant="8" id="1RY-3k-AMr"/>
                             <constraint firstAttribute="bottom" secondItem="oLs-i3-KCS" secondAttribute="bottom" constant="-1" id="7H7-03-rCG"/>
-                            <constraint firstAttribute="trailing" secondItem="oLs-i3-KCS" secondAttribute="trailing" id="Dwh-7X-egz"/>
-                            <constraint firstItem="3Dp-fa-IPO" firstAttribute="leading" secondItem="K3c-DX-qd2" secondAttribute="trailing" constant="3" id="Pom-Hj-kJy"/>
-                            <constraint firstItem="K3c-DX-qd2" firstAttribute="leading" secondItem="TGs-j1-SbW" secondAttribute="leading" constant="5" id="Z5d-ZO-4V1"/>
+                            <constraint firstAttribute="trailing" secondItem="oLs-i3-KCS" secondAttribute="trailing" constant="8" id="Dwh-7X-egz"/>
+                            <constraint firstItem="3Dp-fa-IPO" firstAttribute="leading" secondItem="K3c-DX-qd2" secondAttribute="trailing" constant="5" id="Pom-Hj-kJy"/>
+                            <constraint firstItem="K3c-DX-qd2" firstAttribute="leading" secondItem="TGs-j1-SbW" secondAttribute="leading" id="Z5d-ZO-4V1"/>
                             <constraint firstItem="oLs-i3-KCS" firstAttribute="leading" secondItem="TGs-j1-SbW" secondAttribute="leading" id="baQ-Xf-Y1B"/>
-                            <constraint firstItem="oLs-i3-KCS" firstAttribute="top" secondItem="3Dp-fa-IPO" secondAttribute="bottom" constant="3" id="qxN-43-8P1"/>
-                            <constraint firstItem="3Dp-fa-IPO" firstAttribute="top" secondItem="TGs-j1-SbW" secondAttribute="top" constant="8" id="uaf-gK-GHK"/>
+                            <constraint firstItem="oLs-i3-KCS" firstAttribute="top" secondItem="3Dp-fa-IPO" secondAttribute="bottom" constant="7" id="qxN-43-8P1"/>
+                            <constraint firstItem="3Dp-fa-IPO" firstAttribute="top" secondItem="TGs-j1-SbW" secondAttribute="top" constant="4" id="uaf-gK-GHK"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -61,17 +61,18 @@
                 <constraints>
                     <constraint firstItem="TGs-j1-SbW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="74Q-PR-uOi"/>
                     <constraint firstAttribute="trailingMargin" secondItem="TGs-j1-SbW" secondAttribute="trailing" constant="80" id="E9X-7J-f6g">
-                        <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
                     <constraint firstAttribute="bottomMargin" secondItem="TGs-j1-SbW" secondAttribute="bottom" constant="-7" id="IyS-ok-T79"/>
-                    <constraint firstItem="TGs-j1-SbW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="vPa-3R-kRa">
-                        <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                    <constraint firstItem="TGs-j1-SbW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="72" id="vPa-3R-kRa">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="btnUpdatedBy" destination="K3c-DX-qd2" id="MAI-yW-CFa"/>
+                <outlet property="imgSeprator" destination="oLs-i3-KCS" id="j5N-tl-wA9"/>
                 <outlet property="txtView" destination="3Dp-fa-IPO" id="EjI-AL-ipc"/>
                 <outlet property="view" destination="TGs-j1-SbW" id="f7W-W6-ICc"/>
             </connections>

@@ -682,6 +682,15 @@
                         [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
                         [attributedString appendAttributedString:attributedStringtemp];
                     }
+                    else  if([[dictext objectForKey:@"type"] isEqualToString:@"assignment"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Assignment" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                    }
                     else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
                     {
                         NSString* tempstr=[dictext objectForKey:@"value"];
@@ -710,7 +719,7 @@
                 /////////////////////////////////////////////////////////////////////change the font  color for ipod and iphone by raj
                 else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
                 {
-                    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+                    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:17];
                     
                     NSDictionary *dictext= update.updateTitleArray[textIndex];
                     if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
@@ -727,6 +736,14 @@
                         NSString* tempstr=[dictext objectForKey:@"value"];
                         
                         NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Course" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                    } else  if([[dictext objectForKey:@"type"] isEqualToString:@"assignment"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Assignment" : @(YES) }];
                         
                         [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
                         [attributedString appendAttributedString:attributedStringtemp];
@@ -780,7 +797,7 @@
                     
                 {/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     /////////////////////////////////////////////////////////////////////change the font  color for ipod and iphone by raj
-                    UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:16];
+                    UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:17];
                     
                     NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:strtemp ];
                     
@@ -847,7 +864,7 @@
                 else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
                 {
                     
-                    UIFont *Boldfont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+                    UIFont *Boldfont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:17];
                     NSDictionary *dictext= update.updateTitleArray[textIndex];
                     if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
                     {
@@ -1361,7 +1378,7 @@
             
             else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
             {
-                height=200.0f;
+                height=220.0f;
             }
       
         // code end for checking the iphone or ipad device
@@ -1532,6 +1549,47 @@
     //    ProfileViewController *profileView=[[ProfileViewController alloc]init];
     //    profileView.userid=[NSString stringWithFormat:@"%ld", btn.tag];
     //    [self.navigationController pushViewController:profileView animated:YES];
+    
+    
+
+    
+}
+- (IBAction)btnAssignmentClick:(id)sender {
+   
+    UIButton *btn=(UIButton *)sender;
+    // call the Course Detail Service
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        return;
+    }
+    NSString *feedId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    NSString *assignmentid=[NSString stringWithFormat:@"%@",feedId];
+    NSString *userId=[NSString stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId ];
+    
+    [[appDelegate _engine] getAssignmentsById:userId AndAssignment:assignmentid success:^(NSMutableArray *assignmentList) {
+        [appDelegate hideSpinner];
+        //Hide Indicator
+        AssignmentViewController *assignment=[[AssignmentViewController alloc]init];
+        assignment.selectedAssignment=assignmentList;
+        
+        [self.navigationController pushViewController:assignment animated:YES];
+        
+        
+    }
+                                      failure:^(NSError *error) {
+                                          //Hide Indicator
+                                          [appDelegate hideSpinner];
+                                          NSLog(@"failure JsonData %@",[error description]);
+                                          
+                                          
+                                      }];
+    
+    
 }
 - (IBAction)btnCourseDetailClick:(id)sender {
     UIButton *btn=(UIButton *)sender;
@@ -2320,6 +2378,8 @@
         id course = [textView.attributedText attribute:@"Course" atIndex:characterIndex effectiveRange:&range];
         id module = [textView.attributedText attribute:@"Module" atIndex:characterIndex effectiveRange:&range];
         id resourse = [textView.attributedText attribute:@"Resource" atIndex:characterIndex effectiveRange:&range];
+        id assignment = [textView.attributedText attribute:@"Assignment" atIndex:characterIndex effectiveRange:&range];
+       
         if(user!=nil)
         {
             UIButton *btn=[[UIButton alloc]init];
@@ -2347,7 +2407,15 @@
             Update *update= arrayUpdates[textView.tag];
             btn.tag=[update.updateId integerValue];
             [self btnModuleDetailClick:btn];
-        }else if(resourse!=nil)        // Handle as required...
+        }
+        else if(assignment!=nil)        // Handle as required... need to work
+        {
+            UIButton *btn=[[UIButton alloc]init];
+            
+            btn.tag=[objUpdate.updateId integerValue];
+            [self btnCourseDetailClick:btn];
+        }
+        else if(resourse!=nil)        // Handle as required...
         {
             UIButton *btn=[[UIButton alloc]init];
             Update *update= arrayUpdates[textView.tag];
@@ -2393,62 +2461,119 @@
     actInd = nil;
 }
 
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    NSLog(@"%d",[scrollView isKindOfClass:[UIScrollView class]]);
-    if(scrollView.tag==12 )
+//-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+//{
+//    NSLog(@"%d",[scrollView isKindOfClass:[UIScrollView class]]);
+//    if(scrollView.tag==12 )
+//    {
+//       
+//    
+//    if(tblViewContent.tableHeaderView!=nil ||tblViewContent.tableFooterView!=nil)
+//    {
+//        return ;
+//    }
+//    float cellMainHeightTotal=0.0;
+//    float cellCMTHeightTotal=0.0;
+//    
+//    for (id height in cellMainHeight) {
+//        cellMainHeightTotal=cellMainHeightTotal+[height floatValue];
+//    }
+//    for (id height in cellCMTHeight) {
+//        cellCMTHeightTotal=cellCMTHeightTotal+[height floatValue];
+//    }
+//    
+//    float cellheight=cellMainHeightTotal+cellCMTHeightTotal;
+//    
+//    NSLog(@"Offset=%f height=%f,tableCell height=%f",scrollView.contentOffset.y ,scrollView.frame.size.height,cellheight);
+//    
+//    BOOL endOfTable = (scrollView.contentOffset.y >= (cellheight- scrollView.frame.size.height)); // Here 40 is row height
+//    // tblViewContent.tableFooterView = footerView;
+//    //    tblViewContent.tableHeaderView = footerView;
+//    [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
+//    
+//    if (self.pendingRecord>0 && scrollView.contentOffset.y>0 && endOfTable && !scrollView.dragging && !scrollView.decelerating)
+//    {
+//        [self initFooterView];
+//        tblViewContent.tableFooterView = footerView;
+//        
+//        [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
+//        [self getUpdate:@""];
+//    }else  if (scrollView.contentOffset.y<=0  && !scrollView.dragging && !scrollView.decelerating)
+//    {
+//        [self initFooterView];
+//        tblViewContent.tableHeaderView = footerView;
+//        
+//        [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
+//        self.offsetRecord=0;
+//        ForNew=YES;
+//        [self getUpdate:@""];
+//        
+//    }
+//    else
+//{
+//        [footerView removeFromSuperview];
+//        //        tblViewContent.tableFooterView=nil;
+//        //        tblViewContent.tableHeaderView=nil;
+//        
+//    }
+//    }
+//}
+    -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
     {
-       
-    
-    if(tblViewContent.tableHeaderView!=nil ||tblViewContent.tableFooterView!=nil)
-    {
-        return ;
+        NSLog(@"%d",[scrollView isKindOfClass:[UIScrollView class]]);
+        if(scrollView.tag==12 )
+        {
+            
+            
+            if(tblViewContent.tableHeaderView!=nil ||tblViewContent.tableFooterView!=nil)
+            {
+                return ;
+            }
+            float cellMainHeightTotal=0.0;
+            float cellCMTHeightTotal=0.0;
+            
+            for (id height in cellMainHeight) {
+                cellMainHeightTotal=cellMainHeightTotal+[height floatValue];
+            }
+            for (id height in cellCMTHeight) {
+                cellCMTHeightTotal=cellCMTHeightTotal+[height floatValue];
+            }
+            
+            float cellheight=cellMainHeightTotal+cellCMTHeightTotal;
+            
+            NSLog(@"Offset=%f height=%f,tableCell height=%f",scrollView.contentOffset.y ,scrollView.frame.size.height,cellheight);
+            
+            BOOL endOfTable = (scrollView.contentOffset.y >= (cellheight- scrollView.frame.size.height)); // Here 40 is row height
+            // tblViewContent.tableFooterView = footerView;
+            //    tblViewContent.tableHeaderView = footerView;
+            [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
+            
+            if (self.pendingRecord>0 && scrollView.contentOffset.y>0 && endOfTable && !scrollView.dragging && !scrollView.decelerating)
+            {
+                [self initFooterView];
+                tblViewContent.tableFooterView = footerView;
+                
+                [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
+                [self getUpdate:@""];
+            }else  if (scrollView.contentOffset.y<=0  && !scrollView.dragging && !scrollView.decelerating)
+            {
+                [self initFooterView];
+                tblViewContent.tableHeaderView = footerView;
+                
+                [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
+                self.offsetRecord=0;
+                ForNew=YES;
+                [self getUpdate:@""];
+                
+            }
+            else{
+                [footerView removeFromSuperview];
+                //        tblViewContent.tableFooterView=nil;
+                //        tblViewContent.tableHeaderView=nil;
+                
+            }
+        }
     }
-    float cellMainHeightTotal=0.0;
-    float cellCMTHeightTotal=0.0;
-    
-    for (id height in cellMainHeight) {
-        cellMainHeightTotal=cellMainHeightTotal+[height floatValue];
-    }
-    for (id height in cellCMTHeight) {
-        cellCMTHeightTotal=cellCMTHeightTotal+[height floatValue];
-    }
-    
-    float cellheight=cellMainHeightTotal+cellCMTHeightTotal;
-    
-    NSLog(@"Offset=%f height=%f,tableCell height=%f",scrollView.contentOffset.y ,scrollView.frame.size.height,cellheight);
-    
-    BOOL endOfTable = (scrollView.contentOffset.y >= (cellheight- scrollView.frame.size.height)); // Here 40 is row height
-    // tblViewContent.tableFooterView = footerView;
-    //    tblViewContent.tableHeaderView = footerView;
-    [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
-    
-    if (self.pendingRecord>0 && scrollView.contentOffset.y>0 && endOfTable && !scrollView.dragging && !scrollView.decelerating)
-    {
-        [self initFooterView];
-        tblViewContent.tableFooterView = footerView;
-        
-        [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
-        [self getUpdate:@""];
-    }else  if (scrollView.contentOffset.y<=0  && !scrollView.dragging && !scrollView.decelerating)
-    {
-        [self initFooterView];
-        tblViewContent.tableHeaderView = footerView;
-        
-        [(UIActivityIndicatorView *)[footerView viewWithTag:10] startAnimating];
-        self.offsetRecord=0;
-        ForNew=YES;
-        [self getUpdate:@""];
-        
-    }
-    else{
-        [footerView removeFromSuperview];
-        //        tblViewContent.tableFooterView=nil;
-        //        tblViewContent.tableHeaderView=nil;
-        
-    }
-    }
-}
 - (void)showNetworkStatus:(NSString *)status newVisibility:(BOOL)newVisibility
 {
     

@@ -189,6 +189,65 @@
     }];
     
 }
+//get Course Detail by Course Id
+-(void)getCourseDetailById:(NSString* )courseId success:(void (^)(NSMutableArray *courseList))success   failure:(void (^)(NSError *error))failure{
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    
+    [manager GET:COURSE_DETAILBY_ID_URL(courseId) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        
+        
+        NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+        
+        //Success Full Logout
+        if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+            
+            
+            //call Block function
+            NSMutableArray *courseList= [[NSMutableArray alloc]init];
+            
+            NSDictionary *dicCourese = [responseDic objectForKey:@"courseDetail"];
+            Courses *course= [[Courses alloc]init];
+            course.startedOn=[dicCourese objectForKey:@"startedOn"];
+            course.completedPercentStatus=[dicCourese objectForKey:@"completedPercentStatus"];
+            course.courseId=[dicCourese objectForKey:@"courseId"];
+            course.courseName=[dicCourese objectForKey:@"courseName"];
+            
+            NSMutableArray * arrayModule= [[NSMutableArray alloc]init];
+            for (NSDictionary *dicModule in [dicCourese objectForKey:@"moduleList"]) {
+                Module *module= [[Module alloc]init];
+                module.startedOn=[dicModule objectForKey:@"startedOn"];
+                module.completedPercentStatus=[dicModule objectForKey:@"completedPercentStatus"];
+                module.moduleId=[dicModule objectForKey:@"moduleId"];
+                module.moduleName=[dicModule objectForKey:@"moduleName"];
+                [arrayModule addObject:module];
+            }
+            course.moduleList=arrayModule;
+            [courseList addObject:course];
+            
+            success(courseList);
+            
+            
+        }
+        else {
+            //call Block function
+            failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+        
+    }];
+    
+}
+
 //get Module Detail
 -(void)getModuleDetailByFeed:(NSString* )feedId success:(void (^)(NSDictionary *moduleDetail)) success   failure:(void (^)(NSError *error))failure{
     

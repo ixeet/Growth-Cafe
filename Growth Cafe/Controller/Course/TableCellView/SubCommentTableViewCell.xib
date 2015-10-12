@@ -125,7 +125,9 @@
                     <constraint firstItem="rAV-9M-vsI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="Ur6-XS-Q3G">
                         <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
                     </constraint>
-                    <constraint firstItem="lZ8-Ho-Wln" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="88" id="XG4-v1-mXy"/>
+                    <constraint firstItem="lZ8-Ho-Wln" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="120" id="XG4-v1-mXy">
+                        <variation key="heightClass=regular-widthClass=compact" constant="40"/>
+                    </constraint>
                     <constraint firstItem="4FX-kX-NGz" firstAttribute="top" secondItem="lZ8-Ho-Wln" secondAttribute="bottom" constant="2" id="Y2A-u9-INg"/>
                     <constraint firstItem="hmu-ln-rJn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="eYO-eK-YDR"/>
                     <constraint firstItem="lZ8-Ho-Wln" firstAttribute="top" secondItem="qYY-RC-OrA" secondAttribute="bottom" constant="2" id="eYi-LT-wNt"/>

@@ -70,6 +70,8 @@
 -(void)setLikeOnUpdate:(NSString*)updateId  success:(void (^)(BOOL logoutValue))success   failure:(void (^)(NSError *error))failure;
 //get user Profile
 -(void)getUserDetail:(NSString* )userid success:(void (^)(UserDetails *usrDetail))success   failure:(void (^)(NSError *error))failure;
+//get course Detail by Id
+-(void)getCourseDetailById:(NSString* )courseId success:(void (^)(NSMutableArray *courseList))success   failure:(void (^)(NSError *error))failure;
 //get Course Detail
 -(void)getCourseDetail:(NSString* )feedId success:(void (^)(NSMutableArray *courseList))success   failure:(void (^)(NSError *error))failure;
 //get Module Detail
@@ -87,6 +89,8 @@
 
 
 #pragma Assignment Detail Functions
+//get Assignment
+-(void)getAssignmentsById:(NSString*)userid AndAssignment:(NSString*)assignmentid   success:(void (^)(NSMutableArray *assignments))success   failure:(void (^)(NSError *error))failure;
 //get my Assignment Data
 -(void)getMyAssignments:(NSString*)userid  AndTextSearch:(NSString*)txtSearch success:(void (^)(NSMutableArray *assignments))success   failure:(void (^)(NSError *error))failure;
 

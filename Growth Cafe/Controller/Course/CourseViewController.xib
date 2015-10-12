@@ -33,9 +33,6 @@
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGA-EI-Iim" userLabel="btnMenu">
                     <rect key="frame" x="550" y="23" width="35" height="35"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="nf0-YW-mcw"/>
-                    </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <state key="normal" image="profile-menunn.png">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>

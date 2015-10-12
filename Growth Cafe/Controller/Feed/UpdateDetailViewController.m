@@ -447,6 +447,14 @@
                     
                     [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
                     [attributedString appendAttributedString:attributedStringtemp];
+                } else  if([[dictext objectForKey:@"type"] isEqualToString:@"assignment"])
+                {
+                    NSString* tempstr=[dictext objectForKey:@"value"];
+                    
+                    NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Assignment" : @(YES) }];
+                    
+                    [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                    [attributedString appendAttributedString:attributedStringtemp];
                 }
                 else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
                 {
@@ -489,6 +497,14 @@
                         NSString* tempstr=[dictext objectForKey:@"value"];
                         
                         NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Course" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                    } else  if([[dictext objectForKey:@"type"] isEqualToString:@"assignment"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Assignment" : @(YES) }];
                         
                         [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
                         [attributedString appendAttributedString:attributedStringtemp];
@@ -642,6 +658,9 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textTapped:)];
         
         [ cell.txtView addGestureRecognizer:tap];
+        [cell.txtView setContentOffset:CGPointMake(cell.txtView.frame.origin.x , +11.0)];
+   
+
         //   cell.txtView.tag=indexPath.row;
         
         [cell.txtView setAttributedText:attributedString ];
@@ -1782,9 +1801,10 @@
 }
 
 - (IBAction)btnBackClick:(id)sender {
-      objUpdate.isExpend=NO;
-    [AppSingleton sharedInstance].updatedUpdate=objUpdate;
-    [self.navigationController popToRootViewControllerAnimated:YES];
+//      objUpdate.isExpend=NO;
+//    [AppSingleton sharedInstance].updatedUpdate=objUpdate;
+//
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -2081,6 +2101,7 @@
         NSRange range;
         id user = [textView.attributedText attribute:@"User" atIndex:characterIndex effectiveRange:&range];
         id course = [textView.attributedText attribute:@"Course" atIndex:characterIndex effectiveRange:&range];
+         id assignment = [textView.attributedText attribute:@"Assignment" atIndex:characterIndex effectiveRange:&range];
         id module = [textView.attributedText attribute:@"Module" atIndex:characterIndex effectiveRange:&range];
         id resourse = [textView.attributedText attribute:@"Resource" atIndex:characterIndex effectiveRange:&range];
         if(user!=nil)
@@ -2109,7 +2130,13 @@
             UIButton *btn=[[UIButton alloc]init];
             btn.tag=[objUpdate.updateId integerValue];
             [self btnModuleDetailClick:btn];
-        }else if(resourse!=nil)        // Handle as required...
+        }else if(assignment!=nil)        // Handle as required... need to work
+        {
+            UIButton *btn=[[UIButton alloc]init];
+            
+            btn.tag=[objUpdate.updateId integerValue];
+            [self btnCourseDetailClick:btn];
+        }    else if(resourse!=nil)        // Handle as required...
         {
             UIButton *btn=[[UIButton alloc]init];
           
@@ -2214,15 +2241,15 @@
 - (IBAction)btnClose:(id)sender {
     [self showNetworkStatus:@"" newVisibility:YES];
 }
-- (void)scrollViewDidScroll:(UIScrollView *)sender
-{
-    if([sender isKindOfClass:[UITextView class]])
-    {
-        if(sender.tag!=11)
-        {
-            CGPoint origin = [sender contentOffset];
-            [sender setContentOffset:CGPointMake(origin.x, +11.0)];
-        }
-    }
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)sender
+//{
+//    if([sender isKindOfClass:[UITextView class]])
+//    {
+//        if(sender.tag!=11)
+//        {
+//            CGPoint origin = [sender contentOffset];
+//            [sender setContentOffset:CGPointMake(origin.x, +11.0)];
+//        }
+//    }
+//}
 @end

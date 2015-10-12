@@ -22,6 +22,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "FilterViewController.h"
 #import "AssignmentReviewViewController.h"
+#import "SearchViewController.h"
 
 @interface AssignmentViewController ()
 {
@@ -41,7 +42,7 @@
 
 @implementation AssignmentViewController
 @synthesize txtSearchBar,tblViewContent;
-@synthesize step, moviePlayer,objCustom,btnFiler,viewFilter;
+@synthesize step, moviePlayer,objCustom,btnFiler,viewFilter,selectedAssignment;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -129,7 +130,7 @@
 -(void)dismissKeyboard {
     [txtSearchBar resignFirstResponder];
    // [txtViewCMT resignFirstResponder];
-    isSearching=NO;
+ //   isSearching=NO;
    // txtViewCMT.text=@"";
     step=0;
     
@@ -294,13 +295,12 @@
     //set Profile
     [objCustom setUserProfile];
     
-   
+   if([selectedAssignment count]==0)
+   {
     
-    
-    
-        [self  getAssignment:@""];
+       [self  getAssignment:@""];
 
-    
+   }
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
@@ -632,7 +632,7 @@
         //        NSLayoutConstraint *backdropViewCenterY = [NSLayoutConstraint constraintWithItem:cell.imgResource   attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:cell.imgResource.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
         
         [cell.imgResource.superview addConstraints:@[ backdropViewHeight]];
-        
+        [cell.lblDateAssignment setHidden:NO];
         [cell.lblCourse setHidden:NO];/////////////////////////////////////////////// done by raj
         [cell.lblCourse setAttributedText:attributedString];
         [cell.btnExpend setImage:[UIImage imageNamed:@"icn_arrow-expand.png"] forState:UIControlStateNormal];
@@ -919,9 +919,11 @@
 #pragma mark - UISearchBar Delegate Method
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    
+    SearchViewController *viewController= [[SearchViewController alloc]initWithNibName:@"SearchViewController" bundle:nil];
+    [self.navigationController pushViewController:viewController animated:NO];
+    [searchBar resignFirstResponder];
    // [txtViewCMT resignFirstResponder];
-    isSearching = YES;
+    //isSearching = YES;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -942,7 +944,7 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Cancel clicked");
-    isSearching=NO;
+  //  isSearching=NO;
     [self  getAssignment:txtSearchBar.text];
     [searchBar resignFirstResponder];
 }
@@ -952,7 +954,7 @@
     searchText=searchBar.text;
     [self  getAssignment:txtSearchBar.text];
     [searchBar resignFirstResponder];
-    isSearching=NO;
+   // isSearching=NO;
 }
 -(void)loginError:(NSError*)error{
     

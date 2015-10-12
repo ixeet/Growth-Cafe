@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -72,7 +72,7 @@
                             <color key="titleColor" red="0.57254901960000004" green="0.59607843140000005" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </state>
-                        <state key="selected" image="79B88F5A-DAE6-4012-9A4F-6B1BEFAE8918"/>
+                        <state key="selected" image="EFF5F945-38A6-4745-9327-A0CD8094AB24"/>
                         <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <rect key="frame" x="130" y="256" width="60" height="17"/>
@@ -170,6 +170,7 @@
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
                     <constraint firstItem="qB7-ew-qgE" firstAttribute="top" secondItem="uZL-Se-9bp" secondAttribute="bottom" constant="7" id="1gC-jW-iPR"/>
+                    <constraint firstItem="3OR-m6-s1S" firstAttribute="leading" secondItem="0Gs-NE-zkG" secondAttribute="leading" id="2hb-1R-AIf"/>
                     <constraint firstItem="NcO-SO-Wcd" firstAttribute="top" secondItem="0Gs-NE-zkG" secondAttribute="bottom" constant="7" id="5H3-94-YPd"/>
                     <constraint firstAttribute="trailingMargin" secondItem="8bF-DL-U3K" secondAttribute="trailing" constant="81" id="6Wx-tg-dZx">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -208,6 +209,7 @@
                     </constraint>
                     <constraint firstItem="PAi-rX-PsH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="dyL-oV-MS5"/>
                     <constraint firstItem="NcO-SO-Wcd" firstAttribute="top" secondItem="x61-36-lCT" secondAttribute="bottom" constant="7" id="gyJ-Cc-8rK"/>
+                    <constraint firstItem="3OR-m6-s1S" firstAttribute="trailing" secondItem="x61-36-lCT" secondAttribute="trailing" constant="6" id="lH7-yK-5Mv"/>
                     <constraint firstItem="0Gs-NE-zkG" firstAttribute="top" secondItem="uZL-Se-9bp" secondAttribute="bottom" constant="7" id="ldr-3G-nkt"/>
                     <constraint firstItem="x61-36-lCT" firstAttribute="top" secondItem="uZL-Se-9bp" secondAttribute="bottom" constant="7" id="njd-UN-dKs"/>
                     <constraint firstItem="qB7-ew-qgE" firstAttribute="baseline" secondItem="0Gs-NE-zkG" secondAttribute="baseline" id="pDF-mS-9U5"/>
@@ -238,7 +240,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="79B88F5A-DAE6-4012-9A4F-6B1BEFAE8918" width="18" height="16">
+        <image name="EFF5F945-38A6-4745-9327-A0CD8094AB24" width="18" height="16">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

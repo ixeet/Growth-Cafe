@@ -13,13 +13,14 @@
 @interface UpdateDetailViewController : UIViewController
 {
     UIView * footerView;
+    
 }
 @property (strong, nonatomic) IBOutlet UIView *cmtview;
-
+@property (weak, nonatomic) IBOutlet UITableView *tblViewContent;
 
 @property (strong, nonatomic) IBOutlet UISearchBar *txtSearchBar;
 
-@property (strong, nonatomic) IBOutlet UITableView *tblViewContent;
+
 @property (assign , nonatomic)  NSInteger  step;
 @property (strong, nonatomic) IBOutlet UITextView *txtViewCMT;
 @property (strong, nonatomic) IBOutlet MPMoviePlayerController *moviePlayer;

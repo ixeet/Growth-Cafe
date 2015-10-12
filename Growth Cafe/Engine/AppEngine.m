@@ -390,6 +390,19 @@
         failure(error);
     }];
 }
+//get Course Detail by Course Id
+-(void)getCourseDetailById:(NSString* )courseId success:(void (^)(NSMutableArray *courseList))success   failure:(void (^)(NSError *error))failure{
+    CourseHandler *course=[[CourseHandler alloc] init];
+    [course getCourseDetailById:courseId success:^(NSMutableArray *courseList) {
+        
+        
+        success(courseList);
+        
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+
+}
 //get Module Detail
 -(void)getModuleDetail:(NSString* )feedId success:(void (^)(NSDictionary *moduleDetail))success   failure:(void (^)(NSError *error))failure{
     CourseHandler *course=[[CourseHandler alloc] init];
@@ -405,6 +418,20 @@
 }
 
 #pragma Assignment Detail Functions
+//get Assignment
+-(void)getAssignmentsById:(NSString*)userid AndAssignment:(NSString*)assignmentid   success:(void (^)(NSMutableArray *assignments))success   failure:(void (^)(NSError *error))failure{
+    AssignmentHandler *assign=[[AssignmentHandler alloc] init];
+    [assign getAssignmentsById:userid AndAssignment:assignmentid success:^(NSMutableArray *moduleDetail)
+    {
+        
+        
+        success(moduleDetail);
+        
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+    
+}
 //get my Assignment Data
 -(void)getMyAssignments:(NSString*)userid  AndTextSearch:(NSString*)txtSearch success:(void (^)(NSMutableArray *assignments))success   failure:(void (^)(NSError *error))failure
 {
