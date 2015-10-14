@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="254" id="KGk-i7-Jjw" customClass="AssignmentDetailTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="254"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="253"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hup-Id-38j" userLabel="imgResorces">
+                        <rect key="frame" x="142" y="58" width="90" height="143"/>
+                        <color key="backgroundColor" red="0.20784313730000001" green="0.60784313729999995" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                            <rect key="frame" x="61" y="46" width="238" height="122"/>
+                        </variation>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivO-eK-my7" userLabel="btnAssignmentStatus">
+                        <rect key="frame" x="88" y="8" width="46" height="46"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="46" id="0IO-2c-vBN"/>
+                            <constraint firstAttribute="width" constant="46" id="m7X-hu-vRu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                        <inset key="imageEdgeInsets" minX="-2" minY="-10" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" image="icn_pending-assignment.png">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vtd-oJ-Pjy" userLabel="lblAssignementDetail">
+                        <rect key="frame" x="142" y="34" width="90" height="21"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                        </variation>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Avf-cs-moQ" userLabel="imgDevider">
+                        <rect key="frame" x="142" y="252" width="167" height="1"/>
+                        <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="7kc-Dg-dvc"/>
+                        </constraints>
+                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                            <rect key="frame" x="62" y="189" width="247" height="1"/>
+                        </variation>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7z-Z2-t4j" userLabel="lblUploadedDate">
+                        <rect key="frame" x="142" y="226" width="90" height="21"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                            <rect key="frame" x="62" y="168" width="237" height="20"/>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WTg-Sc-s9Q" userLabel="lblAssignmentTitle">
+                        <rect key="frame" x="142" y="7" width="90" height="29"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="29" id="Q2T-3r-IPJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.078431372550000003" green="0.094117647060000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="July 17" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcE-62-R9O" userLabel="lblDateAssignment">
+                        <rect key="frame" x="88" y="51" width="48" height="18"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" red="0.078431372550000003" green="0.094117647060000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                        </variation>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3C-HK-SYw" userLabel="btnExpend">
+                        <rect key="frame" x="142" y="8" width="87" height="37"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <state key="normal" image="icn_arrow.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Odc-Vb-Gom" userLabel="lblCourse">
+                        <rect key="frame" x="144" y="202" width="88" height="21"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                            <rect key="frame" x="62" y="169" width="237" height="0.0"/>
+                        </variation>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0DC-KA-tmn" userLabel="btnPlay">
+                        <rect key="frame" x="165" y="104" width="45" height="49"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="49" id="SiM-Ia-MLw"/>
+                            <constraint firstAttribute="width" constant="45" id="j5v-bA-8UC"/>
+                        </constraints>
+                        <state key="normal" image="icn_play1.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                            <rect key="frame" x="158" y="79" width="45" height="45"/>
+                        </variation>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="jcE-62-R9O" firstAttribute="top" secondItem="ivO-eK-my7" secondAttribute="bottom" constant="-3" id="00I-tw-ZxV"/>
+                    <constraint firstItem="hup-Id-38j" firstAttribute="leading" secondItem="Odc-Vb-Gom" secondAttribute="leading" constant="-2" id="1pX-Cb-rmE"/>
+                    <constraint firstItem="Odc-Vb-Gom" firstAttribute="top" secondItem="hup-Id-38j" secondAttribute="bottom" constant="1" id="1zN-Sj-4Cb"/>
+                    <constraint firstItem="WTg-Sc-s9Q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-1" id="5aV-tP-daQ"/>
+                    <constraint firstItem="0DC-KA-tmn" firstAttribute="centerX" secondItem="hup-Id-38j" secondAttribute="centerX" id="7Ap-Qq-AAU"/>
+                    <constraint firstItem="hup-Id-38j" firstAttribute="leading" secondItem="ivO-eK-my7" secondAttribute="trailing" constant="8" id="82g-Hb-YpT"/>
+                    <constraint firstItem="hup-Id-38j" firstAttribute="top" secondItem="Vtd-oJ-Pjy" secondAttribute="bottom" constant="3" id="8Gd-Cf-SIO"/>
+                    <constraint firstItem="ivO-eK-my7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="8Wc-Ae-yZ3"/>
+                    <constraint firstItem="Vtd-oJ-Pjy" firstAttribute="leading" secondItem="ivO-eK-my7" secondAttribute="trailing" constant="8" id="9C4-Fl-zyV"/>
+                    <constraint firstItem="X7z-Z2-t4j" firstAttribute="top" secondItem="Odc-Vb-Gom" secondAttribute="bottom" constant="3" id="H6Y-qJ-N2t"/>
+                    <constraint firstItem="X7z-Z2-t4j" firstAttribute="leading" secondItem="Odc-Vb-Gom" secondAttribute="leading" constant="-2" id="KQN-nD-jaP"/>
+                    <constraint firstItem="hup-Id-38j" firstAttribute="top" secondItem="ivO-eK-my7" secondAttribute="bottom" constant="4" id="QHk-s6-0DD"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Vtd-oJ-Pjy" secondAttribute="trailing" constant="80" id="QYC-Mg-JVL">
+                        <variation key="heightClass=regular-widthClass=compact" constant="13"/>
+                    </constraint>
+                    <constraint firstItem="jcE-62-R9O" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="T0x-1F-wGL">
+                        <variation key="heightClass=regular-widthClass=compact" constant="-2"/>
+                    </constraint>
+                    <constraint firstItem="WTg-Sc-s9Q" firstAttribute="leading" secondItem="ivO-eK-my7" secondAttribute="trailing" constant="8" id="TBN-5o-v2z"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Odc-Vb-Gom" secondAttribute="trailing" constant="80" id="XZo-f5-CIG">
+                        <variation key="heightClass=regular-widthClass=compact" constant="11"/>
+                    </constraint>
+                    <constraint firstAttribute="trailingMargin" secondItem="hup-Id-38j" secondAttribute="trailing" constant="80" id="YbS-Ew-WMK">
+                        <variation key="heightClass=regular-widthClass=compact" constant="13"/>
+                    </constraint>
+                    <constraint firstItem="T3C-HK-SYw" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-83" id="aUV-Nq-3fZ">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
+                    <constraint firstItem="X7z-Z2-t4j" firstAttribute="leading" secondItem="Avf-cs-moQ" secondAttribute="leading" id="b0N-XN-Ssx"/>
+                    <constraint firstItem="T3C-HK-SYw" firstAttribute="leading" secondItem="ivO-eK-my7" secondAttribute="trailing" constant="8" id="d0T-if-LWv"/>
+                    <constraint firstItem="0DC-KA-tmn" firstAttribute="top" secondItem="Vtd-oJ-Pjy" secondAttribute="bottom" constant="49" id="eBo-Th-2BO"/>
+                    <constraint firstItem="0DC-KA-tmn" firstAttribute="centerY" secondItem="hup-Id-38j" secondAttribute="centerY" constant="-3" id="hAV-49-EWH"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Avf-cs-moQ" secondAttribute="bottom" constant="-8" id="ldR-uZ-FHB"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Avf-cs-moQ" secondAttribute="trailing" constant="80" id="lwH-53-fjM">
+                        <variation key="heightClass=regular-widthClass=compact" constant="3"/>
+                    </constraint>
+                    <constraint firstItem="ivO-eK-my7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="o7c-xM-L6E">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
+                    <constraint firstItem="Avf-cs-moQ" firstAttribute="top" secondItem="X7z-Z2-t4j" secondAttribute="bottom" constant="5" id="pJe-kT-d0a"/>
+                    <constraint firstItem="T3C-HK-SYw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="peQ-jp-MXU"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="X7z-Z2-t4j" secondAttribute="trailing" constant="80" id="riC-SD-vxi">
+                        <variation key="heightClass=regular-widthClass=compact" constant="13"/>
+                    </constraint>
+                    <constraint firstAttribute="trailingMargin" secondItem="WTg-Sc-s9Q" secondAttribute="trailing" constant="80" id="xEA-wr-y9m">
+                        <variation key="heightClass=regular-widthClass=compact" constant="13"/>
+                    </constraint>
+                    <constraint firstItem="Vtd-oJ-Pjy" firstAttribute="top" secondItem="WTg-Sc-s9Q" secondAttribute="bottom" constant="-2" id="zKw-q7-kdO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="btnAssignmentStatus" destination="ivO-eK-my7" id="chB-6L-gi5"/>
+                <outlet property="btnExpend" destination="T3C-HK-SYw" id="8MP-H1-9nx"/>
+                <outlet property="btnPlay" destination="0DC-KA-tmn" id="Deh-zz-NRX"/>
+                <outlet property="imgResource" destination="hup-Id-38j" id="rQb-kQ-JAP"/>
+                <outlet property="lblAssignementDetail" destination="Vtd-oJ-Pjy" id="aah-f8-wXT"/>
+                <outlet property="lblAssignmentTitle" destination="WTg-Sc-s9Q" id="LOf-nf-P0Z"/>
+                <outlet property="lblCourse" destination="Odc-Vb-Gom" id="MGH-oH-pXb"/>
+                <outlet property="lblDateAssignment" destination="jcE-62-R9O" id="jSF-nI-GZs"/>
+                <outlet property="lblUploadedDate" destination="X7z-Z2-t4j" id="Fg9-bD-b2U"/>
+            </connections>
+            <point key="canvasLocation" x="209" y="163"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icn_arrow.png" width="8" height="12"/>
+        <image name="icn_pending-assignment.png" width="91" height="91"/>
+        <image name="icn_play1.png" width="45" height="45"/>
+    </resources>
+</document>

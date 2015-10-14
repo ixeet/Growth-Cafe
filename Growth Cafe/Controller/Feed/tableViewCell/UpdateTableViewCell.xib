@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationLevel="40" indentationWidth="0.0" rowHeight="1196" id="KGk-i7-Jjw" customClass="UpdateTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="245"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="251"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAi-rX-PsH" userLabel="btnCommentedBy">
+                        <rect key="frame" x="88" y="8" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="QbD-BI-oTS"/>
+                            <constraint firstAttribute="height" constant="40" id="ZK7-Aj-BVL"/>
+                            <constraint firstAttribute="width" constant="40" id="w7e-go-GFp"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <state key="normal" backgroundImage="user_dummy.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="QbD-BI-oTS"/>
+                            </mask>
+                        </variation>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3OR-m6-s1S" userLabel="imgBelowLine1">
+                        <rect key="frame" x="88" y="243" width="150" height="1"/>
+                        <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="xZe-Zz-Rgd"/>
+                        </constraints>
+                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                            <rect key="frame" x="0.0" y="285" width="320" height="1"/>
+                        </variation>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NcO-SO-Wcd" userLabel="imgBelowLine8">
+                        <rect key="frame" x="88" y="238" width="144" height="8"/>
+                        <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="8" id="40z-PH-q33"/>
+                            <constraint firstAttribute="height" constant="8" id="wBt-g3-wlz"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="40z-PH-q33"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                            <rect key="frame" x="0.0" y="281" width="320" height="8"/>
+                        </variation>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qB7-ew-qgE" userLabel="btnLike">
+                        <rect key="frame" x="121" y="210" width="76" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="76" id="v3n-aG-FLz"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <inset key="titleEdgeInsets" minX="5" minY="-4" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="-4" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="Share" image="icn_share.png">
+                            <color key="titleColor" red="0.57254901960000004" green="0.59607843140000005" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="659238C0-6163-4B47-BD00-2126DC3CE640"/>
+                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            <rect key="frame" x="130" y="256" width="60" height="17"/>
+                        </variation>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Gs-NE-zkG" userLabel="btnLike">
+                        <rect key="frame" x="88" y="210" width="86" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="86" id="QSH-bx-zES"/>
+                            <constraint firstAttribute="height" constant="21" id="vIy-m8-EeN"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <inset key="titleEdgeInsets" minX="5" minY="-4" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="-8" minY="-6" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="Like" image="icn_like.png">
+                            <color key="titleColor" red="0.5725490196078431" green="0.59607843137254901" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="icn_like_c.png"/>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                        </variation>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8bF-DL-U3K" userLabel="imgResorces">
+                        <rect key="frame" x="87" y="77" width="144" height="102"/>
+                        <color key="backgroundColor" red="0.20784313730000001" green="0.60784313729999995" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                            <rect key="frame" x="6" y="59" width="308" height="165"/>
+                        </variation>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZL-Se-9bp" userLabel="lblLikeAndCmtConut">
+                        <rect key="frame" x="88" y="188" width="232" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="O27-eL-tsF"/>
+                            <constraint firstAttribute="height" constant="15" id="vxE-h7-jRo"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" red="0.57254901960000004" green="0.59607843140000005" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="O27-eL-tsF"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            <rect key="frame" x="8" y="228" width="304" height="21"/>
+                        </variation>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x61-36-lCT" userLabel="btnComment">
+                        <rect key="frame" x="120" y="210" width="112" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="112" id="rTx-CT-E1A"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <inset key="titleEdgeInsets" minX="5" minY="-4" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="-3" minY="-4" maxX="0.0" maxY="-3"/>
+                        <state key="normal" title="Comment" image="icn_comment.png">
+                            <color key="titleColor" red="0.5725490196078431" green="0.59607843137254901" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="icn_comment.png"/>
+                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            <rect key="frame" x="232" y="257" width="82" height="16"/>
+                        </variation>
+                    </button>
+                    <textView clipsSubviews="YES" tag="11" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhz-c2-CXa">
+                        <rect key="frame" x="136" y="8" width="96" height="64"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="scrollIndicatorInsets" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
+                        <color key="textColor" red="0.078431372550000003" green="0.094117647060000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                            <rect key="frame" x="54" y="7" width="260" height="48"/>
+                        </variation>
+                    </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0z-WF-iVK" userLabel="btnPlay">
+                        <rect key="frame" x="137" y="105" width="45" height="45"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                        <state key="normal" image="icn_play1.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <rect key="frame" x="138" y="116" width="45" height="45"/>
+                        </variation>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="8bF-DL-U3K" firstAttribute="top" secondItem="mhz-c2-CXa" secondAttribute="bottom" constant="5" id="0lz-i9-lzy"/>
+                    <constraint firstItem="PAi-rX-PsH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="1ch-0N-BGI">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
+                    <constraint firstItem="qB7-ew-qgE" firstAttribute="top" secondItem="uZL-Se-9bp" secondAttribute="bottom" constant="7" id="1gC-jW-iPR"/>
+                    <constraint firstItem="3OR-m6-s1S" firstAttribute="leading" secondItem="0Gs-NE-zkG" secondAttribute="leading" id="2hb-1R-AIf"/>
+                    <constraint firstItem="NcO-SO-Wcd" firstAttribute="top" secondItem="0Gs-NE-zkG" secondAttribute="bottom" constant="7" id="5H3-94-YPd"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="8bF-DL-U3K" secondAttribute="trailing" constant="81" id="6Wx-tg-dZx">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
+                    <constraint firstItem="8bF-DL-U3K" firstAttribute="top" secondItem="PAi-rX-PsH" secondAttribute="bottom" constant="29" id="9kb-9g-OIU"/>
+                    <constraint firstItem="mhz-c2-CXa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Cym-Gz-zgB"/>
+                    <constraint firstItem="3OR-m6-s1S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="EoY-Dq-3xe">
+                        <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
+                    </constraint>
+                    <constraint firstItem="NcO-SO-Wcd" firstAttribute="top" secondItem="qB7-ew-qgE" secondAttribute="bottom" constant="7" id="FDp-pi-280"/>
+                    <constraint firstItem="mhz-c2-CXa" firstAttribute="leading" secondItem="PAi-rX-PsH" secondAttribute="trailing" constant="8" id="G6T-ps-IUk"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="NcO-SO-Wcd" secondAttribute="trailing" constant="80" id="JBm-a0-YOz">
+                        <variation key="heightClass=regular-widthClass=compact" constant="-6"/>
+                    </constraint>
+                    <constraint firstItem="uZL-Se-9bp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="Lj6-L4-kbk">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
+                    <constraint firstItem="0Gs-NE-zkG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="NWS-PC-0GS">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
+                    <constraint firstAttribute="trailingMargin" secondItem="x61-36-lCT" secondAttribute="trailing" constant="80" id="T5k-R7-XbF">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
+                    <constraint firstItem="x61-36-lCT" firstAttribute="baseline" secondItem="qB7-ew-qgE" secondAttribute="baseline" id="TbT-c8-Lng"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="3OR-m6-s1S" secondAttribute="trailing" constant="74" id="Tkz-Ex-dZ9"/>
+                    <constraint firstItem="uZL-Se-9bp" firstAttribute="top" secondItem="8bF-DL-U3K" secondAttribute="bottom" constant="9" id="Vt4-1o-s1V"/>
+                    <constraint firstItem="V0z-WF-iVK" firstAttribute="centerX" secondItem="8bF-DL-U3K" secondAttribute="centerX" constant="0.5" id="WKc-3S-C4G"/>
+                    <constraint firstAttribute="centerX" secondItem="qB7-ew-qgE" secondAttribute="centerX" constant="1" id="Wm8-H6-Z4f"/>
+                    <constraint firstItem="3OR-m6-s1S" firstAttribute="top" secondItem="NcO-SO-Wcd" secondAttribute="bottom" constant="-3" id="XbJ-XU-3q2"/>
+                    <constraint firstItem="uZL-Se-9bp" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="8" id="Z09-Uc-g1S">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
+                    <constraint firstItem="0Gs-NE-zkG" firstAttribute="baseline" secondItem="qB7-ew-qgE" secondAttribute="firstBaseline" id="aAJ-fh-DKO"/>
+                    <constraint firstItem="8bF-DL-U3K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="79" id="cmg-3Q-gmr">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
+                    <constraint firstItem="PAi-rX-PsH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="dyL-oV-MS5"/>
+                    <constraint firstItem="NcO-SO-Wcd" firstAttribute="top" secondItem="x61-36-lCT" secondAttribute="bottom" constant="7" id="gyJ-Cc-8rK"/>
+                    <constraint firstItem="3OR-m6-s1S" firstAttribute="trailing" secondItem="x61-36-lCT" secondAttribute="trailing" constant="6" id="lH7-yK-5Mv"/>
+                    <constraint firstItem="0Gs-NE-zkG" firstAttribute="top" secondItem="uZL-Se-9bp" secondAttribute="bottom" constant="7" id="ldr-3G-nkt"/>
+                    <constraint firstItem="x61-36-lCT" firstAttribute="top" secondItem="uZL-Se-9bp" secondAttribute="bottom" constant="7" id="njd-UN-dKs"/>
+                    <constraint firstItem="qB7-ew-qgE" firstAttribute="baseline" secondItem="0Gs-NE-zkG" secondAttribute="baseline" id="pDF-mS-9U5"/>
+                    <constraint firstItem="8bF-DL-U3K" firstAttribute="centerY" secondItem="V0z-WF-iVK" secondAttribute="centerY" constant="0.5" id="pQ5-92-wmp"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="mhz-c2-CXa" secondAttribute="trailing" constant="80" id="wu0-kS-c4M">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
+                    <constraint firstAttribute="bottomMargin" secondItem="NcO-SO-Wcd" secondAttribute="bottom" constant="-10" id="xoo-Xd-4ib"/>
+                    <constraint firstItem="NcO-SO-Wcd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="ycN-qc-ygj">
+                        <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
+                    </constraint>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="btnComment" destination="x61-36-lCT" id="zAx-RB-r8H"/>
+                <outlet property="btnLike" destination="0Gs-NE-zkG" id="1rW-lc-NwC"/>
+                <outlet property="btnPlay" destination="V0z-WF-iVK" id="Zfd-bj-4iV"/>
+                <outlet property="btnShare" destination="qB7-ew-qgE" id="xPg-ZA-Ypv"/>
+                <outlet property="btnUpdatedBy" destination="PAi-rX-PsH" id="tTq-7A-Lkr"/>
+                <outlet property="imgBelowLine1" destination="3OR-m6-s1S" id="I1a-Gv-NcO"/>
+                <outlet property="imgBelowLine8" destination="NcO-SO-Wcd" id="tal-hW-1Dc"/>
+                <outlet property="imgResorces" destination="8bF-DL-U3K" id="13Y-uZ-u1h"/>
+                <outlet property="lblLikeAndCmtConut" destination="uZL-Se-9bp" id="KxO-6L-oKU"/>
+                <outlet property="txtView" destination="mhz-c2-CXa" id="wNa-oU-VZe"/>
+            </connections>
+            <point key="canvasLocation" x="-82" y="180.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="659238C0-6163-4B47-BD00-2126DC3CE640" width="18" height="16">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
+GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
+c1dOU0NvbG9ygAKADRIgwAAAgAOAC1h7MTgsIDE2fdIVChYYWk5TLm9iamVjdHOhF4AEgArSFQoaHaIb
+HIAFgAaACRAA0iAKISJfEBROU1RJRkZSZXByZXNlbnRhdGlvboAHgAhPEQzuTU0AKgAABIgAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGEyHmh5eprwCBw0VAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHVyiti+U//8WR32QAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBQoTJHHJ
+3y6Q//8eXqa8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAQM1xwLIfx/i6N/f8WR36RAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAhQ9bX8qg+v4LYr2/yd51+oEDxonAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAACh83RiuG8P0tiPL/LYv4/xVDeIwAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEHVujuC2M+v8shu7/LIjy/x5fp70WRn2OGEuG
+lBZHf5AVQnSECRsxPQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQMVlrLIbz/SyH8P8shu7/LIbu
+/y2K9f8tjPr/LYz6/y2M+v8uj/z/Jnra7A0qS2ILIz9TGlOTpxxYnrEZToueBRMiKxQ+bn8pgef2LYjy
+/yyG7v8shu7/LIbu/yyG7v8shu7/LIbu/yyG7v8tiPL/J3nY6w0rTWEfX6jCLYz7/yuL+/8rhO79Ezxq
+dyuE7v0siPL/LIbu/yyG7v8shu7/LIbu/yyG7v8shu7/LIbu/yyG7v8tifP/JXTO4gcXKT0dXKO8MInw
+/zyT8f8qgOb1EjhncyqA4/Ush/D/LIbu/yyG7v8shu7/LIbu/yyG7v8shu7/LIbu/yyG7v8siPL/J3nX
+6g8uUmoZWKK8hcD2//X7//9Jlun1DzdncyqA4/Ush/D/LIbu/yyG7v8shu7/LIbu/yyG7v8shu7/LIbu
+/yyG7v8ti/r/HVmftgAAAAAcWqO8S5zy/3m49/8zh+f1ETdncyqA4/Ush/D/LIbu/yyG7v8shu7/LIbu
+/yyG7v8shu7/LIbu/yyG7v8tivf/IWa3ywEFCBIfXaW+KYTw/yaD7v8pgOb1EjpodCqC5vcsiPH/LIbu
+/yyG7v8shu7/LIbu/yyG7v8shu7/LIbu/y2H8v8qgOP0CBgtPAAAAAAcV5u1LYn1/y2M+v8qg+r4ETRf
+bSd51ugshu7/LYr3/y2J9f8tiPL/LYfx/yyH8P8shvD/LIfw/y6M+/8gZLHGAAIECQAAAAAEDhspETVf
+dxM9bYYQMVhwAgcMEwYSISoMJUJREz1vhR1borwja7/XJnTQ5Sd72+0ofd7vJ3nW6x1Zn7cFDhkmAAAA
+AAAAAAAADgEAAAMAAAABABIAAAEBAAMAAAABABAAAAECAAMAAAAEAAAFNgEDAAMAAAABAAEAAAEGAAMA
+AAABAAIAAAERAAQAAAABAAAACAESAAMAAAABAAEAAAEVAAMAAAABAAQAAAEWAAMAAAABABAAAAEXAAQA
+AAABAAAEgAEcAAMAAAABAAEAAAFSAAMAAAABAAEAAAFTAAMAAAAEAAAFPodzAAcAAAeoAAAFRgAAAAAA
+CAAIAAgACAABAAEAAQABAAAHqGFwcGwCIAAAbW50clJHQiBYWVogB9kAAgAZAAsAGgALYWNzcEFQUEwA
+AAAAYXBwbAAAAAAAAAAAAAAAAAAAAAAAAPbWAAEAAAAA0y1hcHBsAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALZGVzYwAAAQgAAABvZHNjbQAAAXgAAAVsY3BydAAABuQA
+AAA4d3RwdAAABxwAAAAUclhZWgAABzAAAAAUZ1hZWgAAB0QAAAAUYlhZWgAAB1gAAAAUclRSQwAAB2wA
+AAAOY2hhZAAAB3wAAAAsYlRSQwAAB2wAAAAOZ1RSQwAAB2wAAAAOZGVzYwAAAAAAAAAUR2VuZXJpYyBS
+R0IgUHJvZmlsZQAAAAAAAAAAAAAAFEdlbmVyaWMgUkdCIFByb2ZpbGUAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG1sdWMAAAAAAAAAHgAAAAxza1NLAAAAKAAAAXho
+ckhSAAAAKAAAAaBjYUVTAAAAJAAAAchwdEJSAAAAJgAAAex1a1VBAAAAKgAAAhJmckZVAAAAKAAAAjx6
+aFRXAAAAFgAAAmRpdElUAAAAKAAAAnpuYk5PAAAAJgAAAqJrb0tSAAAAFgAAAshjc0NaAAAAIgAAAt5o
+ZUlMAAAAHgAAAwBkZURFAAAALAAAAx5odUhVAAAAKAAAA0pzdlNFAAAAJgAAAqJ6aENOAAAAFgAAA3Jq
+YUpQAAAAGgAAA4hyb1JPAAAAJAAAA6JlbEdSAAAAIgAAA8ZwdFBPAAAAJgAAA+hubE5MAAAAKAAABA5l
+c0VTAAAAJgAAA+h0aFRIAAAAJAAABDZ0clRSAAAAIgAABFpmaUZJAAAAKAAABHxwbFBMAAAALAAABKRy
+dVJVAAAAIgAABNBhckVHAAAAJgAABPJlblVTAAAAJgAABRhkYURLAAAALgAABT4AVgFhAGUAbwBiAGUA
+YwBuAP0AIABSAEcAQgAgAHAAcgBvAGYAaQBsAEcAZQBuAGUAcgBpAQ0AawBpACAAUgBHAEIAIABwAHIA
+bwBmAGkAbABQAGUAcgBmAGkAbAAgAFIARwBCACAAZwBlAG4A6AByAGkAYwBQAGUAcgBmAGkAbAAgAFIA
+RwBCACAARwBlAG4A6QByAGkAYwBvBBcEMAQzBDAEOwRMBD0EOAQ5ACAEPwRABD4ERAQwBDkEOwAgAFIA
+RwBCAFAAcgBvAGYAaQBsACAAZwDpAG4A6QByAGkAcQB1AGUAIABSAFYAQpAadSgAIABSAEcAQgAggnJf
+aWPPj/AAUAByAG8AZgBpAGwAbwAgAFIARwBCACAAZwBlAG4AZQByAGkAYwBvAEcAZQBuAGUAcgBpAHMA
+awAgAFIARwBCAC0AcAByAG8AZgBpAGzHfLwYACAAUgBHAEIAINUEuFzTDMd8AE8AYgBlAGMAbgD9ACAA
+UgBHAEIAIABwAHIAbwBmAGkAbAXkBegF1QXkBdkF3AAgAFIARwBCACAF2wXcBdwF2QBBAGwAbABnAGUA
+bQBlAGkAbgBlAHMAIABSAEcAQgAtAFAAcgBvAGYAaQBsAMEAbAB0AGEAbADhAG4AbwBzACAAUgBHAEIA
+IABwAHIAbwBmAGkAbGZukBoAIABSAEcAQgAgY8+P8GWHTvZOAIIsACAAUgBHAEIAIDDXMO0w1TChMKQw
+6wBQAHIAbwBmAGkAbAAgAFIARwBCACAAZwBlAG4AZQByAGkAYwOTA7UDvQO5A7oDzAAgA8ADwQO/A8YD
+rwO7ACAAUgBHAEIAUABlAHIAZgBpAGwAIABSAEcAQgAgAGcAZQBuAOkAcgBpAGMAbwBBAGwAZwBlAG0A
+ZQBlAG4AIABSAEcAQgAtAHAAcgBvAGYAaQBlAGwOQg4bDiMORA4fDiUOTAAgAFIARwBCACAOFw4xDkgO
+Jw5EDhsARwBlAG4AZQBsACAAUgBHAEIAIABQAHIAbwBmAGkAbABpAFkAbABlAGkAbgBlAG4AIABSAEcA
+QgAtAHAAcgBvAGYAaQBpAGwAaQBVAG4AaQB3AGUAcgBzAGEAbABuAHkAIABwAHIAbwBmAGkAbAAgAFIA
+RwBCBB4EMQRJBDgEOQAgBD8EQAQ+BEQEOAQ7BEwAIABSAEcAQgZFBkQGQQAgBioGOQYxBkoGQQAgAFIA
+RwBCACAGJwZEBjkGJwZFAEcAZQBuAGUAcgBpAGMAIABSAEcAQgAgAFAAcgBvAGYAaQBsAGUARwBlAG4A
+ZQByAGUAbAAgAFIARwBCAC0AYgBlAHMAawByAGkAdgBlAGwAcwBldGV4dAAAAABDb3B5cmlnaHQgMjAw
+NyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRzIHJlc2VydmVkLgBYWVogAAAAAAAA81IAAQAAAAEWz1hZWiAA
+AAAAAAB0TQAAPe4AAAPQWFlaIAAAAAAAAFp1AACscwAAFzRYWVogAAAAAAAAKBoAABWfAAC4NmN1cnYA
+AAAAAAAAAQHNAABzZjMyAAAAAAABDEIAAAXe///zJgAAB5IAAP2R///7ov///aMAAAPcAADAbNIlJico
+WiRjbGFzc25hbWVYJGNsYXNzZXNfEBBOU0JpdG1hcEltYWdlUmVwoykqK18QEE5TQml0bWFwSW1hZ2VS
+ZXBaTlNJbWFnZVJlcFhOU09iamVjdNIlJi0uV05TQXJyYXmiLSvSJSYwMV5OU011dGFibGVBcnJheaMw
+LSvTMzQKNTY3V05TV2hpdGVcTlNDb2xvclNwYWNlRDAgMAAQA4AM0iUmOTpXTlNDb2xvcqI5K9IlJjw9
+V05TSW1hZ2WiPCtfEA9OU0tleWVkQXJjaGl2ZXLRQEFUcm9vdIABAAgAEQAaACMALQAyADcARgBMAFcA
+XgBlAHIAeQCBAIMAhQCKAIwAjgCXAJwApwCpAKsArQCyALUAtwC5ALsAvQDCANkA2wDdDc8N1A3fDegN
++w3/DhIOHQ4mDisOMw42DjsOSg5ODlUOXQ5qDm8OcQ5zDngOgA6DDogOkA6TDqUOqA6tAAAAAAAAAgEA
+AAAAAAAAQgAAAAAAAAAAAAAAAAAADq8
+</mutableData>
+        </image>
+        <image name="icn_comment.png" width="18" height="16"/>
+        <image name="icn_like.png" width="18" height="16"/>
+        <image name="icn_like_c.png" width="18" height="16"/>
+        <image name="icn_play1.png" width="45" height="45"/>
+        <image name="icn_share.png" width="16" height="17"/>
+        <image name="user_dummy.png" width="40" height="40"/>
+    </resources>
+</document>

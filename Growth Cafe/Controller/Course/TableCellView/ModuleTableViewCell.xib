@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="KGk-i7-Jjw" customClass="ModuleTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nrq-e8-oTS">
+                        <rect key="frame" x="88" y="0.0" width="120" height="46"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnm-QO-hox" userLabel="lblCourseName">
+                                <rect key="frame" x="119" y="0.0" width="0.0" height="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VV3-Si-adN" userLabel="lblDate">
+                                <rect key="frame" x="8" y="11" width="55" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="YaC-kR-bgZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                </variation>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="progress_vertica_greyl_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="cX9-rq-g94" userLabel="imgStandingLine">
+                                <rect key="frame" x="64" y="0.0" width="6" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="6" id="emo-Cc-6KH"/>
+                                </constraints>
+                            </imageView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="7BW-Zs-xMO">
+                                <rect key="frame" x="119" y="38" width="0.0" height="3"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.58039215690000001" green="0.0" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="JrO-xM-2uh"/>
+                                </constraints>
+                                <color key="progressTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="trackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkg-PP-gEb" userLabel="lblPercent">
+                                <rect key="frame" x="129" y="14" width="47" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="47" id="6AV-C3-EhR"/>
+                                    <constraint firstAttribute="height" constant="21" id="H8K-Ez-G5o"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" red="0.72941176470588232" green="0.0" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bkg-PP-gEb" firstAttribute="top" secondItem="nrq-e8-oTS" secondAttribute="top" constant="14" id="2He-yp-Yl4"/>
+                            <constraint firstItem="hnm-QO-hox" firstAttribute="top" secondItem="nrq-e8-oTS" secondAttribute="top" id="FYl-63-NwW"/>
+                            <constraint firstAttribute="trailing" secondItem="bkg-PP-gEb" secondAttribute="trailing" constant="3" id="MZ4-TG-94u"/>
+                            <constraint firstItem="cX9-rq-g94" firstAttribute="leading" secondItem="VV3-Si-adN" secondAttribute="trailing" constant="1" id="PH0-2S-rFk"/>
+                            <constraint firstAttribute="trailing" secondItem="7BW-Zs-xMO" secondAttribute="trailing" constant="1" id="QnN-TA-5Ld"/>
+                            <constraint firstItem="7BW-Zs-xMO" firstAttribute="leading" secondItem="cX9-rq-g94" secondAttribute="trailing" constant="49" id="S5a-oX-xKL"/>
+                            <constraint firstItem="bkg-PP-gEb" firstAttribute="leading" secondItem="hnm-QO-hox" secondAttribute="trailing" constant="10" id="TbR-OL-Ix0"/>
+                            <constraint firstItem="VV3-Si-adN" firstAttribute="leading" secondItem="nrq-e8-oTS" secondAttribute="leading" constant="8" id="VIx-Jt-Gpk"/>
+                            <constraint firstItem="cX9-rq-g94" firstAttribute="top" secondItem="nrq-e8-oTS" secondAttribute="top" id="a9u-0c-Kkd"/>
+                            <constraint firstItem="bkg-PP-gEb" firstAttribute="baseline" secondItem="hnm-QO-hox" secondAttribute="baseline" constant="-1" id="bcm-7S-rMD"/>
+                            <constraint firstAttribute="bottom" secondItem="cX9-rq-g94" secondAttribute="bottom" constant="3" id="bwi-Ir-EdD"/>
+                            <constraint firstItem="7BW-Zs-xMO" firstAttribute="top" secondItem="hnm-QO-hox" secondAttribute="bottom" constant="2" id="eGY-6L-pkc"/>
+                            <constraint firstItem="hnm-QO-hox" firstAttribute="leading" secondItem="cX9-rq-g94" secondAttribute="trailing" constant="49" id="k9a-mF-N3m"/>
+                            <constraint firstItem="VV3-Si-adN" firstAttribute="top" secondItem="nrq-e8-oTS" secondAttribute="top" constant="11" id="uio-Pk-3sd"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="nrq-e8-oTS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="KRp-dv-dAY">
+                        <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
+                    </constraint>
+                    <constraint firstItem="nrq-e8-oTS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="Ql8-7N-nuY"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="nrq-e8-oTS" secondAttribute="trailing" constant="80" id="fwv-J8-k4Y">
+                        <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
+                    </constraint>
+                    <constraint firstAttribute="bottomMargin" secondItem="nrq-e8-oTS" secondAttribute="bottom" constant="-8" id="zwr-gB-FYW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="lblDate" destination="VV3-Si-adN" id="V1d-mS-I2D"/>
+                <outlet property="lblModuleName" destination="hnm-QO-hox" id="4W3-Lw-zIp"/>
+                <outlet property="lblPercent" destination="bkg-PP-gEb" id="H6K-Rx-gvd"/>
+                <outlet property="progressBarModule" destination="7BW-Zs-xMO" id="Zr1-Pa-vnZ"/>
+            </connections>
+            <point key="canvasLocation" x="310" y="28.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="progress_vertica_greyl_line.png" width="6" height="50"/>
+    </resources>
+</document>
