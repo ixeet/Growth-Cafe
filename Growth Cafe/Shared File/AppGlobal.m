@@ -131,7 +131,7 @@
     
     if(monthName.length>3)
     {
-        return  [monthName substringToIndex:4];;
+        return  [monthName substringToIndex:3];;
     }
     return monthName;
 }
@@ -576,17 +576,28 @@
     if(minutes) seconds -= minutes * 60;
     
     if(days) {
+        if(days!=2)
         timeLeft = [NSString stringWithFormat:@"%ld Days", (long)days*-1];
+        else
+            timeLeft = [NSString stringWithFormat:@"%ld Day", (long)days*-1];
     }
     else if(hours) {
+         if(hours!=2)
         timeLeft = [NSString stringWithFormat: @"%ld Hrs", (long)hours*-1];
+        else
+            timeLeft = [NSString stringWithFormat: @"%ld Hr", (long)hours*-1];
+
     }
-    else if(minutes) { timeLeft = [NSString stringWithFormat: @"%ld mins", (long)minutes*-1];
+    else if(minutes) {
+        if(minutes!=2)
+        timeLeft = [NSString stringWithFormat: @"%ld mins", (long)minutes*-1];
+        else
+            timeLeft = [NSString stringWithFormat: @"%ld min", (long)minutes*-1];
     }
     else if(seconds)
         timeLeft = [NSString stringWithFormat: @"%ld sec", (long)seconds*-1];
     if(timeLeft==nil)
-        timeLeft=@"0 sec";
+        timeLeft=@"now";
     return timeLeft;
 }
 // this method is used to get the server's url from settings bundle

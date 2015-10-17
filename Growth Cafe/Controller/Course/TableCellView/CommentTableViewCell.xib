@@ -72,7 +72,7 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Related Videos:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0B6-Jb-N7o">
-                        <rect key="frame" x="88" y="195" width="164" height="20"/>
+                        <rect key="frame" x="88" y="203" width="164" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="164" id="2oX-jJ-EKQ"/>
                         </constraints>
@@ -84,9 +84,9 @@
                         </variation>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rc9-NV-lwD" userLabel="btnLike">
-                        <rect key="frame" x="88" y="132" width="60" height="16"/>
+                        <rect key="frame" x="88" y="132" width="68" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="Izx-66-znR"/>
+                            <constraint firstAttribute="width" constant="70" id="Izx-66-znR"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                         <inset key="titleEdgeInsets" minX="8" minY="5" maxX="0.0" maxY="0.0"/>
@@ -123,7 +123,7 @@
                     <constraint firstItem="tBM-bH-MgC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="LXH-rL-WMY">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
-                    <constraint firstItem="0B6-Jb-N7o" firstAttribute="top" secondItem="tBM-bH-MgC" secondAttribute="bottom" id="NW1-Gp-9J0"/>
+                    <constraint firstItem="0B6-Jb-N7o" firstAttribute="top" secondItem="tBM-bH-MgC" secondAttribute="bottom" constant="8" id="NW1-Gp-9J0"/>
                     <constraint firstItem="DgS-EM-T3v" firstAttribute="leading" secondItem="rc9-NV-lwD" secondAttribute="trailing" constant="25" id="Qat-Hf-Vvg"/>
                     <constraint firstItem="0B6-Jb-N7o" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="SFq-EV-JGS">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>

@@ -22,7 +22,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDK-n0-MpC" userLabel="lblName">
-                        <rect key="frame" x="144" y="11" width="160" height="17"/>
+                        <rect key="frame" x="144" y="14" width="160" height="17"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" white="0.33333333329999998" alpha="0.98999999999999999" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -33,8 +33,8 @@
                     <constraint firstItem="VDK-n0-MpC" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-8" id="5ie-0w-iL7">
                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                     </constraint>
-                    <constraint firstItem="Gl6-zq-ldd" firstAttribute="centerY" secondItem="VDK-n0-MpC" secondAttribute="centerY" constant="2" id="PVs-11-22p"/>
-                    <constraint firstItem="VDK-n0-MpC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="bww-ff-eGe"/>
+                    <constraint firstItem="Gl6-zq-ldd" firstAttribute="centerY" secondItem="VDK-n0-MpC" secondAttribute="centerY" constant="-1" id="PVs-11-22p"/>
+                    <constraint firstItem="VDK-n0-MpC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="bww-ff-eGe"/>
                     <constraint firstItem="Gl6-zq-ldd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="gsZ-Cb-DqF">
                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                     </constraint>

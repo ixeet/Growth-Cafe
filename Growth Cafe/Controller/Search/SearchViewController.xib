@@ -37,7 +37,7 @@
                     </variation>
                 </imageView>
                 <tableView clipsSubviews="YES" tag="12" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="36" sectionFooterHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="nro-Lo-eon" userLabel="tableView">
-                    <rect key="frame" x="0.0" y="70" width="600" height="549"/>
+                    <rect key="frame" x="0.0" y="70" width="600" height="480"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -98,14 +98,14 @@
                     </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Src-zW-2aZ" userLabel="btnProfileClick">
-                    <rect key="frame" x="548" y="26" width="47" height="30"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                    <rect key="frame" x="526" y="26" width="69" height="38"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                     <state key="normal" title="Cancel">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                         <rect key="frame" x="341" y="19" width="49" height="44"/>
                     </variation>
                     <connections>
@@ -113,7 +113,7 @@
                     </connections>
                 </button>
                 <searchBar contentMode="redraw" placeholder="Search" backgroundImage="img_search-boxn.png" translatesAutoresizingMaskIntoConstraints="NO" id="WHn-RL-UbD">
-                    <rect key="frame" x="35" y="19" width="502" height="44"/>
+                    <rect key="frame" x="17" y="19" width="498" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="rHo-6g-swN"/>
                     </constraints>
@@ -135,7 +135,7 @@
                 <constraint firstItem="KKa-vJ-DJV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Bad-bk-Zak"/>
                 <constraint firstAttribute="trailing" secondItem="nro-Lo-eon" secondAttribute="trailing" id="CUi-5a-IcD"/>
                 <constraint firstItem="nro-Lo-eon" firstAttribute="top" secondItem="7du-4F-Rs5" secondAttribute="bottom" id="Cqe-49-S2Y"/>
-                <constraint firstItem="WHn-RL-UbD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="FEc-qd-MfD"/>
+                <constraint firstItem="WHn-RL-UbD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="17" id="FEc-qd-MfD"/>
                 <constraint firstAttribute="trailing" secondItem="7du-4F-Rs5" secondAttribute="trailing" constant="-1" id="KND-cz-vah"/>
                 <constraint firstAttribute="trailing" secondItem="Src-zW-2aZ" secondAttribute="trailing" constant="5" id="LhB-8k-Xqr"/>
                 <constraint firstAttribute="bottom" secondItem="KKa-vJ-DJV" secondAttribute="bottom" id="W8w-Xe-MWU"/>
@@ -144,7 +144,7 @@
                 <constraint firstItem="nro-Lo-eon" firstAttribute="trailing" secondItem="Hrq-fC-tr6" secondAttribute="trailing" id="cAi-ei-Fp2"/>
                 <constraint firstItem="WHn-RL-UbD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="cIX-Nm-eEl"/>
                 <constraint firstItem="nro-Lo-eon" firstAttribute="leading" secondItem="7du-4F-Rs5" secondAttribute="leading" id="fNo-gg-hlt"/>
-                <constraint firstAttribute="bottom" secondItem="nro-Lo-eon" secondAttribute="bottom" constant="-19" id="j4E-CS-EZg"/>
+                <constraint firstAttribute="bottom" secondItem="nro-Lo-eon" secondAttribute="bottom" constant="50" id="j4E-CS-EZg"/>
                 <constraint firstItem="7du-4F-Rs5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jGR-lM-B2T"/>
                 <constraint firstAttribute="trailing" secondItem="KKa-vJ-DJV" secondAttribute="trailing" id="kcM-ni-dq3"/>
                 <constraint firstItem="7du-4F-Rs5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="m6N-vA-YMy"/>

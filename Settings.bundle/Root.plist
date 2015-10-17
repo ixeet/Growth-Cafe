@@ -18,7 +18,7 @@
 			<key>KeyboardType</key>
 			<string>Alphabet</string>
 			<key>Title</key>
-			<string>Growth Cafe Version                0.0.4</string>
+			<string>Growth Cafe Version                0.0.5</string>
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 		</dict>
@@ -34,7 +34,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<string>191.239.57.54:8081/SLMS</string>
+			<string>191.239.57.54:8082/SLMS</string>
 			<key>Key</key>
 			<string>url_preference</string>
 			<key>Title</key>
@@ -43,6 +43,7 @@
 			<array>
 				<string>Prod_GrowthCafe</string>
 				<string>Test_GrowthCafe</string>
+				<string>QA_GrowthCafe</string>
 			</array>
 			<key>Type</key>
 			<string>PSMultiValueSpecifier</string>
@@ -50,6 +51,7 @@
 			<array>
 				<string>191.239.57.54:8083/SLMS</string>
 				<string>191.239.57.54:8081/SLMS</string>
+				<string>191.239.57.54:8082/SLMS</string>
 			</array>
 		</dict>
 	</array>

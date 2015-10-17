@@ -574,6 +574,7 @@ AFNetworkReachabilityStatus previousStatus;
 
 #pragma mark - tab bar Action
 - (IBAction)btnBackClicked:(id)sender {
+    [AppSingleton sharedInstance].comeFromChild=YES;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -738,9 +739,14 @@ AFNetworkReachabilityStatus previousStatus;
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
     [[appDelegate _engine] getModuleDetail:userid AndTextSearch:txtSearch AndSelectModule:self.selectedModule AndSelectCourse:self.selectedCourse success:^(NSDictionary *moduleDetails) {
-        
+      
         contentList=[moduleDetails objectForKey:@"resourceList"];
         assignmentList=[moduleDetails objectForKey:@"assignmentList"];
+          if([contentList count]==0)
+          {
+              [AppGlobal showAlertWithMessage:NO_RESOURCE_MSG title:@""];
+              [self.navigationController popViewControllerAnimated:YES];
+          }
         for (Resourse *resource in contentList) {
             if([resource.resourceId isEqualToString:selectedResource.resourceId])
             {
@@ -749,8 +755,7 @@ AFNetworkReachabilityStatus previousStatus;
             }
         }
         
-        //Hide Indicator
-        [appDelegate hideSpinner];
+       
         if (isTableSelect) {
             [tblViewContent reloadData];
         }else{
@@ -773,8 +778,11 @@ AFNetworkReachabilityStatus previousStatus;
             
             // Load the initial set of pages that are on screen
             [self loadVisiblePages];
+          
             
         }
+        //Hide Indicator
+        [appDelegate hideSpinner];
     }
                                    failure:^(NSError *error) {
                                        //Hide Indicator
@@ -812,8 +820,7 @@ AFNetworkReachabilityStatus previousStatus;
              }
          }
          
-         //Hide Indicator
-         [appDelegate hideSpinner];
+        
          if (isTableSelect) {
              [tblViewContent reloadData];
          }else{
@@ -835,7 +842,8 @@ AFNetworkReachabilityStatus previousStatus;
         // Load the initial set of pages that are on screen
         [self loadVisiblePages];
          }
-      
+         //Hide Indicator
+         [appDelegate hideSpinner];
         
         
     }
@@ -1661,13 +1669,15 @@ AFNetworkReachabilityStatus previousStatus;
             if(IsCommentExpended && (indexPath.row==[selectedResource.comments count]-1))
             {
                 [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
+//                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
+                 [cell.btnMore setTitle:@"View More"  forState:UIControlStateNormal];
                 cell.btnMore.hidden=YES;
                 cell.imgDevider.hidden=NO;
                 cell.lblRelatedVideo.hidden =NO;
             }else if(indexPath.row==2 && !IsCommentExpended){
                 [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
+//                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
+                  [cell.btnMore setTitle:@"View More" forState:UIControlStateNormal];
                 cell.btnMore.hidden=NO;
                 cell.imgDevider.hidden=NO;
                 cell.lblRelatedVideo.hidden =NO;
@@ -1795,13 +1805,16 @@ AFNetworkReachabilityStatus previousStatus;
                 if(IsCommentExpended && (indexPath.row==[selectedResource.comments count]-1))
                 {
                     [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
+//                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
+                  [cell.btnMore setTitle:@"View More" forState:UIControlStateNormal];
+
                     cell.btnMore.hidden=YES;
                     cell.imgDevider.hidden=NO;
                     cell.lblRelatedVideo.hidden =NO;
                 }else if(indexPath.row==2 && !IsCommentExpended){
                     [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
+//                    [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
+                        [cell.btnMore setTitle:@"View More" forState:UIControlStateNormal];
                     cell.btnMore.hidden=NO;
                     cell.imgDevider.hidden=NO;
                     cell.lblRelatedVideo.hidden =NO;
@@ -1904,7 +1917,8 @@ AFNetworkReachabilityStatus previousStatus;
             if([selectedResource.relatedResources count]>=3)
             {
                 [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
+//                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
+                     [cell.btnMore setTitle:@"View More" forState:UIControlStateNormal];
                  cell.imgHalfDevide.hidden=YES;
             }else{
                 cell.btnMore.hidden=YES;
@@ -1928,13 +1942,15 @@ AFNetworkReachabilityStatus previousStatus;
             if(IsRelatedConentExpended && (indexPath.row==[selectedResource.relatedResources count]-1))
             {
                 [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
+//                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
+                [cell.btnMore setTitle:@"View More" forState:UIControlStateNormal];
                 cell.btnMore.hidden=YES;
                 cell.imgDevider.hidden=NO;
                 cell.lblAssignment.hidden =NO;
             }else if(indexPath.row==2 && !IsRelatedConentExpended){
                 [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
+//                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
+                  [cell.btnMore setTitle:@"View More" forState:UIControlStateNormal];
                 cell.btnMore.hidden=NO;
                 cell.imgDevider.hidden=NO;
                 cell.lblAssignment.hidden =NO;
@@ -2006,22 +2022,40 @@ AFNetworkReachabilityStatus previousStatus;
             cell.imgContentURL.image= img;
             [ cell.imgContentURL setBackgroundColor:[UIColor clearColor]];
         }
+            NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.assignmentSubmittedDate];
+            if(submittedDate!=nil){
+                NSCalendar* calendar = [NSCalendar currentCalendar];
+                NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  submittedDate]; // Get necessary date components
+                
+                
+                NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+                monthName=[AppGlobal getMonthTimed:monthName];
+                
+                cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",monthName,(long)components.day ];
+            }
+
+            
+        }else{
+        
+            NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.assignmentDueDate];
+            if(submittedDate!=nil){
+                NSCalendar* calendar = [NSCalendar currentCalendar];
+                NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  submittedDate]; // Get necessary date components
+                
+                
+                NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+                monthName=[AppGlobal getMonthTimed:monthName];
+                
+                cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",monthName,(long)components.day ];
+            }
+
+        
         }
         
         
-        NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.assignmentSubmittedDate];
-       if(submittedDate!=nil){
-        NSCalendar* calendar = [NSCalendar currentCalendar];
-        NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  submittedDate]; // Get necessary date components
-        
-        
-        NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-            monthName=[AppGlobal getMonthTimed:monthName];
-    
-           cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",monthName,(long)components.day ];
-       }
-        
+            
         cell.btnPlay.tag= indexPath.row;
         [cell.btnPlay  addTarget:self action:@selector(btnPlayAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -2041,7 +2075,8 @@ AFNetworkReachabilityStatus previousStatus;
             if([assignmentList count]>3)
             {
                 [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%u More",[assignmentList count ]-3]  forState:UIControlStateNormal];
+//                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%u More",[assignmentList count ]-3]  forState:UIControlStateNormal];
+                  [cell.btnMore setTitle:@"View More" forState:UIControlStateNormal];
             }else{
                 cell.btnMore.hidden=YES;
             }
@@ -2174,9 +2209,23 @@ AFNetworkReachabilityStatus previousStatus;
         {
             if(IsCommentExpended && (indexPath.row==[selectedResource.comments count]-1))
             {
-                 height=55.0f;
+                
+                if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
+                    
+                    height=50.0f;
+                }else{
+                    height=60.0f;
+                }
+                
+                
             }else if(indexPath.row==2 && !IsCommentExpended){
-             height=55.0f;
+           
+                if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
+                    
+                    height=40.0f;
+                }else{
+                    height=60.0f;
+                }
             }
             
         }
@@ -2237,7 +2286,7 @@ AFNetworkReachabilityStatus previousStatus;
                                     if(labelSize.height>17){
                                         return  height=height+labelSize.height-17;
                                     }
-                                    else if([realtedResource.resourceTitle length]>34 &&  (screenHeight > 480 && screenHeight < 667 ))
+                                    else if([realtedResource.resourceTitle length]>34 &&  (screenHeight > 480 && screenHeight <= 667 ))
                                     {
                                         
                                         return  height=height+labelSize.height;

@@ -21,4 +21,8 @@
 @property(nonatomic,strong) Update *updatedUpdate;
 // device token
 @property(nonatomic,strong) NSString *deviceToken;
+
+// ComeFromChild
+@property(nonatomic,assign) BOOL comeFromChild;
+
 @end

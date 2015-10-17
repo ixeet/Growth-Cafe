@@ -63,6 +63,7 @@
 //    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"sample1" ofType:@"html" inDirectory:@"htmlfile"];
 //    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
 //    [self.webView loadHTMLString:htmlString baseURL:nil];
+    arrayUpdates=[[NSMutableArray alloc]init];
     NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"sample1" ofType:@"html" inDirectory:@"htmlfile"]];
 
     [webViewLoader loadRequest:[NSURLRequest requestWithURL:url]];
@@ -936,6 +937,29 @@
         
         [ cell.txtView addGestureRecognizer:tap];
         //   cell.txtView.tag=indexPath.row;
+        //set time here
+        // cal calculate the time
+        NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:update.updatetime];
+        
+        NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
+        //   cell.lblCmtDate.text=comment.commentDate;
+        scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
+                                                           withString:@""];
+        // Set label text to attributed string
+        NSString *str = [NSString stringWithFormat:@"\n%@ ago" ,scincetime];
+        //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+        
+        UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:12];
+        
+        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:str ];
+        
+        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[str length] )];
+        [attributedString appendAttributedString:attributedStringtemp];
+        
+        
+        
+        //cell.lblUpdateTime.text=str;
+        
         
         [cell.txtView setAttributedText:attributedString ];
         [cell.txtView setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
@@ -989,6 +1013,7 @@
                 
             }
         }
+       
         if(update.user !=nil)
         {
             [cell.btnUpdatedBy addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -1492,7 +1517,7 @@
         //        {
         //            cellMainHeight=height+97;
         //        }
-        height=height+160;
+        height=height+180;
         
         // [cellMainHeight insertObject:[NSString stringWithFormat:@"%f",height] atIndex:indexPath.section];
         NSLog(@"%@",[cellMainHeight objectAtIndex:indexPath.section]);

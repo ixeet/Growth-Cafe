@@ -69,7 +69,8 @@
                         if(img!=nil)
                         {
                             [imgUser setImage:img];
-                            
+                            imgUser.layer.cornerRadius = imgUser.frame.size.width/2;
+                            imgUser.clipsToBounds = YES;
                             [imgUser setBackgroundColor:[UIColor clearColor]];
                         }
                     });
@@ -77,7 +78,9 @@
             }else{
                 UIImage *img=[UIImage imageWithData:user.userImageData];
                 [imgUser setImage:img];
-                
+              
+                imgUser.layer.cornerRadius = imgUser.frame.size.width/2;
+                imgUser.clipsToBounds = YES;
                 [imgUser setBackgroundColor:[UIColor clearColor]];
             }
         }

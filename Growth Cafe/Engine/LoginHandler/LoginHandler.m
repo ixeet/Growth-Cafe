@@ -329,6 +329,7 @@
             userDetail.schoolId=[responseDic objectForKey:@"schoolId"];
             userDetail.schoolName=[responseDic objectForKey:@"schoolName"];
             userDetail.address=[responseDic objectForKey:@"address"];
+            userDetail.userImage=[responseDic objectForKey:@"profileImage"];
             userDetail.adminEmailId=[responseDic objectForKey:@"adminEmail"];
             userDetail.userFBID=[responseDic objectForKey:@"userFbId"];
             userDetail.userRole=[[responseDic objectForKey:@"userType"]integerValue];

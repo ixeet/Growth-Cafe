@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imgAssest;
 @property (strong, nonatomic) IBOutlet ALAsset *selectedAssest;
 @property (strong, nonatomic) IBOutlet UIView *subView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scollView;
 
 
 @end

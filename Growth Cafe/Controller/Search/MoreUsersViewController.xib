@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="lblStatus" destination="So1-Vq-GHG" id="9hD-91-hGo"/>
                 <outlet property="tblViewContent" destination="Xe8-nP-8Ny" id="I4e-Ty-y6e"/>
+                <outlet property="txtSearchBar" destination="btt-Q9-UoG" id="JBF-gx-brW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewNetwork" destination="wxJ-hq-yxf" id="Ygu-sH-vnl"/>
             </connections>
@@ -59,6 +60,9 @@
                     <state key="normal" image="icn_back-header.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="btnBackclick:" destination="-1" eventType="touchUpInside" id="FD8-BF-BHM"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abH-1M-aDG" userLabel="btnLogout">
                     <rect key="frame" x="550" y="23" width="35" height="35"/>
@@ -67,10 +71,16 @@
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="btnProfileClick:" destination="-1" eventType="touchUpInside" id="yx9-eF-pWy"/>
+                    </connections>
                 </button>
                 <searchBar contentMode="redraw" misplaced="YES" placeholder="Search" backgroundImage="img_search-boxn.png" translatesAutoresizingMaskIntoConstraints="NO" id="btt-Q9-UoG">
                     <rect key="frame" x="35" y="19" width="506" height="44"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="z3J-CI-3vs"/>
+                    </connections>
                 </searchBar>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wxJ-hq-yxf" userLabel="viewNetwork">
                     <rect key="frame" x="-1" y="70" width="600" height="44"/>

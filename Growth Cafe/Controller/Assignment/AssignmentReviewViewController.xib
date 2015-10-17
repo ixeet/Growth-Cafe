@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AssignmentReviewViewController">
@@ -29,25 +29,28 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MO3-Xt-csb" userLabel="btnSubmit">
-                    <rect key="frame" x="528" y="19" width="58" height="44"/>
+                    <rect key="frame" x="504" y="24" width="81" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="9Da-6d-AUO"/>
-                        <constraint firstAttribute="width" constant="58" id="YDw-NE-g8N"/>
+                        <constraint firstAttribute="width" constant="81" id="YDw-NE-g8N"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                     <state key="normal" title="Submit">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                    </variation>
                     <connections>
                         <action selector="btnSubmitClick:" destination="-1" eventType="touchUpInside" id="nPh-6f-A5S"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25D-Zp-V5n" userLabel="btnBack">
-                    <rect key="frame" x="8" y="19" width="26" height="44"/>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25D-Zp-V5n" userLabel="btnBack">
+                    <rect key="frame" x="0.0" y="24" width="34" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="26" id="ggj-A7-myr"/>
-                        <constraint firstAttribute="height" constant="44" id="uj4-2e-mBR"/>
+                        <constraint firstAttribute="width" constant="34" id="ggj-A7-myr"/>
+                        <constraint firstAttribute="height" constant="44" id="ghx-Bb-aMY"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <state key="normal" image="icn_back-header.png">
@@ -59,7 +62,7 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ehn-wi-oZy">
-                    <rect key="frame" x="-4" y="70" width="604" height="530"/>
+                    <rect key="frame" x="0.0" y="70" width="600" height="480"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -176,40 +179,42 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review Assignment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Abg-MF-D9N" userLabel="lblTitle">
-                    <rect key="frame" x="76" y="19" width="444" height="44"/>
+                    <rect key="frame" x="195" y="24" width="207" height="44"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="CTY-Zn-gCt"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                    </variation>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Abg-MF-D9N" firstAttribute="leading" secondItem="25D-Zp-V5n" secondAttribute="trailing" constant="42" id="1KI-Sf-CeB"/>
                 <constraint firstAttribute="centerX" secondItem="Abg-MF-D9N" secondAttribute="centerX" constant="2" id="1z3-yp-lpy"/>
                 <constraint firstItem="MEX-vk-96b" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="55d-gV-qVM"/>
                 <constraint firstAttribute="trailing" secondItem="MEX-vk-96b" secondAttribute="trailing" id="84p-Ic-2MP"/>
-                <constraint firstItem="MO3-Xt-csb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="AVn-mK-RXU"/>
+                <constraint firstItem="MO3-Xt-csb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="24" id="AVn-mK-RXU"/>
                 <constraint firstItem="IXy-8s-KI3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-1" id="AXn-gF-8Dj"/>
                 <constraint firstItem="hSo-Vb-zLP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="1300" id="BV2-N8-yuB"/>
                 <constraint firstItem="MEX-vk-96b" firstAttribute="trailing" secondItem="IXy-8s-KI3" secondAttribute="trailing" id="CfW-9N-U7D"/>
                 <constraint firstItem="IXy-8s-KI3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DxU-Qa-9d3"/>
-                <constraint firstItem="25D-Zp-V5n" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="Eao-hu-bhs"/>
+                <constraint firstItem="25D-Zp-V5n" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="24" id="Eao-hu-bhs"/>
                 <constraint firstItem="Ehn-wi-oZy" firstAttribute="top" secondItem="IXy-8s-KI3" secondAttribute="bottom" id="Ihz-gy-HXo"/>
-                <constraint firstAttribute="bottom" secondItem="Ehn-wi-oZy" secondAttribute="bottom" id="Lle-7A-ihh"/>
-                <constraint firstItem="25D-Zp-V5n" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="O4E-Ph-grY"/>
+                <constraint firstAttribute="bottom" secondItem="Ehn-wi-oZy" secondAttribute="bottom" constant="50" id="Lle-7A-ihh"/>
+                <constraint firstItem="25D-Zp-V5n" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="O4E-Ph-grY"/>
                 <constraint firstItem="hSo-Vb-zLP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Vfv-oA-x0e"/>
                 <constraint firstAttribute="trailing" secondItem="hSo-Vb-zLP" secondAttribute="trailing" id="aiO-j8-c19"/>
                 <constraint firstAttribute="trailing" secondItem="IXy-8s-KI3" secondAttribute="trailing" id="ckB-MN-szp"/>
                 <constraint firstAttribute="bottom" secondItem="MEX-vk-96b" secondAttribute="bottom" constant="490" id="e8M-vB-DL1"/>
-                <constraint firstItem="Abg-MF-D9N" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="f6B-0t-z63"/>
+                <constraint firstItem="Abg-MF-D9N" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="24" id="f6B-0t-z63"/>
                 <constraint firstItem="MEX-vk-96b" firstAttribute="top" secondItem="IXy-8s-KI3" secondAttribute="bottom" id="fZl-Gy-qJr"/>
                 <constraint firstAttribute="trailing" secondItem="Ehn-wi-oZy" secondAttribute="trailing" id="idL-s4-nmO"/>
-                <constraint firstAttribute="trailing" secondItem="MO3-Xt-csb" secondAttribute="trailing" constant="14" id="iz8-FP-Oeg"/>
-                <constraint firstItem="Ehn-wi-oZy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-4" id="j1w-6S-rWU"/>
+                <constraint firstAttribute="trailing" secondItem="MO3-Xt-csb" secondAttribute="trailing" constant="15" id="iz8-FP-Oeg"/>
+                <constraint firstItem="Ehn-wi-oZy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="j1w-6S-rWU"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">

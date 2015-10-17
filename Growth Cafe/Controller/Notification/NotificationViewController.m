@@ -64,7 +64,7 @@
     UILongPressGestureRecognizer *tap = [[UILongPressGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
-    
+    tap.minimumPressDuration = 0.2; //seconds
     [self.view addGestureRecognizer:tap];
     self.isLoading=true;
     // Custom initialization
@@ -680,9 +680,27 @@
         
         
      //   [cell.txtView setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
-        
+    // cal calculate the time
+    NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:update.updatetime];
+    
+    NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
+    //   cell.lblCmtDate.text=comment.commentDate;
+    scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
+                                                       withString:@""];
+    // Set label text to attributed string
+    NSString *str = [NSString stringWithFormat:@"\n%@ ago" ,scincetime];
+    //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+    
+    UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:12];
+    
+    NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:str ];
+    
+    [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[str length] )];
+    [attributedString appendAttributedString:attributedStringtemp];
+    
+    
         [cell.txtView setAttributedText:attributedString ];
-        
+    
         CGPoint origin = [cell.txtView contentOffset];
         [cell.txtView setContentOffset:CGPointMake(origin.x, +11.0)];
         cell.txtView.delegate=self;
@@ -724,16 +742,18 @@
                 [cell.btnUpdatedBy setBackgroundColor:[UIColor clearColor]];
             }
         }
-               // cal calculate the time
-        NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:update.updatetime];
-        
-        NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
-        //   cell.lblCmtDate.text=comment.commentDate;
-        scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                           withString:@""];
-        // Set label text to attributed string
-       // NSString *str = [NSString stringWithFormat:@"%@ ago" ,scincetime];
-        //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+//    // cal calculate the time
+//    NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:update.updatetime];
+//    
+//    NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
+//    //   cell.lblCmtDate.text=comment.commentDate;
+//    scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
+//                                                       withString:@""];
+//    // Set label text to attributed string
+//    NSString *str = [NSString stringWithFormat:@"%@ ago" ,scincetime];
+//    //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+//    
+//    cell.lblUpdateTime.text=str;
     if(update.viewStatus ==1 )
     {
        cell.view.backgroundColor=[UIColor clearColor];
@@ -749,13 +769,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identifier = @"NotificationTableViewCell";
-    NotificationTableViewCell *cell = (NotificationTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-    
-       cell.backgroundColor = [UIColor redColor];
-   
-
-    //    BOOL isChild =
+//    static NSString *identifier = @"NotificationTableViewCell";
+//    NotificationTableViewCell *cell = (NotificationTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+//    BOOL isChild =
     //    currentExpandedIndex > -1
     //    && indexPath.row > currentExpandedIndex
     //    && indexPath.row <= currentExpandedIndex + [[moduleArray objectAtIndex:currentExpandedIndex] count];
@@ -818,9 +834,11 @@
       
         if(objUpdate.viewStatus==0)
         {  objUpdate.viewStatus=1 ;  //   notification  viewed
-        [self setUpdateStaus:updates];
+        [self setUpdateStaus:objUpdate];
         }else{
+            [appDelegate hideSpinner];
             UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]init];
+            updates.viewStatus=objUpdate.viewStatus;
             updateDetailView.objUpdate=updates;
             [self.navigationController pushViewController:updateDetailView animated:YES];
         }
@@ -929,7 +947,7 @@
         //        }
     if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
     {
-        height=height+70;
+        height=height+80;
         if( screenHeight > 480 && screenHeight < 667 ){
          height=   height+15;
         }
@@ -1268,6 +1286,7 @@
     
     [[appDelegate _engine] setUpdatesStatus:update.updateId success:^(BOOL logoutValue) {
           update.viewStatus=1;
+        [tblViewContent reloadData];
         [appDelegate hideSpinner];
         UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]init];
         updateDetailView.objUpdate=update;

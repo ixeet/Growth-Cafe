@@ -165,7 +165,7 @@
             user.userImageData=[AppGlobal getImageAvailableAtLocal:user.userImage];
             UIImage *img=[UIImage imageWithData:user.userImageData];
             [imgProfile setImage:img];
-            imgProfile.layer.cornerRadius = imgProfile.frame.size.width/6;
+            imgProfile.layer.cornerRadius = imgProfile.frame.size.width/2;
             imgProfile.clipsToBounds = YES;
             NSLog(@"%@",@"yes");
         }else{
@@ -834,7 +834,7 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
     [[appDelegate _engine] SetFBloginWithUserID:username FBID:fbuserid success:^(bool status) {
-        self.btnFacebook.hidden=YES;
+      //  self.btnFacebook.hidden=YES;
         [self loginSucessFullWithFB:fbuserid];
         //Hide Indicator
         [appDelegate hideSpinner];

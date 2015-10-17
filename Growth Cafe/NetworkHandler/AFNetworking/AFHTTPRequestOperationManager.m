@@ -20,13 +20,10 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-
 #import "AFHTTPRequestOperationManager.h"
 #import "AFHTTPRequestOperation.h"
-
 #import <Availability.h>
 #import <Security/Security.h>
-
 #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
 #import <UIKit/UIKit.h>
 #endif

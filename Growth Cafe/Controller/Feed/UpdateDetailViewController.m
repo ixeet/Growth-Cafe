@@ -688,6 +688,23 @@
    
 
         //   cell.txtView.tag=indexPath.row;
+        // cal calculate the time
+        NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:objUpdate.updatetime];
+        
+        NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
+        //   cell.lblCmtDate.text=comment.commentDate;
+        scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
+                                                           withString:@""];
+        // Set label text to attributed string
+        NSString *str = [NSString stringWithFormat:@"\n%@ ago" ,scincetime];
+        //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+        
+        UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:12];
+        
+        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:str ];
+        
+        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[str length] )];
+        [attributedString appendAttributedString:attributedStringtemp];
         
         [cell.txtView setAttributedText:attributedString ];
         [cell.txtView setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
@@ -820,17 +837,17 @@
         [cell.btnShare addTarget:self action:@selector(btnShareOnUpdateClick:) forControlEvents:UIControlEventTouchUpInside];
         
         // cal calculate the time
-        NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:objUpdate.updatetime];
-        
-        NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
-        //   cell.lblCmtDate.text=comment.commentDate;
-        scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                           withString:@""];
-        // Set label text to attributed string
-        NSString *str = [NSString stringWithFormat:@"%@ ago" ,scincetime];
-        //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
-        
-        cell.lblUpdateTime.text=str;
+//        NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:objUpdate.updatetime];
+//        
+//        NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
+//        //   cell.lblCmtDate.text=comment.commentDate;
+//        scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
+//                                                           withString:@""];
+//        // Set label text to attributed string
+//        NSString *str = [NSString stringWithFormat:@"%@ ago" ,scincetime];
+//        //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+//        
+//        cell.lblUpdateTime.text=str;
         
         return cell;
     }

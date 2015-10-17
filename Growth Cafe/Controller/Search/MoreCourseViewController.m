@@ -266,6 +266,19 @@
     cell.lblCourseName.text=assignment.assignmentName;
     
     }
+    float xval=80.0;
+    float width=self.view.frame.size.width-160;
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
+        xval= 8.0;
+        width=self.view.frame.size.width-8;
+        
+    }
+    UIView * additionalSeparator = [[UIView alloc]
+                                    initWithFrame:CGRectMake(xval,cell.frame.size.height,width,1)];
+    additionalSeparator.backgroundColor = [UIColor lightGrayColor];
+    [cell addSubview:additionalSeparator];
+    
+  
     // cal calculate the time
     return cell;
 
@@ -275,6 +288,21 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView
+  willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath
+                                                             *)indexPath
+{
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+}
+
+
+
+-(UIView *)tableView:(UITableView *)tableView
+viewForFooterInSection:(NSInteger)section
+{
+    return [[UIView alloc] init];
+}
 
 #pragma mark - Table view delegate
 
@@ -314,7 +342,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 35.0;
+    return 50.0;
     
     
     

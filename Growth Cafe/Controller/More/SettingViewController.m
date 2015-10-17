@@ -270,7 +270,7 @@
 }
 -(UIView*)tableView:(UITableView*)tableView viewForFooterInSection:(NSInteger)section
 {
-    UIView *footerview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 10)];
+    UIView *footerview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 40)];
     footerview.backgroundColor=[UIColor whiteColor];
     //    footerview.layer.cornerRadius = 5.0f;
     //    [footerview setClipsToBounds:YES];

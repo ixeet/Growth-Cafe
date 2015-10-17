@@ -226,12 +226,12 @@
          viewFilter.hidden=NO;
         CGRect rect= tblViewContent.frame;
 
-        if( rect.origin.y==70){
-            rect.size.height= rect.size.height-(120-70);
+    if( rect.origin.y==70){
+            rect.size.height= rect.size.height-(170-70);
             rect.origin.y=120;
             tblViewContent.frame=rect;
             
-        }
+       }
     }
     
 }
@@ -258,8 +258,8 @@
             CGRect rect= tblViewContent.frame;
             
             if( rect.origin.y==70){
-                rect.size.height= rect.size.height-(120-70);
-                rect.origin.y=120;
+                rect.size.height= rect.size.height-(170-70);
+                rect.origin.y=170;
                 tblViewContent.frame=rect;
                 
             }
@@ -298,7 +298,11 @@
     
     //set Profile
     [objCustom setUserProfile];
-    
+    if ( [AppSingleton sharedInstance].comeFromChild!=YES && !comeFromUpdate ) {
+        [arrayAssignment removeAllObjects];
+       
+    }
+     [AppSingleton sharedInstance].comeFromChild=NO;
    if([arrayAssignment count]==0)
    {
        [self  getAssignment:@""];
@@ -608,7 +612,7 @@
             
             NSDateFormatter *df = [[NSDateFormatter alloc] init];
             NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-            cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ldby %@",[monthName substringToIndex:3],(long)components.day, assignment.assignmentSubmittedBy];
+            cell.lblUploadedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld by %@",[monthName substringToIndex:3],(long)components.day, assignment.assignmentSubmittedBy];
         }
         
         if([AppSingleton sharedInstance].userDetail.userRole==2)
@@ -663,7 +667,7 @@
             [cell.lblAssignementDetail  setHidden:NO];
         }
         CGRect imgFrame=cell.imgResource.frame;
-        
+       // [cell.imgResource setImage:[UIImage imageNamed:@"splash.png"]];
         if (assignment.attachedResource!=nil) {
             
             if(assignment.attachedResource.resourceImageUrl!=nil){
@@ -734,7 +738,7 @@
     Assignment *assignment=arrayAssignment[indexPath.row];
     if(assignment.isExpend==NO)
     {
-        return 70.0f;//height change from 90 to 70 by raj  start
+        return 95.0f;//height change from 90 to 70 by raj  start
 
         
     }else{

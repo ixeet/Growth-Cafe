@@ -41,6 +41,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)viewWillAppear:(BOOL)animated{
+    [AppSingleton sharedInstance].comeFromChild=YES;
     [super viewWillAppear:animated];
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
@@ -89,7 +90,9 @@
         if([dicSelectedParam objectForKey:rating.ratingParam]==nil)
          {
              // show alert for select the rating for each param
-             [AppGlobal showAlertWithMessage:key_Select_Massage(rating.ratingParam) title:@""];
+             NSDictionary *temp= rating.ratingParam;
+            
+             [AppGlobal showAlertWithMessage:key_Select_Massage( [temp objectForKey:@"value"]) title:@""];
              return;
          }
     }
@@ -97,6 +100,8 @@
     
     [[appDelegate _engine] setAssignmentRating:dicSelectedParam AndParam:selectedAssignment.ratingParam AndAssignmentResourceTxnId:selectedAssignment.assignmentResourceTxnId success:^(BOOL logoutValue) {
      [appDelegate hideSpinner];
+        [AppSingleton sharedInstance].comeFromChild=NO;
+        [self.navigationController popViewControllerAnimated:YES];
     }
                                     failure:^(NSError *error) {
                                         //Hide Indicator
@@ -114,7 +119,8 @@
     [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];
 }
 - (IBAction)btnBackClick:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark - Table view data source
 
@@ -401,8 +407,16 @@
         float height=90.0f;
         if(assignment.attachedResource!=nil)
         {
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            {
+                height=height+163.0f;          }
             
-            height=height+163.0f;
+            
+            else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            {
+                height=height+220.0f;
+            }
+
         }
         float width=200;
         if( screenHeight <740 && screenHeight >667 )

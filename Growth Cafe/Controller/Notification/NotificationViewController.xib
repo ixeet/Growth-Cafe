@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotificationViewController">
@@ -74,7 +74,7 @@
                     </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnj-uA-2Yv" userLabel="btnLogout">
-                    <rect key="frame" x="550" y="24" width="35" height="35"/>
+                    <rect key="frame" x="550" y="23" width="35" height="35"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
                     <state key="normal" image="profile-menunn.png">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -125,17 +125,13 @@
                 <constraint firstItem="z40-B4-d9U" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="NCp-8U-ccw"/>
                 <constraint firstAttribute="bottom" secondItem="hTi-C5-qjD" secondAttribute="bottom" constant="47" id="bez-V4-uKf"/>
                 <constraint firstItem="b9s-2D-Bg0" firstAttribute="width" secondItem="z40-B4-d9U" secondAttribute="width" id="is0-Ot-bm2"/>
-                <constraint firstItem="hTi-C5-qjD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="o2O-W8-KD0">
-                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                </constraint>
-                <constraint firstItem="tnj-uA-2Yv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="24" id="qiG-E4-UfK"/>
+                <constraint firstItem="hTi-C5-qjD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="o2O-W8-KD0"/>
+                <constraint firstItem="tnj-uA-2Yv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="23" id="qiG-E4-UfK"/>
                 <constraint firstAttribute="trailing" secondItem="yg0-tN-hVe" secondAttribute="trailing" id="qzg-8K-Q1N"/>
                 <constraint firstAttribute="trailing" secondItem="tnj-uA-2Yv" secondAttribute="trailing" constant="15" id="tME-f4-5V8"/>
                 <constraint firstItem="b9s-2D-Bg0" firstAttribute="height" secondItem="z40-B4-d9U" secondAttribute="height" id="tud-G0-7V6"/>
                 <constraint firstItem="hTi-C5-qjD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="wcy-rl-fAv"/>
-                <constraint firstAttribute="trailing" secondItem="hTi-C5-qjD" secondAttribute="trailing" id="xNt-xB-aGJ">
-                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                </constraint>
+                <constraint firstAttribute="trailing" secondItem="hTi-C5-qjD" secondAttribute="trailing" id="xNt-xB-aGJ"/>
                 <constraint firstItem="b9s-2D-Bg0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="zN0-9D-4zh"/>
             </constraints>
             <point key="canvasLocation" x="412" y="44"/>

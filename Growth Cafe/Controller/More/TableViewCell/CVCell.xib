@@ -9,24 +9,24 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3" customClass="CVCell">
-            <rect key="frame" x="0.0" y="0.0" width="98" height="152"/>
+            <rect key="frame" x="0.0" y="0.0" width="98" height="137"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="98" height="152"/>
+                <rect key="frame" x="0.0" y="0.0" width="98" height="137"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4">
-                        <rect key="frame" x="7" y="108" width="91" height="21"/>
+                        <rect key="frame" x="4" y="100" width="90" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="72"/>
-                            <constraint firstAttribute="width" constant="91" id="81"/>
+                            <constraint firstAttribute="width" constant="90" id="81"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" red="0.50588235290000005" green="0.51764705879999995" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-profile.png" translatesAutoresizingMaskIntoConstraints="NO" id="17">
-                        <rect key="frame" x="8" y="8" width="90" height="90"/>
+                        <rect key="frame" x="4" y="8" width="90" height="90"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="90" id="39"/>
@@ -34,7 +34,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unfolllowed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64">
-                        <rect key="frame" x="7" y="124" width="91" height="21"/>
+                        <rect key="frame" x="4" y="116" width="90" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="73"/>
                         </constraints>
@@ -47,21 +47,21 @@
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="17" firstAttribute="leading" secondItem="3" secondAttribute="leadingMargin" id="60"/>
+                <constraint firstItem="17" firstAttribute="leading" secondItem="3" secondAttribute="leadingMargin" constant="-4" id="60"/>
                 <constraint firstItem="17" firstAttribute="trailing" secondItem="4" secondAttribute="trailing" id="63"/>
                 <constraint firstItem="64" firstAttribute="trailing" secondItem="4" secondAttribute="trailing" id="94"/>
                 <constraint firstItem="64" firstAttribute="leading" secondItem="4" secondAttribute="leading" id="95"/>
-                <constraint firstAttribute="bottom" secondItem="64" secondAttribute="bottom" constant="7" id="128"/>
+                <constraint firstAttribute="bottom" secondItem="64" secondAttribute="bottom" id="128"/>
                 <constraint firstItem="17" firstAttribute="top" secondItem="3" secondAttribute="topMargin" id="133"/>
-                <constraint firstAttribute="bottom" secondItem="4" secondAttribute="bottom" constant="23" id="148"/>
+                <constraint firstAttribute="bottom" secondItem="4" secondAttribute="bottom" constant="16" id="148"/>
             </constraints>
-            <size key="customSize" width="98" height="152"/>
+            <size key="customSize" width="98" height="137"/>
             <connections>
                 <outlet property="imgview" destination="17" id="30"/>
                 <outlet property="lblStatus" destination="64" id="96"/>
                 <outlet property="titleLabel" destination="4" id="16"/>
             </connections>
-            <point key="canvasLocation" x="88" y="188"/>
+            <point key="canvasLocation" x="88" y="180.5"/>
         </collectionViewCell>
     </objects>
     <resources>

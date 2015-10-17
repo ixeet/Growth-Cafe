@@ -23,17 +23,17 @@
                         <constraint firstAttribute="height" constant="70" id="m90-aw-bXj"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKk-Xg-iPe" userLabel="lblSelectVideo">
-                    <rect key="frame" x="155" y="28" width="290" height="35"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKk-Xg-iPe" userLabel="lblSelectVideo">
+                    <rect key="frame" x="235" y="19" width="131" height="44"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="35" id="haY-BU-Q0h"/>
+                        <constraint firstAttribute="height" constant="44" id="haY-BU-Q0h"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                     <variation key="heightClass=regular-widthClass=compact">
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
                     </variation>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="obn-72-c9g">
@@ -47,15 +47,15 @@
                         <outlet property="delegate" destination="-1" id="4Ie-07-60F"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cj-Pl-8wy" userLabel="btnCancle">
-                    <rect key="frame" x="490" y="28" width="95" height="35"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cj-Pl-8wy" userLabel="btnCancle">
+                    <rect key="frame" x="516" y="23" width="69" height="38"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                     <state key="normal" title="Cancel">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <variation key="heightClass=regular-widthClass=compact">
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                     </variation>
                     <connections>
                         <action selector="btnCancleClick:" destination="-1" eventType="touchUpInside" id="wRh-2g-aST"/>
@@ -68,9 +68,9 @@
                 <constraint firstAttribute="bottom" secondItem="obn-72-c9g" secondAttribute="bottom" constant="44" id="A3Q-aW-zzc"/>
                 <constraint firstAttribute="centerX" secondItem="yKk-Xg-iPe" secondAttribute="centerX" id="Bh0-VM-8D1"/>
                 <constraint firstItem="obn-72-c9g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ca0-x1-JTE"/>
-                <constraint firstItem="yKk-Xg-iPe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="28" id="GPZ-sJ-b26"/>
-                <constraint firstItem="yKk-Xg-iPe" firstAttribute="centerY" secondItem="SKV-1R-khY" secondAttribute="centerY" constant="10.5" id="Mqd-7v-6Er"/>
-                <constraint firstItem="0cj-Pl-8wy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="28" id="RYL-QS-SIT"/>
+                <constraint firstItem="yKk-Xg-iPe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="GPZ-sJ-b26"/>
+                <constraint firstItem="yKk-Xg-iPe" firstAttribute="centerY" secondItem="SKV-1R-khY" secondAttribute="centerY" constant="6" id="Mqd-7v-6Er"/>
+                <constraint firstItem="0cj-Pl-8wy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="23" id="RYL-QS-SIT"/>
                 <constraint firstAttribute="trailing" secondItem="0cj-Pl-8wy" secondAttribute="trailing" constant="15" id="WaL-ha-XnT"/>
                 <constraint firstItem="SKV-1R-khY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Y65-k2-ij0"/>
                 <constraint firstAttribute="trailing" secondItem="obn-72-c9g" secondAttribute="trailing" id="ZZE-Nk-aYZ"/>

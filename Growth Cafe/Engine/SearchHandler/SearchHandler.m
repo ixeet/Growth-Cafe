@@ -53,14 +53,20 @@
             //call Block function
                 
                 NSMutableArray *userList= [[NSMutableArray alloc]init];
-                for (NSDictionary *dicUser  in [dicSearch objectForKey:@"usersList"]) {
+                for (NSDictionary *userdic  in [dicSearch objectForKey:@"usersList"]) {
                 
-                    UserDetails  *userDetail= [[UserDetails alloc]init];
-                    userDetail.userId= [dicUser objectForKey:@"userId"];
-                    userDetail.userImage=[dicUser objectForKey:@"profileImage"];
-                    userDetail.username=[dicUser objectForKey:@"userName"];
-                    userDetail.isFollowUpAllowed=[dicUser objectForKey:@"isFollowUpAllowed"];
-                    [userList addObject:userDetail];
+                    UserDetails  *user= [[UserDetails alloc]init];
+                    user.userId=[userdic objectForKey:@"userId"];
+                    user.userFBID=[userdic objectForKey:@"userFbId"];
+                    user.username  =[userdic objectForKey:@"userName"];
+                    user.userFirstName=[userdic objectForKey:@"firstName"];
+                    user.userLastName=[userdic objectForKey:@"lastName"];
+                    user.userEmail=[userdic objectForKey:@"emailId"];
+                    user.title=[userdic objectForKey:@"title"];
+                    user.userImage=[userdic objectForKey:@"profileImage"];
+                    
+                    
+                    [userList addObject:user];
                     
                 }
                  [dicSearchResult setObject:userList forKey:@"user"];

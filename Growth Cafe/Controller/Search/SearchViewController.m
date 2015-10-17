@@ -145,10 +145,11 @@
 
 -(void)setSearchUI
 {
+    screenHeight = [UIScreen mainScreen].bounds.size.height;
+    screenWidth = [UIScreen mainScreen].bounds.size.width;
     if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
         
-        screenHeight = [UIScreen mainScreen].bounds.size.height;
-        screenWidth = [UIScreen mainScreen].bounds.size.width;
+     
         if( screenHeight < screenWidth ){
             screenHeight = screenWidth;
         }
@@ -177,7 +178,7 @@
         [txfSearchField setTextColor:[UIColor whiteColor]];
     }else{
         
-        [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn.png"]];
+        [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxnS.png"]];
         
         //@2x~ipad
         
@@ -445,6 +446,23 @@
 //            [ cell.txtView addGestureRecognizer:tap];
 //            //   cell.txtView.tag=indexPath.row;
             
+            // cal calculate the time
+            NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:update.updatetime];
+            
+            NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
+            //   cell.lblCmtDate.text=comment.commentDate;
+            scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
+                                                               withString:@""];
+            // Set label text to attributed string
+            NSString *str = [NSString stringWithFormat:@"\n%@ ago" ,scincetime];
+            //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+            
+            UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:12];
+            
+            NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:str ];
+            
+            [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[str length] )];
+            [attributedString appendAttributedString:attributedStringtemp];
             
             [cell.txtView setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
             
@@ -485,14 +503,7 @@
                     [cell.btnUpdatedBy setBackgroundColor:[UIColor clearColor]];
                 }
             }
-            // cal calculate the time
-            NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:update.updatetime];
-            
-            NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
-            //   cell.lblCmtDate.text=comment.commentDate;
-            scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                               withString:@""];
-            // Set label text to attributed string
+                      // Set label text to attributed string
             // NSString *str = [NSString stringWithFormat:@"%@ ago" ,scincetime];
             //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             if(update.viewStatus ==1 )
@@ -608,7 +619,7 @@
          
             // cal calculate the time
              cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                       return cell;
+            return cell;
         }
             break;
         default:
@@ -744,6 +755,11 @@
 {
     switch (indexPath.section) {
         case 0:{
+            if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+            {
+                return 90;
+               
+            }
             return 70;
         }
             break;

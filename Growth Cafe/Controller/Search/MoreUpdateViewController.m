@@ -372,8 +372,24 @@
             //[ cell.txtView addGestureRecognizer:tap];
             //   cell.txtView.tag=indexPath.row;
             
-            
-            [cell.txtView setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
+    // cal calculate the time
+    NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:update.updatetime];
+    
+    NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
+    //   cell.lblCmtDate.text=comment.commentDate;
+    scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
+                                                       withString:@""];
+    // Set label text to attributed string
+    NSString *str = [NSString stringWithFormat:@"\n%@ ago" ,scincetime];
+    //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
+    
+    UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:12];
+    
+    NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:str ];
+    
+    [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[str length] )];
+    [attributedString appendAttributedString:attributedStringtemp];
+    [cell.txtView setTextColor: [UIColor colorWithRed:20.0/255.0 green:24.0/255.0  blue:35.0/255.0  alpha:1]];
             
             [cell.txtView setAttributedText:attributedString ];
             
@@ -419,12 +435,12 @@
                 }
             }
             // cal calculate the time
-            NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:update.updatetime];
-            
-            NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
-            //   cell.lblCmtDate.text=comment.commentDate;
-            scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                               withString:@""];
+//            NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:update.updatetime];
+//            
+//            NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
+//            //   cell.lblCmtDate.text=comment.commentDate;
+//            scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
+//                                                               withString:@""];
             // Set label text to attributed string
             // NSString *str = [NSString stringWithFormat:@"%@ ago" ,scincetime];
             //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
@@ -491,6 +507,11 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+    {
+        return 90;
+        
+    }
     return 70.0;
     
     

@@ -490,8 +490,10 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if([txtAdminEmail isEqual:textField]){
+        if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
+
         [self setPositionOfLoginBaseViewWhenStartEditing:-150];
-        
+        }
     }
     
     activeTextField = textField;

@@ -377,7 +377,7 @@
             assignment.assignmentName=[dicAssign objectForKey:@"assignmentName"];
             assignment.assignmentStatus=[dicAssign objectForKey:@"assignmentStatus"];
             assignment.assignmentSubmittedDate=[dicAssign objectForKey:@"assignmentSubmittedDate"];
-            
+            assignment.assignmentDueDate=[dicAssign objectForKey:@"assignmentDueDate"];
             assignment.assignmentSubmittedBy=[dicAssign objectForKey:@"assignmentSubmittedBy"];
             for (NSDictionary *dicRelatedResource in [dicAssign objectForKey:@"attachedResources"]) {
                 
@@ -552,7 +552,7 @@
                 assignment.assignmentSubmittedDate=[dicAssign objectForKey:@"assignmentSubmittedDate"];
                 
                 assignment.assignmentSubmittedBy=[dicAssign objectForKey:@"assignmentSubmittedBy"];
-                
+                assignment.assignmentDueDate=[dicAssign objectForKey:@"assignmentDueDate"];
                 for (NSDictionary *dicRelatedResource in [dicAssign objectForKey:@"attachedResources"]) {
                    
                     

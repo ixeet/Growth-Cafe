@@ -31,7 +31,7 @@
 @end
 
 @implementation CourseViewController
-@synthesize btnAssignment,btnCourses,btnMore,btnBack,btnNotification,btnUpdates,txtSearchBar,objCustom,coursesList,comeFromUpdate,btnFiler,viewFilter  ;
+@synthesize btnBack,txtSearchBar,objCustom,coursesList,comeFromUpdate,btnFiler,viewFilter  ;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -109,8 +109,7 @@
     [filterDic setValue:@"2"forKey:@"status"];
      previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
     [self setSearchUI];
-    btnCourses.selected=YES;
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+   //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
 //                                   initWithTarget:self
 //                                   action:@selector(dismissKeyboard)];
 //    
@@ -211,7 +210,11 @@
         //       }
     }];
  [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    
+    if ( [AppSingleton sharedInstance].comeFromChild!=YES && !comeFromUpdate ) {
+        [coursesList removeAllObjects];
+       
+    }
+     [AppSingleton sharedInstance].comeFromChild=NO;
     if(!comeFromUpdate){
         if([coursesList count]==0)
         [self  getCourses:@""];

@@ -12,10 +12,11 @@
 //#define  APP_URL  @"http://191.239.57.54:8080/SLMS"
 //#define  APP_URL  @"http://191.239.57.54:8080/SLMS_test"
 //#define  APP_URL  @"http://192.168.0.21:8080/"
+//#define  APP_URL  @"http://192.168.0.21:8082/"
 #define APP_URL [AppGlobal getServerURL]
 
 
-#define kProdURL [NSString stringWithFormat:@"191.239.57.54:8081/SLMS"]
+#define kProdURL [NSString stringWithFormat:@"191.239.57.54:8082/SLMS"]
 #define kGROWTHURL(url) [NSString stringWithFormat:@"http://%@" ,url]
 
 #define MASTER_DATA_URL [NSString stringWithFormat:@"%@/rest/common/getMasterData", APP_URL]
@@ -136,7 +137,7 @@
 #define FORGET_SUCCESS_MSG(useremail)[NSString stringWithFormat:@"Your password is sent to %@, please check SPAM folder if not received in inbox.",useremail]
 
 // Error Msg
-
+#define NO_RESOURCE_MSG @"There is no resources available for this module."
 #define NO_INTERNET_MSG @"No Internet Connection."
 #define REESTABLISH_INTERNET_MSG @"Reestablishing Lost Connection."
 #define ERROR_DEFAULT_MSG @"There seems to be a problem connecting with server. Please check your network connection."

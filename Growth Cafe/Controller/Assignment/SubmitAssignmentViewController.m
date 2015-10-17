@@ -16,7 +16,7 @@
     CustomKeyboard *customKeyboard;
     UITextView *activeTextField;
     AssestViewController *modalView2;
-  
+    CGFloat yAxis;
 
 }
 @end
@@ -25,7 +25,18 @@
 @synthesize assignment;
 @synthesize txtViewURL,txtViewVideoDesc,txtViewVideoTitle,selectedAssest,imgAssest;
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+    {
+        _scollView.scrollEnabled = YES;
+    }else{
+     _scollView.scrollEnabled = NO;
+    
+    }
+    
     // Do any additional setup after loading the view from its nib.
     //iOS7 Customization, swipe to pop gesture
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
@@ -43,6 +54,15 @@
     customKeyboard = [[CustomKeyboard alloc] init];
     customKeyboard.delegate = self;
     
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [AppSingleton sharedInstance].comeFromChild=YES;
+}
+- (void)viewDidLayoutSubviews {
+    
+    self.scollView.contentSize = CGSizeMake(self.view.frame.size.width, self.scollView.frame.size.height+250);
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,8 +107,8 @@
         [[appDelegate _engine] uploadAssignment:txtViewVideoTitle.text AndVideoDesc:txtViewVideoDesc.text AndVideoURL:txtViewURL.text AndVideoPath:selectedAssest andFileName:@"" AndAssignment:assignment.assignmentId success:^(BOOL logoutValue) {
         //Hide Indicator
       [appDelegate hideSpinner];
-
-        [self.navigationController popToRootViewControllerAnimated:YES];
+            [AppSingleton sharedInstance].comeFromChild=NO;
+        [self.navigationController popViewControllerAnimated:YES];
 
     }
                                     failure:^(NSError *error) {
@@ -153,6 +173,7 @@
      
 
 - (IBAction)btnBackClick:(id)sender {
+    
      [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -169,9 +190,10 @@
         
         if( screenHeight > 480 && screenHeight < 667 ){
             
+            yAxis=250;
             [self setPositionOfLoginBaseViewWhenStartEditing:-250];
         }else{
-            
+            yAxis=160;
             [self setPositionOfLoginBaseViewWhenStartEditing:-160];
         }
     }
@@ -290,17 +312,23 @@
 #pragma --
 #pragma mark -- Manage View Position
 
--(void)setPositionOfLoginBaseViewWhenStartEditing:(CGFloat)yAxis{
+-(void)setPositionOfLoginBaseViewWhenStartEditing:(CGFloat)yAxis1{
     
-    if (self.view.frame.origin.y != yAxis) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardHide:) name:UIKeyboardWillHideNotification object:nil];       [AppGlobal setViewPositionWithView:self.view axisX:self.view.frame.origin.x axisY:yAxis withAnimation:NO];
-    }
+//    if (self.scollView.frame.origin.y != yAxis) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardHide:) name:UIKeyboardWillHideNotification object:nil];       [AppGlobal setViewPositionWithView:self.scollView axisX:self.scollView.frame.origin.x axisY:yAxis withAnimation:NO];
+//    }
+    CGRect rc = [_scollView bounds];
+    
+    [_scollView setContentOffset:CGPointMake(rc.origin.x, rc.origin.y-yAxis1) animated:YES];
 }
 
 -(void)setPositionOfLoginBaseViewWhenEndEditing{
-    [AppGlobal setViewPositionWithView:self.view  axisX:self.view.frame.origin.x  axisY:0.0 withAnimation:YES];
+    CGRect rc = [_scollView bounds];
+    
+    [_scollView setContentOffset:CGPointMake(rc.origin.x, rc.origin.y-yAxis) animated:YES];
+//    [AppGlobal setViewPositionWithView:self.scollView  axisX:self.scollView.frame.origin.x  axisY:0.0 withAnimation:YES];
    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+  // [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)onKeyboardHide:(NSNotification *)notification{
