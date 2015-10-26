@@ -16,7 +16,7 @@
 #define APP_URL [AppGlobal getServerURL]
 
 
-#define kProdURL [NSString stringWithFormat:@"191.239.57.54:8082/SLMS"]
+#define kProdURL [NSString stringWithFormat:@"191.239.57.54:8081/SLMS"]
 #define kGROWTHURL(url) [NSString stringWithFormat:@"http://%@" ,url]
 
 #define MASTER_DATA_URL [NSString stringWithFormat:@"%@/rest/common/getMasterData", APP_URL]
@@ -44,7 +44,7 @@
 //Key For UserDefault
 //Comment and like URL
 #define CMT_ON_RESOURCE_URL [NSString stringWithFormat:@"%@/rest/course/commentOnResourse",APP_URL]
-#define LIKE_ON_RESOURCE_URL(username,resourceid) [NSString stringWithFormat:@"/rest/course/likeOnResource/userName/%@/resourceId/%@",APP_URL,username,resourceid]
+#define LIKE_ON_RESOURCE_URL(username,resourceid) [NSString stringWithFormat:@"%@/rest/course/likeOnResource/userName/%@/resourceId/%@",APP_URL,username,resourceid]
 
 #define CMT_ON_CMT_URL [NSString stringWithFormat:@"%@/rest/course/commentOnComment",APP_URL]
 
@@ -137,6 +137,7 @@
 #define FORGET_SUCCESS_MSG(useremail)[NSString stringWithFormat:@"Your password is sent to %@, please check SPAM folder if not received in inbox.",useremail]
 
 // Error Msg
+#define NO_RECORD_FOUND_MSG @"No record found."
 #define NO_RESOURCE_MSG @"There is no resources available for this module."
 #define NO_INTERNET_MSG @"No Internet Connection."
 #define REESTABLISH_INTERNET_MSG @"Reestablishing Lost Connection."

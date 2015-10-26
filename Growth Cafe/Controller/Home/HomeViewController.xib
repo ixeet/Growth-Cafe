@@ -27,10 +27,10 @@
                     <rect key="frame" x="225" y="270" width="150" height="150"/>
                 </imageView>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ku6-N9-oQP" userLabel="viewNetwork">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oem-gT-VYA" userLabel="btnClose">
-                            <rect key="frame" x="546" y="7" width="30" height="30"/>
+                            <rect key="frame" x="540" y="7" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="X6b-Fm-8EZ"/>
                                 <constraint firstAttribute="width" constant="30" id="oUW-5v-bMG"/>
@@ -46,12 +46,16 @@
                                 <action selector="btnClose:" destination="-1" eventType="touchUpInside" id="TW4-SL-zvo"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyg-YL-UCS" userLabel="lblStatus">
-                            <rect key="frame" x="78" y="7" width="445" height="30"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyg-YL-UCS" userLabel="lblStatus">
+                            <rect key="frame" x="85" y="7" width="431" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="GA5-gl-pYN"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                 <rect key="frame" x="8" y="14" width="361" height="14"/>
                             </variation>
                         </label>
@@ -59,10 +63,11 @@
                     <color key="backgroundColor" white="0.33333333329999998" alpha="0.98999999999999999" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="cyg-YL-UCS" firstAttribute="top" secondItem="Ku6-N9-oQP" secondAttribute="top" constant="7" id="7Nr-jn-4gq"/>
-                        <constraint firstAttribute="trailing" secondItem="oem-gT-VYA" secondAttribute="trailing" constant="24" id="ARh-NV-9q3"/>
+                        <constraint firstAttribute="trailing" secondItem="oem-gT-VYA" secondAttribute="trailing" constant="30" id="ARh-NV-9q3"/>
                         <constraint firstItem="oem-gT-VYA" firstAttribute="top" secondItem="Ku6-N9-oQP" secondAttribute="top" constant="7" id="Dxn-3k-NxQ"/>
-                        <constraint firstItem="cyg-YL-UCS" firstAttribute="leading" secondItem="Ku6-N9-oQP" secondAttribute="leading" constant="78" id="Vh9-qh-GIG"/>
-                        <constraint firstAttribute="height" constant="44" id="o33-YF-Nsv"/>
+                        <constraint firstItem="cyg-YL-UCS" firstAttribute="leading" secondItem="Ku6-N9-oQP" secondAttribute="leading" constant="85" id="Vh9-qh-GIG"/>
+                        <constraint firstAttribute="height" constant="40" id="o33-YF-Nsv"/>
+                        <constraint firstItem="oem-gT-VYA" firstAttribute="leading" secondItem="cyg-YL-UCS" secondAttribute="trailing" constant="24" id="pUb-Zw-eRI"/>
                     </constraints>
                     <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="0.0" y="70" width="400" height="40"/>

@@ -176,6 +176,12 @@
         
         
         arrayUpdates=   [searchResult objectForKey:@"update"];
+        if(! [arrayUpdates count] >0)
+        {
+            [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_MSG title:@""];
+             [appDelegate hideSpinner];
+            return ;
+        }
         
 
         
@@ -261,9 +267,12 @@
                                   };
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"" attributes:ats];
             int textIndex=0;
-            for (NSString *strtemp in titleWords) {
-                if([update.updateTitleArray count]<=textIndex)
-                    break ;
+    NSString *lastValue;
+    for (NSString *strtemp in titleWords) {
+        if([update.updateTitleArray count]<=textIndex){
+            lastValue=strtemp;
+            break ;
+        }
                 if([strtemp isEqualToString:@""])
                 {
                     //  NSString* tempstr=[update.updateTitleArray objectAtIndex:textIndex];
@@ -367,6 +376,20 @@
                 
                 textIndex=textIndex+1;
             }
+    if([update.updateTitleArray count] <[titleWords count])
+    {
+        float fontSize=14.0;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            fontSize=17.0;
+        UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:fontSize];
+        
+        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:lastValue ];
+        
+        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[lastValue length] )];
+        [attributedString appendAttributedString:attributedStringtemp];
+        
+        
+    }
 //            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textTapped:)];
     
             //[ cell.txtView addGestureRecognizer:tap];

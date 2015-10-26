@@ -438,6 +438,7 @@
         NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
         
         //Success Full Logout
+       
         if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
             
         
@@ -517,6 +518,7 @@
                         comment.commentDate=[dicSubComment objectForKey:@"commentDate"];
                         
                         [arrayComments addObject:comment];
+                        
                     }
                     }
 
@@ -524,7 +526,7 @@
                
               
                 resource.comments=arrayComments;
-               
+                
                 NSMutableArray * arrayRelatedResource= [[NSMutableArray alloc]init];
                 for (NSDictionary *dicRelatedResource in [dicContent objectForKey:@"relatedVideoList"]) {
                     Resourse *resource= [[Resourse alloc]init];
@@ -535,6 +537,7 @@
                     resource.resourceTitle=[dicRelatedResource objectForKey:@"resourceName"];
                      resource.authorName=[dicRelatedResource objectForKey:@"authorName"];
                     [arrayRelatedResource addObject:resource];
+                    
                 }
                 
                 resource.relatedResources=arrayRelatedResource;

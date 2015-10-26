@@ -17,4 +17,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnSetting;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnInstructions;
+
+@property (strong, nonatomic) IBOutlet UIView *viewNetwork;
+- (IBAction)btnClose:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lblStatus;
 @end

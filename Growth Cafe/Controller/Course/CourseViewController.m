@@ -393,6 +393,12 @@
         for (Courses *course in coursesList) {
             [moduleArray addObject:course.moduleList];
         }
+        if(! [moduleArray count] >0)
+        {
+            [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_MSG title:@""];
+             [appDelegate hideSpinner];
+            return ;
+        }
         
         [tableViewCourse reloadData];
         // [self loginSucessFullWithFB];
@@ -420,6 +426,12 @@
         currentExpandedIndex = -1;
         for (Courses *course in coursesList) {
             [moduleArray addObject:course.moduleList];
+        }
+        if(! [moduleArray count] >0)
+        {
+            [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_MSG title:@""];
+             [appDelegate hideSpinner];
+            return ;
         }
         
         [tableViewCourse reloadData];

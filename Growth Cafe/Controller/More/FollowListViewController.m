@@ -10,8 +10,12 @@
 #import "UserCollectionViewCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CVCell.h"
+#import "AFHTTPRequestOperationManager.h"
 @interface FollowListViewController ()
 {
+    
+    AFNetworkReachabilityStatus previousStatus;
+
     NSMutableArray *users;
       NSMutableArray *actionOnUsers;
 }
@@ -34,22 +38,73 @@
     
 
 }
+
+
+- (void)showNetworkStatus:(NSString *)status newVisibility:(BOOL)newVisibility
+{
+    
+    _lblStatus.text=status;
+    [_viewNetwork setHidden:newVisibility];
+}
+
+
+- (IBAction)btnClose:(id)sender {
+    [self showNetworkStatus:@"" newVisibility:YES];
+}
+
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self getUserFollowList];
     
+    
+    
+    
+       [self getUserFollowList];
+    
+    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+        if(status==AFNetworkReachabilityStatusNotReachable)
+        {   previousStatus=status;
+            [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        }else{
+            previousStatus=status;
+            [self showNetworkStatus:REESTABLISH_INTERNET_MSG newVisibility:YES];
+            
+        }
+        //       else  if(status!=AFNetworkReachabilityStatusNotReachable)
+        //       {
+        //           previousStatus=status;
+        //           [self showNetworkStatus:@""];
+        //
+        //       }
+    }];
+     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 -(void)getUserFollowList{
-    
+    //Show Indicator
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        return;
+    }
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
     NSString *userId=[NSString stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId ];
     [[appDelegate _engine] getUserFollowList:userId success:^(NSMutableArray *userList) {
         users=userList;
+        if([userList count]==0)
+        {
+            [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_MSG title:@""];
+             [appDelegate hideSpinner];
+            return ;
+        }
         [self.colUserView reloadData];
 
         //Hide Indicator

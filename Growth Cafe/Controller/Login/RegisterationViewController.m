@@ -73,6 +73,8 @@
     
     // set
   
+  
+    
 
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -485,11 +487,13 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     
+
+    
     return YES;
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if([txtAdminEmail isEqual:textField]){
+       if([txtAdminEmail isEqual:textField]){
         if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
 
         [self setPositionOfLoginBaseViewWhenStartEditing:-150];

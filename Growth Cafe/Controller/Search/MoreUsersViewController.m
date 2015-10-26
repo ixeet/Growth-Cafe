@@ -171,6 +171,12 @@
         
         
          arrayUsers=   [searchResult objectForKey:@"user"];
+        if(! [arrayUsers count] >0)
+        {
+            [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_MSG title:@""];
+             [appDelegate hideSpinner];
+            return ;
+        }
         
         //Hide Indicator
         [appDelegate hideSpinner];

@@ -303,9 +303,15 @@
     }
     [[appDelegate _engine] getNotification:userid  AndTextSearch:txtSearch Offset:(int)self.offsetRecord  NoOfRecords:NOTIFICATION_PER_PAGE  success:^(NSMutableDictionary *dicUpdates) {
         
+       
         
         self.totalRecord=[[dicUpdates objectForKey:@"updatesCount"] integerValue] ;
-        
+        if( [[dicUpdates objectForKey:@"updates"] count]==0)
+        {
+            [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_MSG title:@""];
+            [appDelegate hideSpinner];
+            return ;
+        }
         tblViewContent.tableHeaderView=nil;
         tblViewContent.tableFooterView=nil;
         // [self loginSucessFullWithFB];
@@ -437,9 +443,12 @@
                               };
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"" attributes:ats];
         int textIndex=0;
-        for (NSString *strtemp in titleWords) {
-            if([update.updateTitleArray count]<=textIndex)
-                break ;
+    NSString *lastValue;
+    for (NSString *strtemp in titleWords) {
+        if([update.updateTitleArray count]<=textIndex){
+            lastValue=strtemp;
+            break ;
+        }
             if([strtemp isEqualToString:@""])
             {
                 
@@ -464,6 +473,15 @@
                         NSString* tempstr=[dictext objectForKey:@"value"];
                         
                         NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Course" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                    }
+                    else  if([[dictext objectForKey:@"type"] isEqualToString:@"assignment"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Assignment" : @(YES) }];
                         
                         [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
                         [attributedString appendAttributedString:attributedStringtemp];
@@ -516,6 +534,14 @@
                     NSString* tempstr=[dictext objectForKey:@"value"];
                     
                     NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Course" : @(YES) }];
+                    
+                    [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                    [attributedString appendAttributedString:attributedStringtemp];
+                } else  if([[dictext objectForKey:@"type"] isEqualToString:@"assignment"])
+                {
+                    NSString* tempstr=[dictext objectForKey:@"value"];
+                    
+                    NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Assignment" : @(YES) }];
                     
                     [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
                     [attributedString appendAttributedString:attributedStringtemp];
@@ -595,6 +621,15 @@
                     
                     [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
                     [attributedString appendAttributedString:attributedStringtemp];
+                }
+                else  if([[dictext objectForKey:@"type"] isEqualToString:@"assignment"])
+                {
+                    NSString* tempstr=[dictext objectForKey:@"value"];
+                    
+                    NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Assignment" : @(YES) }];
+                    
+                    [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
+                    [attributedString appendAttributedString:attributedStringtemp];
                 }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
                 {
                     NSString* tempstr=[dictext objectForKey:@"value"];
@@ -642,6 +677,15 @@
                           
                           [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
                           [attributedString appendAttributedString:attributedStringtemp];
+                      }
+                      else  if([[dictext objectForKey:@"type"] isEqualToString:@"assignment"])
+                      {
+                          NSString* tempstr=[dictext objectForKey:@"value"];
+                          
+                          NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Assignment" : @(YES) }];
+                          
+                          [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
+                          [attributedString appendAttributedString:attributedStringtemp];
                       }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
                       {
                           NSString* tempstr=[dictext objectForKey:@"value"];
@@ -673,6 +717,20 @@
             
             textIndex=textIndex+1;
         }
+    if([update.updateTitleArray count] <[titleWords count])
+    {
+        float fontSize=14.0;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            fontSize=17.0;
+        UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:fontSize];
+        
+        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:lastValue ];
+        
+        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[lastValue length] )];
+        [attributedString appendAttributedString:attributedStringtemp];
+        
+        
+    }
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textTapped:)];
         
         [ cell.txtView addGestureRecognizer:tap];
@@ -831,10 +889,19 @@
 //       updateDetailView.objUpdate= update;
 //        [self.navigationController pushViewController:updateDetailView animated:YES];
 //
-      
+        updates.viewStatus=objUpdate.viewStatus;
         if(objUpdate.viewStatus==0)
         {  objUpdate.viewStatus=1 ;  //   notification  viewed
         [self setUpdateStaus:objUpdate];
+            [appDelegate hideSpinner];
+            UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]init];
+            updates.viewStatus=objUpdate.viewStatus;
+            updateDetailView.objUpdate=updates;
+            [self.navigationController pushViewController:updateDetailView animated:YES];
+            
+            
+            
+            
         }else{
             [appDelegate hideSpinner];
             UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]init];
@@ -888,7 +955,7 @@
             
             if([titleWords count]-1!=textIndex)
             {
-                x=x+strikeWidth;
+               // x=x+strikeWidth;
                 UIButton *btnAction=[[UIButton alloc]init];
                 
                 NSDictionary *dictext= update.updateTitleArray[textIndex];
@@ -905,26 +972,26 @@
                 
                 strikeWidth = textSize.width;
                 
-                if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
-                {
-                    btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
-                    [btnAction addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
-                    
-                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
-                {
-                    btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
-                    [btnAction addTarget:self action:@selector(btnCourseDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-                    
-                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
-                {
-                    btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
-                    [btnAction addTarget:self action:@selector(btnModuleDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-                }
-                else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
-                {
-                    btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
-                    [btnAction addTarget:self action:@selector(btnResourceDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-                }
+//                if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
+//                {
+//                    btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
+//                    [btnAction addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
+//                    
+//                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
+//                {
+//                    btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
+//                    [btnAction addTarget:self action:@selector(btnCourseDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+//                    
+//                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
+//                {
+//                    btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
+//                    [btnAction addTarget:self action:@selector(btnModuleDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+//                }
+//                else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
+//                {
+//                    btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
+//                    [btnAction addTarget:self action:@selector(btnResourceDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+//                }
                 
                 btnAction.frame=CGRectMake(x, y, strikeWidth, 21);
                 textIndex=textIndex+1;
@@ -993,6 +1060,13 @@
     [[appDelegate _engine] getCourseDetail:feedId success:^(NSMutableArray *courseList) {
         
         //Hide Indicator
+        if([courseList count]==0)
+        {
+            [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_MSG title:@""];
+             [appDelegate hideSpinner];
+            return ;
+        }
+        
         CourseViewController *courseView=[[CourseViewController alloc]init];
         courseView.coursesList=courseList;
         courseView.comeFromUpdate=YES;
@@ -1287,10 +1361,10 @@
     [[appDelegate _engine] setUpdatesStatus:update.updateId success:^(BOOL logoutValue) {
           update.viewStatus=1;
         [tblViewContent reloadData];
-        [appDelegate hideSpinner];
-        UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]init];
-        updateDetailView.objUpdate=update;
-        [self.navigationController pushViewController:updateDetailView animated:YES];
+//        [appDelegate hideSpinner];
+//        UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]init];
+//        updateDetailView.objUpdate=update;
+//        [self.navigationController pushViewController:updateDetailView animated:YES];
     } failure:^(NSError *error) {
         [appDelegate hideSpinner];
         NSLog(@"failure JsonData %@",[error description]);

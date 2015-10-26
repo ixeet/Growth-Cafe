@@ -134,7 +134,12 @@
         else
             arrayCourses=   [searchResult objectForKey:@"assignment"];
        
-        
+        if(! [arrayCourses count] >0)
+        {
+            [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_MSG title:@""];
+             [appDelegate hideSpinner];
+            return ;
+        }
         
         
         

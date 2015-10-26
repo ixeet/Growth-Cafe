@@ -18,8 +18,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7C-sm-8F3">
                         <rect key="frame" x="88" y="0.0" width="144" height="47"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3b-by-L0a" userLabel="lblCourseName">
-                                <rect key="frame" x="83" y="6" width="158" height="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3b-by-L0a" userLabel="lblCourseName">
+                                <rect key="frame" x="83" y="6" width="32" height="32"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -27,14 +27,14 @@
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="progress_vertica_greyl_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="Mte-eg-1mq" userLabel="imgStandingLine">
-                                <rect key="frame" x="64" y="0.0" width="6" height="47"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="progress_vertica_greyl_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="Mte-eg-1mq" userLabel="imgStandingLine">
+                                <rect key="frame" x="64" y="0.0" width="6" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="6" id="Erj-KN-EcC"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtx-Pv-5fv" userLabel="lblDate">
-                                <rect key="frame" x="8" y="12" width="55" height="21"/>
+                                <rect key="frame" x="8" y="12" width="0.0" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -43,7 +43,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQm-rL-QpJ" userLabel="lblPercent">
-                                <rect key="frame" x="243" y="11" width="51" height="21"/>
+                                <rect key="frame" x="116" y="11" width="0.0" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" red="0.72941176470000002" green="0.0" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -52,7 +52,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eeh-DB-svX">
-                                <rect key="frame" x="129" y="14" width="8" height="16"/>
+                                <rect key="frame" x="122" y="11" width="13" height="22"/>
                                 <state key="normal" image="icn_arrow.png">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -61,46 +61,38 @@
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="x3n-su-iCP">
-                                <rect key="frame" x="83" y="40" width="230" height="2"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="x3n-su-iCP">
+                                <rect key="frame" x="83" y="43" width="38" height="3"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.58039215690000001" green="0.0" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="jWK-bf-5Q1"/>
-                                </constraints>
                             </progressView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" image="icn_arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="6Gm-sn-NqB" userLabel="imgAssessaryview">
-                                <rect key="frame" x="129" y="14" width="8" height="16"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6Gm-sn-NqB" userLabel="imgAssessaryview">
+                                <rect key="frame" x="122" y="11" width="22" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="Zsc-03-FTd"/>
-                                    <constraint firstAttribute="width" constant="8" id="fPw-o6-QPR"/>
+                                    <constraint firstAttribute="width" constant="22" id="vfC-wl-awV"/>
+                                    <constraint firstAttribute="height" constant="22" id="xH5-LS-pYH"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="x3n-su-iCP" firstAttribute="leading" secondItem="C7C-sm-8F3" secondAttribute="leading" constant="83" id="0mg-1B-UQZ"/>
-                            <constraint firstItem="x3n-su-iCP" firstAttribute="trailing" secondItem="Eeh-DB-svX" secondAttribute="trailing" id="1nv-oO-zGa"/>
-                            <constraint firstItem="x3n-su-iCP" firstAttribute="top" secondItem="hQm-rL-QpJ" secondAttribute="bottom" constant="8" symbolic="YES" id="2lp-Ao-9Gm"/>
-                            <constraint firstItem="Eeh-DB-svX" firstAttribute="bottom" secondItem="6Gm-sn-NqB" secondAttribute="bottom" id="D0T-Ds-P7f"/>
+                            <constraint firstItem="Eeh-DB-svX" firstAttribute="top" secondItem="C7C-sm-8F3" secondAttribute="top" constant="11" id="0VY-JF-9XL"/>
                             <constraint firstItem="U3b-by-L0a" firstAttribute="top" secondItem="C7C-sm-8F3" secondAttribute="top" constant="6" id="DQV-Qb-kPL"/>
+                            <constraint firstItem="x3n-su-iCP" firstAttribute="leading" secondItem="C7C-sm-8F3" secondAttribute="leading" constant="83" id="DSW-OM-xVL"/>
                             <constraint firstItem="Mte-eg-1mq" firstAttribute="top" secondItem="dtx-Pv-5fv" secondAttribute="bottom" constant="-33" id="LxZ-Sj-LZ1"/>
-                            <constraint firstItem="x3n-su-iCP" firstAttribute="leading" secondItem="U3b-by-L0a" secondAttribute="leading" id="Pkd-G9-XcU"/>
-                            <constraint firstItem="x3n-su-iCP" firstAttribute="top" secondItem="Mte-eg-1mq" secondAttribute="bottom" constant="-7" id="QEL-iT-64X"/>
-                            <constraint firstItem="Eeh-DB-svX" firstAttribute="top" secondItem="6Gm-sn-NqB" secondAttribute="top" id="Tju-g1-XRF"/>
-                            <constraint firstItem="hQm-rL-QpJ" firstAttribute="leading" secondItem="U3b-by-L0a" secondAttribute="trailing" constant="2" id="Udu-WH-33g"/>
-                            <constraint firstItem="6Gm-sn-NqB" firstAttribute="leading" secondItem="hQm-rL-QpJ" secondAttribute="trailing" constant="11" id="cMX-ZH-W7I"/>
+                            <constraint firstAttribute="bottom" secondItem="x3n-su-iCP" secondAttribute="bottom" constant="2" id="Pgt-wR-fir"/>
+                            <constraint firstItem="x3n-su-iCP" firstAttribute="top" secondItem="U3b-by-L0a" secondAttribute="bottom" constant="5" id="SA6-FC-scS"/>
+                            <constraint firstAttribute="trailing" secondItem="x3n-su-iCP" secondAttribute="trailing" constant="23" id="Sn3-fi-wLJ"/>
+                            <constraint firstItem="hQm-rL-QpJ" firstAttribute="leading" secondItem="U3b-by-L0a" secondAttribute="trailing" constant="1" id="Udu-WH-33g"/>
+                            <constraint firstItem="6Gm-sn-NqB" firstAttribute="leading" secondItem="hQm-rL-QpJ" secondAttribute="trailing" constant="6" id="cMX-ZH-W7I"/>
                             <constraint firstItem="dtx-Pv-5fv" firstAttribute="top" secondItem="C7C-sm-8F3" secondAttribute="top" constant="12" id="cmu-Dk-F0C"/>
                             <constraint firstItem="hQm-rL-QpJ" firstAttribute="top" secondItem="C7C-sm-8F3" secondAttribute="top" constant="11" id="fk8-VD-emB"/>
-                            <constraint firstItem="6Gm-sn-NqB" firstAttribute="top" secondItem="C7C-sm-8F3" secondAttribute="top" constant="14" id="gNQ-Xa-avm"/>
-                            <constraint firstItem="x3n-su-iCP" firstAttribute="top" secondItem="U3b-by-L0a" secondAttribute="bottom" constant="2" id="ihq-p0-EGU"/>
-                            <constraint firstItem="Eeh-DB-svX" firstAttribute="centerY" secondItem="dtx-Pv-5fv" secondAttribute="centerY" id="jU0-FT-KCs"/>
-                            <constraint firstAttribute="trailing" secondItem="x3n-su-iCP" secondAttribute="trailing" constant="7" id="nEf-W9-gGq"/>
+                            <constraint firstItem="Eeh-DB-svX" firstAttribute="leading" secondItem="hQm-rL-QpJ" secondAttribute="trailing" constant="6" id="gBh-jM-yK6"/>
+                            <constraint firstItem="6Gm-sn-NqB" firstAttribute="top" secondItem="C7C-sm-8F3" secondAttribute="top" constant="11" id="gNQ-Xa-avm"/>
                             <constraint firstItem="dtx-Pv-5fv" firstAttribute="leading" secondItem="C7C-sm-8F3" secondAttribute="leading" constant="8" id="pxg-3e-6uk"/>
                             <constraint firstItem="U3b-by-L0a" firstAttribute="leading" secondItem="Mte-eg-1mq" secondAttribute="trailing" constant="13" id="rUJ-nc-JTs"/>
-                            <constraint firstAttribute="trailing" secondItem="6Gm-sn-NqB" secondAttribute="trailing" constant="7" id="waY-uw-INd"/>
-                            <constraint firstItem="Eeh-DB-svX" firstAttribute="baseline" secondItem="hQm-rL-QpJ" secondAttribute="baseline" id="xJ9-f6-GO0"/>
-                            <constraint firstAttribute="bottom" secondItem="x3n-su-iCP" secondAttribute="bottom" constant="6" id="xm1-IX-BF0"/>
+                            <constraint firstAttribute="trailing" secondItem="6Gm-sn-NqB" secondAttribute="trailing" id="waY-uw-INd"/>
+                            <constraint firstItem="x3n-su-iCP" firstAttribute="leading" secondItem="U3b-by-L0a" secondAttribute="leading" id="zah-ek-zR7"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -119,7 +111,6 @@
             <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="btnImg" destination="Eeh-DB-svX" id="ccD-6P-ZmI"/>
-                <outlet property="imgAssessaryview" destination="6Gm-sn-NqB" id="XhN-pj-FWi"/>
                 <outlet property="lblCourseName" destination="U3b-by-L0a" id="nwE-rP-dLP"/>
                 <outlet property="lblDate" destination="dtx-Pv-5fv" id="mOk-Fq-IVp"/>
                 <outlet property="lblPercent" destination="hQm-rL-QpJ" id="Md4-Zu-yVg"/>
@@ -129,8 +120,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="icn_arrow-expand.png" width="13" height="7"/>
-        <image name="icn_arrow.png" width="8" height="12"/>
+        <image name="icn_arrow-expand.png" width="13" height="13"/>
+        <image name="icn_arrow.png" width="13" height="13"/>
         <image name="progress_vertica_greyl_line.png" width="6" height="50"/>
     </resources>
 </document>

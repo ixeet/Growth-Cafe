@@ -36,7 +36,7 @@
     
     
     
-
+    
 }
 
 @end
@@ -57,11 +57,11 @@
     self.btnFacebook.delegate = self;
     self.btnFacebook.readPermissions = @[@"public_profile", @"email"];
     [self changeFrameAndBackgroundImg];
-        isFirstLoginDone=NO;
+    isFirstLoginDone=NO;
     customKeyboard = [[CustomKeyboard alloc] init];
     customKeyboard.delegate = self;
-   
- }
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -97,7 +97,7 @@
         //
         //       }
     }];
-     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 }
 #pragma mark - Private method implementation
 -(void)changeFrameAndBackgroundImg
@@ -135,115 +135,235 @@
     //    self.profilePicture.hidden = shouldHide;
 }
 
--(void)setUserProfile {
+ -(void)setUserProfile {
+    
     // UserDetails *user=[AppGlobal readUserDetail];
+    
     user=[AppSingleton sharedInstance].userDetail;
     
+      lblFirstName.text=user.userFirstName;
     
-    lblFirstName.text=user.userFirstName;
     txtFirstName.text=user.userFirstName;
+    
     lblLastName.text=user.userEmail;
+    
     txtLastName.text=user.userLastName;
+    
     [btnOrg setTitle:user.schoolName forState:UIControlStateNormal];
+    
     [btnDeprtment setTitle:user.className forState:UIControlStateNormal];
+    
     [btnGroup setTitle:user.homeRoomName forState:UIControlStateNormal];
+    
     [btnTitle setTitle:user.title forState:UIControlStateNormal];
+    
     if(user.userFBID==nil)
+        
     {
-    //need to validate
-    btnFacebook.hidden=NO;
+        
+        //need to validate
+        
+        btnFacebook.hidden=NO;
+        
     }else{
+        
         //FB allready validated
+        
         btnFacebook.hidden=YES;
-    }
-    if(user.userImage!=nil){
-   
-       //check image available at local
-        //get image name from URL
-        if([AppGlobal checkImageAvailableAtLocal:user.userImage])
-        {
-            user.userImageData=[AppGlobal getImageAvailableAtLocal:user.userImage];
-            UIImage *img=[UIImage imageWithData:user.userImageData];
-            [imgProfile setImage:img];
-            imgProfile.layer.cornerRadius = imgProfile.frame.size.width/2;
-            imgProfile.clipsToBounds = YES;
-            NSLog(@"%@",@"yes");
-        }else{
-            NSURL *imageURL = [NSURL URLWithString:user.userImage];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                user.userImageData  = [NSData dataWithContentsOfURL:imageURL];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    // Update the UI
-                    UIImage *img=[UIImage imageWithData:user.userImageData];
-                    [AppGlobal setImageAvailableAtLocal:user.userImage AndImageData:user.userImageData];
-                    if(img!=nil)
-                    {
-                        [imgProfile setImage:img];
-                        imgProfile.layer.cornerRadius = imgProfile.frame.size.width / 2;
-                        imgProfile.clipsToBounds = YES;
-
-                        
-                    }
-                });
-            });
-        }
-//        }else{
-//            UIImage *img=[UIImage imageWithData:user.userImageData];
-//            [imgProfile setImage:img];
-//            imgProfile.layer.cornerRadius = imgProfile.frame.size.width / 2;
-//            imgProfile.clipsToBounds = YES;
-//
-//            
-//        }
-    }
-    arraySchools=[AppGlobal getDropdownList:SCHOOL_DATA];
-    
-    for (NSDictionary *dicSch in arraySchools) {
-        if([[dicSch  objectForKey:@"schoolName"] isEqualToString:user.schoolName])
-        {
-            selectedSchoolId=  [dicSch objectForKey:@"schoolId"];
-            selectedSchoolName=  [dicSch objectForKey:@"schoolName"];
-            arrayClass=  [dicSch objectForKey:@"classList"];
-        }
         
     }
     
-    for (NSDictionary *dicClass in arrayClass) {
-        if([[dicClass  objectForKey:@"className"] isEqualToString:user.className])
-        {
-            
-            
-            selectedClassId=  [dicClass objectForKey:@"classId"];
-            selectedClassName=  [dicClass objectForKey:@"className"];
-            arrayHome=  [dicClass objectForKey:@"homeRoomList"];
-        }
-        
-    }
     arrayAllData=[AppGlobal getDropdownList:TITLE_DATA];
+    
     for (NSDictionary *dicTitle in arrayAllData) {
-        if([[dicTitle  objectForKey:@"Title"] isEqualToString:user.title])
         
+        if([[dicTitle  objectForKey:@"Title"] isEqualToString:user.title])
+            
+            
+            
             selectedTitle= [dicTitle objectForKey:@"Title"];
         
+        
+        
     }
+    
+    if(user.userImage!=nil){
+        
+        
+        
+        //check image available at local
+        
+        //get image name from URL
+        
+        if([AppGlobal checkImageAvailableAtLocal:user.userImage])
+            
+        {
+            
+            user.userImageData=[AppGlobal getImageAvailableAtLocal:user.userImage];
+            
+            UIImage *img=[UIImage imageWithData:user.userImageData];
+            
+            [imgProfile setImage:img];
+            
+            imgProfile.layer.cornerRadius = imgProfile.frame.size.width/2;
+            
+            imgProfile.clipsToBounds = YES;
+            
+            NSLog(@"%@",@"yes");
+            
+        }else{
+            
+            NSURL *imageURL = [NSURL URLWithString:user.userImage];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                
+                user.userImageData  = [NSData dataWithContentsOfURL:imageURL];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    // Update the UI
+                    
+                    UIImage *img=[UIImage imageWithData:user.userImageData];
+                    
+                    [AppGlobal setImageAvailableAtLocal:user.userImage AndImageData:user.userImageData];
+                    
+                    if(img!=nil)
+                        
+                    {
+                        
+                        [imgProfile setImage:img];
+                        
+                        imgProfile.layer.cornerRadius = imgProfile.frame.size.width / 2;
+                        
+                        imgProfile.clipsToBounds = YES;
+                        
+                        
+                        
+                        
+                        
+                    }
+                    
+                });
+                
+            });
+            
+        }
+        
+        //        }else{
+        
+        //            UIImage *img=[UIImage imageWithData:user.userImageData];
+        
+        //            [imgProfile setImage:img];
+        
+        //            imgProfile.layer.cornerRadius = imgProfile.frame.size.width / 2;
+        
+        //            imgProfile.clipsToBounds = YES;
+        
+        //
+        
+        //
+        
+        //        }
+        
+    }
+    
+    arraySchools=[AppGlobal getDropdownList:SCHOOL_DATA]    ;
+    
+    if(user.userRole!=2)
+        
+    {
+        
+        return;
+        
+    }
+    
+    if(user.userRole==2)
+        
+    {
+        
+        arraySchools=[AppGlobal getDropdownList:TEACHER_DATA];
+    
+    }
+     for (NSDictionary *dicSch in arraySchools) {
+        
+        //        if([[dicSch  objectForKey:@"schoolName"] isEqualToString:user.schoolName])
+        
+        //        {
+        
+        selectedSchoolId=  [dicSch objectForKey:@"schoolId"];
+        
+        selectedSchoolName=  [dicSch objectForKey:@"schoolName"];
+        
+        [btnOrg setTitle:selectedSchoolName forState:UIControlStateNormal];
+        
+        
+        
+        arrayClass=  [dicSch objectForKey:@"classList"];
+        
+        // }
+        
+        
+        
+    }
+    
+    
+    
+    for (NSDictionary *dicClass in arrayClass) {
+        
+        //        if([[dicClass  objectForKey:@"className"] isEqualToString:user.className])
+        
+        //        {
+        
+        
+        
+        
+        
+        selectedClassId=  [dicClass objectForKey:@"classId"];
+        
+        selectedClassName=  [dicClass objectForKey:@"className"];
+        
+        [btnDeprtment setTitle:selectedClassName forState:UIControlStateNormal];
+        
+        
+        
+        
+        
+        arrayHome=  [dicClass objectForKey:@"homeRoomList"];
+        
+        //}
+        
+        
+        
+    }
+    
+    if([arrayHome count]>0)
+        
+    {
+        
+        NSDictionary *dicHome = [arrayHome objectAtIndex:0];
+        
+        [btnGroup setTitle:  [dicHome objectForKey:@"homeRoomName"]  forState:UIControlStateNormal];
+        
+        
+        
+    }
+  }
 
-
-}
 - (IBAction)btnBackClick:(id)sender {
     //Show Indicator
     if(previousStatus==AFNetworkReachabilityStatusNotReachable)
     {
         [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
         
-       // return;
+        // return;
     }
     UserDetails *usrDetail= [[UserDetails alloc]init];
     
-if(![txtFirstName.text isEqualToString:  user.userFirstName])
-{
-    isUpdate=YES;
-    
-}else if(![txtLastName.text isEqualToString:  user.userLastName])
+    if(![txtFirstName.text isEqualToString:  user.userFirstName])
+    {
+        isUpdate=YES;
+        
+    }else if(![txtLastName.text isEqualToString:  user.userLastName])
     {
         isUpdate=YES;
         
@@ -253,64 +373,64 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
         
     }
     if(isUpdate){
-    usrDetail.userFirstName=txtFirstName.text;
-    usrDetail.userLastName=txtLastName.text;
-    usrDetail.title=selectedTitle;
-    usrDetail.userId =user.userId;
-    usrDetail.userEmail=user.userEmail;
-//    usrDetail.schoolName=selectedSchoolName;
-//    usrDetail.schoolId=selectedSchoolId;
-//    usrDetail.classId   =selectedClassId;
-//    usrDetail.className=selectedClassName;
-//    usrDetail.homeRoomName=selectedRoomName;
-//    usrDetail.homeRoomId=selectedRoomId;
-  
-    
-    if ([usrDetail.title length] <= 0){
-        [AppGlobal showAlertWithMessage:MISSING_TITLE title:@""];
-    }
-    else if ([usrDetail.userFirstName length] <= 0){
-        [AppGlobal showAlertWithMessage:MISSING_FIRST_NAME title:@""];
-    }
-    else if ([usrDetail.userLastName length] <= 0){
-        [AppGlobal showAlertWithMessage:MISSING_LAST_NAME title:@""];
-    }
-    
-    
-    else{
-        [activeTextField resignFirstResponder];
-        //Show Indicator
-        [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+        usrDetail.userFirstName=txtFirstName.text;
+        usrDetail.userLastName=txtLastName.text;
+        usrDetail.title=selectedTitle;
+        usrDetail.userId =user.userId;
+        usrDetail.userEmail=user.userEmail;
+        //    usrDetail.schoolName=selectedSchoolName;
+        //    usrDetail.schoolId=selectedSchoolId;
+        //    usrDetail.classId   =selectedClassId;
+        //    usrDetail.className=selectedClassName;
+        //    usrDetail.homeRoomName=selectedRoomName;
+        //    usrDetail.homeRoomId=selectedRoomId;
         
-        [[appDelegate _engine] updateUserDetail:usrDetail  success:^(UserDetails *userDetail) {
-            
-            
-            user.userFirstName=txtFirstName.text;
-            user.userLastName=txtLastName.text;
-            user.title=selectedTitle;
-            //Hide Indicator
-            [appDelegate hideSpinner];
-            //navigate to feed view Controller
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            //            FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-            //            CourseViewController *viewController= [[CourseViewController alloc]initWithNibName:@"CourseViewController" bundle:nil];
-            //
-            //            [self.navigationController pushViewController:viewController animated:YES];
+        
+        if ([usrDetail.title length] <= 0){
+            [AppGlobal showAlertWithMessage:MISSING_TITLE title:@""];
         }
-                                              failure:^(NSError *error) {
-                                                  //Hide Indicator
-                                                  [appDelegate hideSpinner];
-                                                  NSLog(@"failure Json Data %@",[error description]);
-                                                  [self registerationError:error];
-                                                  
-                                              }];
-    }
-    
+        else if ([usrDetail.userFirstName length] <= 0){
+            [AppGlobal showAlertWithMessage:MISSING_FIRST_NAME title:@""];
+        }
+        else if ([usrDetail.userLastName length] <= 0){
+            [AppGlobal showAlertWithMessage:MISSING_LAST_NAME title:@""];
+        }
+        
+        
+        else{
+            [activeTextField resignFirstResponder];
+            //Show Indicator
+            [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+            
+            [[appDelegate _engine] updateUserDetail:usrDetail  success:^(UserDetails *userDetail) {
+                
+                
+                user.userFirstName=txtFirstName.text;
+                user.userLastName=txtLastName.text;
+                user.title=selectedTitle;
+                //Hide Indicator
+                [appDelegate hideSpinner];
+                //navigate to feed view Controller
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                //            FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
+                //            CourseViewController *viewController= [[CourseViewController alloc]initWithNibName:@"CourseViewController" bundle:nil];
+                //
+                //            [self.navigationController pushViewController:viewController animated:YES];
+            }
+                                            failure:^(NSError *error) {
+                                                //Hide Indicator
+                                                [appDelegate hideSpinner];
+                                                NSLog(@"failure Json Data %@",[error description]);
+                                                [self registerationError:error];
+                                                
+                                            }];
+        }
+        
     }else {
         [self.navigationController popToRootViewControllerAnimated:YES];
         
     }
-   
+    
 }
 -(void)registerationError:(NSError*)error{
     
@@ -399,89 +519,113 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
 
 
 - (IBAction)btnGroupClick:(id)sender {
-//    selectedPicker=ROOM_DATA;
-//    //  arrayAllData=[AppGlobal getDropdownList:ROOM_DATA];
-//    if (arrayHome!=nil &&[arrayHome count]>0)
-//        
-//    {
-//        
-//        
-//        
-//        [mDataPickerView reloadAllComponents];
-//        [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
-//        [self allTxtFieldsResignFirstResponder];
-//    }
-//    else{
-//        [AppGlobal showAlertWithMessage:DEPART_NOT_FILLED title:@"Department"];
-//    }
+    if(user.userRole!=2)
+        return;
+    selectedPicker=ROOM_DATA;
+    mIntRow=0;
+    //  arrayAllData=[AppGlobal getDropdownList:ROOM_DATA];
+    if (arrayHome!=nil &&[arrayHome count]>0){
+        if(selectedRoomId!=nil)
+        {
+            for (NSDictionary *dic in arrayHome) {
+                if([[dic objectForKey:@"homeRoomName"] isEqualToString:selectedRoomName] )
+                {
+                    mIntRow =[arrayHome indexOfObject:dic] ;
+                }
+            }
+            
+        }
+        [mDataPickerView reloadAllComponents];
+        [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
+        [self allTxtFieldsResignFirstResponder];
+    }else{
+        [AppGlobal showAlertWithMessage:DEPART_NOT_FILLED title:@"Department"];
+    }
+
+    
 }
 - (IBAction)btnOrgClick:(id)sender {
-//    selectedPicker=SCHOOL_DATA;
-//    
-//    
-//    [mDataPickerView reloadAllComponents];
-//    [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
-//    [self allTxtFieldsResignFirstResponder];
-//    
-////    if((btnDeprtment!=@"Department") ||(btnDeprtment!=@"Group"))
-////    {
-////        //  [btnDeprtment setTitle:@"Department" forState:UIControlStateNormal];
-////        // [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
-////        selectedClassId=nil;
-////        selectedClassName=nil;
-////        selectedRoomId=nil;
-////        selectedRoomName=nil;
-////        
-////    }else{
-////        
-////        [btnDeprtment setTitle:@"Department" forState:UIControlStateNormal];
-////        [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
-////        selectedClassId=nil;
-////        selectedClassName=nil;
-////        selectedRoomId=nil;
-////        selectedRoomName=nil;
-////        
-////    }
-//    
+    if(user.userRole!=2)
+        return;
+    selectedPicker=SCHOOL_DATA;
+    mIntRow=0;
+    if(selectedSchoolId!=nil)
+    {
+        for (NSDictionary *dic in arraySchools) {
+            if([[dic objectForKey:@"schoolName"] isEqualToString:selectedSchoolName] )
+            {
+                mIntRow =[arraySchools indexOfObject:dic] ;
+            }
+        }
+        
+    }
+    [mDataPickerView selectRow:mIntRow inComponent:0 animated:YES];
+    [mDataPickerView reloadAllComponents];
+    [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
+    [self allTxtFieldsResignFirstResponder];
+
+    
     
 }
 - (IBAction)btnDeprtmentClick:(id)sender {
-//    selectedPicker=CLASS_DATA;
-//    // arrayAllData=[AppGlobal getDropdownList:CLASS_DATA];
-//    
-//    
-//    if (arrayClass!=nil &&[arrayClass count]>0)
-//        
-//    {
-//        
-//        [mDataPickerView reloadAllComponents];
-//        [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
-//        [self allTxtFieldsResignFirstResponder];
-//        
-//        
-////        if (btnGroup!=@"Group") {
-////            // [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
-////            
-////            selectedRoomId=nil;
-////            selectedRoomName=nil;
-////        }else {
-////            
-////            [btnGroup   setTitle:@"Group" forState:UIControlStateNormal];
-////            
-////            selectedRoomId=nil;
-////            selectedRoomName=nil;
-////        }
-//    }
-//    else{
-//        [AppGlobal showAlertWithMessage:ORG_NOT_FILLED title:@"Organization"];
-//        
-//    }
+    if(user.userRole!=2)
+        return;
+    selectedPicker=CLASS_DATA;
+    //   arrayAllData=[AppGlobal getDropdownList:CLASS_DATA];
+    mIntRow=0;
     
+    if (arrayClass!=nil &&[arrayClass count]>0)
+        
+    {
+        if(selectedClassId!=nil)
+        {
+            for (NSDictionary *dic in arrayClass) {
+                if([[dic objectForKey:@"className"] isEqualToString:selectedClassName] )
+                {
+                    mIntRow =[arrayClass indexOfObject:dic] ;
+                }
+            }
+            
+        }
+        [mDataPickerView reloadAllComponents];
+        [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
+        [self allTxtFieldsResignFirstResponder];
+        
+        //
+        //        if (btnHome!=@"Group") {
+        //            // [btnHome   setTitle:@"Group" forState:UIControlStateNormal];
+        //
+        //            selectedRoomId=nil;
+        //            selectedRoomName=nil;
+        //        } else {
+        //            [btnHome   setTitle:@"Group" forState:UIControlStateNormal];
+        
+        //            selectedRoomId=nil;
+        //            selectedRoomName=nil;
+        //  }
+    }else{
+        [AppGlobal showAlertWithMessage:ORG_NOT_FILLED title:@"Organization"];
+    }
 }
 
 - (IBAction)btnTitleClick:(id)sender {
+    
+    mIntRow=0;
     selectedPicker=TITLE_DATA;
-   
+    
+    arrayAllData=[AppGlobal getDropdownList:TITLE_DATA];
+    if(selectedTitle!=nil)
+    {
+        for (NSDictionary *dic in arrayAllData) {
+            if([[dic objectForKey:@"Title"] isEqualToString:selectedTitle] )
+            {
+                mIntRow =[arrayAllData indexOfObject:dic] ;
+                break;
+            }
+        }
+        
+    }
+    [mDataPickerView selectRow:mIntRow inComponent:0 animated:YES];
     [mDataPickerView reloadAllComponents];
     [AppGlobal ShowHidePickeratWindow:mViewAccountTypePicker fromWindow:self.view withVisibility:YES];
     [self allTxtFieldsResignFirstResponder];
@@ -710,7 +854,7 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
             return [responseDic objectForKey:@"Title"];
             break;
         }
-
+            
         case MODULE_DATA:
         {
             NSDictionary *responseDic = [ arrayAllData objectAtIndex:row];
@@ -821,7 +965,7 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
     //    [self changeFrameAndBackgroundImg];
 }
 -(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
-  //  NSLog(@"%@", user);
+    //  NSLog(@"%@", user);
     //if user is already sign in Then validate with server.
     
     // get user id
@@ -834,7 +978,7 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
     [[appDelegate _engine] SetFBloginWithUserID:username FBID:fbuserid success:^(bool status) {
-      //  self.btnFacebook.hidden=YES;
+        //  self.btnFacebook.hidden=YES;
         [self loginSucessFullWithFB:fbuserid];
         //Hide Indicator
         [appDelegate hideSpinner];
@@ -883,26 +1027,26 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
 
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-          UIImage *image = info[UIImagePickerControllerOriginalImage];
-
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    
     //Show Indicator
     if(previousStatus==AFNetworkReachabilityStatusNotReachable)
     {
         [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
         return;
     }
-
+    
     //Show Indicator
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
     [[appDelegate _engine] updateUserImage:image success:^(BOOL successValue) {
         
         
-      
+        
         //Hide Indicator
         [appDelegate hideSpinner];
-       
-         user=[AppSingleton sharedInstance].userDetail;
+        
+        user=[AppSingleton sharedInstance].userDetail;
         if(user.userImage!=nil){
             
             
@@ -925,15 +1069,15 @@ if(![txtFirstName.text isEqualToString:  user.userFirstName])
         }
         
     }
-                                    failure:^(NSError *error) {
-                                        //Hide Indicator
-                                        [appDelegate hideSpinner];
-                                        NSLog(@"failure Json Data %@",[error description]);
-                                        [self registerationError:error];
-                                        
-                                    }];
-
-   [picker dismissViewControllerAnimated:YES completion:nil];
+                                   failure:^(NSError *error) {
+                                       //Hide Indicator
+                                       [appDelegate hideSpinner];
+                                       NSLog(@"failure Json Data %@",[error description]);
+                                       [self registerationError:error];
+                                       
+                                   }];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
     
 }
 //- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{

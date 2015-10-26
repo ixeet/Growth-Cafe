@@ -30,6 +30,7 @@
 {
     NSMutableArray *arrayUpdates;
     BOOL isSearching;
+      UIWebView *videoView;
     CGRect txtframe;
     NSString    *searchText;
     NSString *selectedCommentId,*selectedUpdateId;
@@ -349,7 +350,12 @@
         
         
         self.totalRecord=[[dicUpdates objectForKey:@"updatesCount"] integerValue] ;
-        
+        if([[dicUpdates objectForKey:@"updates"]  count] ==0)
+        {
+            [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_MSG title:@""];
+                [webViewLoader setHidden:YES];
+            return ;
+        }
         tblViewContent.tableHeaderView=nil;
         tblViewContent.tableFooterView=nil;
         // [self loginSucessFullWithFB];
@@ -558,79 +564,8 @@
         // create custom view for title
         NSString *titleString =update.updateTitle;
         NSArray *titleWords = [titleString componentsSeparatedByString:@"$"];
-        //        float x,y;
-        //        x=0.0f;
-        //        y=0.0f;
-        //        int textIndex=0;
-        //        for (NSString *strtemp in titleWords) {
-        //            UILabel *lbltitle=[[UILabel alloc]init];
-        //            [lbltitle setTextColor:[UIColor darkGrayColor]];
-        //            NSString *strtrim = [strtemp stringByTrimmingCharactersInSet:
-        //                                       [NSCharacterSet whitespaceCharacterSet]];
-        //             lbltitle.text=strtrim;
-        //            [lbltitle setFont:[UIFont fontWithName:@"Helvetica Neue" size:12.0]];
-        //            CGSize textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
-        //
-        //            CGFloat strikeWidth = textSize.width+5;
-        //            lbltitle.frame=CGRectMake(x, y, strikeWidth, 21);
-        //            if (x>140&& y==0) {
-        //                y=y+21;
-        //                x=0;
-        //            }
-        //
-        //            [cell.viewDetail addSubview:lbltitle];
-        //            if([titleWords count]-1!=textIndex)
-        //            {
-        //                 x=x+strikeWidth;
-        //                UIButton *btnAction=[[UIButton alloc]init];
-        //
-        //                NSDictionary *dictext= update.updateTitleArray[textIndex];
-        //                btnAction.tag =(int) update.updateId;
-        //                NSString *strtrim = [[dictext objectForKey:@"value"] stringByTrimmingCharactersInSet:
-        //                                     [NSCharacterSet whitespaceCharacterSet]];
-        //
-        //                [btnAction setTitle:strtrim forState:UIControlStateNormal];
-        //                [btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        //
-        //                [btnAction.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12.0]];
-        //                textSize = [[lbltitle text] sizeWithAttributes:@{NSFontAttributeName:[lbltitle font]}];
-        //                textSize=[AppGlobal getTheExpectedSizeOfLabel:strtrim];
-        //
-        //                strikeWidth = textSize.width+5;
-        //
-        //                if([[dictext objectForKey:@"type"] isEqualToString:@"user"])
-        //                {
-        //                    btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
-        //                    [btnAction addTarget:self action:@selector(btnUserProfileClick:) forControlEvents:UIControlEventTouchUpInside];
-        //
-        //                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
-        //                {
-        //                     btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
-        //                   [btnAction addTarget:self action:@selector(btnCourseDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-        //
-        //                }else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
-        //                {
-        //                     btnAction.tag = [[dictext objectForKey:@"key"] integerValue];
-        //                     [btnAction addTarget:self action:@selector(btnModuleDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-        //                }
-        //                else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
-        //                {
-        //                     btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
-        //                    [btnAction addTarget:self action:@selector(btnResourceDetailClick:) forControlEvents:UIControlEventTouchUpInside];
-        //                }
-        //
-        //                btnAction.frame=CGRectMake(x, y, strikeWidth, 21);
-        //                textIndex=textIndex+1;
-        //                [cell.viewDetail addSubview:btnAction];
-        //                 x=x+strikeWidth;
-        //
-        //            }
-        //            if (x>140 && y==0) {
-        //                y=y+21;
-        //                x=0;
-        //            }
-        //        }
-        //  cell.viewDetail.frame=CGRectMake(0, 0, x, 60);
+ 
+ 
         
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle.lineHeightMultiple = 50.0f;
@@ -641,26 +576,14 @@
                               };
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"" attributes:ats];
         int textIndex=0;
+        NSString *lastValue;
         for (NSString *strtemp in titleWords) {
-            if([update.updateTitleArray count]<=textIndex)
+            if([update.updateTitleArray count]<=textIndex){
+                lastValue=strtemp;
                 break ;
+            }
             if([strtemp isEqualToString:@""])
-            {/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////change the font  color for ipod and iphone by raj
-                //  NSString* tempstr=[update.updateTitleArray objectAtIndex:textIndex];
-                
-                
-                
-                //                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-                //                {
-                //                     UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
-                //                }
-                //
-                //
-                //                else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-                //                {
-                //                    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:22];
-                //                }
+            {
                 
                 if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
                 {
@@ -776,17 +699,7 @@
                 
                 
             }else {
-                //                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-                //                {
-                //                    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
-                //                }
-                //
-                //
-                //                else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-                //                {
-                //                    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:22];
-                //                }
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                               /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 /////////////////////////////////////////////////////////////////////change the font  color for ipod and iphone by raj
                 if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
                 {
@@ -933,6 +846,21 @@
             
             textIndex=textIndex+1;
         }
+        if([update.updateTitleArray count] <[titleWords count])
+        {
+            float fontSize=14.0;
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+                fontSize=17.0;
+            UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:fontSize];
+            
+            NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:lastValue ];
+            
+            [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[lastValue length] )];
+            [attributedString appendAttributedString:attributedStringtemp];
+            
+
+        }
+        
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textTapped:)];
         
         [ cell.txtView addGestureRecognizer:tap];
@@ -975,8 +903,9 @@
         }
         
         [cell.btnPlay setHidden:YES];
+        [cell.imgResorces setHidden:YES];
         if (update.resource!=nil) {
-            
+             [cell.imgResorces setHidden:NO];
             if(update.resource.resourceImageUrl!=nil){
                 //
                 
@@ -998,6 +927,7 @@
                             
                             if(img!=nil)
                             {
+                                
                                 [cell.imgResorces setImage:img];
                                 
                                 [cell.imgResorces setBackgroundColor:[UIColor clearColor]];
@@ -1780,6 +1710,39 @@
     [self.navigationController pushViewController:updateDetailView animated:YES];
     
 }
+- (void)embedYouTube:(NSString*)url frame:(CGRect)frame {
+    NSString* embedHTML = @"\
+    <html><head>\
+    <style type=\"text/css\">\
+    body {\
+    background-color: transparent;\
+    color: white;\
+    }\
+    </style>\
+    </head><body style=\"margin:0\">\
+    <embed id=\"yt\" src=\"%@\" type=\"application/x-shockwave-flash\" \
+    width=\"%0.0f\" height=\"%0.0f\"></embed>\
+    </body></html>";
+    NSString* html = [NSString stringWithFormat:embedHTML, url, frame.size.width, frame.size.height];
+    if(videoView == nil) {
+        videoView = [[UIWebView alloc] initWithFrame:frame];
+        [self.view addSubview:videoView];
+    }
+    [videoView loadHTMLString:html baseURL:nil];
+    
+    videoView.delegate=self;
+}
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    return YES;
+}
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    
+}
+
 #pragma mark - Comment and like on Update
 
 - (IBAction)btnPlayResourceClick:(id)sender {
@@ -1791,7 +1754,14 @@
     UIButton *btn=(UIButton *)sender;
     Update *update=[arrayUpdates objectAtIndex:btn.tag];
     Resourse *resourse =update.resource;
-    [self PlayTheVideo:resourse.resourceUrl];
+    if([resourse.resourceUrl containsString:@"youtube"])
+    {
+        [self embedYouTube:resourse.resourceUrl  frame:self.view.frame];
+        [appDelegate self].allowRotation = YES;
+    }else {
+        [self PlayTheVideo:resourse.resourceUrl];
+        
+    }
     
 }
 

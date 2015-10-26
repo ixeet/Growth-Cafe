@@ -8,9 +8,15 @@
 
 #import "MoreViewController.h"
 #import "SettingViewController.h"
+#import "AFHTTPRequestOperationManager.h"
+
 
 @interface MoreViewController ()
-
+{
+    
+AFNetworkReachabilityStatus previousStatus;
+    
+}
 @end
 
 @implementation MoreViewController
@@ -21,6 +27,24 @@
     [self setUserProfile];
     // Do any additional setup after loading the view from its nib.
 }
+
+
+
+
+- (void)showNetworkStatus:(NSString *)status newVisibility:(BOOL)newVisibility
+{
+    
+    _lblStatus.text=status;
+    [_viewNetwork setHidden:newVisibility];
+}
+
+
+- (IBAction)btnClose:(id)sender {
+    [self showNetworkStatus:@"" newVisibility:YES];
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -36,6 +60,32 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+       
+    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+        if(status==AFNetworkReachabilityStatusNotReachable)
+        {   previousStatus=status;
+            [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        }else{
+            previousStatus=status;
+            [self showNetworkStatus:REESTABLISH_INTERNET_MSG newVisibility:YES];
+            
+        }
+        //       else  if(status!=AFNetworkReachabilityStatusNotReachable)
+        //       {
+        //           previousStatus=status;
+        //           [self showNetworkStatus:@""];
+        //
+        //       }
+    }];
+     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+}
+
 
 
 - (IBAction)btnInstructionsClick:(id)sender {

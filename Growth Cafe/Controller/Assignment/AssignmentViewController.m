@@ -372,6 +372,12 @@
     
     [[appDelegate _engine] getMyAssignments:userid  AndTextSearch:txtSearch success:^(NSMutableArray *assignments) {
         arrayAssignment=assignments;
+        if(! [arrayAssignment count] >0)
+        {
+            [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_MSG title:@""];
+             [appDelegate hideSpinner];
+            return ;
+        }
         
         
         [tblViewContent reloadData];
@@ -395,6 +401,12 @@
     
     [[appDelegate _engine] getTeacherAssignment:userid  AndTextSearch:txtSearch AndFilterDic:filterDic success:^(NSMutableArray *assignments) {
         arrayAssignment=assignments;
+        if(! [arrayAssignment count] >0)
+        {
+            [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_MSG title:@""];
+             [appDelegate hideSpinner];
+            return ;
+        }
         
         
         [tblViewContent reloadData];

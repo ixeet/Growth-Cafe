@@ -9,11 +9,16 @@
 #import "SettingViewController.h"
 #import "SettingTableViewCell.h"
 #import "FollowListViewController.h"
+#import "AFHTTPRequestOperationManager.h"
+
 @interface SettingViewController ()
 {
     NSMutableArray *arraySettingList;
     NSMutableArray *arraySettingImageList;
     int selectedRow;
+    AFNetworkReachabilityStatus previousStatus;
+    
+
 }
 @end
 
@@ -41,13 +46,57 @@
     [tblSetting setClipsToBounds:YES];
     [self getMySetting];
 }
+
+
+- (void)showNetworkStatus:(NSString *)status newVisibility:(BOOL)newVisibility
+{
+    
+    _lblStatus.text=status;
+    [_viewNetwork setHidden:newVisibility];
+}
+
+
+- (IBAction)btnClose:(id)sender {
+    [self showNetworkStatus:@"" newVisibility:YES];
+}
+
+
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
     
     
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+        if(status==AFNetworkReachabilityStatusNotReachable)
+        {   previousStatus=status;
+            [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        }else{
+            previousStatus=status;
+            [self showNetworkStatus:REESTABLISH_INTERNET_MSG newVisibility:YES];
+            
+        }
+        //       else  if(status!=AFNetworkReachabilityStatusNotReachable)
+        //       {
+        //           previousStatus=status;
+        //           [self showNetworkStatus:@""];
+        //
+        //       }
+    }];
+     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 }
+    
+
 -(void)getMySetting{
     
+    if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        
+        return;
+    }
+
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
     NSString *userId=[NSString stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId ];

@@ -7,7 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstructionViewController">
             <connections>
+                <outlet property="lblStatus" destination="QTs-PF-bNA" id="p9j-zI-rBg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewNetwork" destination="Cj6-IW-EMb" id="etY-Df-OhX"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -89,6 +91,54 @@
                         </mask>
                     </variation>
                 </button>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cj6-IW-EMb" userLabel="viewNetwork">
+                    <rect key="frame" x="0.0" y="70" width="600" height="40"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JzK-iz-CMl" userLabel="btnClose">
+                            <rect key="frame" x="545" y="8" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="LZa-6w-5Fs"/>
+                                <constraint firstAttribute="height" constant="25" id="zX0-pv-HzX"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <state key="normal" image="close_icon.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <rect key="frame" x="369" y="6" width="23" height="30"/>
+                            </variation>
+                            <connections>
+                                <action selector="btnClose:" destination="-1" eventType="touchUpInside" id="6Nm-MV-WMI"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTs-PF-bNA" userLabel="lblStatus">
+                            <rect key="frame" x="85" y="5" width="431" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="a3W-vB-Mb6"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <rect key="frame" x="8" y="14" width="361" height="14"/>
+                            </variation>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333329999998" alpha="0.98999999999999999" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="JzK-iz-CMl" secondAttribute="trailing" constant="30" id="7aI-4a-n4X"/>
+                        <constraint firstItem="JzK-iz-CMl" firstAttribute="leading" secondItem="QTs-PF-bNA" secondAttribute="trailing" constant="29" id="AzA-wN-swF"/>
+                        <constraint firstItem="QTs-PF-bNA" firstAttribute="top" secondItem="Cj6-IW-EMb" secondAttribute="top" constant="5" id="VSb-iT-1hR"/>
+                        <constraint firstItem="QTs-PF-bNA" firstAttribute="leading" secondItem="Cj6-IW-EMb" secondAttribute="leading" constant="85" id="gJw-Uh-rtA"/>
+                        <constraint firstAttribute="height" constant="40" id="hTN-2D-BMp"/>
+                        <constraint firstItem="JzK-iz-CMl" firstAttribute="top" secondItem="Cj6-IW-EMb" secondAttribute="top" constant="8" id="sTO-xf-ZH0"/>
+                    </constraints>
+                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="0.0" y="70" width="400" height="40"/>
+                    </variation>
+                </view>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AL3-Fu-7c2">
                     <rect key="frame" x="-6" y="66" width="612" height="534"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -96,6 +146,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="Cj6-IW-EMb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2dp-gD-Si8"/>
                 <constraint firstItem="UdT-xa-MpL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8fl-jy-MjQ"/>
                 <constraint firstAttribute="trailing" secondItem="Z5O-8C-o9m" secondAttribute="trailing" id="BdP-uE-jDl"/>
                 <constraint firstItem="E49-v4-ur2" firstAttribute="bottom" secondItem="Gyu-HG-k97" secondAttribute="bottom" id="Dzp-81-HaG"/>
@@ -108,9 +159,11 @@
                 <constraint firstItem="AL3-Fu-7c2" firstAttribute="top" secondItem="Gyu-HG-k97" secondAttribute="bottom" constant="-2" id="UEZ-rI-a3q"/>
                 <constraint firstItem="Gyu-HG-k97" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="24" id="WmO-Pc-a0P"/>
                 <constraint firstItem="E49-v4-ur2" firstAttribute="centerX" secondItem="UdT-xa-MpL" secondAttribute="centerX" id="abU-sf-TXF"/>
+                <constraint firstItem="Cj6-IW-EMb" firstAttribute="top" secondItem="UdT-xa-MpL" secondAttribute="bottom" id="gKe-bZ-ddm"/>
                 <constraint firstItem="Z5O-8C-o9m" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gaW-Xs-jxJ"/>
                 <constraint firstItem="Gyu-HG-k97" firstAttribute="leading" secondItem="UdT-xa-MpL" secondAttribute="leading" id="hqb-Xg-FAs"/>
                 <constraint firstAttribute="bottom" secondItem="Z5O-8C-o9m" secondAttribute="bottom" id="iyd-5o-dHR"/>
+                <constraint firstAttribute="trailing" secondItem="Cj6-IW-EMb" secondAttribute="trailing" id="n8O-8G-ULv"/>
                 <constraint firstItem="AL3-Fu-7c2" firstAttribute="bottom" secondItem="Z5O-8C-o9m" secondAttribute="bottom" id="nnf-oM-Buu"/>
                 <constraint firstItem="AL3-Fu-7c2" firstAttribute="top" secondItem="UdT-xa-MpL" secondAttribute="bottom" constant="-4" id="pbp-VM-Un1"/>
                 <constraint firstAttribute="trailing" secondItem="UdT-xa-MpL" secondAttribute="trailing" constant="-1" id="w7a-wk-mWE"/>
@@ -120,6 +173,7 @@
         </view>
     </objects>
     <resources>
+        <image name="close_icon.png" width="30" height="30"/>
         <image name="icn_back-header.png" width="13" height="21"/>
     </resources>
 </document>

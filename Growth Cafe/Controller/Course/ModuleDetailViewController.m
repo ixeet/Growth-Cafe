@@ -47,6 +47,7 @@ AFNetworkReachabilityStatus previousStatus;
       NSMutableArray *tableViewCellsRelatedResourseArray;
     CGFloat screenWidth;
     float currentTextHeight;
+     UIWebView *videoView;
 }
 
 
@@ -307,6 +308,39 @@ AFNetworkReachabilityStatus previousStatus;
     [tblViewContent reloadData];
    
 }
+- (void)embedYouTube:(NSString*)url frame:(CGRect)frame {
+    NSString* embedHTML = @"\
+    <html><head>\
+    <style type=\"text/css\">\
+    body {\
+    background-color: transparent;\
+    color: white;\
+    }\
+    </style>\
+    </head><body style=\"margin:0\">\
+    <embed id=\"yt\" src=\"%@\" type=\"application/x-shockwave-flash\" \
+    width=\"%0.0f\" height=\"%0.0f\"></embed>\
+    </body></html>";
+    NSString* html = [NSString stringWithFormat:embedHTML, url, frame.size.width, frame.size.height];
+    if(videoView == nil) {
+        videoView = [[UIWebView alloc] initWithFrame:frame];
+        [self.view addSubview:videoView];
+    }
+    [videoView loadHTMLString:html baseURL:nil];
+    
+    videoView.delegate=self;
+}
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    return YES;
+}
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    
+}
+
 #pragma mark - Comment and like on Resource
 
 - (IBAction)btnPlayAssignmentClick:(id)sender {
@@ -315,7 +349,15 @@ AFNetworkReachabilityStatus previousStatus;
 //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"assignmentId == %d", btn.tag];
 //    NSArray *filteredArray = [assignmentList filteredArrayUsingPredicate:predicate];
     Assignment *assignment =[assignmentList objectAtIndex: btn.tag];
-    [self PlayTheVideo:assignment.attachedResource.resourceUrl];
+   // [self PlayTheVideo:assignment.attachedResource.resourceUrl];
+    if([assignment.attachedResource.resourceUrl containsString:@"youtube"])
+    {
+        [self embedYouTube:assignment.attachedResource.resourceUrl  frame:self.view.frame];
+        [appDelegate self].allowRotation = YES;
+    }else {
+        [self PlayTheVideo:assignment.attachedResource.resourceUrl];
+        
+    }
 
 }
 - (IBAction)btnPlayRelatedResourceClick:(id)sender {
@@ -325,7 +367,14 @@ AFNetworkReachabilityStatus previousStatus;
 //    NSArray *filteredArray = [assignmentList filteredArrayUsingPredicate:predicate];
 //
     Resourse *resource =[selectedResource.relatedResources objectAtIndex:btn.tag];
-    [self PlayTheVideo:resource.resourceUrl];
+    if([resource.resourceUrl containsString:@"youtube"])
+    {
+        [self embedYouTube:resource.resourceUrl  frame:self.view.frame];
+        [appDelegate self].allowRotation = YES;
+    }else {
+        [self PlayTheVideo:resource.resourceUrl];
+        
+    }
     
 }
 - (IBAction)btnPlayResourceClick:(id)sender {
@@ -339,7 +388,15 @@ AFNetworkReachabilityStatus previousStatus;
     NSInteger currentpage=  page;
     // get the current Content
     selectedResource=[contentList objectAtIndex:currentpage];
-    [self PlayTheVideo:selectedResource.resourceUrl];
+    if([selectedResource.resourceUrl containsString:@"youtube"])
+    {
+        [self embedYouTube:selectedResource.resourceUrl  frame:self.view.frame];
+        [appDelegate self].allowRotation = YES;
+    }else {
+        [self PlayTheVideo:selectedResource.resourceUrl];
+        
+    }
+
 }
 -(void)PlayTheVideo:(NSString *)stringUrl
 {
@@ -742,6 +799,7 @@ AFNetworkReachabilityStatus previousStatus;
       
         contentList=[moduleDetails objectForKey:@"resourceList"];
         assignmentList=[moduleDetails objectForKey:@"assignmentList"];
+        
           if([contentList count]==0)
           {
               [AppGlobal showAlertWithMessage:NO_RESOURCE_MSG title:@""];
@@ -812,6 +870,11 @@ AFNetworkReachabilityStatus previousStatus;
          //Hide Indicator
         contentList=[moduleDetails objectForKey:@"resourceList"];
         assignmentList=[moduleDetails objectForKey:@"assignmentList"];
+         if([contentList count]==0)
+         {
+             [AppGlobal showAlertWithMessage:NO_RESOURCE_MSG title:@""];
+             [self.navigationController popViewControllerAnimated:YES];
+         }
          for (Resourse *resource in contentList) {
              if([resource.resourceId isEqualToString:selectedResource.resourceId])
              {
@@ -1656,7 +1719,7 @@ AFNetworkReachabilityStatus previousStatus;
         cell.imgDevider.hidden=YES;
         cell.lblRelatedVideo.hidden =YES;
         
-        if(([selectedResource.comments count]<3) && (indexPath.row==[selectedResource.comments count]-1))
+        if(([selectedResource.comments count]<=3) && (indexPath.row==[selectedResource.comments count]-1))
         {
             cell.btnMore.hidden=YES;
             cell.imgDevider.hidden=NO;
@@ -1664,7 +1727,7 @@ AFNetworkReachabilityStatus previousStatus;
           
             
         }
-        else if([selectedResource.comments count]>=3)
+        else if([selectedResource.comments count]>3)
         {
             if(IsCommentExpended && (indexPath.row==[selectedResource.comments count]-1))
             {
@@ -1793,14 +1856,14 @@ AFNetworkReachabilityStatus previousStatus;
             cell.imgDevider.hidden=YES;
             cell.lblRelatedVideo.hidden =YES;
             
-            if(([selectedResource.comments count]<3) && (indexPath.row==[selectedResource.comments count]-1))
+            if(([selectedResource.comments count]<=3) && (indexPath.row==[selectedResource.comments count]-1))
             {
                 cell.btnMore.hidden=YES;
                 cell.imgDevider.hidden=NO;
                 cell.lblRelatedVideo.hidden =NO;
                 
             }
-            else if([selectedResource.comments count]>=3)
+            else if([selectedResource.comments count]>3)
             {
                 if(IsCommentExpended && (indexPath.row==[selectedResource.comments count]-1))
                 {
@@ -1907,37 +1970,37 @@ AFNetworkReachabilityStatus previousStatus;
         
         cell.imgHalfDevide.hidden=NO;
        
-        if(indexPath.row!=([selectedResource.relatedResources count]-1))
-        {
-            cell.btnMore.hidden=YES;
-            cell.imgDevider.hidden=YES;
-             cell.lblAssignment.hidden=YES;
-          
-        }else{
-            if([selectedResource.relatedResources count]>=3)
-            {
-                [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
-//                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
-                     [cell.btnMore setTitle:@"View More" forState:UIControlStateNormal];
-                 cell.imgHalfDevide.hidden=YES;
-            }else{
-                cell.btnMore.hidden=YES;
-                
-            }
-        }
+//        if(indexPath.row!=([selectedResource.relatedResources count]-1))
+//        {
+//            cell.btnMore.hidden=YES;
+//            cell.imgDevider.hidden=YES;
+//             cell.lblAssignment.hidden=YES;
+//          
+//        }else{
+//            if([selectedResource.relatedResources count]>=3)
+//            {
+//                [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
+////                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
+//                     [cell.btnMore setTitle:@"View More" forState:UIControlStateNormal];
+//                 cell.imgHalfDevide.hidden=YES;
+//            }else if(indexPath.row==2 && !IsRelatedConentExpended){
+//                cell.btnMore.hidden=YES;
+//                
+//            }
+//        }
 
         cell.btnMore.hidden=YES;
         cell.imgDevider.hidden=YES;
         cell.lblAssignment.hidden =YES;
         
-        if(([selectedResource.relatedResources count]<3) && (indexPath.row==[selectedResource.relatedResources count]-1))
+        if(([selectedResource.relatedResources count]<=3) && (indexPath.row==[selectedResource.relatedResources count]-1))
         {
             cell.btnMore.hidden=YES;
             cell.imgDevider.hidden=NO;
             cell.lblAssignment.hidden =NO;
             
         }
-        else if([selectedResource.relatedResources count]>=3)
+        else if([selectedResource.relatedResources count]>3)
         {
             if(IsRelatedConentExpended && (indexPath.row==[selectedResource.relatedResources count]-1))
             {
@@ -1991,10 +2054,10 @@ AFNetworkReachabilityStatus previousStatus;
         [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(3, [assignment.assignmentSubmittedBy length])];
         [cell.lblContentby setAttributedText:attributedString];
         
-       
+        [cell.imgContentURL setHidden:YES];
         if(resource!=nil)
         {
-        
+        [cell.imgContentURL setHidden:NO];
         if(resource.resourceImageUrl!=nil){
             if([AppGlobal checkImageAvailableAtLocal:resource.resourceImageUrl])
             {
@@ -2200,12 +2263,12 @@ AFNetworkReachabilityStatus previousStatus;
         
                       float height=0.0f;
         NSLog(@"%ld",(long)indexPath.row);
-        if(([selectedResource.comments count]<3) && (indexPath.row==[selectedResource.comments count]-1))
+        if(([selectedResource.comments count]<=3) && (indexPath.row==[selectedResource.comments count]-1))
         {
            height=55.0f;
                 
         }
-        else if([selectedResource.comments count]>=3)
+        else if([selectedResource.comments count]>3)
         {
             if(IsCommentExpended && (indexPath.row==[selectedResource.comments count]-1))
             {
@@ -2253,14 +2316,14 @@ AFNetworkReachabilityStatus previousStatus;
                                 static NSString *identifier = @"AssignmentTableViewCell";
                                 AssignmentTableViewCell *cell = (AssignmentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
                                 NSLog(@"%f",cell.lblContentName.frame.size.width);
-                                if(([selectedResource.relatedResources count]<3) && (indexPath.row==[selectedResource.relatedResources count]-1))
+                                if(([selectedResource.relatedResources count]<=3) && (indexPath.row==[selectedResource.relatedResources count]-1))
                                 {
                                     height=height+50.0f;
                                     
                                     
                                     
                                 }
-                                else if([selectedResource.relatedResources count]>=3)
+                                else if([selectedResource.relatedResources count]>3)
                                 {
                                     if(IsRelatedConentExpended && (indexPath.row==[selectedResource.relatedResources count]-1))
                                     {
@@ -2306,14 +2369,14 @@ AFNetworkReachabilityStatus previousStatus;
                                 static NSString *identifier = @"AssignmentTableViewCell";
                                 AssignmentTableViewCell *cell = (AssignmentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
                                 NSLog(@"%f",cell.lblContentName.frame.size.width);
-                                if(([selectedResource.relatedResources count]<3) && (indexPath.row==[selectedResource.relatedResources count]-1))
+                                if(([selectedResource.relatedResources count]<=3) && (indexPath.row==[selectedResource.relatedResources count]-1))
                                 {
                                     height=height+50.0f;
                                     
                                     
                                     
                                 }
-                                else if([selectedResource.relatedResources count]>=3)
+                                else if([selectedResource.relatedResources count]>3)
                                 {
                                     if(IsRelatedConentExpended && (indexPath.row==[selectedResource.relatedResources count]-1))
                                     {
@@ -2357,14 +2420,14 @@ AFNetworkReachabilityStatus previousStatus;
         static NSString *identifier = @"AssignmentTableViewCell";
         AssignmentTableViewCell *cell = (AssignmentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
         NSLog(@"%f",cell.lblContentName.frame.size.width);
-        if(([selectedResource.relatedResources count]<3) && (indexPath.row==[selectedResource.relatedResources count]-1))
+        if(([selectedResource.relatedResources count]<=3) && (indexPath.row==[selectedResource.relatedResources count]-1))
         {
             height=height+50.0f;
             
             
             
         }
-        else if([selectedResource.relatedResources count]>=3)
+        else if([selectedResource.relatedResources count]>3)
         {
             if(IsRelatedConentExpended && (indexPath.row==[selectedResource.relatedResources count]-1))
             {
@@ -2414,14 +2477,14 @@ AFNetworkReachabilityStatus previousStatus;
 //
         float height=73.0f;
         
-        if(([assignmentList count]<3) && (indexPath.row==[assignmentList count]-1))
+        if(([assignmentList count]<=3) && (indexPath.row==[assignmentList count]-1))
         {
             height=height+30.0f;
             
             
             
         }
-        else if([assignmentList count]>=3)
+        else if([assignmentList count]>3)
         {
             if(IsAsignmentExpended && (indexPath.row==[assignmentList count]-1))
             {

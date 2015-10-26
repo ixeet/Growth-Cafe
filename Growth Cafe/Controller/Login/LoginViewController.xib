@@ -193,25 +193,26 @@
                     </variation>
                 </label>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Wf-Iv-zFo" userLabel="viewNetwork">
-                    <rect key="frame" x="1" y="0.0" width="599" height="44"/>
+                    <rect key="frame" x="1" y="0.0" width="599" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OhH-OT-hmM" userLabel="lblStatus">
-                            <rect key="frame" x="76" y="7" width="445" height="30"/>
+                            <rect key="frame" x="85" y="5" width="431" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="ef9-op-6Pn"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                 <rect key="frame" x="50" y="14" width="300" height="14"/>
                             </variation>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SvT-0T-6Er" userLabel="btnClose">
-                            <rect key="frame" x="545" y="7" width="30" height="30"/>
+                            <rect key="frame" x="544" y="8" width="25" height="25"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="30" id="1UT-Cr-SoL"/>
-                                <constraint firstAttribute="height" constant="30" id="CgY-aJ-thf"/>
+                                <constraint firstAttribute="width" constant="25" id="1UT-Cr-SoL"/>
+                                <constraint firstAttribute="height" constant="25" id="CgY-aJ-thf"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <state key="normal" image="close_icon.png">
@@ -227,12 +228,11 @@
                     </subviews>
                     <color key="backgroundColor" white="0.33333333329999998" alpha="0.98999999999999999" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="SvT-0T-6Er" firstAttribute="leading" secondItem="OhH-OT-hmM" secondAttribute="trailing" constant="24" id="2J5-bq-ZxO"/>
-                        <constraint firstAttribute="trailing" secondItem="SvT-0T-6Er" secondAttribute="trailing" constant="24" id="9Uh-pP-ChW"/>
-                        <constraint firstItem="OhH-OT-hmM" firstAttribute="top" secondItem="8Wf-Iv-zFo" secondAttribute="top" constant="7" id="9eK-s9-6AU"/>
-                        <constraint firstItem="SvT-0T-6Er" firstAttribute="top" secondItem="8Wf-Iv-zFo" secondAttribute="top" constant="7" id="Cly-ez-er2"/>
-                        <constraint firstAttribute="height" constant="44" id="H4D-YR-Gls"/>
-                        <constraint firstItem="OhH-OT-hmM" firstAttribute="leading" secondItem="8Wf-Iv-zFo" secondAttribute="leading" constant="76" id="tLA-dP-TnE"/>
+                        <constraint firstAttribute="trailing" secondItem="SvT-0T-6Er" secondAttribute="trailing" constant="30" id="9Uh-pP-ChW"/>
+                        <constraint firstItem="OhH-OT-hmM" firstAttribute="top" secondItem="8Wf-Iv-zFo" secondAttribute="top" constant="5" id="9eK-s9-6AU"/>
+                        <constraint firstItem="SvT-0T-6Er" firstAttribute="top" secondItem="8Wf-Iv-zFo" secondAttribute="top" constant="8" id="Cly-ez-er2"/>
+                        <constraint firstItem="OhH-OT-hmM" firstAttribute="leading" secondItem="8Wf-Iv-zFo" secondAttribute="leading" constant="85" id="tLA-dP-TnE"/>
+                        <constraint firstItem="SvT-0T-6Er" firstAttribute="leading" secondItem="OhH-OT-hmM" secondAttribute="trailing" constant="28" id="vrk-zy-Y0n"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2LO-NX-APt" userLabel="btnCREATEACCOUNT">
@@ -259,7 +259,7 @@
                 <constraint firstItem="Ct4-mW-IPM" firstAttribute="trailing" secondItem="8Wf-Iv-zFo" secondAttribute="trailing" id="5EI-GZ-5P3"/>
                 <constraint firstItem="HKI-mA-8sE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7b7-r3-O3M"/>
                 <constraint firstAttribute="trailing" secondItem="HKI-mA-8sE" secondAttribute="trailing" id="9AE-Vy-VS1"/>
-                <constraint firstItem="mCt-C7-2hO" firstAttribute="top" secondItem="8Wf-Iv-zFo" secondAttribute="bottom" constant="13" id="9UC-e2-4Z6"/>
+                <constraint firstItem="mCt-C7-2hO" firstAttribute="top" secondItem="8Wf-Iv-zFo" secondAttribute="bottom" constant="17" id="9UC-e2-4Z6"/>
                 <constraint firstItem="8Wf-Iv-zFo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="AEr-3b-dvT"/>
                 <constraint firstItem="lyD-g5-Seg" firstAttribute="centerX" secondItem="HKI-mA-8sE" secondAttribute="centerX" id="Aa2-7E-Th3"/>
                 <constraint firstItem="mCt-C7-2hO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="57" id="LOn-3N-Zue"/>

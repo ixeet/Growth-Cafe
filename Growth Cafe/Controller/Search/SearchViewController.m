@@ -212,7 +212,6 @@
     NSString *userId=[NSString stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId ];
     [[appDelegate _engine] getSearchResult:userId AndSearchText:txtSearchBar.text AndCatId:@"" AndCount:@"" success:^(NSDictionary *searchResult) {
         
-        
         arrayUsers=     [searchResult objectForKey:@"user"];
         arrayUpdates=   [searchResult objectForKey:@"update"];
         arrayCourses=   [searchResult objectForKey:@"course"];
@@ -231,7 +230,13 @@
         if([[searchResult objectForKey:@"totalAssignmentsCount"] integerValue]>0)
             viewMoreAsignemnts=YES;
         
-        
+        if(!([arrayUsers count] >0 || [arrayUpdates count] >0|| [arrayAsignemnts count] >0|| [arrayCourses count] >0))
+        {
+            [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_MSG title:@""];
+             [appDelegate hideSpinner];
+            return ;
+        }
+
 
         
         //Hide Indicator

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoreUpdateViewController">
@@ -51,13 +51,13 @@
                     </connections>
                 </tableView>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cc3-Fs-Eso" userLabel="viewNetwork">
-                    <rect key="frame" x="-2" y="69" width="600" height="44"/>
+                    <rect key="frame" x="-2" y="70" width="600" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amh-mh-Ift" userLabel="btnClose">
-                            <rect key="frame" x="546" y="7" width="32" height="30"/>
+                            <rect key="frame" x="546" y="8" width="25" height="25"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="fXH-Kn-NPa"/>
-                                <constraint firstAttribute="width" constant="32" id="g9v-Uf-kqL"/>
+                                <constraint firstAttribute="height" constant="25" id="fXH-Kn-NPa"/>
+                                <constraint firstAttribute="width" constant="25" id="g9v-Uf-kqL"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                             <state key="normal" image="close_icon.png">
@@ -72,26 +72,27 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i95-nP-A6L" userLabel="lblStatus">
-                            <rect key="frame" x="85" y="8" width="431" height="28"/>
+                            <rect key="frame" x="85" y="5" width="431" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="28" id="nrI-D8-XuZ"/>
+                                <constraint firstAttribute="height" constant="30" id="nrI-D8-XuZ"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                 <rect key="frame" x="8" y="14" width="361" height="14"/>
                             </variation>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="0.33333333329999998" alpha="0.98999999999999999" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="amh-mh-Ift" firstAttribute="top" secondItem="Cc3-Fs-Eso" secondAttribute="top" constant="7" id="1OB-kF-gH2"/>
+                        <constraint firstItem="amh-mh-Ift" firstAttribute="top" secondItem="Cc3-Fs-Eso" secondAttribute="top" constant="8" id="1OB-kF-gH2"/>
                         <constraint firstItem="amh-mh-Ift" firstAttribute="leading" secondItem="i95-nP-A6L" secondAttribute="trailing" constant="30" id="JBb-WX-c2S"/>
                         <constraint firstItem="i95-nP-A6L" firstAttribute="leading" secondItem="Cc3-Fs-Eso" secondAttribute="leading" constant="85" id="dep-T3-M5b"/>
-                        <constraint firstAttribute="height" constant="44" id="m5M-wY-Hpq"/>
-                        <constraint firstAttribute="trailing" secondItem="amh-mh-Ift" secondAttribute="trailing" constant="22" id="nFF-F4-hnc"/>
-                        <constraint firstItem="i95-nP-A6L" firstAttribute="top" secondItem="Cc3-Fs-Eso" secondAttribute="top" constant="8" id="nMt-ho-jkA"/>
+                        <constraint firstAttribute="height" constant="40" id="m5M-wY-Hpq"/>
+                        <constraint firstAttribute="trailing" secondItem="amh-mh-Ift" secondAttribute="trailing" constant="29" id="nFF-F4-hnc"/>
+                        <constraint firstItem="i95-nP-A6L" firstAttribute="top" secondItem="Cc3-Fs-Eso" secondAttribute="top" constant="5" id="nMt-ho-jkA"/>
                     </constraints>
                     <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="0.0" y="70" width="400" height="40"/>
@@ -151,7 +152,7 @@
                 <constraint firstItem="brv-dd-PAs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="szS-kf-8NY"/>
                 <constraint firstItem="8TX-D4-0Fq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tUN-ZS-U7a"/>
                 <constraint firstAttribute="trailing" secondItem="4hJ-ln-6q6" secondAttribute="trailing" constant="15" id="txC-yi-lgz"/>
-                <constraint firstItem="Cc3-Fs-Eso" firstAttribute="top" secondItem="8TX-D4-0Fq" secondAttribute="bottom" constant="-1" id="uPV-wJ-xu5"/>
+                <constraint firstItem="Cc3-Fs-Eso" firstAttribute="top" secondItem="8TX-D4-0Fq" secondAttribute="bottom" id="uPV-wJ-xu5"/>
                 <constraint firstItem="68x-bX-ala" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-1" id="uWa-OL-2ko"/>
                 <constraint firstItem="Cc3-Fs-Eso" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-2" id="wCK-HY-AnO"/>
             </constraints>

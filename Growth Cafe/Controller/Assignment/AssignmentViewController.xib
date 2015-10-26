@@ -101,13 +101,13 @@
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6UU-9g-waw" userLabel="viewNetwork">
-                    <rect key="frame" x="0.0" y="71" width="600" height="44"/>
+                    <rect key="frame" x="0.0" y="70" width="600" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5IP-AJ-XGs" userLabel="btnClose">
-                            <rect key="frame" x="546" y="7" width="32" height="30"/>
+                            <rect key="frame" x="545" y="8" width="25" height="25"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="32" id="RQc-Ue-H5x"/>
-                                <constraint firstAttribute="height" constant="30" id="SOO-Ch-cvw"/>
+                                <constraint firstAttribute="width" constant="25" id="RQc-Ue-H5x"/>
+                                <constraint firstAttribute="height" constant="25" id="SOO-Ch-cvw"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <state key="normal" image="close_icon.png">
@@ -118,23 +118,27 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsc-IA-Sej" userLabel="lblStatus">
-                            <rect key="frame" x="85" y="8" width="432" height="28"/>
+                            <rect key="frame" x="85" y="5" width="431" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="28" id="9Jj-i6-eVd"/>
+                                <constraint firstAttribute="height" constant="30" id="9Jj-i6-eVd"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            </variation>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="0.33333333329999998" alpha="0.98999999999999999" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="3FR-Os-gwB"/>
-                        <constraint firstItem="5IP-AJ-XGs" firstAttribute="top" secondItem="6UU-9g-waw" secondAttribute="top" constant="7" id="5Nq-zx-uHS"/>
-                        <constraint firstItem="fsc-IA-Sej" firstAttribute="top" secondItem="6UU-9g-waw" secondAttribute="top" constant="8" id="8n0-O0-O9z"/>
+                        <constraint firstAttribute="height" constant="40" id="3FR-Os-gwB"/>
+                        <constraint firstItem="5IP-AJ-XGs" firstAttribute="top" secondItem="6UU-9g-waw" secondAttribute="top" constant="8" id="5Nq-zx-uHS"/>
+                        <constraint firstItem="fsc-IA-Sej" firstAttribute="top" secondItem="6UU-9g-waw" secondAttribute="top" constant="5" id="8n0-O0-O9z"/>
                         <constraint firstItem="5IP-AJ-XGs" firstAttribute="leading" secondItem="fsc-IA-Sej" secondAttribute="trailing" constant="29" id="EEQ-pm-XKb"/>
                         <constraint firstItem="fsc-IA-Sej" firstAttribute="leading" secondItem="6UU-9g-waw" secondAttribute="leading" constant="85" id="FyC-9h-IM8"/>
-                        <constraint firstAttribute="trailing" secondItem="5IP-AJ-XGs" secondAttribute="trailing" constant="22" id="SnC-kA-845"/>
+                        <constraint firstAttribute="trailing" secondItem="5IP-AJ-XGs" secondAttribute="trailing" constant="30" id="SnC-kA-845"/>
+                        <constraint firstItem="5IP-AJ-XGs" firstAttribute="width" secondItem="fsc-IA-Sej" secondAttribute="height" multiplier="5:6" id="rbD-pV-R5l"/>
                     </constraints>
                 </view>
                 <searchBar contentMode="redraw" misplaced="YES" placeholder="Search" backgroundImage="img_search-boxn.png" translatesAutoresizingMaskIntoConstraints="NO" id="c9l-0l-7zS">
@@ -158,7 +162,7 @@
                 <constraint firstAttribute="bottom" secondItem="Wxh-PH-I7w" secondAttribute="bottom" constant="45" id="0fZ-WS-9qr"/>
                 <constraint firstItem="Wxh-PH-I7w" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1Ye-VH-QHW"/>
                 <constraint firstItem="kkg-6M-vdo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2uh-sq-4rl"/>
-                <constraint firstItem="6UU-9g-waw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="7f1-FP-DSc"/>
+                <constraint firstItem="6UU-9g-waw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="70" id="7f1-FP-DSc"/>
                 <constraint firstItem="cRF-tZ-fAs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="23" id="8cM-Uf-xEn"/>
                 <constraint firstItem="6xJ-1J-phg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="DAc-A6-Dfk"/>
                 <constraint firstAttribute="trailing" secondItem="6UU-9g-waw" secondAttribute="trailing" id="Efe-y8-Hcq"/>
