@@ -125,7 +125,7 @@
     else
         catId=@"Assignment";
     
-    [[appDelegate _engine] getSearchResult:userId AndSearchText:txtSearchBar.text AndCatId:@"Course" AndCount:@"" success:^(NSDictionary *searchResult) {
+    [[appDelegate _engine] getSearchResult:userId AndSearchText:txtSearchBar.text AndCatId:catId AndCount:@"" success:^(NSDictionary *searchResult) {
         
         
         if(isCourse)
@@ -274,8 +274,8 @@
     float xval=80.0;
     float width=self.view.frame.size.width-160;
     if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
-        xval= 8.0;
-        width=self.view.frame.size.width-8;
+        xval= 0.0;
+        width=self.view.frame.size.width;
         
     }
     UIView * additionalSeparator = [[UIView alloc]
@@ -347,7 +347,12 @@ viewForFooterInSection:(NSInteger)section
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50.0;
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+    {
+        return 50;
+        
+    }
+    return 40;
     
     
     

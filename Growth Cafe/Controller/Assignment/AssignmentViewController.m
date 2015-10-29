@@ -182,6 +182,7 @@
         
         [txfSearchField setBackgroundColor:[UIColor clearColor]];
         
+        
         //[txfSearchField setLeftView:UITextFieldViewModeNever];
         
         [txfSearchField setBorderStyle:UITextBorderStyleNone];

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -35,10 +34,10 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qYY-RC-OrA" userLabel="btnLike">
-                        <rect key="frame" x="163" y="290" width="56" height="16"/>
+                        <rect key="frame" x="163" y="290" width="69" height="16"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="56" id="C6G-TB-9Yp"/>
+                            <constraint firstAttribute="width" constant="69" id="C6G-TB-9Yp"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                         <inset key="titleEdgeInsets" minX="8" minY="5" maxX="0.0" maxY="0.0"/>
@@ -122,7 +121,7 @@
                     <constraint firstItem="LHc-DG-pP7" firstAttribute="top" secondItem="hmu-ln-rJn" secondAttribute="bottom" constant="1" id="Oop-be-3wF"/>
                     <constraint firstItem="rAV-9M-vsI" firstAttribute="top" secondItem="4FX-kX-NGz" secondAttribute="bottom" constant="1" id="Q97-4e-QfK"/>
                     <constraint firstItem="qYY-RC-OrA" firstAttribute="top" secondItem="LHc-DG-pP7" secondAttribute="bottom" constant="1" id="QLu-U5-58M"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="qYY-RC-OrA" secondAttribute="trailing" constant="93" id="UUR-bP-90c">
+                    <constraint firstAttribute="trailingMargin" secondItem="qYY-RC-OrA" secondAttribute="trailing" constant="80" id="UUR-bP-90c">
                         <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                     </constraint>
                     <constraint firstItem="rAV-9M-vsI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="80" id="Ur6-XS-Q3G">

@@ -216,18 +216,22 @@
         arrayUpdates=   [searchResult objectForKey:@"update"];
         arrayCourses=   [searchResult objectForKey:@"course"];
         arrayAsignemnts= [searchResult objectForKey:@"assignment"];
+        viewMoreUser=NO;
         
-        if([[searchResult objectForKey:@"totalUsersCount"] integerValue]>0)
+        viewMoreUpdate=NO;
+        viewMoreCourse=NO;
+        viewMoreAsignemnts=NO;
+        if([[searchResult objectForKey:@"totalUsersCount"] integerValue]>3)
             viewMoreUser=YES;
         
         
-        if([[searchResult objectForKey:@"totalFeedsCount"] integerValue]>0)
+        if([[searchResult objectForKey:@"totalFeedsCount"] integerValue]>3)
             viewMoreUpdate=YES;
         
-        if([[searchResult objectForKey:@"totalCoursesCount"] integerValue]>0)
+        if([[searchResult objectForKey:@"totalCoursesCount"] integerValue]>3)
             viewMoreCourse=YES;
         
-        if([[searchResult objectForKey:@"totalAssignmentsCount"] integerValue]>0)
+        if([[searchResult objectForKey:@"totalAssignmentsCount"] integerValue]>3)
             viewMoreAsignemnts=YES;
         
         if(!([arrayUsers count] >0 || [arrayUpdates count] >0|| [arrayAsignemnts count] >0|| [arrayCourses count] >0))
@@ -340,9 +344,12 @@
                                   };
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"" attributes:ats];
             int textIndex=0;
+            NSString *lastValue;
             for (NSString *strtemp in titleWords) {
-                if([update.updateTitleArray count]<=textIndex)
+                if([update.updateTitleArray count]<=textIndex){
+                    lastValue=strtemp;
                     break ;
+                }
                 if([strtemp isEqualToString:@""])
                 {
                     //  NSString* tempstr=[update.updateTitleArray objectAtIndex:textIndex];
@@ -363,6 +370,15 @@
                         NSString* tempstr=[dictext objectForKey:@"value"];
                         
                         NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Course" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                    }
+                    else  if([[dictext objectForKey:@"type"] isEqualToString:@"assignment"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Assignment" : @(YES) }];
                         
                         [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
                         [attributedString appendAttributedString:attributedStringtemp];
@@ -430,6 +446,14 @@
                         [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
                         [attributedString appendAttributedString:attributedStringtemp];
                         
+                    } else  if([[dictext objectForKey:@"type"] isEqualToString:@"assignment"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Assignment" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
                     }
                     else  if([[dictext objectForKey:@"type"] isEqualToString:@"resource"])
                     {
@@ -452,14 +476,27 @@
 //            //   cell.txtView.tag=indexPath.row;
             
             // cal calculate the time
+            if([update.updateTitleArray count] <[titleWords count])
+            {
+                float fontSize=14.0;
+                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+                    fontSize=17.0;
+                UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:fontSize];
+                
+                NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:lastValue ];
+                
+                [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[lastValue length] )];
+                [attributedString appendAttributedString:attributedStringtemp];
+                
+                
+            }
             NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:update.updatetime];
             
             NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
             //   cell.lblCmtDate.text=comment.commentDate;
-            scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                               withString:@""];
+  
             // Set label text to attributed string
-            NSString *str = [NSString stringWithFormat:@"\n%@ ago" ,scincetime];
+            NSString *str = [NSString stringWithFormat:@"\n%@" ,scincetime];
             //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:12];
@@ -582,7 +619,7 @@
                 [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
             }
             UserDetails *userPrfile=[arrayUsers objectAtIndex:indexPath.row];
-            cell.lblName.text=userPrfile.userFirstName;
+            cell.lblName.text=userPrfile.username;
             if(userPrfile.userImage!=nil){
                 
                 //check image available at local
@@ -742,9 +779,30 @@
             
             // call the user profi{le service user profile
             UserDetails *usrDetail=[arrayUsers objectAtIndex:indexPath.row];
-            ProfileViewController *profileView=[[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
-            profileView.user=usrDetail;
-            [self.navigationController pushViewController:profileView animated:YES];
+            
+            if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+            {
+                [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+                return;
+            }
+            [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+            
+            
+            [[appDelegate _engine] getUserDetail:[NSString stringWithFormat:@"%@", usrDetail.userId] success:^(UserDetails *usrDetail) {
+                //Hide Indicator
+                ProfileViewController *profileView=[[ProfileViewController alloc]init];
+                profileView.user=usrDetail;
+                [self.navigationController pushViewController:profileView animated:YES];
+                [appDelegate hideSpinner];
+                
+            }
+                                         failure:^(NSError *error) {
+                                             //Hide Indicator
+                                             [appDelegate hideSpinner];
+                                             NSLog(@"failure JsonData %@",[error description]);
+                                             
+                                             [self settingError:error];
+                                         }];
              break;
         }
             
@@ -770,15 +828,33 @@
             break;
         case 1:
             //show Course Detail
-            return 30;
+            if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+            {
+                return 50;
+                
+            }
+            return 40;
+
             break;
         case 2:
             //show Assignment Detail
-                return 30;
+            if( UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPhone )
+            {
+                return 50;
+                
+            }
+            return 40;
+
             break;
         case 3:
             //show full Profile
-                return 30;
+            if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+            {
+                return 50;
+                
+            }
+            return 40;
+
             break;
         default:
             break;
@@ -861,31 +937,39 @@
     footerview.backgroundColor=[UIColor whiteColor];
     if(section==0)
     {
-        //        if([arrayUpdates count]>SEARCH_PER_PAGE)
-        //        {
         
         UIButton *btnMore=[[UIButton alloc]init];
         btnMore.frame = CGRectMake((screenWidth-150)/2, 0,150,30);
-        NSString *title=@"No Record Found";
+        NSString *title=@"";
+        if([arrayUpdates count]==0)
+        {
+                title=@"No Record Found";
+        }
+
         if (viewMoreUpdate) {
             title=@"view more";
             [btnMore  addTarget:self action:@selector(btnMoreUpdate:) forControlEvents:UIControlEventTouchUpInside];
         }
+        
         [btnMore setTitle:title forState:UIControlStateNormal];
         
         
         btnMore.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0];
         [btnMore setTitleColor:[UIColor colorWithRed:129.0/255.0 green:132.0/255.0 blue:139.0/255.0 alpha:1] forState:UIControlStateNormal];
         [footerview addSubview:btnMore];
-        // }
+        
     }else if(section==1)
     {
-        //        if([arrayCourses count]>SEARCH_PER_PAGE)
-        //        {
+        
         
         UIButton *btnMore=[[UIButton alloc]init];
         btnMore.frame = CGRectMake((screenWidth-150)/2, 0,150,30);
-        NSString *title=@"No Record Found";
+        NSString *title=@"";
+        if([arrayCourses count]==0)
+        {
+            title=@"No Record Found";
+        }
+        
         if (viewMoreCourse) {
             title=@"view more";
             [btnMore  addTarget:self action:@selector(btnMoreCourse:) forControlEvents:UIControlEventTouchUpInside];
@@ -894,17 +978,22 @@
         
         btnMore.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0];
         [btnMore setTitleColor:[UIColor colorWithRed:129.0/255.0 green:132.0/255.0 blue:139.0/255.0 alpha:1] forState:UIControlStateNormal];
+        
         [footerview addSubview:btnMore];
-        //        }
+        
     }
     else if(section==2)
     {
-        //        if([arrayAsignemnts count]>SEARCH_PER_PAGE)
-        //        {
+        
         
         UIButton *btnMore=[[UIButton alloc]init];
         btnMore.frame = CGRectMake((screenWidth-150)/2, 0,150,30);
-        NSString *title=@"No Record Found";
+        NSString *title=@"";
+        if([arrayAsignemnts count]==0)
+        {
+            title=@"No Record Found";
+        }
+
         if (viewMoreAsignemnts) {
             title=@"view more";
             [btnMore  addTarget:self action:@selector(btnMoreAssignment:) forControlEvents:UIControlEventTouchUpInside];
@@ -914,16 +1003,19 @@
         btnMore.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0];
         [btnMore setTitleColor:[UIColor colorWithRed:129.0/255.0 green:132.0/255.0 blue:139.0/255.0 alpha:1] forState:UIControlStateNormal];
         [footerview addSubview:btnMore];
-        // }
+        
     }
     else if(section==3)
     {
-        //        if([arrayUsers count]>SEARCH_PER_PAGE)
-        //        {
         
         UIButton *btnMore=[[UIButton alloc]init];
         btnMore.frame = CGRectMake((screenWidth-150)/2, 0,150,30);
-        NSString *title=@"No Record Found";
+        NSString *title=@"";
+        if([arrayUsers count]==0)
+        {
+            title=@"No Record Found";
+        }
+
         if (viewMoreUser) {
             title=@"view more";
             [btnMore  addTarget:self action:@selector(btnMorePrfile:) forControlEvents:UIControlEventTouchUpInside];
@@ -933,7 +1025,7 @@
         btnMore.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0];
         [btnMore setTitleColor:[UIColor colorWithRed:129.0/255.0 green:132.0/255.0 blue:139.0/255.0 alpha:1] forState:UIControlStateNormal];
         [footerview addSubview:btnMore];
-        //        }
+        
     }
     //    footerview.layer.cornerRadius = 5.0f;
     //    [footerview setClipsToBounds:YES];

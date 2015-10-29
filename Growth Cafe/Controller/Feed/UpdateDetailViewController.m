@@ -211,7 +211,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self   name:UIKeyboardWillHideNotification object:nil];
     objCustom.btnFacebook.delegate=nil;
-    objUpdate.isExpend=NO;
+
     [AppSingleton sharedInstance].updatedUpdate=objUpdate;
     
 }
@@ -252,18 +252,18 @@
     [[appDelegate _engine] getUpdatesDetail:objUpdate.updateId   success:^(Update *updates) {
         objUpdate=updates;
         
-        if([objUpdate.comments count]>=COMMENT_PER_PAGE){
-            NSUInteger location=COMMENT_PER_PAGE-1;
-            NSUInteger length=[objUpdate.comments count]-COMMENT_PER_PAGE;
-            //  NSRange range = NSMakeRange(0, [string length]);
-            NSRange range= NSMakeRange(location,length);
-            
-            [objUpdate.comments removeObjectsInRange:range] ;
-            self.totalRecord=[objUpdate.commentCount integerValue];
-            self.pendingRecord= self.totalRecord-[objUpdate.comments count];
-            self.offsetRecord=self.offsetRecord+COMMENT_PER_PAGE;
-        }
-        objUpdate.isExpend=NO;
+//        if([objUpdate.comments count]>=COMMENT_PER_PAGE){
+//            NSUInteger location=COMMENT_PER_PAGE-1;
+//            NSUInteger length=[objUpdate.comments count]-COMMENT_PER_PAGE;
+//            //  NSRange range = NSMakeRange(0, [string length]);
+//            NSRange range= NSMakeRange(location,length);
+//            
+//            [objUpdate.comments removeObjectsInRange:range] ;
+//            self.totalRecord=[objUpdate.commentCount integerValue];
+//            self.pendingRecord= self.totalRecord-[objUpdate.comments count];
+//            self.offsetRecord=self.offsetRecord+COMMENT_PER_PAGE;
+//        }
+      
         [AppSingleton sharedInstance].updatedUpdate=objUpdate;
 
         [tblViewContent reloadData];
@@ -711,10 +711,9 @@
         
         NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
         //   cell.lblCmtDate.text=comment.commentDate;
-        scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                           withString:@""];
+
         // Set label text to attributed string
-        NSString *str = [NSString stringWithFormat:@"\n%@ ago" ,scincetime];
+        NSString *str = [NSString stringWithFormat:@"\n%@" ,scincetime];
         //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
         
         UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:12];
@@ -900,10 +899,9 @@
             
             NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
             //   cell.lblCmtDate.text=comment.commentDate;
-            scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                               withString:@""];
+            
             // Set label text to attributed string
-            NSString *str = [NSString stringWithFormat:@"%@ %@ ago" ,comment.commentBy,scincetime];
+            NSString *str = [NSString stringWithFormat:@"%@ %@" ,comment.commentBy,scincetime];
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
@@ -1043,10 +1041,9 @@
             
             NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
             //   cell.lblCmtDate.text=comment.commentDate;
-            scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                               withString:@""];
+           
             // Set label text to attributed string
-            NSString *str = [NSString stringWithFormat:@"%@ %@ ago" ,comment.commentBy,scincetime];
+            NSString *str = [NSString stringWithFormat:@"%@ %@" ,comment.commentBy,scincetime];
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
@@ -1856,7 +1853,7 @@
         }
         [tblViewContent reloadData];
          [appDelegate hideSpinner];
-       // [self  getUpdate:txtSearchBar.text];
+       [self  getUpdatedUpdate:txtSearchBar.text];
     }
                                     failure:^(NSError *error) {
                                         //Hide Indicator

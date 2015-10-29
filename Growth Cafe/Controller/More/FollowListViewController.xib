@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FollowListViewController">
@@ -47,31 +46,13 @@
                     <rect key="frame" x="0.0" y="24" width="34" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="GFP-BS-Kw4"/>
-                        <constraint firstAttribute="width" constant="73" id="a3D-GZ-Mln">
-                            <variation key="heightClass=regular-widthClass=compact" constant="22"/>
-                        </constraint>
-                        <constraint firstAttribute="width" constant="34" id="jWy-Rg-crH"/>
-                        <constraint firstAttribute="height" constant="27" id="stf-wF-gC4">
-                            <variation key="heightClass=regular-widthClass=compact" constant="44"/>
-                        </constraint>
+                        <constraint firstAttribute="width" priority="250" constant="34" id="jWy-Rg-crH"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <state key="normal" title=" " image="icn_back-header.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="a3D-GZ-Mln"/>
-                            <exclude reference="stf-wF-gC4"/>
-                        </mask>
-                    </variation>
-                    <variation key="heightClass=regular-widthClass=compact">
-                        <mask key="constraints">
-                            <include reference="a3D-GZ-Mln"/>
-                            <include reference="stf-wF-gC4"/>
-                        </mask>
-                    </variation>
                     <connections>
                         <action selector="btnBackClick:" destination="-1" eventType="touchUpInside" id="OE1-8j-tip"/>
                     </connections>

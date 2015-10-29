@@ -162,6 +162,9 @@
      [super viewWillAppear:animated];
     /* Listen for keyboard */
     
+ [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+   // self.tabBarItem.badgeValue=@"";
+      self.tabBarItem.badgeValue = nil;
     //  NSInteger numberOfViewControllers = self.navigationController.viewControllers.count;
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
@@ -743,10 +746,8 @@
     
     NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
     //   cell.lblCmtDate.text=comment.commentDate;
-    scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                       withString:@""];
-    // Set label text to attributed string
-    NSString *str = [NSString stringWithFormat:@"\n%@ ago" ,scincetime];
+  
+    NSString *str = [NSString stringWithFormat:@"\n%@" ,scincetime];
     //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
     
     UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:12];

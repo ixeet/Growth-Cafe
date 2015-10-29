@@ -66,7 +66,7 @@ UIApplication* appp;
     
     
     // UIViewController *uvButton2 = [self.tabBarController.viewControllers objectAtIndex:1];
-    viewController2.tabBarItem.title = @"Assignment" ;
+    viewController2.tabBarItem.title = @"Assignments" ;
    // [viewController2.tabBarItem setEnabled:NO];
     viewController2.tabBarItem.image = [[UIImage imageNamed:@"icn_assignment-defaultn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     viewController2.tabBarItem.selectedImage = [ [UIImage imageNamed:@"icn_assignment-selectedn.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -79,6 +79,9 @@ UIApplication* appp;
     // UIViewController *uvButton4 = [self.tabBarController.viewControllers objectAtIndex:3];
     viewController4.tabBarItem.title = @"Notifications" ;
     //[viewController4.tabBarItem setEnabled:NO];
+    NSInteger badgeNumber = [application applicationIconBadgeNumber];
+    if(badgeNumber>0)
+    viewController4.tabBarItem.badgeValue=[NSString stringWithFormat:@"%ld", (long)badgeNumber];
     viewController4.tabBarItem.image = [[UIImage imageNamed:@"icn_notification-defaultn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     viewController4.tabBarItem.selectedImage = [[UIImage imageNamed:@"icn_notification-selectedn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
@@ -131,15 +134,15 @@ UIApplication* appp;
         //NSLog(@"deviceToken = %@",  [NPUserData sharedNPUserData].deviceToken);
     }
     //appp = application;
-    //[self performSelector:@selector(pushTest) withObject:nil afterDelay:30];
+    [self performSelector:@selector(pushTest) withObject:nil afterDelay:30];
     return YES;
 }
 - (void) pushTest
 {
-    //  NSLog(@"testing for push notification");
-//    NSDictionary *dic =[[NSDictionary alloc] initWithObjectsAndKeys:kPushMessage, @"alert", nil];
-//    
-//    [self application:appp didReceiveRemoteNotification:dic];
+      NSLog(@"testing for push notification");
+    NSDictionary *dic =[[NSDictionary alloc] initWithObjectsAndKeys:@"alert", @"alert", nil];
+    
+    [self application:appp didReceiveRemoteNotification:dic];
 }
 #pragma --
 #pragma Register push
@@ -234,6 +237,9 @@ UIApplication* appp;
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+//    NSInteger badgeNumber = [application applicationIconBadgeNumber];
+//    [application setApplicationIconBadgeNumber:++badgeNumber];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -310,10 +316,17 @@ UIApplication* appp;
     
     //   NSLog(@"message %@", message);
     
-    
+//    NSString* alertValue = [[userInfo valueForKey:@"aps"] valueForKey:@"badge"];
+//    NSLog(@"my message-- %@",alertValue);
+//    int badgeValue= [alertValue intValue];
+//    
+//    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badgeValue];
 
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PushNotification" object:nil];
+    
+    NSInteger badgeNumber = [application applicationIconBadgeNumber];
+    [application setApplicationIconBadgeNumber:++badgeNumber];
 }
 
 #pragma mark - Core Data stack

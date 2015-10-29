@@ -598,6 +598,12 @@
         timeLeft = [NSString stringWithFormat: @"%ld sec", (long)seconds*-1];
     if(timeLeft==nil)
         timeLeft=@"now";
+    
+    
+    timeLeft = [timeLeft stringByReplacingOccurrencesOfString:@"-"
+                                                       withString:@""];
+    // Set label text to attributed string
+    timeLeft = [NSString stringWithFormat:@"%@ ago" ,timeLeft];
     return timeLeft;
 }
 // this method is used to get the server's url from settings bundle

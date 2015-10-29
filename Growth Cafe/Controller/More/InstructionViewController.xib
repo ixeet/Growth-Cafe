@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstructionViewController">
@@ -64,32 +63,14 @@
                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gyu-HG-k97" userLabel="btnBack">
                     <rect key="frame" x="0.0" y="24" width="34" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="34" id="6T5-XV-MhS"/>
-                        <constraint firstAttribute="height" constant="27" id="ABb-Rl-QrM">
-                            <variation key="heightClass=regular-widthClass=compact" constant="44"/>
-                        </constraint>
+                        <constraint firstAttribute="width" priority="250" constant="34" id="6T5-XV-MhS"/>
                         <constraint firstAttribute="height" constant="44" id="Zun-Jg-G6F"/>
-                        <constraint firstAttribute="width" constant="73" id="pVZ-Ph-coy">
-                            <variation key="heightClass=regular-widthClass=compact" constant="22"/>
-                        </constraint>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <state key="normal" title=" " image="icn_back-header.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="ABb-Rl-QrM"/>
-                            <exclude reference="pVZ-Ph-coy"/>
-                        </mask>
-                    </variation>
-                    <variation key="heightClass=regular-widthClass=compact">
-                        <mask key="constraints">
-                            <include reference="ABb-Rl-QrM"/>
-                            <include reference="pVZ-Ph-coy"/>
-                        </mask>
-                    </variation>
                 </button>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cj6-IW-EMb" userLabel="viewNetwork">
                     <rect key="frame" x="0.0" y="70" width="600" height="40"/>

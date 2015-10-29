@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UpdateViewController">
@@ -57,7 +56,7 @@
                     </connections>
                 </tableView>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1P-J0-SRP" userLabel="webViewLoader">
-                    <rect key="frame" x="0.0" y="71" width="600" height="536"/>
+                    <rect key="frame" x="0.0" y="71" width="600" height="529"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </webView>
                 <searchBar contentMode="redraw" misplaced="YES" placeholder="Search" backgroundImage="img_search-boxn.png" translatesAutoresizingMaskIntoConstraints="NO" id="JaX-5B-j5q">
@@ -163,7 +162,7 @@
                 <constraint firstItem="rmO-uq-EDI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Xq6-Xb-y3M"/>
                 <constraint firstItem="Cv1-n2-noY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Y2o-bJ-vtt"/>
                 <constraint firstItem="Y1P-J0-SRP" firstAttribute="top" secondItem="rmO-uq-EDI" secondAttribute="bottom" constant="1" id="bJF-lm-p40"/>
-                <constraint firstItem="Y1P-J0-SRP" firstAttribute="centerY" secondItem="yrx-wp-1Kb" secondAttribute="centerY" constant="39" id="c06-8e-sQr"/>
+                <constraint firstItem="Y1P-J0-SRP" firstAttribute="centerY" secondItem="yrx-wp-1Kb" secondAttribute="centerY" constant="35.5" id="c06-8e-sQr"/>
                 <constraint firstItem="M0c-YC-SzI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="cW5-HG-m1U"/>
                 <constraint firstItem="Y1P-J0-SRP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dBF-6Q-R8s"/>
                 <constraint firstAttribute="bottom" secondItem="1pc-w9-lLY" secondAttribute="bottom" constant="44" id="eI8-Jm-uWB"/>

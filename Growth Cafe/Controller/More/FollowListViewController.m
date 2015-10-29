@@ -26,6 +26,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    previousStatus=[AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+    // Do any additional setup after loading the view from its nib.
+    previousStatus=AFNetworkReachabilityStatusUnknown;
     users=[[NSMutableArray alloc]init];
     actionOnUsers=[[NSMutableArray alloc]init];
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -60,7 +63,7 @@
     
     
     
-       [self getUserFollowList];
+    
     
     
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
@@ -81,6 +84,7 @@
         //       }
     }];
      [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+     [self getUserFollowList];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

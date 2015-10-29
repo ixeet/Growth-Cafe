@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -18,7 +17,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aU8-O8-ayc">
                         <rect key="frame" x="88" y="0.0" width="144" height="44"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="departments.png" translatesAutoresizingMaskIntoConstraints="NO" id="2kg-3Z-yV5" userLabel="imgIcon">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="departments.png" translatesAutoresizingMaskIntoConstraints="NO" id="2kg-3Z-yV5" userLabel="imgIcon">
                                 <rect key="frame" x="6" y="15" width="16" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="un4-Yv-uGz"/>
@@ -37,16 +36,25 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FWU-Is-erg">
+                                <rect key="frame" x="0.0" y="38" width="144" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="2UG-cF-Fnc"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2kg-3Z-yV5" firstAttribute="leading" secondItem="aU8-O8-ayc" secondAttribute="leading" constant="6" id="2zw-sz-Y6f"/>
                             <constraint firstAttribute="trailing" secondItem="Nsr-SS-nPC" secondAttribute="trailing" constant="5" id="C6G-d6-bfj"/>
+                            <constraint firstAttribute="trailing" secondItem="FWU-Is-erg" secondAttribute="trailing" id="DR1-Ak-tiv"/>
+                            <constraint firstItem="FWU-Is-erg" firstAttribute="top" secondItem="rrT-N2-OzP" secondAttribute="bottom" constant="8" id="NAe-kJ-wpW"/>
                             <constraint firstItem="Nsr-SS-nPC" firstAttribute="top" secondItem="aU8-O8-ayc" secondAttribute="top" constant="11" id="R4M-lM-Y3v"/>
                             <constraint firstItem="rrT-N2-OzP" firstAttribute="leading" secondItem="2kg-3Z-yV5" secondAttribute="trailing" constant="40" id="Yde-b5-Eab">
                                 <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                             </constraint>
                             <constraint firstItem="rrT-N2-OzP" firstAttribute="top" secondItem="aU8-O8-ayc" secondAttribute="top" constant="13" id="bJX-Rf-ore"/>
+                            <constraint firstItem="FWU-Is-erg" firstAttribute="leading" secondItem="aU8-O8-ayc" secondAttribute="leading" id="jLj-bS-hpx"/>
                             <constraint firstItem="2kg-3Z-yV5" firstAttribute="top" secondItem="aU8-O8-ayc" secondAttribute="top" constant="15" id="yqi-ek-xPa"/>
                         </constraints>
                     </view>

@@ -24,10 +24,9 @@ AFNetworkReachabilityStatus previousStatus;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setUserProfile];
+   
     // Do any additional setup after loading the view from its nib.
 }
-
 
 
 
@@ -74,7 +73,7 @@ AFNetworkReachabilityStatus previousStatus;
         }else{
             previousStatus=status;
             [self showNetworkStatus:REESTABLISH_INTERNET_MSG newVisibility:YES];
-            
+            [self setUserProfile];
         }
         //       else  if(status!=AFNetworkReachabilityStatusNotReachable)
         //       {

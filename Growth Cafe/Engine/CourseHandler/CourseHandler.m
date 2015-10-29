@@ -50,6 +50,9 @@
                     module.completedPercentStatus=[dicModule objectForKey:@"completedPercentStatus"];
                     module.moduleId=[dicModule objectForKey:@"moduleId"];
                     module.moduleName=[dicModule objectForKey:@"moduleName"];
+                    module.moduleSessionId=[dicModule objectForKey:@"moduleSessionId"];
+
+                    
                     [arrayModule addObject:module];
                 }
                 course.moduleList=arrayModule;
@@ -294,6 +297,27 @@
             
             resource.startedOn=[dicContent objectForKey:@"startedOn"];
             resource.completedOn=[dicContent objectForKey:@"completedOn"];
+            
+            NSDate *dateSatrtedOn = [AppGlobal convertStringDateToNSDate:resource.startedOn];
+            NSDate *dateCompletedOn = [AppGlobal convertStringDateToNSDate:resource.completedOn];
+            NSCalendar* calendar = [NSCalendar currentCalendar];
+            NSDateComponents* components ;
+            NSString *monthName;
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            if(dateSatrtedOn!=nil)
+            {
+                components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateSatrtedOn]; // Get necessary date components
+                monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+                monthName=[AppGlobal getMonthTimed:monthName];
+                resource.startedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
+                
+            }
+            if(dateCompletedOn!=nil){
+                components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateCompletedOn]; // Get necessary date components
+                monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+                monthName=[AppGlobal getMonthTimed:monthName];
+                resource.completedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
+            }
             resource.authorName=[dicContent objectForKey:@"authorName"];
             resource.authorImage=[dicContent objectForKey:@"authorImg"];
             
@@ -423,14 +447,25 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    NSDictionary *parameters = @{@"userId":userid,@"courseId":course.courseId,@"moduleId":module.moduleId,
-                                 @"searchText":txtSearch,
-                                 };
+    NSMutableDictionary *parametersMutable =[[NSMutableDictionary alloc]init];
+
+    [parametersMutable setObject:userid forKey:@"userId"];
+    [parametersMutable setObject:course.courseId forKey:@"courseId"];
+    [parametersMutable setObject:module.moduleId forKey:@"moduleId"];
+    [parametersMutable setObject:txtSearch forKey:@"searchText"];
+    
+    if([AppSingleton sharedInstance].userDetail.userRole==2)
+    {
+        
+        [parametersMutable setObject:module.moduleSessionId forKey:@"moduleSessionId"];
+        
+    }
+  
 //    parameters = @{@"userId":userid,@"courseId":@"1",@"moduleId":@"1",
 //                    @"searchText":@"xxx",
 //                    };
 //  {"userId":"1","courseId":"1","moduleId":"1","searchText":"xxx"}
-    [manager POST:USER_MODULE_DETAIL_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:USER_MODULE_DETAIL_URL parameters:parametersMutable success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         
@@ -464,9 +499,32 @@
                 resource.resourceImageUrl=[dicContent objectForKey:@"thumbImg"];
                 resource.resourceDesc=[dicContent objectForKey:@"resourceDesc"];
                 resource.resourceUrl=[dicContent objectForKey:@"resourceUrl"];
-                
                 resource.startedOn=[dicContent objectForKey:@"startedOn"];
                 resource.completedOn=[dicContent objectForKey:@"completedOn"];
+
+                NSDate *dateSatrtedOn = [AppGlobal convertStringDateToNSDate:resource.startedOn];
+                NSDate *dateCompletedOn = [AppGlobal convertStringDateToNSDate:resource.completedOn];
+                NSCalendar* calendar = [NSCalendar currentCalendar];
+                NSDateComponents* components ;
+                NSString *monthName;
+                NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                if(dateSatrtedOn!=nil)
+                {
+                    components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateSatrtedOn]; // Get necessary date components
+                    monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+                    monthName=[AppGlobal getMonthTimed:monthName];
+                    resource.startedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
+                    
+                }
+                if(dateCompletedOn!=nil){
+                    components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateCompletedOn]; // Get necessary date components
+                    monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+                    monthName=[AppGlobal getMonthTimed:monthName];
+                    resource.completedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
+                }
+
+                
+               
                 resource.authorName=[dicContent objectForKey:@"authorName"];
                    resource.authorImage=[dicContent objectForKey:@"authorImg"];
                 

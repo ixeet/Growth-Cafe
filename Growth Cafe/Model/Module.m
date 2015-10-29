@@ -9,5 +9,5 @@
 #import "Module.h"
 
 @implementation Module
-@synthesize moduleId,moduleName,completedPercentStatus,startedOn;
+@synthesize moduleId,moduleName,completedPercentStatus,startedOn,moduleSessionId;
 @end

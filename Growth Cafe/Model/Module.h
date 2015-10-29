@@ -13,4 +13,5 @@
 @property (nonatomic,strong) NSString* completedPercentStatus;
 @property (nonatomic,strong) NSString* moduleId;
 @property (nonatomic,strong) NSString* moduleName;
+@property (nonatomic,strong) NSString* moduleSessionId;
 @end

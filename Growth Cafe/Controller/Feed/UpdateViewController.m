@@ -104,6 +104,21 @@
                                              }];
             [self saveTeacherMasterData];
 
+        }else{
+            [FBSession.activeSession closeAndClearTokenInformation];
+            [FBSession.activeSession close];
+            [FBSession setActiveSession:nil];
+            
+            [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
+            [AppSingleton sharedInstance].isUserLoggedIn=NO;
+            
+            
+            [self.tabBarController.tabBar setHidden:YES];
+            HomeViewController *viewController= [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+            
+            //        FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
+            [self.tabBarController.tabBar setHidden:YES];
+            [self.navigationController pushViewController:viewController animated:YES];
         }
         
     }else if(  [AppSingleton sharedInstance].isUserLoggedIn!=YES)
@@ -449,8 +464,8 @@
             [arrayUpdates insertObject:objUpdate atIndex:index];
             
         }
-        objUpdate.isExpend=NO;
         
+        [AppSingleton sharedInstance].updatedUpdate=objUpdate;
         
         [tblViewContent reloadData];
         // [self loginSucessFullWithFB];
@@ -527,20 +542,16 @@
     int rowCount=0;
     Update *update=arrayUpdates[section];
     
-    if(update.isExpend)
-    {
-        rowCount=[update.comments count] +1;
-    }else{
         if([update.comments count]<1)
         {
-            rowCount=[update.comments count]+1;
+            rowCount=1;
         }
         else{
             rowCount=2;
         }
         
         
-    }
+    
     return rowCount;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -871,10 +882,9 @@
         
         NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
         //   cell.lblCmtDate.text=comment.commentDate;
-        scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                           withString:@""];
+       
         // Set label text to attributed string
-        NSString *str = [NSString stringWithFormat:@"\n%@ ago" ,scincetime];
+        NSString *str = [NSString stringWithFormat:@"\n%@" ,scincetime];
         //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
         
         UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:12];
@@ -1052,10 +1062,9 @@
             
             NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
             //   cell.lblCmtDate.text=comment.commentDate;
-            scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                               withString:@""];
+        
             // Set label text to attributed string
-            NSString *str = [NSString stringWithFormat:@"%@ %@ ago" ,comment.commentBy,scincetime];
+            NSString *str = [NSString stringWithFormat:@"%@ %@" ,comment.commentBy,scincetime];
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
@@ -1118,7 +1127,10 @@
             }
 //            if(comment.commentCounts  !=nil)
 //            {
-//                [cell.btnCMT setTitle:comment.commentCounts forState:UIControlStateNormal];
+                [cell.btnCMT setTitle:[NSString stringWithFormat:@"%ld",indexPath.section] forState:UIControlStateDisabled];\
+           
+         
+                [  cell.btnLike setTitle:[NSString stringWithFormat:@"%ld",indexPath.section] forState:UIControlStateDisabled];\
 //            }else{
 //                [cell.btnCMT setTitle:@" " forState:UIControlStateNormal];
 //            }
@@ -1132,37 +1144,59 @@
             cell.btnMore.hidden=YES;
             cell.imgDevider.hidden=YES;
             cell.btnMore.tag=indexPath.section;
-            if(([update.comments count]<1) && (indexPath.row==[update.comments count]))
+//            if(([update.comments count]<1) && (indexPath.row==[update.comments count]))
+//            {
+//                cell.btnMore.hidden=YES;
+//                cell.imgDevider.hidden=NO;
+//                
+//                
+//            }
+//            else if([update.comments count]>=1)
+//            {
+//                if(indexPath.row==[update.comments count])
+//                {
+//                    [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+//                    [cell.btnMore setTitle:[NSString stringWithFormat:@"View previous comments"]  forState:UIControlStateNormal];
+//                    cell.btnMore.hidden=YES;
+//                    cell.imgDevider.hidden=NO;
+//                    
+//                }else if(indexPath.row==1 ){
+//                    [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+//                    [cell.btnMore setTitle:[ NSString stringWithFormat:@"View previous comments"]   forState:UIControlStateNormal];
+//                    cell.btnMore.hidden=NO;
+//                    cell.imgDevider.hidden=NO;
+//                    
+//                    if([update.comments count]==1 && [comment.subComments count]==0)
+//                    {
+//                        cell.btnMore.hidden=YES;
+//                        cell.imgHalfDevider.hidden=YES;
+//                        
+//                        
+//                    }
+//                    
+//                    
+               // }
+                
+          //  }
+            
+            if([update.comments count]==0)
             {
                 cell.btnMore.hidden=YES;
+                 cell.imgHalfDevider.hidden=YES;
                 cell.imgDevider.hidden=NO;
-                
-                
-            }
-            else if([update.comments count]>=1)
+            }else if([update.comments count]==1 && [comment.subComments count]==0)
             {
-                if(update.isExpend && (indexPath.row==[update.comments count]))
-                {
-                    [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[NSString stringWithFormat:@"View previous comments"]  forState:UIControlStateNormal];
-                    cell.btnMore.hidden=YES;
-                    cell.imgDevider.hidden=NO;
-                    
-                }else if(indexPath.row==1 && !update.isExpend){
-                    [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btnMore setTitle:[ NSString stringWithFormat:@"View previous comments"]   forState:UIControlStateNormal];
-                    cell.btnMore.hidden=NO;
-                    cell.imgDevider.hidden=NO;
-                    if([update.comments count]==1)
-                    {
-                        cell.btnMore.hidden=YES;
-                        cell.imgHalfDevider.hidden=YES;
-                                      }
-                    
-                    
-                }
-                
+                cell.btnMore.hidden=YES;
+                cell.imgHalfDevider.hidden=NO;
+                cell.imgDevider.hidden=NO;
+            }else{
+            [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.btnMore setTitle:[NSString stringWithFormat:@"View previous comments"]  forState:UIControlStateNormal];
+            cell.btnMore.hidden=NO;
+                cell.imgHalfDevider.hidden=NO;
+            cell.imgDevider.hidden=NO;
             }
+            
             return cell;
         }else{
             
@@ -1186,10 +1220,9 @@
             
             NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
             //   cell.lblCmtDate.text=comment.commentDate;
-            scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                               withString:@""];
+          
             // Set label text to attributed string
-            NSString *str = [NSString stringWithFormat:@"%@ %@ ago" ,comment.commentBy,scincetime];
+            NSString *str = [NSString stringWithFormat:@"%@ %@" ,comment.commentBy,scincetime];
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
@@ -1267,20 +1300,20 @@
             }
             else if([update.comments count]>=1)
             {
-                if(update.isExpend && (indexPath.row==[update.comments count]))
+                if(indexPath.row==[update.comments count])
                 {
                     [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.btnMore setTitle:[ NSString stringWithFormat:@"View previous comments"]    forState:UIControlStateNormal];
                     cell.btnMore.hidden=YES;
                     cell.imgDevider.hidden=NO;
                     
-                }else if(indexPath.row==1 && !update.isExpend){
+                }else if(indexPath.row==1 ){
                     [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.btnMore setTitle:[ NSString stringWithFormat:@"View previous comments"]    forState:UIControlStateNormal];
                     cell.btnMore.hidden=NO;
                     cell.imgDevider.hidden=NO;
                     
-                }else if(indexPath.row==1 && update.isExpend){
+                }else if(indexPath.row==1){
                     
                     cell.btnMore.hidden=YES;
                     cell.imgHalfDevider.hidden=NO;
@@ -1471,10 +1504,10 @@
         }
         else if([update.comments count]>=1)
         {
-            if(update.isExpend && (indexPath.row==[update.comments count]))
+            if(indexPath.row==[update.comments count])
             {
                 height=35.0f;
-            }else if(indexPath.row==1 && !update.isExpend){
+            }else if(indexPath.row==1){
                 height=35.0f;
             }
             
@@ -1695,16 +1728,16 @@
     UIButton *btn=(UIButton *)sender;
     
     Update *update=[arrayUpdates objectAtIndex:btn.tag];
-    update.isExpend=YES;
-    
-    if([update.comments count]>=COMMENT_PER_PAGE){
-        NSUInteger location=COMMENT_PER_PAGE;
-        NSUInteger length=[update.comments count]-COMMENT_PER_PAGE;
-        //  NSRange range = NSMakeRange(0, [string length]);
-        NSRange range= NSMakeRange(location,length);
-        
-        [update.comments removeObjectsInRange:range] ;
-    }
+  
+//    
+//    if([update.comments count]>=COMMENT_PER_PAGE){
+//        NSUInteger location=COMMENT_PER_PAGE;
+//        NSUInteger length=[update.comments count]-COMMENT_PER_PAGE;
+//        //  NSRange range = NSMakeRange(0, [string length]);
+//        NSRange range= NSMakeRange(location,length);
+//        
+//        [update.comments removeObjectsInRange:range] ;
+//    }
     UpdateDetailViewController *updateDetailView=[[UpdateDetailViewController alloc]init];
     updateDetailView.objUpdate=update;
     [self.navigationController pushViewController:updateDetailView animated:YES];
@@ -1981,6 +2014,7 @@
         return;
     }
     UIButton *btn=(UIButton *)sender;
+    NSLog(@"%ld",[[ btn titleForState:UIControlStateDisabled ] integerValue]);
     Update *update=[arrayUpdates objectAtIndex:[[ btn titleForState:UIControlStateDisabled ] integerValue]];
     objUpdate=update;
     selectedCommentId=[NSString stringWithFormat:@"%ld", (long)btn.tag];

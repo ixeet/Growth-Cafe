@@ -12,7 +12,6 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "ProfileViewController.h"
 
-
 @interface MoreUsersViewController ()
 {
     NSMutableArray *arrayUsers;
@@ -222,7 +221,7 @@
 {
     // Return the number of sections.
     NSLog(@"You are in: %s", __FUNCTION__);
-    return 4;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -245,7 +244,7 @@
         [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     }
     UserDetails *userPrfile=[arrayUsers objectAtIndex:indexPath.row];
-    cell.lblName.text=userPrfile.userFirstName;
+    cell.lblName.text=userPrfile.username;
     if(userPrfile.userImage!=nil){
         
         //check image available at local
@@ -284,7 +283,17 @@
         }
         
     }
-    
+    float xval=80.0;
+    float width=self.view.frame.size.width-160;
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
+        xval= 0.0;
+        width=self.view.frame.size.width;
+        
+    }
+    UIView * additionalSeparator = [[UIView alloc]
+                                    initWithFrame:CGRectMake(xval,cell.frame.size.height,width,1)];
+    additionalSeparator.backgroundColor = [UIColor lightGrayColor];
+    [cell addSubview:additionalSeparator];
     // cal calculate the time
     return cell;
 
@@ -300,18 +309,46 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // call the user profi{le service user profile
-    UserDetails *usrDetail=[arrayUsers objectAtIndex:indexPath.row];
-    ProfileViewController *profileView=[[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
-    profileView.user=usrDetail;
-    [self.navigationController pushViewController:profileView animated:YES];
-
     
+    
+    
+    UserDetails *usrDetail=[arrayUsers objectAtIndex:indexPath.row];
+  
+ if(previousStatus==AFNetworkReachabilityStatusNotReachable)
+    {
+        [self showNetworkStatus:NO_INTERNET_MSG newVisibility:NO] ;
+        return;
+    }
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    
+    [[appDelegate _engine] getUserDetail:[NSString stringWithFormat:@"%@", usrDetail.userId] success:^(UserDetails *usrDetail) {
+        //Hide Indicator
+        ProfileViewController *profileView=[[ProfileViewController alloc]init];
+        profileView.user=usrDetail;
+        [self.navigationController pushViewController:profileView animated:YES];
+        [appDelegate hideSpinner];
+        
+    }
+                                 failure:^(NSError *error) {
+                                     //Hide Indicator
+                                     [appDelegate hideSpinner];
+                                     NSLog(@"failure JsonData %@",[error description]);
+                                     
+                                     
+                                 }];
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50.0;
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+    {
+        return 50;
+        
+    }
+    return 40;
+
     
     
     

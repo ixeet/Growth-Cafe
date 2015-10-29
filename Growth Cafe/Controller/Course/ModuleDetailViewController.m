@@ -971,26 +971,26 @@ AFNetworkReachabilityStatus previousStatus;
         Resourse *resource=[contentList objectAtIndex:page];
         CustomContentView *customView= [[CustomContentView alloc]init];
         customView.lblAutherName.text=resource.authorName;
-        NSDate *dateSatrtedOn = [AppGlobal convertStringDateToNSDate:resource.startedOn];
-        NSDate *dateCompletedOn = [AppGlobal convertStringDateToNSDate:resource.completedOn];
-        NSCalendar* calendar = [NSCalendar currentCalendar];
-        NSDateComponents* components ;
-        NSString *monthName;
-         NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        if(dateSatrtedOn!=nil)
-        {
-         components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateSatrtedOn]; // Get necessary date components
-        monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-             monthName=[AppGlobal getMonthTimed:monthName];
-        resource.startedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
-       
-        }
-        if(dateCompletedOn!=nil){
-            components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateCompletedOn]; // Get necessary date components
-            monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-             monthName=[AppGlobal getMonthTimed:monthName];
-            resource.completedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
-        }
+//        NSDate *dateSatrtedOn = [AppGlobal convertStringDateToNSDate:resource.startedOn];
+//        NSDate *dateCompletedOn = [AppGlobal convertStringDateToNSDate:resource.completedOn];
+//        NSCalendar* calendar = [NSCalendar currentCalendar];
+//        NSDateComponents* components ;
+//        NSString *monthName;
+//         NSDateFormatter *df = [[NSDateFormatter alloc] init];
+//        if(dateSatrtedOn!=nil)
+//        {
+//         components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateSatrtedOn]; // Get necessary date components
+//        monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+//             monthName=[AppGlobal getMonthTimed:monthName];
+//        resource.startedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
+//       
+//        }
+//        if(dateCompletedOn!=nil){
+//            components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateCompletedOn]; // Get necessary date components
+//            monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+//             monthName=[AppGlobal getMonthTimed:monthName];
+//            resource.completedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
+//        }
         customView.lblStartedon.text=resource.startedOn;
         customView.lblCompletedon.text=resource.completedOn;
         if([resource.islike isEqualToString:@"1"])
@@ -1088,10 +1088,9 @@ AFNetworkReachabilityStatus previousStatus;
             
             NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
             //   cell.lblCmtDate.text=comment.commentDate;
-            scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                               withString:@""];
             // Set label text to attributed string
-            NSString *str = [NSString stringWithFormat:@"%@ %@ ago" ,objComment.commentBy,scincetime];
+            NSString *str = [NSString stringWithFormat:@"%@ %@" ,objComment.commentBy,scincetime];
+            
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
@@ -1550,6 +1549,7 @@ AFNetworkReachabilityStatus previousStatus;
         
         cell.lblStartedon.text=selectedResource.startedOn;
        
+        
         cell.lblCompletedon.text=selectedResource.completedOn;
         if(selectedResource.resourceImageUrl!=nil){
             if([AppGlobal checkImageAvailableAtLocal:selectedResource.resourceImageUrl])
@@ -1642,10 +1642,9 @@ AFNetworkReachabilityStatus previousStatus;
             
             NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
             //   cell.lblCmtDate.text=comment.commentDate;
-            scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                               withString:@""];
+          
             // Set label text to attributed string
-            NSString *str = [NSString stringWithFormat:@"%@ %@ ago" ,comment.commentBy,scincetime];
+            NSString *str = [NSString stringWithFormat:@"%@ %@" ,comment.commentBy,scincetime];
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
@@ -1778,10 +1777,9 @@ AFNetworkReachabilityStatus previousStatus;
             
             NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
             //   cell.lblCmtDate.text=comment.commentDate;
-            scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                 withString:@""];
+           
             // Set label text to attributed string
-            NSString *str = [NSString stringWithFormat:@"%@ %@ ago" ,comment.commentBy,scincetime];
+            NSString *str = [NSString stringWithFormat:@"%@ %@" ,comment.commentBy,scincetime];
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
             
             // Set font, notice the range is for the whole string
@@ -2052,11 +2050,12 @@ AFNetworkReachabilityStatus previousStatus;
         // Set font, notice the range is for the whole string
         UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
         [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(3, [assignment.assignmentSubmittedBy length])];
-        [cell.lblContentby setAttributedText:attributedString];
+      
         
         [cell.imgContentURL setHidden:YES];
         if(resource!=nil)
         {
+              [cell.lblContentby setAttributedText:attributedString];
         [cell.imgContentURL setHidden:NO];
         if(resource.resourceImageUrl!=nil){
             if([AppGlobal checkImageAvailableAtLocal:resource.resourceImageUrl])
@@ -2085,6 +2084,28 @@ AFNetworkReachabilityStatus previousStatus;
             cell.imgContentURL.image= img;
             [ cell.imgContentURL setBackgroundColor:[UIColor clearColor]];
         }
+        }}
+        
+        if([assignment.assignmentStatus isEqualToString:@"1"])
+        {
+            
+            NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.assignmentDueDate];
+            if(submittedDate!=nil){
+                NSCalendar* calendar = [NSCalendar currentCalendar];
+                NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  submittedDate]; // Get necessary date components
+                
+                
+                NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+                monthName=[AppGlobal getMonthTimed:monthName];
+                
+                cell.lblContentby.text=[NSString stringWithFormat:@"Due date %@ %ld",monthName,(long)components.day ];
+                cell.lblSubmittedDate.hidden=YES;
+                cell.btnPlay.hidden=YES;
+
+            }
+            
+        }else{
             NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.assignmentSubmittedDate];
             if(submittedDate!=nil){
                 NSCalendar* calendar = [NSCalendar currentCalendar];
@@ -2097,36 +2118,19 @@ AFNetworkReachabilityStatus previousStatus;
                 
                 cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",monthName,(long)components.day ];
             }
-
-            
-        }else{
-        
-            NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.assignmentDueDate];
-            if(submittedDate!=nil){
-                NSCalendar* calendar = [NSCalendar currentCalendar];
-                NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  submittedDate]; // Get necessary date components
+            if(resource.resourceUrl!=nil)
+            {
+                cell.btnPlay.tag= indexPath.row;
+                [cell.btnPlay  addTarget:self action:@selector(btnPlayAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
                 
+            }else{
                 
-                NSDateFormatter *df = [[NSDateFormatter alloc] init];
-                NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-                monthName=[AppGlobal getMonthTimed:monthName];
+               
+                [cell.imgContentURL setImage:[UIImage imageNamed:@"imPending.png"]];
+                cell.lblSubmittedDate.hidden=YES;
                 
-                cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Submitted on %@ %ld",monthName,(long)components.day ];
             }
-
-        
-        }
-        
-        
             
-        cell.btnPlay.tag= indexPath.row;
-        [cell.btnPlay  addTarget:self action:@selector(btnPlayAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        }else{
-        
-            cell.btnPlay.hidden=YES;
-            [cell.imgContentURL setImage:[UIImage imageNamed:@"imPending.png"]];
-            cell.lblSubmittedDate.hidden=YES;
             
         }
         if(indexPath.row!=([assignmentList count]-1))

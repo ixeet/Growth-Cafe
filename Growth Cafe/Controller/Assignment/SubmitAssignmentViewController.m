@@ -32,6 +32,8 @@
     if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
     {
         _scollView.scrollEnabled = YES;
+     
+       
     }else{
      _scollView.scrollEnabled = NO;
     
@@ -61,7 +63,12 @@
 }
 - (void)viewDidLayoutSubviews {
     
-    self.scollView.contentSize = CGSizeMake(self.view.frame.size.width, self.scollView.frame.size.height+250);
+   // self.scollView.contentSize = CGSizeMake(self.view.frame.size.width, self.scollView.frame.size.height+0);
+       if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+    {
+         self.scollView.contentSize = CGSizeMake(self.view.frame.size.width, self.scollView.frame.size.height+100);
+        
+    }
 
 }
 
@@ -108,7 +115,9 @@
         //Hide Indicator
       [appDelegate hideSpinner];
             [AppSingleton sharedInstance].comeFromChild=NO;
-        [self.navigationController popViewControllerAnimated:YES];
+            [self.navigationController popViewControllerAnimated:YES];
+
+             [appDelegate hideSpinner];
 
     }
                                     failure:^(NSError *error) {
@@ -190,8 +199,8 @@
         
         if( screenHeight > 480 && screenHeight < 667 ){
             
-            yAxis=250;
-            [self setPositionOfLoginBaseViewWhenStartEditing:-250];
+            yAxis=200;
+            [self setPositionOfLoginBaseViewWhenStartEditing:-200];
         }else{
             yAxis=160;
             [self setPositionOfLoginBaseViewWhenStartEditing:-160];
@@ -218,7 +227,7 @@
 {
   if(txtViewURL==textView)
   {
-      [self setPositionOfLoginBaseViewWhenEndEditing];
+      //[self setPositionOfLoginBaseViewWhenEndEditing];
       [textView resignFirstResponder];
       
      
@@ -282,8 +291,8 @@
     UITextField *nextResponder = (UITextField*) [self.view  viewWithTag:nextTag];
    
     
-    if([txtViewURL isEqual:activeTextField]){
-        
+     if([activeTextField isEqual:txtViewURL]){
+         yAxis=yAxis-150;
         [self setPositionOfLoginBaseViewWhenEndEditing];
         
     }
@@ -304,9 +313,12 @@
 }
 - (void)doneClicked:(NSUInteger)selectedId
 {
+    if([activeTextField isEqual:txtViewURL]){
+
     [self setPositionOfLoginBaseViewWhenEndEditing];
-    [self allTxtFieldsResignFirstResponder];
-  
+
+    }
+        [self allTxtFieldsResignFirstResponder];
     
 }
 #pragma --
@@ -323,9 +335,15 @@
 }
 
 -(void)setPositionOfLoginBaseViewWhenEndEditing{
-    CGRect rc = [_scollView bounds];
-    
-    [_scollView setContentOffset:CGPointMake(rc.origin.x, rc.origin.y-yAxis) animated:YES];
+//    CGRect contentRect = CGRectZero;
+//    for (UIView *view in _scollView.subviews) {
+//        contentRect = CGRectUnion(contentRect, view.frame);
+//    }
+//    self.scollView.contentSize  = contentRect.size;
+
+  CGRect rc = [_scollView bounds];
+//    
+  [_scollView setContentOffset:CGPointMake(rc.origin.x, rc.origin.y-yAxis) animated:YES];
 //    [AppGlobal setViewPositionWithView:self.scollView  axisX:self.scollView.frame.origin.x  axisY:0.0 withAnimation:YES];
    
   // [[NSNotificationCenter defaultCenter] removeObserver:self];

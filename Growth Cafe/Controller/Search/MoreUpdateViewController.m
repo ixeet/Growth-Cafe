@@ -296,6 +296,14 @@
                         
                         [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
                         [attributedString appendAttributedString:attributedStringtemp];
+                    } else  if([[dictext objectForKey:@"type"] isEqualToString:@"assignment"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Assignment" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
                     }
                     else  if([[dictext objectForKey:@"type"] isEqualToString:@"module"])
                     {
@@ -343,7 +351,16 @@
                         [attributedStringtemp addAttribute:NSFontAttributeName value:Boldfont range:NSMakeRange(0,[tempstr length] )];
                         [attributedString appendAttributedString:attributedStringtemp];
                         
-                    }else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
+                    } else  if([[dictext objectForKey:@"type"] isEqualToString:@"assignment"])
+                    {
+                        NSString* tempstr=[dictext objectForKey:@"value"];
+                        
+                        NSMutableAttributedString *attributedStringtemp = [[NSMutableAttributedString alloc] initWithString:tempstr attributes:@{ @"Assignment" : @(YES) }];
+                        
+                        [attributedStringtemp addAttribute:NSFontAttributeName value:font range:NSMakeRange(0,[tempstr length] )];
+                        [attributedString appendAttributedString:attributedStringtemp];
+                    }
+                    else  if([[dictext objectForKey:@"type"] isEqualToString:@"course"])
                     {
                         NSString* tempstr=[dictext objectForKey:@"value"];
                         
@@ -400,10 +417,9 @@
     
     NSString* scincetime=[AppGlobal timeLeftSinceDate:submittedDate];
     //   cell.lblCmtDate.text=comment.commentDate;
-    scincetime = [scincetime stringByReplacingOccurrencesOfString:@"-"
-                                                       withString:@""];
+
     // Set label text to attributed string
-    NSString *str = [NSString stringWithFormat:@"\n%@ ago" ,scincetime];
+    NSString *str = [NSString stringWithFormat:@"\n%@" ,scincetime];
     //        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
     
     UIFont *font = [UIFont fontWithName:@"Helvetica neue" size:12];
