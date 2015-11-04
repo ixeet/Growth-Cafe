@@ -23,6 +23,8 @@
 @property (strong, nonatomic) IBOutlet ALAsset *selectedAssest;
 @property (strong, nonatomic) IBOutlet UIView *subView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scollView;
+@property (strong, nonatomic) IBOutlet UIView *loadingView;
+@property (strong, nonatomic) IBOutlet UILabel *lblUploadStatus;
 
 
 @end

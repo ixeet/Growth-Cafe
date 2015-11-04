@@ -511,6 +511,120 @@
 //}
 -(void)uploadAssignment:(NSString*)videoTitle  AndVideoDesc:(NSString*)videoDesc AndVideoURL:(NSString*)videoURL AndVideoPath:(ALAsset*)asset andFileName:(NSString*)fileName  AndAssignment:(NSString*)assignmentId  success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure{
     
+    ALAssetRepresentation *rep = [asset defaultRepresentation];
+    //    Byte *buffer = (Byte*)malloc((NSUInteger)rep.size);
+    //    NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:(NSUInteger)rep.size error:nil];
+    //    NSData *videoData =[NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES] ;
+    
+    
+    NSArray *arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath =  [NSString stringWithFormat:@"%@/%@.mp4",[arr objectAtIndex:0],@"output" ];
+    NSURL *outputURL = [NSURL fileURLWithPath:filePath];
+    
+    NSData *videoData= [NSData dataWithContentsOfURL:outputURL];
+    
+    
+    // NSString *urlString = @"http://192.168.0.10:8080/SLMS/rest/course/uploadResourceDetail"; // your url
+    // NSString *urlString = @"http://191.239.57.54:8080/SLMS/rest/course/uploadResourceDetail"; // your url
+    
+    
+    NSString *BoundaryConstant = @"---------------------------14737809831466499882746641449";
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [request setHTTPShouldHandleCookies:NO];
+    [request setTimeoutInterval:30];
+    [request setHTTPMethod:@"POST"];
+    [request setURL:[NSURL URLWithString:POST_ASSIGNMENT_URL]];
+    UserDetails * objUser=[AppSingleton  sharedInstance].userDetail;
+    
+    
+    // set Content-Type in HTTP header
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BoundaryConstant];
+    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    // post body
+    NSMutableData *body = [NSMutableData data];
+    
+    // add params (all params are strings)
+    NSMutableDictionary *_params=[[NSMutableDictionary alloc]init];
+    [_params setObject:videoTitle forKey:@"resourceName"];
+    
+    [_params setObject:[NSString stringWithFormat:@"%@ %@", objUser.userFirstName,objUser.userLastName ] forKey:@"resourceAuthor"];
+    [_params setObject:videoDesc forKey:@"descTxt"];
+    [_params setObject:objUser.userEmail forKey:@"userName"];
+    [_params setObject:videoURL forKey:@"uploadedUrl"];
+    [_params setObject:assignmentId forKey:@"assignmentId"];
+    
+    for (NSString *param in _params) {
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", param] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"%@\r\n", [_params objectForKey:param]] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    // add image data
+    //NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"logo@2x.png"], 1.0);
+    if (videoData) {
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"output.mp4\"\r\n", @"fileName"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Type: video/mp4\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:videoData];
+        [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // setting the body of the post to the reqeust
+    [request setHTTPBody:body];
+    
+    // set the content-length
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[body length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    // set URL
+    
+    //    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    //
+    //    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    //    NSError* error;
+    //    NSDictionary* responseDic = [NSJSONSerialization JSONObjectWithData:returnData
+    //                                                         options:kNilOptions
+    //                                                           error:&error];
+    
+
+    
+    // 3. Create and use `AFHTTPRequestOperationManager` to create an `AFHTTPRequestOperation` from the `NSMutableURLRequest` that we just created.
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestOperation *operation =
+    [manager HTTPRequestOperationWithRequest:request
+                                     success:^(AFHTTPRequestOperation *operation, id responseDic) {
+                                         if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+                                             
+                                             success(YES);
+                                         }else{
+                                             failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+                                         }
+                                         
+
+                                         NSLog(@"Success %@", responseDic);
+                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                          failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+                                         NSLog(@"Failure %@", error.description);
+                                     }];
+    
+    // 4. Set the progress block of the operation.
+    [operation setUploadProgressBlock:^(NSUInteger __unused bytesWritten,
+                                        long long totalBytesWritten,
+                                        long long totalBytesExpectedToWrite) {
+        NSLog(@"Wrote %lld/%lld", totalBytesWritten, totalBytesExpectedToWrite);
+    }];
+    
+    // 5. Begin!
+    [operation start];
+    
+}
+-(void)uploadAssignment1:(NSString*)videoTitle  AndVideoDesc:(NSString*)videoDesc AndVideoURL:(NSString*)videoURL AndVideoPath:(ALAsset*)asset andFileName:(NSString*)fileName  AndAssignment:(NSString*)assignmentId  success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure{
+    
 //    ALAssetRepresentation *rep = [asset defaultRepresentation];
 //    Byte *buffer = (Byte*)malloc((NSUInteger)rep.size);
 //    NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:(NSUInteger)rep.size error:nil];

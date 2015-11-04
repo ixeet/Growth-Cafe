@@ -427,7 +427,7 @@
         }
         
     }else {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
         
     }
     
@@ -978,7 +978,7 @@
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
     [[appDelegate _engine] SetFBloginWithUserID:username FBID:fbuserid success:^(bool status) {
-        //  self.btnFacebook.hidden=YES;
+          self.btnFacebook.hidden=YES;
         [self loginSucessFullWithFB:fbuserid];
         //Hide Indicator
         [appDelegate hideSpinner];

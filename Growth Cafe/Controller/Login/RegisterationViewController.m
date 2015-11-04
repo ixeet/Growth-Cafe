@@ -530,8 +530,17 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self setPositionOfLoginBaseViewWhenEndEditing];
-    [textField resignFirstResponder];
+    
+        if(textField.tag==15)
+        {
+            [textField resignFirstResponder];
+            
+        }else{
+            [textField resignFirstResponder];
+            [self nextClicked:textField.tag];
+        }
+        
+        
     
     return YES;
 }

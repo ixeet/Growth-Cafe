@@ -26,6 +26,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "SearchViewController.h"
 #import <Social/Social.h>
+#import "VedioViewController.h"
 @interface UpdateViewController ()
 {
     NSMutableArray *arrayUpdates;
@@ -1451,7 +1452,7 @@
                 else  if([[dictext objectForKey:@"type"] isEqualToString:@"assignment"])
                 {
                     btnAction.tag =[ [dictext objectForKey:@"key"]integerValue];
-                    [btnAction addTarget:self action:@selector(btnCourseDetailClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [btnAction addTarget:self action:@selector(btnAssignmentClick::) forControlEvents:UIControlEventTouchUpInside];
                     
                 }
                 
@@ -1761,8 +1762,9 @@
         videoView = [[UIWebView alloc] initWithFrame:frame];
         [self.view addSubview:videoView];
     }
-    [videoView loadHTMLString:html baseURL:nil];
-    
+   // [videoView  baseURL:nil];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL: [NSURL URLWithString: url] cachePolicy: NSURLRequestUseProtocolCachePolicy timeoutInterval: 1000.0];
+    [videoView loadRequest: request];
     videoView.delegate=self;
 }
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
@@ -1787,15 +1789,19 @@
     UIButton *btn=(UIButton *)sender;
     Update *update=[arrayUpdates objectAtIndex:btn.tag];
     Resourse *resourse =update.resource;
-    if([resourse.resourceUrl containsString:@"youtube"])
+    if([resourse.resourceUrl containsString:@"vimeo"])
     {
-        [self embedYouTube:resourse.resourceUrl  frame:self.view.frame];
-        [appDelegate self].allowRotation = YES;
+//   resourse.resourceUrl=@"https://player.vimeo.com/video/140230038?title=0&byline=0&portrait=0";
+//        [self embedYouTube:@"https://player.vimeo.com/video/140230038?title=0&byline=0&portrait=0"  frame:self.view.frame];
+    VedioViewController *vedio= [[VedioViewController alloc]initWithNibName:@"VedioViewController" bundle:nil];
+        vedio.streamURL=resourse.resourceUrl;//@"https://player.vimeo.com/video/140230038?title=0&byline=0&portrait=0";
+    [self.navigationController pushViewController:vedio animated:YES];
+     // [appDelegate self].allowRotation = YES;
     }else {
-        [self PlayTheVideo:resourse.resourceUrl];
+       [self PlayTheVideo:resourse.resourceUrl];
         
     }
-    
+
 }
 
 -(void)PlayTheVideo:(NSString *)stringUrl

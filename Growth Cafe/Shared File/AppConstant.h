@@ -138,6 +138,7 @@
 
 // Error Msg
 #define NO_RECORD_FOUND_MSG @"No record found."
+#define NO_RECORD_FOUND_FOR_REVIEW_MSG @"There is no pending assignment for review."
 #define NO_RESOURCE_MSG @"There is no resources available for this module."
 #define NO_INTERNET_MSG @"No Internet Connection."
 #define REESTABLISH_INTERNET_MSG @"Reestablishing Lost Connection."

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -18,7 +17,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7C-sm-8F3">
                         <rect key="frame" x="88" y="0.0" width="144" height="47"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3b-by-L0a" userLabel="lblCourseName">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3b-by-L0a" userLabel="lblCourseName">
                                 <rect key="frame" x="83" y="6" width="32" height="32"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -27,14 +26,17 @@
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="progress_vertica_greyl_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="Mte-eg-1mq" userLabel="imgStandingLine">
-                                <rect key="frame" x="64" y="0.0" width="6" height="50"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="progress_vertica_greyl_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="Mte-eg-1mq" userLabel="imgStandingLine">
+                                <rect key="frame" x="64" y="0.0" width="6" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="6" id="Erj-KN-EcC"/>
+                                    <constraint firstAttribute="width" constant="6" id="Fq1-Y5-Uon"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtx-Pv-5fv" userLabel="lblDate">
-                                <rect key="frame" x="8" y="12" width="0.0" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="3 nov" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtx-Pv-5fv" userLabel="lblDate">
+                                <rect key="frame" x="8" y="12" width="55" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="Oc6-a8-Oey"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -61,7 +63,7 @@
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="x3n-su-iCP">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="x3n-su-iCP">
                                 <rect key="frame" x="83" y="43" width="38" height="3"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.58039215690000001" green="0.0" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -78,21 +80,22 @@
                         <constraints>
                             <constraint firstItem="Eeh-DB-svX" firstAttribute="top" secondItem="C7C-sm-8F3" secondAttribute="top" constant="11" id="0VY-JF-9XL"/>
                             <constraint firstItem="U3b-by-L0a" firstAttribute="top" secondItem="C7C-sm-8F3" secondAttribute="top" constant="6" id="DQV-Qb-kPL"/>
-                            <constraint firstItem="x3n-su-iCP" firstAttribute="leading" secondItem="C7C-sm-8F3" secondAttribute="leading" constant="83" id="DSW-OM-xVL"/>
-                            <constraint firstItem="Mte-eg-1mq" firstAttribute="top" secondItem="dtx-Pv-5fv" secondAttribute="bottom" constant="-33" id="LxZ-Sj-LZ1"/>
-                            <constraint firstAttribute="bottom" secondItem="x3n-su-iCP" secondAttribute="bottom" constant="2" id="Pgt-wR-fir"/>
-                            <constraint firstItem="x3n-su-iCP" firstAttribute="top" secondItem="U3b-by-L0a" secondAttribute="bottom" constant="5" id="SA6-FC-scS"/>
-                            <constraint firstAttribute="trailing" secondItem="x3n-su-iCP" secondAttribute="trailing" constant="23" id="Sn3-fi-wLJ"/>
+                            <constraint firstItem="Mte-eg-1mq" firstAttribute="top" secondItem="C7C-sm-8F3" secondAttribute="top" id="Ecc-qp-P9H"/>
+                            <constraint firstItem="x3n-su-iCP" firstAttribute="leading" secondItem="U3b-by-L0a" secondAttribute="leading" id="GQv-Ho-k1i"/>
+                            <constraint firstItem="Mte-eg-1mq" firstAttribute="leading" secondItem="dtx-Pv-5fv" secondAttribute="trailing" constant="1" id="KDL-at-vCQ"/>
+                            <constraint firstItem="U3b-by-L0a" firstAttribute="leading" secondItem="Mte-eg-1mq" secondAttribute="trailing" constant="13" id="ScF-aN-eyP"/>
                             <constraint firstItem="hQm-rL-QpJ" firstAttribute="leading" secondItem="U3b-by-L0a" secondAttribute="trailing" constant="1" id="Udu-WH-33g"/>
                             <constraint firstItem="6Gm-sn-NqB" firstAttribute="leading" secondItem="hQm-rL-QpJ" secondAttribute="trailing" constant="6" id="cMX-ZH-W7I"/>
                             <constraint firstItem="dtx-Pv-5fv" firstAttribute="top" secondItem="C7C-sm-8F3" secondAttribute="top" constant="12" id="cmu-Dk-F0C"/>
                             <constraint firstItem="hQm-rL-QpJ" firstAttribute="top" secondItem="C7C-sm-8F3" secondAttribute="top" constant="11" id="fk8-VD-emB"/>
                             <constraint firstItem="Eeh-DB-svX" firstAttribute="leading" secondItem="hQm-rL-QpJ" secondAttribute="trailing" constant="6" id="gBh-jM-yK6"/>
                             <constraint firstItem="6Gm-sn-NqB" firstAttribute="top" secondItem="C7C-sm-8F3" secondAttribute="top" constant="11" id="gNQ-Xa-avm"/>
+                            <constraint firstAttribute="trailing" secondItem="x3n-su-iCP" secondAttribute="trailing" constant="23" id="iKQ-pM-Aog"/>
+                            <constraint firstItem="x3n-su-iCP" firstAttribute="top" secondItem="U3b-by-L0a" secondAttribute="bottom" constant="5" id="mOm-fd-Tol"/>
                             <constraint firstItem="dtx-Pv-5fv" firstAttribute="leading" secondItem="C7C-sm-8F3" secondAttribute="leading" constant="8" id="pxg-3e-6uk"/>
-                            <constraint firstItem="U3b-by-L0a" firstAttribute="leading" secondItem="Mte-eg-1mq" secondAttribute="trailing" constant="13" id="rUJ-nc-JTs"/>
+                            <constraint firstItem="Mte-eg-1mq" firstAttribute="leading" secondItem="dtx-Pv-5fv" secondAttribute="trailing" constant="1" id="vqr-Td-bi8"/>
+                            <constraint firstAttribute="bottom" secondItem="Mte-eg-1mq" secondAttribute="bottom" constant="-1" id="wAK-VR-i4f"/>
                             <constraint firstAttribute="trailing" secondItem="6Gm-sn-NqB" secondAttribute="trailing" id="waY-uw-INd"/>
-                            <constraint firstItem="x3n-su-iCP" firstAttribute="leading" secondItem="U3b-by-L0a" secondAttribute="leading" id="zah-ek-zR7"/>
                         </constraints>
                     </view>
                 </subviews>

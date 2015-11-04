@@ -24,6 +24,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import <Social/Social.h>
 #import "SearchViewController.h"
+#import "VedioViewController.h"
 @interface UpdateDetailViewController ()
 {
    
@@ -1580,14 +1581,19 @@
     UIButton *btn=(UIButton *)sender;
  
     Resourse *resourse =objUpdate.resource;
-    if([resourse.resourceUrl containsString:@"youtube"])
+    if([resourse.resourceUrl containsString:@"vimeo"])
     {
-        [self embedYouTube:resourse.resourceUrl  frame:self.view.frame];
-        [appDelegate self].allowRotation = YES;
+        //   resourse.resourceUrl=@"https://player.vimeo.com/video/140230038?title=0&byline=0&portrait=0";
+        //        [self embedYouTube:@"https://player.vimeo.com/video/140230038?title=0&byline=0&portrait=0"  frame:self.view.frame];
+        VedioViewController *vedio= [[VedioViewController alloc]initWithNibName:@"VedioViewController" bundle:nil];
+        vedio.streamURL=resourse.resourceUrl;//@"https://player.vimeo.com/video/140230038?title=0&byline=0&portrait=0";
+        [self.navigationController pushViewController:vedio animated:YES];
+        // [appDelegate self].allowRotation = YES;
     }else {
         [self PlayTheVideo:resourse.resourceUrl];
         
     }
+
     
 }
 

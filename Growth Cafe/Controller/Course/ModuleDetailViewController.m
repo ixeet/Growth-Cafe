@@ -21,6 +21,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import <Social/Social.h>
 #import "SearchViewController.h"
+#import "VedioViewController.h"
 
 AFNetworkReachabilityStatus previousStatus;
 
@@ -388,14 +389,18 @@ AFNetworkReachabilityStatus previousStatus;
     NSInteger currentpage=  page;
     // get the current Content
     selectedResource=[contentList objectAtIndex:currentpage];
-    if([selectedResource.resourceUrl containsString:@"youtube"])
-    {
-        [self embedYouTube:selectedResource.resourceUrl  frame:self.view.frame];
-        [appDelegate self].allowRotation = YES;
-    }else {
-        [self PlayTheVideo:selectedResource.resourceUrl];
-        
-    }
+   if([selectedResource.resourceUrl containsString:@"vimeo"])
+        {
+            //   resourse.resourceUrl=@"https://player.vimeo.com/video/140230038?title=0&byline=0&portrait=0";
+            //        [self embedYouTube:@"https://player.vimeo.com/video/140230038?title=0&byline=0&portrait=0"  frame:self.view.frame];
+            VedioViewController *vedio= [[VedioViewController alloc]initWithNibName:@"VedioViewController" bundle:nil];
+            vedio.streamURL=selectedResource.resourceUrl;//@"https://player.vimeo.com/video/140230038?title=0&byline=0&portrait=0";
+            [self.navigationController pushViewController:vedio animated:YES];
+            // [appDelegate self].allowRotation = YES;
+        }else {
+            [self PlayTheVideo:selectedResource.resourceUrl];
+            
+        }
 
 }
 -(void)PlayTheVideo:(NSString *)stringUrl

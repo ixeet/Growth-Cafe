@@ -23,7 +23,7 @@
 #import "FilterViewController.h"
 #import "AssignmentReviewViewController.h"
 #import "SearchViewController.h"
-
+#import "VedioViewController.h"
 @interface AssignmentViewController ()
 {
    
@@ -37,6 +37,7 @@
     CGFloat screenHeight;
     CGFloat screenWidth;
     NSMutableDictionary *filterDic;
+    
 }
 @end
 
@@ -377,7 +378,7 @@
         {
             [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_MSG title:@""];
              [appDelegate hideSpinner];
-            return ;
+          //  return ;
         }
         
         
@@ -402,12 +403,22 @@
     
     [[appDelegate _engine] getTeacherAssignment:userid  AndTextSearch:txtSearch AndFilterDic:filterDic success:^(NSMutableArray *assignments) {
         arrayAssignment=assignments;
-        if(! [arrayAssignment count] >0)
+        
+        int status= [[filterDic valueForKey:@"status"]intValue];;
+
+        if((![arrayAssignment count] >0) && status==2)
+        {
+            [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_FOR_REVIEW_MSG title:@""];
+             [appDelegate hideSpinner];
+           // return ;
+        }else   if(! [arrayAssignment count] >0)
         {
             [AppGlobal showAlertWithMessage:NO_RECORD_FOUND_MSG title:@""];
-             [appDelegate hideSpinner];
-            return ;
+            [appDelegate hideSpinner];
+           // return ;
         }
+        
+        
         
         
         [tblViewContent reloadData];
@@ -428,7 +439,7 @@
 -(void)DidSelectFilter:(NSMutableDictionary * )dicfilter andSender:(id)sender
 {
     filterDic=dicfilter;
-    [self getAssignment:txtSearchBar.text];
+   // [self getAssignment:txtSearchBar.text];
      [sender dismissViewControllerAnimated:YES completion:nil];
 
 }
@@ -579,9 +590,23 @@
     cell.btnAssignmentStatus.tag =indexPath.row;
     if([assignment.assignmentStatus isEqualToString:@"1"])
     {
+        
+//       int daysToAdd = -1;
+//        NSDate *newDate1 = [dueDate dateByAddingTimeInterval:60*60*24*daysToAdd];
+        
         NSDate *today10am =[NSDate date];
         
-        if ([dueDate compare:today10am] == NSOrderedDescending)
+        unsigned int flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+        NSCalendar* calendar = [NSCalendar currentCalendar];
+        
+        NSDateComponents* components = [calendar components:flags fromDate:dueDate];
+        
+        NSDate* dateOnly = [calendar dateFromComponents:components];
+        components = [calendar components:flags fromDate:today10am];
+        today10am = [calendar dateFromComponents:components];
+        
+        
+        if (([dateOnly compare:today10am] == NSOrderedDescending)||([dateOnly compare:today10am] == NSOrderedSame))
         {
             // cell.btnAssignmentStatus.selected=YES;
             [cell.btnAssignmentStatus setImage:[UIImage imageNamed:@"icn_new-assignment.png"] forState:UIControlStateNormal];
@@ -603,6 +628,7 @@
             // cell.lblDateAssignment.textColor =[UIColor b];
             
         }
+      
         //        if(assignment.isExpend)
         //         // [cell.btnSubmit setHidden:NO];
         
@@ -831,7 +857,8 @@
         
         return;
     }
-
+    if([AppSingleton sharedInstance].userDetail.userRole==2)
+        return;
     UIButton *btn=(UIButton *)sender;
     Assignment *assignment=[arrayAssignment objectAtIndex:btn.tag];
     SubmitAssignmentViewController *submitViewController=[[SubmitAssignmentViewController alloc]init];
@@ -874,13 +901,17 @@
     UIButton *btn=(UIButton *)sender;
     Assignment *assign=[arrayAssignment objectAtIndex:btn.tag];
     Resourse *resourse =assign.attachedResource;
-       if([resourse.resourceUrl containsString:@"youtube"])
+    if([resourse.resourceUrl containsString:@"vimeo"])
     {
-        [self embedYouTube:resourse.resourceUrl  frame:self.view.frame];
-      [appDelegate self].allowRotation = YES;
+        //   resourse.resourceUrl=@"https://player.vimeo.com/video/140230038?title=0&byline=0&portrait=0";
+        //        [self embedYouTube:@"https://player.vimeo.com/video/140230038?title=0&byline=0&portrait=0"  frame:self.view.frame];
+        VedioViewController *vedio= [[VedioViewController alloc]initWithNibName:@"VedioViewController" bundle:nil];
+        vedio.streamURL=resourse.resourceUrl;//@"https://player.vimeo.com/video/140230038?title=0&byline=0&portrait=0";
+        [self.navigationController pushViewController:vedio animated:YES];
+        // [appDelegate self].allowRotation = YES;
     }else {
         [self PlayTheVideo:resourse.resourceUrl];
-
+        
     }
 }
 

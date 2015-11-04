@@ -152,6 +152,8 @@
 		A8CAA0591B8339D80066C893 /* icn_reply@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CAA0571B8339D80066C893 /* icn_reply@3x.png */; };
 		A8CAA0801B849DD70066C893 /* profile-menunn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CAA07E1B849DD70066C893 /* profile-menunn@2x.png */; };
 		A8CAA0811B849DD70066C893 /* profile-menunn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8CAA07F1B849DD70066C893 /* profile-menunn@3x.png */; };
+		A8D4BDC01BE89A3700BB12A2 /* VedioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D4BDBE1BE89A3700BB12A2 /* VedioViewController.m */; };
+		A8D4BDC11BE89A3700BB12A2 /* VedioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8D4BDBF1BE89A3700BB12A2 /* VedioViewController.xib */; };
 		A8D73DCB1B7DE8C40022C1A0 /* browse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8D73DC91B7DE8C40022C1A0 /* browse@2x.png */; };
 		A8D73DCC1B7DE8C40022C1A0 /* browse@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8D73DCA1B7DE8C40022C1A0 /* browse@3x.png */; };
 		A8D73DCE1B7DFFDB0022C1A0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D73DCD1B7DFFDB0022C1A0 /* CoreGraphics.framework */; };
@@ -562,6 +564,9 @@
 		A8CAA0571B8339D80066C893 /* icn_reply@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_reply@3x.png"; sourceTree = "<group>"; };
 		A8CAA07E1B849DD70066C893 /* profile-menunn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-menunn@2x.png"; sourceTree = "<group>"; };
 		A8CAA07F1B849DD70066C893 /* profile-menunn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-menunn@3x.png"; sourceTree = "<group>"; };
+		A8D4BDBD1BE89A3700BB12A2 /* VedioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VedioViewController.h; sourceTree = "<group>"; };
+		A8D4BDBE1BE89A3700BB12A2 /* VedioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VedioViewController.m; sourceTree = "<group>"; };
+		A8D4BDBF1BE89A3700BB12A2 /* VedioViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VedioViewController.xib; sourceTree = "<group>"; };
 		A8D73DC91B7DE8C40022C1A0 /* browse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "browse@2x.png"; sourceTree = "<group>"; };
 		A8D73DCA1B7DE8C40022C1A0 /* browse@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "browse@3x.png"; sourceTree = "<group>"; };
 		A8D73DCD1B7DFFDB0022C1A0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1454,6 +1459,9 @@
 				A8AC9D5A1B96E47800FCE284 /* UpdateDetailViewController.h */,
 				A8AC9D5B1B96E47900FCE284 /* UpdateDetailViewController.m */,
 				03D5FBFE1BBFBEE200279439 /* UpdateDetailViewController.xib */,
+				A8D4BDBD1BE89A3700BB12A2 /* VedioViewController.h */,
+				A8D4BDBE1BE89A3700BB12A2 /* VedioViewController.m */,
+				A8D4BDBF1BE89A3700BB12A2 /* VedioViewController.xib */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -2047,6 +2055,7 @@
 				C9C265E81B7B819100EA4F38 /* icn_pending-assignment@3x.png in Resources */,
 				C9C266151B7B819100EA4F38 /* icn_updates-defaultn@2x.png in Resources */,
 				030220961BDE1ADB00BE3BFB /* nonratina_down.png in Resources */,
+				A8D4BDC11BE89A3700BB12A2 /* VedioViewController.xib in Resources */,
 				A826DC721B8C4B8F0037E94F /* logouta@3x.png in Resources */,
 				C9C266521B7B819100EA4F38 /* first_nm@2x.png in Resources */,
 				03D2A0781BC2920B00C80D6A /* user_profile_no_pic@2x~ipad.png in Resources */,
@@ -2278,6 +2287,7 @@
 				A8DF60D81BC923CF0042C0A3 /* SearchViewController.m in Sources */,
 				C9C2653E1B7B803700EA4F38 /* HomeViewController.m in Sources */,
 				C9C265351B7B803700EA4F38 /* ModuleDetailTableViewCell.m in Sources */,
+				A8D4BDC01BE89A3700BB12A2 /* VedioViewController.m in Sources */,
 				C9C263F51B7B76AF00EA4F38 /* Growth_Cafe.xcdatamodeld in Sources */,
 				C9C265401B7B803700EA4F38 /* CustomProfileView.m in Sources */,
 				C9C264B71B7B7C4E00EA4F38 /* Schools.m in Sources */,

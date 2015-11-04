@@ -181,7 +181,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="icn_arrow.png" width="8" height="12"/>
+        <image name="icn_arrow.png" width="13" height="13"/>
         <image name="icn_pending-assignment.png" width="91" height="91"/>
         <image name="icn_play1.png" width="45" height="45"/>
     </resources>

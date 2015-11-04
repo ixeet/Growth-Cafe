@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AssignmentReviewViewController">
@@ -62,7 +61,7 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ehn-wi-oZy">
-                    <rect key="frame" x="0.0" y="110" width="600" height="480"/>
+                    <rect key="frame" x="0.0" y="70" width="600" height="480"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -200,15 +199,15 @@
                 <constraint firstAttribute="centerX" secondItem="Abg-MF-D9N" secondAttribute="centerX" constant="2" id="1z3-yp-lpy"/>
                 <constraint firstItem="MEX-vk-96b" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="55d-gV-qVM"/>
                 <constraint firstAttribute="trailing" secondItem="MEX-vk-96b" secondAttribute="trailing" id="84p-Ic-2MP"/>
-                <constraint firstItem="Ehn-wi-oZy" firstAttribute="top" secondItem="MEX-vk-96b" secondAttribute="bottom" id="8gm-P0-r10"/>
+                <constraint firstItem="Ehn-wi-oZy" firstAttribute="top" secondItem="MEX-vk-96b" secondAttribute="bottom" constant="-40" id="8gm-P0-r10"/>
                 <constraint firstItem="MO3-Xt-csb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="24" id="AVn-mK-RXU"/>
                 <constraint firstItem="IXy-8s-KI3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-1" id="AXn-gF-8Dj"/>
                 <constraint firstItem="hSo-Vb-zLP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="1300" id="BV2-N8-yuB"/>
                 <constraint firstItem="MEX-vk-96b" firstAttribute="trailing" secondItem="IXy-8s-KI3" secondAttribute="trailing" id="CfW-9N-U7D"/>
                 <constraint firstItem="IXy-8s-KI3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DxU-Qa-9d3"/>
                 <constraint firstItem="25D-Zp-V5n" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="24" id="Eao-hu-bhs"/>
-                <constraint firstItem="Ehn-wi-oZy" firstAttribute="top" secondItem="IXy-8s-KI3" secondAttribute="bottom" constant="40" id="Ihz-gy-HXo"/>
-                <constraint firstAttribute="bottom" secondItem="Ehn-wi-oZy" secondAttribute="bottom" constant="10" id="Lle-7A-ihh"/>
+                <constraint firstItem="Ehn-wi-oZy" firstAttribute="top" secondItem="IXy-8s-KI3" secondAttribute="bottom" id="Ihz-gy-HXo"/>
+                <constraint firstAttribute="bottom" secondItem="Ehn-wi-oZy" secondAttribute="bottom" constant="50" id="Lle-7A-ihh"/>
                 <constraint firstItem="25D-Zp-V5n" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="O4E-Ph-grY"/>
                 <constraint firstItem="hSo-Vb-zLP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Vfv-oA-x0e"/>
                 <constraint firstAttribute="trailing" secondItem="hSo-Vb-zLP" secondAttribute="trailing" id="aiO-j8-c19"/>
